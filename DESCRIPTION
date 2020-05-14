@@ -1,0 +1,23 @@
+Package: statgenIBD
+Type: Package
+Title: Calculation of IBD probabilities
+Version: 0.0.1
+Date: 2020-04-15
+Authors@R: c(person(given = "Martin", 
+                    family = "Boer", 
+                    email = "martin.boer@wur.nl", 
+                    role = c("aut", "cre")),
+            person(given = "Bart-Jan", 
+                   family = "van Rossum", 
+                   email = "bart-jan.vanrossum@wur.nl", 
+                   role = c("ctb")))
+Maintainer: <martin.boer@wur.nl>
+Description: Calculation of IBD probabilities for biparental, three and four-way 
+    crosses. 
+License: GPL
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.3)
+Imports: Rcpp (>= 1.0.4)
+LinkingTo: Rcpp
+RoxygenNote: 7.1.0
