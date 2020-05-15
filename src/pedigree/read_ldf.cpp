@@ -2,6 +2,7 @@
 
 #include "read_ldf.h"
 #include "manipulators.h"
+#include "convert.h"
 #include "eigen.h"
 
 using namespace mbl;

@@ -39,7 +39,7 @@ private:
 
 std::ostream& operator<<(std::ostream& outp, const InhVector& h);
 
-int testInhVector();
+//int testInhVector();
 
 }
 

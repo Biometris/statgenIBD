@@ -23,10 +23,10 @@ private:
 	string ID;
 };
 
-bool findID(const vector<IndProp>& pop, const string& ID)
-{
-	return (find_if(pop.begin(),pop.end(),eqID(ID)) != pop.end());
-}
+// bool findID(const vector<IndProp>& pop, const string& ID)
+// {
+// 	return (find_if(pop.begin(),pop.end(),eqID(ID)) != pop.end());
+// }
 
 int ndxID(const vector<IndProp>& pop, const string& ID)
 {
@@ -99,50 +99,50 @@ bool match(int& x, int& y, const string& str, const char * pat)
 }
 
 // use another name for this function!
-bool correct_type(string type)
-{
-	toupper(type);
-	return (type == "INBFND" || type == "INBPAR" || type == "RIL" || type == "HYBRID");
-}
+// bool correct_type(string type)
+// {
+// 	toupper(type);
+// 	return (type == "INBFND" || type == "INBPAR" || type == "RIL" || type == "HYBRID");
+// }
 
-vector<IndProp> read_ped_file(const string& filename)
-{
-	vector<IndProp> pop;
-	string line;
-	ifstream inp;
-	OpenFile(inp,filename);
-	int line_nr = 0;
-	while (getline(inp,line))
-	{
-		line_nr++;
-		if (line.empty()) continue;
-		istringstream line_stream(line);
-		string ID,type,fam,P1,P2;
-		if (fam_column_pedigree_file)
-			line_stream >> ID >> fam >> type >> P1 >> P2;
-		else
-		{
-			line_stream >> ID >> type >> P1 >> P2;
-			if (correct_type(type))
-				fam = "*";
-			else
-				fam = "ID_FAM";
-		}
-		if (findID(pop,ID))
-			throw mblib_file_error(filename,line_nr,"ID " + ID + " not unique");
-		if (fam == "*" && !correct_type(type))
-			throw mblib_file_error(filename,line_nr,"type " + type + " not defined");
-
-		if (type != "INBFND" && type != "INBPAR")
-		{
-			if (!findID(pop,P1))
-				throw mblib_file_error(filename,line_nr,"Parent " + P1 + " not defined");
-			if (!findID(pop,P2))
-				throw mblib_file_error(filename,line_nr,"Parent " + P2 + " not defined");
-		}
-		pop.push_back(IndProp(ID,fam,type,P1,P2));
-	}
-	return pop;
-}
+// vector<IndProp> read_ped_file(const string& filename)
+// {
+// 	vector<IndProp> pop;
+// 	string line;
+// 	ifstream inp;
+// 	OpenFile(inp,filename);
+// 	int line_nr = 0;
+// 	while (getline(inp,line))
+// 	{
+// 		line_nr++;
+// 		if (line.empty()) continue;
+// 		istringstream line_stream(line);
+// 		string ID,type,fam,P1,P2;
+// 		if (fam_column_pedigree_file)
+// 			line_stream >> ID >> fam >> type >> P1 >> P2;
+// 		else
+// 		{
+// 			line_stream >> ID >> type >> P1 >> P2;
+// 			if (correct_type(type))
+// 				fam = "*";
+// 			else
+// 				fam = "ID_FAM";
+// 		}
+// 		if (findID(pop,ID))
+// 			throw mblib_file_error(filename,line_nr,"ID " + ID + " not unique");
+// 		if (fam == "*" && !correct_type(type))
+// 			throw mblib_file_error(filename,line_nr,"type " + type + " not defined");
+//
+// 		if (type != "INBFND" && type != "INBPAR")
+// 		{
+// 			if (!findID(pop,P1))
+// 				throw mblib_file_error(filename,line_nr,"Parent " + P1 + " not defined");
+// 			if (!findID(pop,P2))
+// 				throw mblib_file_error(filename,line_nr,"Parent " + P2 + " not defined");
+// 		}
+// 		pop.push_back(IndProp(ID,fam,type,P1,P2));
+// 	}
+// 	return pop;
+// }
 
 

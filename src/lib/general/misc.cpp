@@ -21,13 +21,13 @@ string mbl::itostr(int a)
 }
 
 // conversion from string to double
-double mbl::strtod(const std::string& a)
-{
-	return convertTo<double>(a);
-}
+// double mbl::strtod(const std::string& a)
+// {
+// 	return convertTo<double>(a);
+// }
 
 double mbl::round(double x, int precision)
-{ 
+{
 	double fac = pow10(precision);
 	return floor(fac*x+0.5)/fac;
 }
@@ -35,7 +35,7 @@ double mbl::round(double x, int precision)
 void mbl::make_conditional(vector<double>& p)
 {
 	double sum = accumulate(p.begin(),p.end(),0.0);
-	if (sum <= DBL_MIN) 
+	if (sum <= DBL_MIN)
 		throw mblib_error("function make_conditional()");
 	for (vector<double>::iterator it = p.begin(); it != p.end(); ++it)
 		*it/=sum;
@@ -50,18 +50,18 @@ vector<double> mbl::elem_prod(const vector<double>& a, const vector<double>& b)
 	return result;
 }
 
-void upper_to_lower(char& c) { c = tolower(c); }
-void lower_to_upper(char& c) { c = toupper(c); }
+// void upper_to_lower(char& c) { c = tolower(c); }
+// void lower_to_upper(char& c) { c = toupper(c); }
 
-void mbl::tolower(string& a)
-{
-	for_each(a.begin(),a.end(),upper_to_lower);
-}
-
-void mbl::toupper(string& a)
-{
-	for_each(a.begin(),a.end(),lower_to_upper);
-}
+// void mbl::tolower(string& a)
+// {
+// 	for_each(a.begin(),a.end(),upper_to_lower);
+// }
+//
+// void mbl::toupper(string& a)
+// {
+// 	for_each(a.begin(),a.end(),lower_to_upper);
+// }
 
 istream& mbl::skip_rest_of_line(istream& inp)
 {
@@ -103,7 +103,7 @@ void mbl::OpenFile(ifstream& inp, string filename)
 unsigned int mbl::pow2(int n)
 {
 	unsigned int x=1;
-	return (x << n); 
+	return (x << n);
 }
 
 void mbl::write_bin(ostream& outp, double x)

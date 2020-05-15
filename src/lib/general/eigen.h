@@ -24,8 +24,8 @@ namespace mbl
 	std::vector< std::complex<double> > eigenvalues(matrix<double> A);
 
 	// test functions
-	void test_calc_eigenvals_sym();
-	void test_calc_eigenvals_nonsym();
+	// void test_calc_eigenvals_sym();
+	// void test_calc_eigenvals_nonsym();
 
 	//void eigen_vals_vects(mbl::matrix<double>& U, std::vector<double>& lambda, const mbl::matrix<double>& B);
 

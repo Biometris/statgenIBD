@@ -9,7 +9,7 @@
 using namespace std;
 using namespace mbl;
 
-InhVector::InhVector(int len,unsigned int init) : x(init), max(mbl::pow2(len)),n(len) 
+InhVector::InhVector(int len,unsigned int init) : x(init), max(mbl::pow2(len)),n(len)
 {
 	if (n > 15)
 		throw mblib_error("Inheritance vector too long: " + stringify(n));
@@ -46,30 +46,30 @@ ostream& mbl::operator<<(ostream& outp, const InhVector& h)
 	return outp;
 }
 
-int mbl::testInhVector()
-{
-	const int n = 4;
-	const unsigned int start = 3;
-	int N = pow2(n);
-	vector<int> c(N,-1);
-	int cnt=0;
-	for (InhVector y(n,start);!y.end();y++)
-	{
-		c[y] = cnt++;
-		unsigned int u = y;
-		cout << setw(5) << u << setw(8) << y;
-		InhVector z = y;
-		cout << "   ";
-		for (int i=0;i<n;i++)
-			cout << setw(2) << z.next_indic();
-		unsigned int u2 = z;
-		cout << setw(8) << u2 << "  z:" << z << ":" << endl;
-	}
-
-	cout << endl;
-	for (int i=0;i<N;i++)
-		cout << setw(3) << i << setw(6) << c[i] << endl;
-
-	return 0;
-}
+// int mbl::testInhVector()
+// {
+// 	const int n = 4;
+// 	const unsigned int start = 3;
+// 	int N = pow2(n);
+// 	vector<int> c(N,-1);
+// 	int cnt=0;
+// 	for (InhVector y(n,start);!y.end();y++)
+// 	{
+// 		c[y] = cnt++;
+// 		unsigned int u = y;
+// 		cout << setw(5) << u << setw(8) << y;
+// 		InhVector z = y;
+// 		cout << "   ";
+// 		for (int i=0;i<n;i++)
+// 			cout << setw(2) << z.next_indic();
+// 		unsigned int u2 = z;
+// 		cout << setw(8) << u2 << "  z:" << z << ":" << endl;
+// 	}
+//
+// 	cout << endl;
+// 	for (int i=0;i<N;i++)
+// 		cout << setw(3) << i << setw(6) << c[i] << endl;
+//
+// 	return 0;
+// }
 

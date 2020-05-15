@@ -2,10 +2,10 @@
 #include <numeric>
 #include <fstream>
 #include "eigen.h"
-#include "linalg.h"
+// #include "linalg.h"
 #include "misc.h"
 
-#include "util.h"
+//#include "util.h"
 //#include "Random.h"
 
 using namespace std;
@@ -433,138 +433,138 @@ vector< complex<double> > mbl::eigenvalues(matrix<double> A)
 // observations per level and N is the total number of observations
 // see also Crainiceanu & Ruppert, J. R. Statist. Soc. B (2004)
 // Here we assume that Sigma = I.
-void mbl::test_calc_eigenvals_sym()
-{
-	int i,j,k;
-	vector<int> J = init_vector<int>(100,100,50);
-	const int K = J.size();
-	const int N = accumulate(J.begin(),J.end(),0);
-	vector<double> res_var(N,1.0);
-	/*
-	for (i=0;i<N;i++)
-		if (i < 100)
-			res_var[i] = 1.0;
-		else if (i < 200)
-			res_var[i] = 1.0;
-		else if (i < 300)
-			res_var[i] = 8.0;
-	*/
-	matrix<double> R_inv(N,N,0.0);
-	matrix<double> X(N,1,1.0);
-	matrix<double> Z(N,K,0.0);
-	for (i=0,k=0;k<K;k++)
-	{
-		for (j=0;j<J[k];j++)
-		{
-			Z[i][k] = 1.0;
-			R_inv[i][i] = 1.0/res_var[i];
-			i++;
-		}
-	}
-	matrix<double> Xt = transpose(X);
-	matrix<double> S0 = R_inv - R_inv*X*Inverse(Xt*R_inv*X)*Xt*R_inv;
+// void mbl::test_calc_eigenvals_sym()
+// {
+// 	int i,j,k;
+// 	vector<int> J = init_vector<int>(100,100,50);
+// 	const int K = J.size();
+// 	const int N = accumulate(J.begin(),J.end(),0);
+// 	vector<double> res_var(N,1.0);
+// 	/*
+// 	for (i=0;i<N;i++)
+// 		if (i < 100)
+// 			res_var[i] = 1.0;
+// 		else if (i < 200)
+// 			res_var[i] = 1.0;
+// 		else if (i < 300)
+// 			res_var[i] = 8.0;
+// 	*/
+// 	matrix<double> R_inv(N,N,0.0);
+// 	matrix<double> X(N,1,1.0);
+// 	matrix<double> Z(N,K,0.0);
+// 	for (i=0,k=0;k<K;k++)
+// 	{
+// 		for (j=0;j<J[k];j++)
+// 		{
+// 			Z[i][k] = 1.0;
+// 			R_inv[i][i] = 1.0/res_var[i];
+// 			i++;
+// 		}
+// 	}
+// 	matrix<double> Xt = transpose(X);
+// 	matrix<double> S0 = R_inv - R_inv*X*Inverse(Xt*R_inv*X)*Xt*R_inv;
+//
+// 	matrix<double> Q = transpose(Z)*S0*Z;
+//
+// 	vector<double> eigenvalues = eigenvals(Q);
+// 	const int dim = eigenvalues.size();
+// 	vector<double> det(dim);
+// 	for (int d=0;d<dim;d++)
+// 		det[d] = Determinant(Q-eigenvalues[d]*identity_matrix(dim));
+//
+// 	/*
+// 	cout.setf(ios::fixed, ios::floatfield);
+// 	cout << setprecision(2);
+// 	cout << "Eigenvals(Q):            " << setw(8) << eigenvalues << endl;
+// 	cout << "Check -> det(Q-lambda*I):" << setw(8) << det << endl << endl;
+//
+// 	// calculation of effective dimension in two different ways
+// 	double lambda = 100.0;
+// 	matrix<double> X_all(N,K+1);
+// 	for (i=0;i<N;i++)
+// 	{
+// 		X_all[i][0] = X[i][0];
+// 		for (j=0;j<K;j++)
+// 			X_all[i][j+1] = Z[i][j];
+// 	}
+// 	matrix<double> P = identity_matrix(K+1);
+// 	P[0][0] = 0.0; // no penalty on main effect
+// 	matrix<double> XtRinvX = transpose(X_all)*R_inv*X_all;
+// 	matrix<double> H = Inverse(XtRinvX+lambda*P)*XtRinvX;
+// 	cout << setprecision(6);
+//
+// 	double eff_dim1 = 0.0;
+// 	for (i=0;i<H.size();i++)
+// 	{
+// 		cout << "H[i][i] " << H[i][i] << endl;
+// 		eff_dim1 += H[i][i];
+// 	}
+//
+// 	double eff_dim2 = 1.0;
+// 	for (i=0;i<dim;i++)
+// 	{
+// 		cout << "mu_i/(lambda+mu_i)  " << eigenvalues[i]/(lambda+eigenvalues[i]) << endl;
+// 		eff_dim2 += eigenvalues[i]/(lambda + eigenvalues[i]);
+// 	}
+// 	cout << "Eff Dim 1: "  << eff_dim1 << endl;
+// 	cout << "Eff Dim 2: "  << eff_dim2 << endl;
+//
+// 	// test of calculation of asymptotic distribution of RLRT
+// 	long int nsim = 100000;
+// 	int ngridpoints = 200;
+// 	vector<double> RLRT(nsim);
+//
+// 	matrix<double> A(ngridpoints,K);
+// 	vector<double> b(ngridpoints,0.0);
+// 	for (int s=0;s<ngridpoints;s++)
+// 	{
+// 		double d = exp(-12.0 + 24.0*s/(ngridpoints-1));
+// 		for (int k=0;k<K;k++)
+// 		{
+// 			double dmu = d*eigenvalues[k];
+// 			A[s][k] = dmu/(1+dmu);
+// 			b[s] += log(1+dmu);
+// 		}
+// 	}
+// 	int sim;
+// 	for (sim=0;sim<nsim;sim++)
+// 	{
+// 		vector<double> w_sqr(K);
+// 		for (int k=0;k<K;k++)
+// 		    w_sqr[k] = sqr(randnormal());
+// 		vector<double> RLRT_grid = A*w_sqr - b;
+// 		double max = *max_element(RLRT_grid.begin(),RLRT_grid.end());
+// 		RLRT[sim] = (max > 0.0) ? max : 0.0;
+// 	}
+// 	sort(RLRT.begin(),RLRT.end());
+// 	ofstream outp;
+// 	OpenFile(outp,"RLRT.dat");
+// 	for (sim=0;sim<nsim;sim++)
+// 		outp << setw(12) << (sim+1)/(1.0*nsim)
+// 		     << setw(12) << RLRT[sim]
+// 			 << setw(12) << sqrt(RLRT[sim]) << endl;
+// 	cout << "Output written to file RLRT.dat" << endl << endl;
+// 	*/
+// }
 
-	matrix<double> Q = transpose(Z)*S0*Z;
-
-	vector<double> eigenvalues = eigenvals(Q);
-	const int dim = eigenvalues.size();
-	vector<double> det(dim);
-	for (int d=0;d<dim;d++)
-		det[d] = Determinant(Q-eigenvalues[d]*identity_matrix(dim));
-
-	/*
-	cout.setf(ios::fixed, ios::floatfield);
-	cout << setprecision(2);
-	cout << "Eigenvals(Q):            " << setw(8) << eigenvalues << endl;
-	cout << "Check -> det(Q-lambda*I):" << setw(8) << det << endl << endl;
-
-	// calculation of effective dimension in two different ways
-	double lambda = 100.0;
-	matrix<double> X_all(N,K+1);
-	for (i=0;i<N;i++)
-	{
-		X_all[i][0] = X[i][0];
-		for (j=0;j<K;j++)
-			X_all[i][j+1] = Z[i][j];
-	}
-	matrix<double> P = identity_matrix(K+1);
-	P[0][0] = 0.0; // no penalty on main effect
-	matrix<double> XtRinvX = transpose(X_all)*R_inv*X_all;
-	matrix<double> H = Inverse(XtRinvX+lambda*P)*XtRinvX;
-	cout << setprecision(6);
-
-	double eff_dim1 = 0.0;
-	for (i=0;i<H.size();i++)
-	{
-		cout << "H[i][i] " << H[i][i] << endl;
-		eff_dim1 += H[i][i];
-	}
-
-	double eff_dim2 = 1.0;
-	for (i=0;i<dim;i++)
-	{
-		cout << "mu_i/(lambda+mu_i)  " << eigenvalues[i]/(lambda+eigenvalues[i]) << endl;
-		eff_dim2 += eigenvalues[i]/(lambda + eigenvalues[i]);
-	}
-	cout << "Eff Dim 1: "  << eff_dim1 << endl;
-	cout << "Eff Dim 2: "  << eff_dim2 << endl;
-
-	// test of calculation of asymptotic distribution of RLRT
-	long int nsim = 100000;
-	int ngridpoints = 200;
-	vector<double> RLRT(nsim);
-
-	matrix<double> A(ngridpoints,K);
-	vector<double> b(ngridpoints,0.0);
-	for (int s=0;s<ngridpoints;s++)
-	{
-		double d = exp(-12.0 + 24.0*s/(ngridpoints-1));
-		for (int k=0;k<K;k++)
-		{
-			double dmu = d*eigenvalues[k];
-			A[s][k] = dmu/(1+dmu);
-			b[s] += log(1+dmu);
-		}
-	}
-	int sim;
-	for (sim=0;sim<nsim;sim++)
-	{
-		vector<double> w_sqr(K);
-		for (int k=0;k<K;k++)
-		    w_sqr[k] = sqr(randnormal());
-		vector<double> RLRT_grid = A*w_sqr - b;
-		double max = *max_element(RLRT_grid.begin(),RLRT_grid.end());
-		RLRT[sim] = (max > 0.0) ? max : 0.0;
-	}
-	sort(RLRT.begin(),RLRT.end());
-	ofstream outp;
-	OpenFile(outp,"RLRT.dat");
-	for (sim=0;sim<nsim;sim++)
-		outp << setw(12) << (sim+1)/(1.0*nsim)
-		     << setw(12) << RLRT[sim]
-			 << setw(12) << sqrt(RLRT[sim]) << endl;
-	cout << "Output written to file RLRT.dat" << endl << endl;
-	*/
-}
-
-void mbl::test_calc_eigenvals_nonsym()
-{
-	cout << "Test of calculation of eigenvalues for non-sym matrix:" << endl;
-	const int N=4;
-	matrix<double> A(N,N);
-
-	A[0][0] =  0.0; A[0][1] = -1.0; A[0][2] = 3.0; A[0][3] =  0.0;
-	A[1][0] = -1.0; A[1][1] =  0.0; A[1][2] = 1.0; A[1][3] =  0.0;
-	A[2][0] =  0.0; A[2][1] = -4.0; A[2][2] = 5.0; A[2][3] =  0.0;
-	A[3][0] =  0.0; A[3][1] =  0.0; A[3][2] = 0.0; A[3][3] = -1.0;
-
-	cout.setf(ios::fixed, ios::floatfield);		// set output format
-	vector< complex<double> > eig = eigenvalues(A);
-	cout << setw(3) << "nr" << setw(12) << "real" << setw(12) << "imag" << endl;
-	for (int m=0;m<N;m++)
-		cout << setw(3) << m+1 << setw(12) << real(eig[m]) << setw(12) << imag(eig[m]) << endl;
-	cout << endl;
-}
+// void mbl::test_calc_eigenvals_nonsym()
+// {
+// 	cout << "Test of calculation of eigenvalues for non-sym matrix:" << endl;
+// 	const int N=4;
+// 	matrix<double> A(N,N);
+//
+// 	A[0][0] =  0.0; A[0][1] = -1.0; A[0][2] = 3.0; A[0][3] =  0.0;
+// 	A[1][0] = -1.0; A[1][1] =  0.0; A[1][2] = 1.0; A[1][3] =  0.0;
+// 	A[2][0] =  0.0; A[2][1] = -4.0; A[2][2] = 5.0; A[2][3] =  0.0;
+// 	A[3][0] =  0.0; A[3][1] =  0.0; A[3][2] = 0.0; A[3][3] = -1.0;
+//
+// 	cout.setf(ios::fixed, ios::floatfield);		// set output format
+// 	vector< complex<double> > eig = eigenvalues(A);
+// 	cout << setw(3) << "nr" << setw(12) << "real" << setw(12) << "imag" << endl;
+// 	for (int m=0;m<N;m++)
+// 		cout << setw(3) << m+1 << setw(12) << real(eig[m]) << setw(12) << imag(eig[m]) << endl;
+// 	cout << endl;
+// }
 
 // added 26 januari 2009: Calculation of eigenvalues and eigenvectors.
 

@@ -779,81 +779,79 @@ int main_forR(matrix3D<double>& Z,
 
 
 // auxiliary function, not used at the moment
-void eigenvalue_diagnostics(const IBDped& ibd_ped, const LinkageMap& markermap,
-                            const vector<int>& ndx, int Napprox)
-{
-  Stopwatch time;
-  ofstream outp;
-  OpenFile(outp,"dimension.txt");
-  cout << "Mtotal: " << markermap.size() << endl;
-  const int K=ndx.size();
-  cout << "ndx.size() : " << K << endl;
-  for (unsigned int m=0;m<markermap.size();m++)
-  {
-    if (eval_pos(markermap[m]))
-    {
-      matrix<double> IBD_m = ibd_ped(m);
-      matrix<double> M(K,K);
-      for (int i=0;i<K;i++)
-        for (int j=0;j<K;j++)
-          M[i][j] = IBD_m[ndx[i]][ndx[j]];
-
-      vector<EigenReal> eigen = CalcEigen(M);
-      int nNeg = 0;
-      int nPos = 0;
-      int nZero = 0;
-      const double eps = 1.0e-3;
-      for (unsigned int i=0;i<eigen.size();i++)
-      {
-        if (eigen[i].EigenValue() < -eps)
-          nNeg++;
-        else if (eigen[i].EigenValue() >  eps)
-          nPos++;
-        else
-          nZero++;
-      }
-      double sum = 0.0;
-      for (int i=0;i<Napprox;i++)
-        sum += eigen[i].EigenValue();
-      outp << setw(4) << markermap[m].GetChr() << setw(12) << markermap[m].GetPosition()
-           << setw(5) << nNeg << setw(5) << nZero << setw(5) << nPos
-           << setw(12) << eigen[K-1].EigenValue() << setw(12) << eigen[0].EigenValue()
-           << setw(12) << sum << endl;
-      cout << setw(4) << m << setw(5) << nNeg << setw(5) << nZero
-           << setw(5) << nPos << setw(12) << sum << endl;
-    }
-  }
-  cout << "Total time: " << time <<  endl;
-}
-
-// aux, function, not used at the moment
-// mean IBD calculated along the genome (using the evaluation points)
-// N: number of individuals
-// M: number of evaluation points.
-void mean_IBD(const IBDped& ibd_ped, const LinkageMap& markermap, int N, int M)
-{
-  ofstream outp;
-  OpenFile(outp,"mean_IBD.txt");
-  Stopwatch time;
-  cout << "M: " << M << endl;
-  cout << "N: " << N << endl;
-  matrix<double> A(N,N,0.0);
-
-  for (unsigned int m=0;m<markermap.size();m++)
-  {
-    if (eval_pos(markermap[m]))
-    {
-      cout << setw(3) << markermap[m].GetChr() << setw(8) << markermap[m].GetPosition() << endl;
-      A += ibd_ped(m);
-    }
-  }
-  cout << "Total time: " << time << endl;
-  for (int i=0;i<N;i++)
-    for (int j=0;j<N;j++)
-      A[i][j] /= (1.0*M);
-
-  outp << setw(5) << setprecision(2) << A << endl;
-}
-
-
+// void eigenvalue_diagnostics(const IBDped& ibd_ped, const LinkageMap& markermap,
+//                             const vector<int>& ndx, int Napprox)
+// {
+//   Stopwatch time;
+//   ofstream outp;
+//   OpenFile(outp,"dimension.txt");
+//   cout << "Mtotal: " << markermap.size() << endl;
+//   const int K=ndx.size();
+//   cout << "ndx.size() : " << K << endl;
+//   for (unsigned int m=0;m<markermap.size();m++)
+//   {
+//     if (eval_pos(markermap[m]))
+//     {
+//       matrix<double> IBD_m = ibd_ped(m);
+//       matrix<double> M(K,K);
+//       for (int i=0;i<K;i++)
+//         for (int j=0;j<K;j++)
+//           M[i][j] = IBD_m[ndx[i]][ndx[j]];
+// 
+//       vector<EigenReal> eigen = CalcEigen(M);
+//       int nNeg = 0;
+//       int nPos = 0;
+//       int nZero = 0;
+//       const double eps = 1.0e-3;
+//       for (unsigned int i=0;i<eigen.size();i++)
+//       {
+//         if (eigen[i].EigenValue() < -eps)
+//           nNeg++;
+//         else if (eigen[i].EigenValue() >  eps)
+//           nPos++;
+//         else
+//           nZero++;
+//       }
+//       double sum = 0.0;
+//       for (int i=0;i<Napprox;i++)
+//         sum += eigen[i].EigenValue();
+//       outp << setw(4) << markermap[m].GetChr() << setw(12) << markermap[m].GetPosition()
+//            << setw(5) << nNeg << setw(5) << nZero << setw(5) << nPos
+//            << setw(12) << eigen[K-1].EigenValue() << setw(12) << eigen[0].EigenValue()
+//            << setw(12) << sum << endl;
+//       cout << setw(4) << m << setw(5) << nNeg << setw(5) << nZero
+//            << setw(5) << nPos << setw(12) << sum << endl;
+//     }
+//   }
+//   cout << "Total time: " << time <<  endl;
+// }
+// 
+// // aux, function, not used at the moment
+// // mean IBD calculated along the genome (using the evaluation points)
+// // N: number of individuals
+// // M: number of evaluation points.
+// void mean_IBD(const IBDped& ibd_ped, const LinkageMap& markermap, int N, int M)
+// {
+//   ofstream outp;
+//   OpenFile(outp,"mean_IBD.txt");
+//   Stopwatch time;
+//   cout << "M: " << M << endl;
+//   cout << "N: " << N << endl;
+//   matrix<double> A(N,N,0.0);
+// 
+//   for (unsigned int m=0;m<markermap.size();m++)
+//   {
+//     if (eval_pos(markermap[m]))
+//     {
+//       cout << setw(3) << markermap[m].GetChr() << setw(8) << markermap[m].GetPosition() << endl;
+//       A += ibd_ped(m);
+//     }
+//   }
+//   cout << "Total time: " << time << endl;
+//   for (int i=0;i<N;i++)
+//     for (int j=0;j<N;j++)
+//       A[i][j] /= (1.0*M);
+// 
+//   outp << setw(5) << setprecision(2) << A << endl;
+// }
 

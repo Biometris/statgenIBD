@@ -31,7 +31,7 @@ public:
 std::vector<double> operator*(const TransMatSym2D& A, const std::vector<double>& x);
 std::vector<double> operator*(const std::vector<double>& x,const TransMatSym2D& A);
 
-int test_TransMatrix();
+// int test_TransMatrix();
 
 }
 

@@ -50,13 +50,13 @@ private:
 	std::string ID, FAM, TYPE, P1, P2;
 };
 
-bool findID(const std::vector<IndProp>& pop, const std::string& ID);
+// bool findID(const std::vector<IndProp>& pop, const std::string& ID);
 int ndxID(const std::vector<IndProp>& pop, const std::string& ID);
 
 bool match(int& x, const std::string& str, const char * pat);
 bool match(int& x, int& y, const std::string& str, const char * pat);
 
 
-std::vector<IndProp> read_ped_file(const std::string& filename);
+// std::vector<IndProp> read_ped_file(const std::string& filename);
 
 #endif
