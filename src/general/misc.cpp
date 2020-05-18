@@ -20,13 +20,8 @@ string mbl::itostr(int a)
 	return stringify(a);
 }
 
-// conversion from string to double
-// double mbl::strtod(const std::string& a)
-// {
-// 	return convertTo<double>(a);
-// }
-
-double mbl::round(double x, int precision)
+double mbl::round(double x,
+                  int precision)
 {
 	double fac = pow10(precision);
 	return floor(fac*x+0.5)/fac;
@@ -49,19 +44,6 @@ vector<double> mbl::elem_prod(const vector<double>& a, const vector<double>& b)
 		result[i] = a[i]*b[i];
 	return result;
 }
-
-// void upper_to_lower(char& c) { c = tolower(c); }
-// void lower_to_upper(char& c) { c = toupper(c); }
-
-// void mbl::tolower(string& a)
-// {
-// 	for_each(a.begin(),a.end(),upper_to_lower);
-// }
-//
-// void mbl::toupper(string& a)
-// {
-// 	for_each(a.begin(),a.end(),lower_to_upper);
-// }
 
 istream& mbl::skip_rest_of_line(istream& inp)
 {

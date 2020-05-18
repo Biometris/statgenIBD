@@ -3,9 +3,6 @@
 #ifndef MANIPULATORS_HEADER
 #define MANIPULATORS_HEADER
 
-//#pragma warning(disable:4786)   // disable C4786 warning
-
-//#include "util.h"
 #include <iostream>
 
 namespace mbl
@@ -26,12 +23,8 @@ private:
 template<class T>
 std::istream& operator>>(std::istream& inp, istream_fo1<T>& fo) { return fo(inp); }
 
-//std::istream& skip_fields(std::istream& inp, int n);
 std::istream& skip_lines(std::istream& inp, int n);
 
-//istream_fo1<int> skipf(int n = 1);
-//istream_fo1<int> skipl(int n = 1);
-//inline istream_fo1<int> skipf(int n = 1) { return istream_fo1<int>(skip_fields, n);}
 inline istream_fo1<int> skipl(int n = 1) { return istream_fo1<int>(skip_lines, n);}
 
 }

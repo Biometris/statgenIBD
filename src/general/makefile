@@ -2,9 +2,7 @@ CC=g++ -std=gnu++11
 CFLAGS=-I.
 
 OBJECTS = Args.o excepthnd.o HMMalgo.o matvec.o mblexcept.o misc.o TransMatSym2D.o \
-          manipulators.o util_genetics.o eigen.o Ordgeno.o InhVector.o
-
-#dir.o  util.o linalg.o
+          manipulators.o util_genetics.o Ordgeno.o InhVector.o
 
 all: general.lib
 
@@ -38,24 +36,11 @@ manipulators.o: manipulators.cpp
 util_genetics.o: util_genetics.cpp
 	$(CC) -c util_genetics.cpp
 
-#dir.o: dir.cpp
-	#$(CC) -c dir.cpp
-
-#util.o: util.cpp
-#	$(CC) -c util.cpp
-
-#linalg.o: linalg.cpp
-#	$(CC) -c linalg.cpp
-
-eigen.o: eigen.cpp
-	$(CC) -c eigen.cpp
-
 OrdGeno.o: OrdGeno.cpp
 	$(CC) -c OrdGeno.cpp
 
 InhVector.o: InhVector.cpp
 	$(CC) -c InhVector.cpp
-
 
 clean:
 	del $(OBJECTS)$

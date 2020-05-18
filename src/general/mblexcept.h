@@ -24,7 +24,9 @@ public:
 class mblib_file_error : public mblib_error
 {
 public:
-	mblib_file_error(const std::string& filename,int line_nr, const std::string& what_arg);
+	mblib_file_error(const std::string& filename,
+                  int line_nr,
+                  const std::string& what_arg);
 	virtual ~mblib_file_error() throw() {;}
 };
 

@@ -2,12 +2,19 @@
 ## Use the R_HOME indirection to support installations of multiple R version
 PKG_LIBS = $(shell "${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" -e "Rcpp:::LdFlags()")
 
-PKG_CPPFLAGS =  -I. -Ilib/general  \
+PKG_CPPFLAGS =  -I. -Igeneral  \
                     -Ipedigree
 
 SOURCES  = $(wildcard *.cpp)
-SOURCES += $(wildcard lib/general/*.cpp)
+SOURCES += $(wildcard general/*.cpp)
 SOURCES += $(wildcard pedigree/*.cpp)
 
-OBJECTS  = $(SOURCES:.cpp=.o)
+# Obtain the object files
+OBJECTS = $(SOURCES:.cpp=.o)
 
+# Make the shared object
+all: clean $(SHLIB)
+
+# Provide recipe to remove all objects
+clean:
+	@rm -f $(OBJECTS)

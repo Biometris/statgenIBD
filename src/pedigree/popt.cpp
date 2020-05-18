@@ -29,7 +29,7 @@ pop_base * init_pop(const std::string& poptype)
 	if (match(x,poptype,"C3SxDH"))		return new popC3SxDH(x);
 	if (match(x,y,poptype,"C3RCxSy"))	return new popC3RCxSy(x,y);
 	if (match(x,y,poptype,"C3RCxSyDH"))	return new popC3RCxSyDH(x,y);
-	
+
 	// four-way crosses:
 	if (poptype == "C4")				return new popC4Sx(0);
 	if (poptype == "C4DH")				return new popC4SxDH(0);
@@ -40,21 +40,24 @@ pop_base * init_pop(const std::string& poptype)
 	return 0;
 }
 
-OrdGeno popDH::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
+OrdGeno popDH::gen_off(const std::vector<OrdGeno>& p,
+                       InhVector x) const
 {
 	OrdGeno F1 = cross(p[0],0,p[1],0);
 	OrdGeno g = DH(F1,x);
 	return g;
 }
 
-OrdGeno popFx::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
+OrdGeno popFx::gen_off(const std::vector<OrdGeno>& p,
+                       InhVector x) const
 {
 	OrdGeno F1 = cross(p[0],0,p[1],0);
 	OrdGeno g = selfing(F1,x,ngen_self);
 	return g;
 }
 
-OrdGeno popFxDH::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
+OrdGeno popFxDH::gen_off(const std::vector<OrdGeno>& p,
+                         InhVector x) const
 {
 	OrdGeno F1 = cross(p[0],0,p[1],0);
 	OrdGeno g = selfing(F1,x,ngen_self);
@@ -63,21 +66,24 @@ OrdGeno popFxDH::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
 }
 
 // backcross with second parent
-OrdGeno popBCx::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
+OrdGeno popBCx::gen_off(const std::vector<OrdGeno>& p,
+                        InhVector x) const
 {
 	OrdGeno g = BC(p[0],p[1],x,ngen);
 	return g;
 }
 
 // backcross with second parent
-OrdGeno popBCxDH::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
+OrdGeno popBCxDH::gen_off(const std::vector<OrdGeno>& p,
+                          InhVector x) const
 {
 	OrdGeno g = BC(p[0],p[1],x,ngen);
 	return DH(g,x);
 }
 
 // BCxSy population
-OrdGeno popBCxSy::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
+OrdGeno popBCxSy::gen_off(const std::vector<OrdGeno>& p,
+                          InhVector x) const
 {
 	OrdGeno g1 = BC(p[0],p[1],x,ngen_BC);
 	OrdGeno g2 = selfing(g1,x,ngen_self);
@@ -85,7 +91,8 @@ OrdGeno popBCxSy::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
 }
 
 // BCxSyDH population
-OrdGeno popBCxSyDH::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
+OrdGeno popBCxSyDH::gen_off(const std::vector<OrdGeno>& p,
+                            InhVector x) const
 {
 	OrdGeno g1 = BC(p[0],p[1],x,ngen_BC);
 	OrdGeno g2 = selfing(g1,x,ngen_self);
@@ -93,7 +100,8 @@ OrdGeno popBCxSyDH::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
 }
 
 // three way cross: (AxB)xC, followed by x generations of selfing.
-OrdGeno popC3Sx::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
+OrdGeno popC3Sx::gen_off(const std::vector<OrdGeno>& p,
+                         InhVector x) const
 {
 	const OrdGeno& A = p[0];
 	const OrdGeno& B = p[1];
@@ -106,7 +114,8 @@ OrdGeno popC3Sx::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
 }
 
 // three way cross: (AxB)xC, followed by x generations of selfing and DH
-OrdGeno popC3SxDH::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
+OrdGeno popC3SxDH::gen_off(const std::vector<OrdGeno>& p,
+                           InhVector x) const
 {
 	const OrdGeno& A = p[0];
 	const OrdGeno& B = p[1];
@@ -119,7 +128,8 @@ OrdGeno popC3SxDH::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
 }
 
 // 3 parents: (AxB), followed by x gen of RC with C, y gen selfing
-OrdGeno popC3RCxSy::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
+OrdGeno popC3RCxSy::gen_off(const std::vector<OrdGeno>& p,
+                            InhVector x) const
 {
 	const OrdGeno& A = p[0];
 	const OrdGeno& B = p[1];
@@ -131,7 +141,8 @@ OrdGeno popC3RCxSy::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
 }
 
 // 3 parents: (AxB), followed by x gen of RC with C, y gen selfing,DH
-OrdGeno popC3RCxSyDH::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
+OrdGeno popC3RCxSyDH::gen_off(const std::vector<OrdGeno>& p,
+                              InhVector x) const
 {
 	const OrdGeno& A = p[0];
 	const OrdGeno& B = p[1];
@@ -143,7 +154,8 @@ OrdGeno popC3RCxSyDH::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
 }
 
 // four way cross: (AxB)x(CxD), followed by x generations of selfing
-OrdGeno popC4Sx::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
+OrdGeno popC4Sx::gen_off(const std::vector<OrdGeno>& p,
+                         InhVector x) const
 {
 	const OrdGeno& A = p[0];
 	const OrdGeno& B = p[1];
@@ -159,7 +171,8 @@ OrdGeno popC4Sx::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
 }
 
 // four way cross: (AxB)x(CxD), followed by x generations of selfing, and DH
-OrdGeno popC4SxDH::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
+OrdGeno popC4SxDH::gen_off(const std::vector<OrdGeno>& p,
+                           InhVector x) const
 {
 	const OrdGeno& A = p[0];
 	const OrdGeno& B = p[1];
@@ -173,5 +186,3 @@ OrdGeno popC4SxDH::gen_off(const std::vector<OrdGeno>& p, InhVector x) const
 	OrdGeno g = selfing(ABxCD,x,ngen_self);
 	return DH(g,x);
 }
-
-

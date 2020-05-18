@@ -8,7 +8,8 @@ using namespace mbl;
 
 MapFunction mapfunction = invhaldane;
 
-int compare(const Locus& locA, const Locus& locB)
+int compare(const Locus& locA,
+            const Locus& locB)
 {
 	if (locA.chr < locB.chr) return -1;
 	if (locA.chr > locB.chr) return  1;
@@ -20,7 +21,8 @@ int compare(const Locus& locA, const Locus& locB)
 	return 0;
 }
 
-double recomb(const Locus& locA, const Locus& locB)
+double recomb(const Locus& locA,
+              const Locus& locB)
 {
 	if (locA.chr != locB.chr)
 		return 0.5;
@@ -31,20 +33,21 @@ double recomb(const Locus& locA, const Locus& locB)
 vector<double> make_rec_map(const LinkageMap& linkage_map)
 {
 	const int nr_intervals = linkage_map.size() - 1; // number of intervals
-	vector<double> r(nr_intervals); 
+	vector<double> r(nr_intervals);
 	for (int i=0;i<nr_intervals;i++)
 		r[i] = recomb(linkage_map[i],linkage_map[i+1]);
 	return r;
 }
 
-int pos_qtl(const LinkageMap& Markermap, const Locus& QTLpos)
+int pos_qtl(const LinkageMap& Markermap,
+            const Locus& QTLpos)
 {
 	int nloc = Markermap.size();
 	for (int i=0;i<nloc-1;i++)
 		if (QTLpos >= Markermap[i] && QTLpos <= Markermap[i+1])
 			return i;
 	throw mblib_error("Evaluation point not in interval!");
-	return 0; // dummy 
+	return 0; // dummy
 }
 
 
@@ -65,7 +68,7 @@ vector<mbl::Interval> make_intervals(const LinkageMap& markermap)
 		if ((i==nloc-1) || markermap[i].GetChr() != markermap[i+1].GetChr())
 		{
 			right = markermap[i].GetPosition();
-			if (right-left < 10.0) // short interval 
+			if (right-left < 10.0) // short interval
 				result.push_back(Interval(-5.0+0.5*(right+left),5.0+0.5*(right+left)));
 			else
 				result.push_back(Interval(left,right));
@@ -86,7 +89,8 @@ double total_length(const LinkageMap& markermap)
 }
 
 
-LinkageMap generate_extended_map(const LinkageMap& Markermap, double max_step_size)
+LinkageMap generate_extended_map(const LinkageMap& Markermap,
+                                 double max_step_size)
 {
 	LinkageMap extended_map;
 	int extra_markers = 0;

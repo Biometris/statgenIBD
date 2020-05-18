@@ -25,13 +25,8 @@ public:
 	unsigned int Dimension() const { return pow2(this->size()); }
 };
 
-//std::vector<double> product(int k, unsigned int p,
-//					   const TransMatSym2D& A, const std::vector<double>& x);
-
 std::vector<double> operator*(const TransMatSym2D& A, const std::vector<double>& x);
 std::vector<double> operator*(const std::vector<double>& x,const TransMatSym2D& A);
-
-// int test_TransMatrix();
 
 }
 

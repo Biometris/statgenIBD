@@ -1,5 +1,5 @@
 /*!
-\file 
+\file
 \brief  Population Types
 \author Martin Boer, Biometris
 \date   2006-2010
@@ -21,7 +21,8 @@ public:
 	virtual ~pop_base(){}
 
 	unsigned int get_len() const { return n; }
-	virtual mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const = 0;
+	virtual mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p,
+                              mbl::InhVector x) const = 0;
 private:
 	unsigned int n;
 };
@@ -32,7 +33,7 @@ class popDH : public pop_base
 public:
 	popDH() : pop_base(1) {}
 	virtual ~popDH(){}
-	
+
 	mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const;
 };
 
@@ -42,7 +43,7 @@ class popFx : public pop_base
 public:
 	popFx(int x) : pop_base(2*x-2), ngen_self(x-1) {}
 	virtual ~popFx(){}
-	
+
 	mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const;
 private:
 	int ngen_self;
@@ -54,7 +55,7 @@ class popFxDH : public pop_base
 public:
 	popFxDH(int x) : pop_base(2*x-1), ngen_self(x-1) {}
 	virtual ~popFxDH(){}
-	
+
 	mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const;
 private:
 	int ngen_self;
@@ -66,7 +67,7 @@ class popBCx : public pop_base
 public:
 	popBCx(int x) : pop_base(x), ngen(x) {}
 	virtual ~popBCx(){}
-	
+
 	mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const;
 private:
 	int ngen;
@@ -78,7 +79,7 @@ class popBCxDH : public pop_base
 public:
 	popBCxDH(int x) : pop_base(x+1), ngen(x) {}
 	virtual ~popBCxDH(){}
-	
+
 	mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const;
 private:
 	int ngen;
@@ -90,7 +91,7 @@ class popBCxSy : public pop_base
 public:
 	popBCxSy(int x, int y) : pop_base(x+2*y), ngen_BC(x), ngen_self(y) {}
 	virtual ~popBCxSy(){}
-	
+
 	mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const;
 private:
 	int ngen_BC;
@@ -103,44 +104,44 @@ class popBCxSyDH : public pop_base
 public:
 	popBCxSyDH(int x, int y) : pop_base(x+2*y+1), ngen_BC(x), ngen_self(y) {}
 	virtual ~popBCxSyDH(){}
-	
+
 	mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const;
 private:
 	int ngen_BC;
 	int ngen_self;
 };
 
-//! three way cross, followed by selfing 
+//! three way cross, followed by selfing
 class popC3Sx : public pop_base
 {
 public:
 	popC3Sx(int x) : pop_base(2*x+1), ngen_self(x) {}
 	virtual ~popC3Sx(){}
-	
+
 	mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const;
 private:
 	int ngen_self;
 };
 
-//! three way cross, followed by selfing and DH generation 
+//! three way cross, followed by selfing and DH generation
 class popC3SxDH : public pop_base
 {
 public:
 	popC3SxDH(int x) : pop_base(2*x+2), ngen_self(x) {}
 	virtual ~popC3SxDH(){}
-	
+
 	mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const;
 private:
 	int ngen_self;
 };
 
-//! AxB, followed by x gen. of RC with C, and y gen. of selfing 
+//! AxB, followed by x gen. of RC with C, and y gen. of selfing
 class popC3RCxSy : public pop_base
 {
 public:
 	popC3RCxSy(int x, int y) : pop_base(x+2*y), ngen_RC(x), ngen_self(y) {}
 	virtual ~popC3RCxSy(){}
-	
+
 	mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const;
 private:
 	int ngen_RC;
@@ -153,20 +154,20 @@ class popC3RCxSyDH : public pop_base
 public:
 	popC3RCxSyDH(int x, int y) : pop_base(x+2*y+1), ngen_RC(x), ngen_self(y) {}
 	virtual ~popC3RCxSyDH(){}
-	
+
 	mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const;
 private:
 	int ngen_RC;
 	int ngen_self;
 };
 
-//! four way cross, followed by selfing 
+//! four way cross, followed by selfing
 class popC4Sx : public pop_base
 {
 public:
 	popC4Sx(int x) : pop_base(2*x+2), ngen_self(x) {}
 	virtual ~popC4Sx(){}
-	
+
 	mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const;
 private:
 	int ngen_self;
@@ -178,7 +179,7 @@ class popC4SxDH : public pop_base
 public:
 	popC4SxDH(int x) : pop_base(2*x+3), ngen_self(x) {}
 	virtual ~popC4SxDH(){}
-	
+
 	mbl::OrdGeno gen_off(const std::vector<mbl::OrdGeno>& p, mbl::InhVector x) const;
 private:
 	int ngen_self;

@@ -4,7 +4,7 @@
 \name{statgenIBD-package}
 \alias{statgenIBD}
 \alias{statgenIBD-package}
-\title{statgenIBD: Calculation of IBD probabilities}
+\title{statgenIBD: Calculation of IBD Probabilities}
 \description{
 Calculation of IBD probabilities for biparental, three and four-way 
     crosses.

@@ -9,16 +9,11 @@
 
 #include <string>
 
-// #include "util.h"
 #include "matvec.h"
 #include "Loc.h"
 
 const std::string version = "2.75";
 const std::string date    = "april 13, 2020";
-
-//! indicates whether scores are given in parentheses
-const bool scores_in_parentheses = true;
-
 
 int main_forR(mbl::matrix3D<double>& Z,
               std::vector<std::string>& parents,
@@ -27,7 +22,6 @@ int main_forR(mbl::matrix3D<double>& Z,
               const std::string& poptype,
               const std::string& locfile,
               const std::string& mapfile,
-             // const std::string& output,
               const std::string& eval_pos,
               const double& max_step_size);
 

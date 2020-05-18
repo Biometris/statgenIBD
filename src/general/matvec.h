@@ -458,41 +458,6 @@ void freematrix(T **ptr)
 	delete[] ptr;
 }
 
-// old, extra parameter nr not needed:
-template<class T>
-void freematrix(T **ptr, int nr)
-{
-	delete[] *ptr;
-	delete[] ptr;
-}
-
-
-/*
-template<class T>
-T ** conversion_matrix(const matrix<T>& A)
-{
-	int i,j;
-	int nr = A.NrRows();
-	int nc = A.NrCols();
-	T **ptr = new T *[nr];
-	for (i=0;i<nr;i++)
-		*(ptr+i) = new T[nc];
-	for (i=0;i<nr;i++)
-		for (j=0;j<nr;j++)
-			ptr[i][j] = A[i][j]; // kan nog wat sneller!
-	return ptr;
-}
-
-template<class T>
-void freematrix(T **ptr, int nr)
-{
-	for (int i=0;i<nr;i++)
-	    delete[] *(ptr+i);
-	delete[] ptr;
-}
-*/
-
-
 }
 
 #endif

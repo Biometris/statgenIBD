@@ -34,25 +34,25 @@ using namespace mbl;
 //  of the vectors x[i], y[i], and u[i] is 2^(n-1) .
 //
 vector<double> product(int k,
-					   unsigned int p,
-					   const TransMatSym2D& A,
-					   const vector<double>& x)
+                       unsigned int p,
+                       const TransMatSym2D& A,
+                       const vector<double>& x)
 {
-	if (k<0)
-		return vector<double>(1,x[p]);
+  if (k<0)
+    return vector<double>(1,x[p]);
 
-	double r = A[k];
-	double s = 1.0-r;
-	unsigned int M = pow2(k);
-	vector<double> u0 = product(k-1,p  ,A,x); // u0 = C[k-1]*x0 (see comments above)
-	vector<double> u1 = product(k-1,p+M,A,x); // u1 = C[k-1]*x1 (see comments above)
-	vector<double> y(2*M);
-	for (unsigned int i=0;i<M;i++)
-	{
-		y[i]   = s*u0[i] + r*u1[i];	// y0 = s*u0 + r*u1 (see comments above)
-		y[i+M] = r*u0[i] + s*u1[i]; // y1 = r*u0 + s*u1 (see comments above)
-	}
-	return y;
+  double r = A[k];
+  double s = 1.0-r;
+  unsigned int M = pow2(k);
+  vector<double> u0 = product(k-1,p  ,A,x); // u0 = C[k-1]*x0 (see comments above)
+  vector<double> u1 = product(k-1,p+M,A,x); // u1 = C[k-1]*x1 (see comments above)
+  vector<double> y(2*M);
+  for (unsigned int i=0;i<M;i++)
+  {
+    y[i]   = s*u0[i] + r*u1[i];	// y0 = s*u0 + r*u1 (see comments above)
+    y[i+M] = r*u0[i] + s*u1[i]; // y1 = r*u0 + s*u1 (see comments above)
+  }
+  return y;
 }
 
 // calculates y = A*x
@@ -61,11 +61,12 @@ vector<double> product(int k,
 // B[k] =  ( 1-r[k]   r[k]   )
 //         (  r[k]    1-r[k] )
 //
-vector<double> mbl::operator*(const TransMatSym2D& A, const vector<double>& x)
+vector<double> mbl::operator*(const TransMatSym2D& A,
+                              const vector<double>& x)
 {
-	if (x.size() != A.Dimension())
-		throw mblib_error("Error in multiplication A*y");
-	return product(A.size()-1,0,A,x);
+  if (x.size() != A.Dimension())
+    throw mblib_error("Error in multiplication A*y");
+  return product(A.size()-1,0,A,x);
 }
 
 // calculates y^T = x^T*A
@@ -78,24 +79,12 @@ vector<double> mbl::operator*(const TransMatSym2D& A, const vector<double>& x)
 //   kroneck(B[1],...,B[N])^T = kroneck(B[1]^T,...,B[N]^T)= kroneck(B[1],...,B[N])
 // This implicates that:
 // y^T = x^T*A -> y = (x^T*A)^T = A^T * x = A*x
-vector<double> mbl::operator*(const vector<double>& x,const TransMatSym2D& A)
+vector<double> mbl::operator*(const vector<double>& x,
+                              const TransMatSym2D& A)
 {
-	if (x.size() != A.Dimension())
-		throw mblib_error("Error in multiplication y*A");
-	return product(A.size()-1,0,A,x);
+  if (x.size() != A.Dimension())
+    throw mblib_error("Error in multiplication y*A");
+  return product(A.size()-1,0,A,x);
 }
 
-// int mbl::test_TransMatrix()
-// {
-// 	vector<double> r = init_vector<double>(0.4,0.2);
-// 	TransMatSym2D A(r);
-// 	vector<double> y = init_vector<double>(0.1,0.2,0.3,0.4);
-// 	vector<double> Ay = A*y;
-// 	vector<double> yA = y*A;
-// 	double s1 = accumulate(Ay.begin(),Ay.end(),0.0);
-// 	double s2 = accumulate(yA.begin(),yA.end(),0.0);
-// 	cout << "A*y: " << setw(8) << Ay << " (sum = " << s1 << ")" << endl;
-// 	cout << "y*A: " << setw(8) << yA << " (sum = " << s2 << ")" << endl;
-// 	return 0;
-// }
 

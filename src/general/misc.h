@@ -40,7 +40,6 @@ inline double pow10(double x) { return pow(10.0,x); }
 double round(double x, int precision = 0);
 
 std::string itostr(int a);
-// double strtod(const std::string& a);
 
 void make_conditional(std::vector<double>& p);
 std::vector<double> elem_prod(const std::vector<double>& a,
@@ -48,9 +47,6 @@ std::vector<double> elem_prod(const std::vector<double>& a,
 
 std::istream& skip_rest_of_line(std::istream& inp);
 std::istream& eatcomment(std::istream& inp);
-
-// void tolower(std::string& a);
-// void toupper(std::string& a);
 
 void OpenFile(std::ofstream& outp, std::string filename);
 void OpenFile(std::ifstream& inp, std::string filename);

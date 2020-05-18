@@ -1,5 +1,5 @@
 /*!
-\file 
+\file
 \brief  Read LDF file format: IBD between founders
 \author Martin Boer, Biometris
 \date   2006-2010
@@ -44,7 +44,7 @@ template<class T1,class T2> void read_columns(std::vector<T1>& x, std::vector<T2
 	}
 }
 
-template<class T1,class T2,class T3> void read_columns(std::vector<T1>& x, std::vector<T2>& y, 
+template<class T1,class T2,class T3> void read_columns(std::vector<T1>& x, std::vector<T2>& y,
 							std::vector<T3>& z, int dim, std::ifstream& inp)
 {
 	std::string line;
@@ -63,13 +63,10 @@ template<class T1,class T2,class T3> void read_columns(std::vector<T1>& x, std::
 }
 
 // Jan 21 2009: Check the correct format!!
-void read_ldf_file(std::vector<int>& fndname, 
-				   LinkageMap& markermap, 
-				   mbl::matrix3D<double>& Q, const std::string filename);
-
-std::vector< mbl::matrix<double> > decomposition_ldf_file(const LinkageMap& markermap, 
-											std::string filename, double eps);
-
+void read_ldf_file(std::vector<int>& fndname,
+                   LinkageMap& markermap,
+                   mbl::matrix3D<double>& Q,
+                   const std::string filename);
 
 #endif
 

@@ -53,7 +53,6 @@ DataFrame calcIBD(CharacterVector& poptype,
               Rcpp::as<std::string>(poptype),
               Rcpp::as<std::string>(locfile),
               Rcpp::as<std::string>(mapfile),
-             // std::tmpnam(nullptr),
               _evalposfile,
               max_step_size);
   }
@@ -73,36 +72,6 @@ DataFrame calcIBD(CharacterVector& poptype,
   const int npar = parents.size();
   const int npop = offspring.size();
   const int M = positions.size();
-  /*
-   Rcout << endl;
-   Rcout << "# summary of results for poptype:" << poptype << endl;
-   Rcout << "# parent list:" << endl;
-   for (int i=0;i<npar;i++)
-   Rcout << setw(3) << i+1 << setw(12) << parents[i] << endl;
-   Rcout << "# list of individuals: " << endl;
-   for (int i=0;i<npop;i++)
-   Rcout << setw(3) << i+1 << setw(12) << offspring[i] << endl;
-
-   Rcout << "# evaluation points:" << endl;
-   for (int m=0;m<M;m++)
-   {
-   int chr = positions[m].GetChr();
-   double pos = positions[m].GetPosition();
-   Rcout << setw(5) << m+1 << setw(5) << chr << setw(12) << pos << '\n';
-   }
-
-   for (int m=0;m<M;m++)
-   {
-   Rcout << "# IBD-prob, evaluation point " << m+1 << endl;
-   for (int i=0;i<npop;i++) {
-   for (int k=0;k<prob.Dim3(); k++)
-   {
-   Rprintf("%8.3f", prob[i][m][k]);
-   }
-   Rcout << endl;
-   }
-   }
-   */
 
   NumericVector pos_ext;
   IntegerVector chr_ext;
