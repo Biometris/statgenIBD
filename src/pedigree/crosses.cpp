@@ -15,7 +15,7 @@
 #include "markerscore.h"
 #include "analysis_fam.h"
 #include "crosses.h"
-#include "main.h"
+#include "mainR.h"
 
 using namespace mbl;
 using namespace std;
@@ -303,7 +303,7 @@ matrix3D<double> analysis_cross(const vector<IndProp>& pop,
 					const matrix<score>& geno,
 					const LinkageMap& markermap,
 					const LinkageMap& eval_pos,
-					const string& filename,
+					//const string& filename,
 					const Args& Argu)
 {
 	string tmp1;
@@ -318,7 +318,7 @@ matrix3D<double> analysis_cross(const vector<IndProp>& pop,
 
 	string type = find_type(pop);
 	vector<int> ndx_par = get_ndx_par(pop);
-	const int npar = ndx_par.size();
+	//const int npar = ndx_par.size();
 	matrix3D<double> Z = calc_IBDs(pop,ndx_par,geno,markermap,eval_pos,type);
 
 	//ofstream outp;

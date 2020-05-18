@@ -1,4 +1,4 @@
-#include "main.h"
+#include "mainR.h"
 #include "matvec.h"
 #include "Loc.h"
 #include "read_map.h"
@@ -53,7 +53,7 @@ DataFrame calcIBD(CharacterVector& poptype,
               Rcpp::as<std::string>(poptype),
               Rcpp::as<std::string>(locfile),
               Rcpp::as<std::string>(mapfile),
-              std::tmpnam(nullptr),
+             // std::tmpnam(nullptr),
               _evalposfile,
               max_step_size);
   }
