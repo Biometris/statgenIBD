@@ -70,7 +70,6 @@ vector<IndProp> make_ped_file(const string& poptype,
   return result;
 }
 
-
 void marker_selection(LinkageMap& markermap,
                       LinkageMap& eval_pos,
                       int sel_chr,
@@ -351,9 +350,7 @@ int main_forR(matrix3D<double>& Z,
               const string& eval_pos,
               const double& max_step_size)
 {
-  stringstream max_step_size_ss;
-  max_step_size_ss << max_step_size;
-  string max_step_size_str = max_step_size_ss.str();
+  string max_step_size_str = stringify(max_step_size);
   int argc;
   if (eval_pos.length() > 0)
     argc = 8;
