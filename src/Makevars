@@ -12,7 +12,6 @@ PKG_SOURCES = \
         RcppExports.cpp\
         general/HMMalgo.cpp\
         general/InhVector.cpp\
-        general/manipulators.cpp\
         general/matvec.cpp\
         general/mblexcept.cpp\
         general/misc.cpp\
@@ -25,7 +24,6 @@ PKG_SOURCES = \
         pedigree/mainR.cpp\
         pedigree/markerscore.cpp\
         pedigree/popt.cpp\
-        pedigree/read_ldf.cpp\
         pedigree/read_map.cpp
 
 # Obtain the object files

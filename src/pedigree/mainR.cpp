@@ -7,14 +7,11 @@
 #include <Rcpp.h>
 
 // library files
+#include "mainR.h"
 #include "convert.h"
 #include "read_map.h"
-#include "read_ldf.h"
 #include "crosses.h"
 #include "analysis_fam.h"
-//#include "mainR.h"
-#include "Loc.h"
-#include "matvec.h"
 #include "InhVector.h"
 
 using namespace std;
@@ -171,62 +168,7 @@ int count_scores(const vector<score>& geno)
   return cnt;
 }
 
-void print_diagnostics(const vector<IndProp>& pop,
-                       const matrix<score>& geno,
-                       const string& filename)
-{
-  const int N = pop.size();
-  ofstream outp;
-  OpenFile(outp,filename);
-  for (int i=0;i<N;i++)
-  {
-    IndProp ind = pop[i];
-    int cnt = count_scores(geno[i]);
-    int cntP1, cntP2;
-    if (ind.IsFounder())
-    {
-      cntP1 = 0;
-      cntP2 = 0;
-    }
-    else
-    {
-      cntP1 = count_scores(geno[ndxID(pop,ind.GetP1())]);
-      cntP2 = count_scores(geno[ndxID(pop,ind.GetP2())]);
-    }
-
-    outp << setw(4) << i
-         << setw(10) << ind.GetID()
-         << setw(10) << ind.GetP1()
-         << setw(10) << ind.GetP2()
-         << setw(10) << cnt
-         << setw(10) << cntP1
-         << setw(10) << cntP2 << endl;
-  }
-}
-
-matrix3D<double> set_IBD_founders(const matrix3D<double>& A,
-                                  const LinkageMap& markermap,
-                                  double alpha)
-{
-  Rcout << "alpha:  " << alpha << endl;
-
-  const int M = markermap.size();
-  const int Nfnd = A.Dim2();
-  matrix3D<double> IBD_fnd(M,Nfnd,Nfnd);
-  matrix<double> I_Nfnd = identity_matrix(Nfnd);
-  int k=0;
-  for (int m=0;m<M;m++)
-  {
-    if (eval_pos(markermap[m]))	// if current position is evaluation point.
-      IBD_fnd[m] = alpha*A[k++] + (1.0-alpha)*I_Nfnd;
-    else
-      IBD_fnd[m] = I_Nfnd;	// actually not used.
-  }
-  return IBD_fnd;
-}
-
 // main part of the program (reading data, calculating IBD-prob, save results)
-// Argu contains the values of the command line arguments and options
 int main_pedigreeR(matrix3D<double>& Z,
                    vector<string>& parents,
                    vector<string>& offspring,
@@ -240,7 +182,7 @@ int main_pedigreeR(matrix3D<double>& Z,
   // read all the data
   matrix<score> geno;
   LinkageMap markermap = read_map_file(mapfile);
-  bool analysis_family = true; // single_family(pop);
+  bool analysis_family = true;
   int sel_chr = -1;
 
   matrix<score> geno_locfile;
@@ -270,48 +212,18 @@ int main_pedigreeR(matrix3D<double>& Z,
     if (pop[i].IsFounder())
       Nfnd++;
   }
-  //string IBD_founder_file;
   matrix3D<double> IBD_fnd;
-  //vector<int> fndname; // assumes here that fndnames are integers!!
-  // if (Argu.GetOption("rdldf",IBD_founder_file))
-  // {
-  //   matrix3D<double> IBD_fnd_eval_pos;
-  //   if (pos_option)
-  //     throw mblib_error("cannot use both options '-pos' and '-rdldf'");
-  //   pos_option = true;
-  //
-  //   // here further checks ar needed for checking right order fndname!
-  //   eval_pos.clear(); // !?
-  //   read_ldf_file(fndname,eval_pos,IBD_fnd_eval_pos,IBD_founder_file);
-  //
-  //   // only simple check for correct number of founders:
-  //   const int fndname_size = fndname.size();
-  //   if (Nfnd != fndname_size)
-  //     throw mblib_error("wrong number of founders in '-rdldf' option");
-  //
-  //   marker_selection(markermap,eval_pos,sel_chr,analysis_family,pos_option);
-  //
-  //   double alpha = 1.0;
-  //   Argu.GetOption("alpha",alpha);
-  //   IBD_fnd = set_IBD_founders(IBD_fnd_eval_pos,markermap,alpha);
-  // }
-  // else
-  // {
   marker_selection(markermap, eval_pos, sel_chr, analysis_family, pos_option);
   int M = markermap.size();
   IBD_fnd = matrix3D<double>(M, Nfnd, Nfnd);
   for (int m = 0; m < M; m++)
     IBD_fnd[m] = identity_matrix(Nfnd);
-  // }
 
   linking_data(geno, markermap, pop, geno_locfile, ID, marker_names);
 
   string diag_file;
-  //if (Argu.GetOption("diag",diag_file))
-  //  print_diagnostics(pop,geno,diag_file);
-  // start of analysis and write results to output:
+  // start of analysis.
   Z = analysis_cross(pop, geno, markermap, eval_pos);
-
   const int npar = count_parents(pop);
   for (int i=0; i < npar; i++)
     parents.push_back(ID[i]);
@@ -323,40 +235,5 @@ int main_pedigreeR(matrix3D<double>& Z,
   return 0;
 }
 
-//
-//   Options options;
-//   options.Add("H"				  , "help");
-//   options.Add("bin"             , "save all results in binary file");
-//   options.Add("flx"			  , "generate LD-input file for FlexQTL");
-//   options.Add("chr <int>"       , "select chromosome number");
-//   options.Add("coa <string>"    , "coa matrices for individuals defined in file");
-//   options.Add("prec <int>"      , "precision in tab-delimited output files");
-//   options.Add("frac <double>"   , "threshold for ancestors (frac. scored loci)");
-//   options.Add("pos <string>"    , "IBD-prob. at positions defined in file");
-//   options.Add("max_step_size <string>"   , "maximum distance for in between marker observations");
-//   options.Add("diag <string>"   , "some diagnostics, extra output");
-//   options.Add("nocoa"           , "write no coa matrices to output");
-//   options.Add("rdldf <string>"  , "read IBD probabilities for founders");
-//   options.Add("alpha <double>"  , "weighting factor for rdldf option");
-//   options.Add("eigen <string>"  , "use eigen-decomposition of ldf-file");
-//   options.Add("epseig <double>" , "precision for spectral decomposition");
-//   options.Add("savecoa <string>", "save coeff. of coancestry in file");
-//   options.Add("binformat <int> ", "format in binary file");
-//
-//   Rcout << "Pedigree, version " << version << " (" << date << ")" << endl
-//         << "Martin Boer, Biometris; martin.boer@wur.nl" << endl << endl;
-//
-//   Args Argu(options,arg,optional_arg,argc,argv);
-//   if (Argu.GetOption("H") || !Argu.State())
-//   {
-//     Rcout << "format: Pedigree <pedfile> <locfile> <mapfile>  [options]"
-//           << endl << endl << options << endl << endl;
-//     return 1;
-//   }
-//   int result = main_pedigreeR(Z, parents, offspring, positions, Argu);
-//
-//   int result = main_pedigreeR(Z, parents, offspring, positions, )
-//
-//   return result;
-// }
+
 

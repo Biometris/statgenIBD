@@ -3,7 +3,6 @@ rm -f \
   src/general/InhVector.o\
   src/general/OrdGeno.o\
   src/general/TransMatSym2D.o\
-  src/general/manipulators.o\
   src/general/matvec.o\
   src/general/mblexcept.o\
   src/general/misc.o\
@@ -14,5 +13,4 @@ rm -f \
   src/pedigree/mainR.o\
   src/pedigree/markerscore.o\
   src/pedigree/popt.o\
-  src/pedigree/read_ldf.o\
   src/pedigree/read_map.o

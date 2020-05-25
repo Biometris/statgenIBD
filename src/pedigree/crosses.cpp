@@ -9,7 +9,6 @@
 #include "convert.h"
 #include "TransMatSym2D.h"
 #include "Loc.h"
-#include "popt.h"
 #include "OrdGeno.h"
 #include "InhVector.h"
 #include "markerscore.h"
