@@ -7,14 +7,12 @@
 #include <Rcpp.h>
 
 // library files
-#include "Args.h"
-#include "excepthnd.h"
 #include "convert.h"
 #include "read_map.h"
 #include "read_ldf.h"
 #include "crosses.h"
 #include "analysis_fam.h"
-#include "mainR.h"
+//#include "mainR.h"
 #include "Loc.h"
 #include "matvec.h"
 #include "InhVector.h"
@@ -140,7 +138,7 @@ int linking_data(matrix<score>& geno,
       if (pop[i].IsHybrid())
       {
         Rcout << "!Warning: Genotypic data for " << pop[i].GetID()
-             << " will be ignored" << endl;
+              << " will be ignored" << endl;
       }
       else
       {
@@ -233,103 +231,91 @@ int main_pedigreeR(matrix3D<double>& Z,
                    vector<string>& parents,
                    vector<string>& offspring,
                    LinkageMap& positions,
-                   const Args& Argu)
+                   const string& poptype,
+                   const string& locfile,
+                   const string& mapfile,
+                   const string& eval_pos_file,
+                   const double& max_step_size)
 {
-  // get arguments (i.e. get the filenames for input)
-  string poptype,locfile,mapfile; //,output;
-  Argu.GetArgument("poptype",poptype);
-  Argu.GetArgument("locfile",locfile);
-  Argu.GetArgument("mapfile",mapfile);
-
   // read all the data
   matrix<score> geno;
   LinkageMap markermap = read_map_file(mapfile);
   bool analysis_family = true; // single_family(pop);
-
-  int sel_chr = -1; // default: analyse all chromosomes
-  Argu.GetOption("chr",sel_chr);
+  int sel_chr = -1;
 
   matrix<score> geno_locfile;
   vector<string> ID, marker_names;
   Rcout << "reading data .............." << endl;
-  read_flapjackfile(ID,marker_names,geno_locfile,locfile);
+  read_flapjackfile(ID, marker_names, geno_locfile, locfile);
 
   vector<IndProp> pop = make_ped_file(poptype, ID);
 
-  markermap = reduce_markermap(markermap,marker_names);
-  print_marker_warnings(markermap,marker_names);
+  markermap = reduce_markermap(markermap, marker_names);
+  print_marker_warnings(markermap, marker_names);
   LinkageMap eval_pos;
-  string eval_pos_file;
-  bool pos_option = Argu.GetOption("pos",eval_pos_file);
-
-  string max_step_size_str;
-  bool mss = Argu.GetOption("max_step_size",max_step_size_str);
-  double max_step_size = std::stod(max_step_size_str);
+  bool pos_option = eval_pos_file.length() > 0;
   if (pos_option)
   {
-    if (Argu.GetOption("flx") || Argu.GetOption("bin"))
-      throw mblib_error("cannot use option '-pos' in flexqtl (-flx) or binary mode (-bin)");
     eval_pos = read_eval_pos_file(eval_pos_file);
   }
   else if (max_step_size > 0)
     eval_pos = generate_extended_map(markermap, max_step_size);
   else
     eval_pos = markermap;
-
   // Count number of inbred founders:
   int Nfnd = 0;
   const int Npop = pop.size();
-  for (int i=0;i<Npop;i++)
+  for (int i = 0; i < Npop; i++)
   {
     if (pop[i].IsFounder())
       Nfnd++;
   }
-  string IBD_founder_file;
+  //string IBD_founder_file;
   matrix3D<double> IBD_fnd;
-  vector<int> fndname; // assumes here that fndnames are integers!!
-  if (Argu.GetOption("rdldf",IBD_founder_file))
-  {
-    matrix3D<double> IBD_fnd_eval_pos;
-    if (pos_option)
-      throw mblib_error("cannot use both options '-pos' and '-rdldf'");
-    pos_option = true;
+  //vector<int> fndname; // assumes here that fndnames are integers!!
+  // if (Argu.GetOption("rdldf",IBD_founder_file))
+  // {
+  //   matrix3D<double> IBD_fnd_eval_pos;
+  //   if (pos_option)
+  //     throw mblib_error("cannot use both options '-pos' and '-rdldf'");
+  //   pos_option = true;
+  //
+  //   // here further checks ar needed for checking right order fndname!
+  //   eval_pos.clear(); // !?
+  //   read_ldf_file(fndname,eval_pos,IBD_fnd_eval_pos,IBD_founder_file);
+  //
+  //   // only simple check for correct number of founders:
+  //   const int fndname_size = fndname.size();
+  //   if (Nfnd != fndname_size)
+  //     throw mblib_error("wrong number of founders in '-rdldf' option");
+  //
+  //   marker_selection(markermap,eval_pos,sel_chr,analysis_family,pos_option);
+  //
+  //   double alpha = 1.0;
+  //   Argu.GetOption("alpha",alpha);
+  //   IBD_fnd = set_IBD_founders(IBD_fnd_eval_pos,markermap,alpha);
+  // }
+  // else
+  // {
+  marker_selection(markermap, eval_pos, sel_chr, analysis_family, pos_option);
+  int M = markermap.size();
+  IBD_fnd = matrix3D<double>(M, Nfnd, Nfnd);
+  for (int m = 0; m < M; m++)
+    IBD_fnd[m] = identity_matrix(Nfnd);
+  // }
 
-    // here further checks ar needed for checking right order fndname!
-    eval_pos.clear(); // !?
-    read_ldf_file(fndname,eval_pos,IBD_fnd_eval_pos,IBD_founder_file);
-
-    // only simple check for correct number of founders:
-    const int fndname_size = fndname.size();
-    if (Nfnd != fndname_size)
-      throw mblib_error("wrong number of founders in '-rdldf' option");
-
-    marker_selection(markermap,eval_pos,sel_chr,analysis_family,pos_option);
-
-    double alpha = 1.0;
-    Argu.GetOption("alpha",alpha);
-    IBD_fnd = set_IBD_founders(IBD_fnd_eval_pos,markermap,alpha);
-  }
-  else
-  {
-    marker_selection(markermap,eval_pos,sel_chr,analysis_family,pos_option);
-    int M = markermap.size();
-    IBD_fnd = matrix3D<double>(M,Nfnd,Nfnd);
-    for (int m=0;m<M;m++)
-      IBD_fnd[m] = identity_matrix(Nfnd);
-  }
-
-  linking_data(geno,markermap,pop,geno_locfile,ID,marker_names);
+  linking_data(geno, markermap, pop, geno_locfile, ID, marker_names);
 
   string diag_file;
-  if (Argu.GetOption("diag",diag_file))
-    print_diagnostics(pop,geno,diag_file);
+  //if (Argu.GetOption("diag",diag_file))
+  //  print_diagnostics(pop,geno,diag_file);
   // start of analysis and write results to output:
-  Z = analysis_cross(pop,geno,markermap,eval_pos,Argu);
+  Z = analysis_cross(pop, geno, markermap, eval_pos);
 
   const int npar = count_parents(pop);
-  for (int i=0;i<npar;i++)
+  for (int i=0; i < npar; i++)
     parents.push_back(ID[i]);
-  for (unsigned int i=npar;i<ID.size();i++)
+  for (unsigned int i = npar; i < ID.size(); i++)
     offspring.push_back(ID[i]);
 
   positions = eval_pos;
@@ -337,71 +323,40 @@ int main_pedigreeR(matrix3D<double>& Z,
   return 0;
 }
 
-// This function for making connection with R/Rcpp
-//  1. It reads the command-line and saves the arguments in class Args
-//  2. Exception handling (see proc. exception_handler in files excepthnd.*)
-int main_forR(matrix3D<double>& Z,
-              vector<string>& parents,
-              vector<string>& offspring,
-              LinkageMap& positions,
-              const string& poptype,
-              const string& locfile,
-              const string& mapfile,
-              const string& eval_pos,
-              const double& max_step_size)
-{
-  string max_step_size_str = stringify(max_step_size);
-  int argc;
-  if (eval_pos.length() > 0)
-    argc = 8;
-  else
-    argc = 6;
-  const char *argv[argc];
-  argv[0] = "main_forR";
-  argv[1] = poptype.c_str();
-  argv[2] = locfile.c_str();
-  argv[3] = mapfile.c_str();
-  argv[4] = "-max_step_size";
-  argv[5] = max_step_size_str.c_str();
-  if (eval_pos.length() > 0)
-  {
-    argv[6] = "-pos";
-    argv[7] = eval_pos.c_str();
-  }
-  const string arg = "poptype locfile mapfile";
-  const string optional_arg = "";
-
-  Options options;
-  options.Add("H"				  , "help");
-  options.Add("bin"             , "save all results in binary file");
-  options.Add("flx"			  , "generate LD-input file for FlexQTL");
-  options.Add("chr <int>"       , "select chromosome number");
-  options.Add("coa <string>"    , "coa matrices for individuals defined in file");
-  options.Add("prec <int>"      , "precision in tab-delimited output files");
-  options.Add("frac <double>"   , "threshold for ancestors (frac. scored loci)");
-  options.Add("pos <string>"    , "IBD-prob. at positions defined in file");
-  options.Add("max_step_size <string>"   , "maximum distance for in between marker observations");
-  options.Add("diag <string>"   , "some diagnostics, extra output");
-  options.Add("nocoa"           , "write no coa matrices to output");
-  options.Add("rdldf <string>"  , "read IBD probabilities for founders");
-  options.Add("alpha <double>"  , "weighting factor for rdldf option");
-  options.Add("eigen <string>"  , "use eigen-decomposition of ldf-file");
-  options.Add("epseig <double>" , "precision for spectral decomposition");
-  options.Add("savecoa <string>", "save coeff. of coancestry in file");
-  options.Add("binformat <int> ", "format in binary file");
-
-  Rcout << "Pedigree, version " << version << " (" << date << ")" << endl
-       << "Martin Boer, Biometris; martin.boer@wur.nl" << endl << endl;
-
-  Args Argu(options,arg,optional_arg,argc,argv);
-  if (Argu.GetOption("H") || !Argu.State())
-  {
-    Rcout << "format: Pedigree <pedfile> <locfile> <mapfile>  [options]"
-         << endl << endl << options << endl << endl;
-    return 1;
-  }
-  int result = main_pedigreeR(Z, parents, offspring, positions, Argu);
-
-  return result;
-}
+//
+//   Options options;
+//   options.Add("H"				  , "help");
+//   options.Add("bin"             , "save all results in binary file");
+//   options.Add("flx"			  , "generate LD-input file for FlexQTL");
+//   options.Add("chr <int>"       , "select chromosome number");
+//   options.Add("coa <string>"    , "coa matrices for individuals defined in file");
+//   options.Add("prec <int>"      , "precision in tab-delimited output files");
+//   options.Add("frac <double>"   , "threshold for ancestors (frac. scored loci)");
+//   options.Add("pos <string>"    , "IBD-prob. at positions defined in file");
+//   options.Add("max_step_size <string>"   , "maximum distance for in between marker observations");
+//   options.Add("diag <string>"   , "some diagnostics, extra output");
+//   options.Add("nocoa"           , "write no coa matrices to output");
+//   options.Add("rdldf <string>"  , "read IBD probabilities for founders");
+//   options.Add("alpha <double>"  , "weighting factor for rdldf option");
+//   options.Add("eigen <string>"  , "use eigen-decomposition of ldf-file");
+//   options.Add("epseig <double>" , "precision for spectral decomposition");
+//   options.Add("savecoa <string>", "save coeff. of coancestry in file");
+//   options.Add("binformat <int> ", "format in binary file");
+//
+//   Rcout << "Pedigree, version " << version << " (" << date << ")" << endl
+//         << "Martin Boer, Biometris; martin.boer@wur.nl" << endl << endl;
+//
+//   Args Argu(options,arg,optional_arg,argc,argv);
+//   if (Argu.GetOption("H") || !Argu.State())
+//   {
+//     Rcout << "format: Pedigree <pedfile> <locfile> <mapfile>  [options]"
+//           << endl << endl << options << endl << endl;
+//     return 1;
+//   }
+//   int result = main_pedigreeR(Z, parents, offspring, positions, Argu);
+//
+//   int result = main_pedigreeR(Z, parents, offspring, positions, )
+//
+//   return result;
+// }
 

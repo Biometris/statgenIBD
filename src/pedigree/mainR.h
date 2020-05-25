@@ -15,15 +15,15 @@
 const std::string version = "2.75";
 const std::string date    = "april 13, 2020";
 
-int main_forR(mbl::matrix3D<double>& Z,
-              std::vector<std::string>& parents,
-              std::vector<std::string>& offspring,
-              LinkageMap& positions,
-              const std::string& poptype,
-              const std::string& locfile,
-              const std::string& mapfile,
-              const std::string& eval_pos,
-              const double& max_step_size);
+int main_pedigreeR(mbl::matrix3D<double>& Z,
+                   std::vector<std::string>& parents,
+                   std::vector<std::string>& offspring,
+                   LinkageMap& positions,
+                   const std::string& poptype,
+                   const std::string& locfile,
+                   const std::string& mapfile,
+                   const std::string& eval_pos,
+                   const double& max_step_size);
 
 #endif
 

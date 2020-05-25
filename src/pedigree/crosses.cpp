@@ -275,8 +275,8 @@ vector<int> get_ndx_par(const vector<IndProp>& pop)
   IndProp ind = find_first_progeny(pop);
   string P1 = ind.GetP1();
   string P2 = ind.GetP2();
-  int ndx_P1 = ndxID(pop,P1);
-  int ndx_P2 = ndxID(pop,P2);
+  int ndx_P1 = ndxID(pop, P1);
+  int ndx_P2 = ndxID(pop, P2);
   IndProp par1 = pop[ndx_P1];
   IndProp par2 = pop[ndx_P2];
   if (npar == 2)
@@ -288,23 +288,23 @@ vector<int> get_ndx_par(const vector<IndProp>& pop)
   {
     if (par1.IsHybrid())
     {
-      ndx_par.push_back(ndxID(pop,par1.GetP1()));
-      ndx_par.push_back(ndxID(pop,par1.GetP2()));
+      ndx_par.push_back(ndxID(pop, par1.GetP1()));
+      ndx_par.push_back(ndxID(pop, par1.GetP2()));
       ndx_par.push_back(ndx_P2);
     }
     else
     {
-      ndx_par.push_back(ndxID(pop,par2.GetP1()));
-      ndx_par.push_back(ndxID(pop,par2.GetP2()));
+      ndx_par.push_back(ndxID(pop, par2.GetP1()));
+      ndx_par.push_back(ndxID(pop, par2.GetP2()));
       ndx_par.push_back(ndx_P1);
     }
   }
   else // npar == 4
   {
-    ndx_par.push_back(ndxID(pop,par1.GetP1()));
-    ndx_par.push_back(ndxID(pop,par1.GetP2()));
-    ndx_par.push_back(ndxID(pop,par2.GetP1()));
-    ndx_par.push_back(ndxID(pop,par2.GetP2()));
+    ndx_par.push_back(ndxID(pop, par1.GetP1()));
+    ndx_par.push_back(ndxID(pop, par1.GetP2()));
+    ndx_par.push_back(ndxID(pop, par2.GetP1()));
+    ndx_par.push_back(ndxID(pop, par2.GetP2()));
   }
   return ndx_par;
 }
@@ -312,22 +312,13 @@ vector<int> get_ndx_par(const vector<IndProp>& pop)
 matrix3D<double> analysis_cross(const vector<IndProp>& pop,
                                 const matrix<score>& geno,
                                 const LinkageMap& markermap,
-                                const LinkageMap& eval_pos,
-                                const Args& Argu)
+                                const LinkageMap& eval_pos)
 {
-  string tmp1;
-  double tmp2;
-  if (Argu.GetOption("bin") || Argu.GetOption("flx") ||
-      Argu.GetOption("coa",tmp1) || Argu.GetOption("frac",tmp2))
-    throw mblib_error("Analysis of family: one of the options cannot be used");
-  int prec=3;
-  Argu.GetOption("prec",prec);
-
   Rcpp::Rcout << "analysis of family ........" << endl;
 
   string type = find_type(pop);
   vector<int> ndx_par = get_ndx_par(pop);
-  matrix3D<double> Z = calc_IBDs(pop,ndx_par,geno,markermap,eval_pos,type);
+  matrix3D<double> Z = calc_IBDs(pop, ndx_par, geno, markermap, eval_pos, type);
   return Z;
 }
 

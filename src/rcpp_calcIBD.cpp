@@ -49,12 +49,12 @@ DataFrame calcIBD(CharacterVector& poptype,
     _evalposfile = "";
   try
   {
-    main_forR(prob, parents, offspring, positions,
-              Rcpp::as<std::string>(poptype),
-              Rcpp::as<std::string>(locfile),
-              Rcpp::as<std::string>(mapfile),
-              _evalposfile,
-              max_step_size);
+    main_pedigreeR(prob, parents, offspring, positions,
+                   Rcpp::as<std::string>(poptype),
+                   Rcpp::as<std::string>(locfile),
+                   Rcpp::as<std::string>(mapfile),
+                   _evalposfile,
+                   max_step_size);
   }
   catch (mblib_error& e)
   {

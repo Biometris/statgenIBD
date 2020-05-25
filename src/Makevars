@@ -10,8 +10,6 @@ PKG_CPPFLAGS = \
 PKG_SOURCES = \
         rcpp_calcIBD.cpp\
         RcppExports.cpp\
-        general/Args.cpp\
-        general/excepthnd.cpp\
         general/HMMalgo.cpp\
         general/InhVector.cpp\
         general/manipulators.cpp\
