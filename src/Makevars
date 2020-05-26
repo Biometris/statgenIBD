@@ -8,7 +8,7 @@ PKG_CPPFLAGS = \
 
 # Include all C++ files in src/ and its subdirectories
 PKG_SOURCES = \
-        rcpp_calcIBD.cpp\
+        calcIBD.cpp\
         RcppExports.cpp\
         general/HMMalgo.cpp\
         general/InhVector.cpp\

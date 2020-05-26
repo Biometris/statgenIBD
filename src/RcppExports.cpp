@@ -6,7 +6,7 @@
 using namespace Rcpp;
 
 // calcIBD
-DataFrame calcIBD(CharacterVector& poptype, CharacterVector& locfile, CharacterVector& mapfile, Nullable<CharacterVector&> evalposfile, Nullable<NumericVector&> evaldist);
+List calcIBD(CharacterVector& poptype, CharacterVector& locfile, CharacterVector& mapfile, Nullable<CharacterVector&> evalposfile, Nullable<NumericVector&> evaldist);
 RcppExport SEXP _statgenIBD_calcIBD(SEXP poptypeSEXP, SEXP locfileSEXP, SEXP mapfileSEXP, SEXP evalposfileSEXP, SEXP evaldistSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
