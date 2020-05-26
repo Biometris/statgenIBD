@@ -1,9 +1,7 @@
 // Martin Boer, Biometris
 
 #include "mblexcept.h"
-#include "convert.h"
 #include "popt.h"
-
 #include "util_genetics.h"
 
 using namespace mbl;

@@ -1,10 +1,10 @@
+#include <string>
+#include <Rcpp.h>
+
 #include "mainR.h"
 #include "matvec.h"
 #include "Loc.h"
 #include "read_map.h"
-
-#include <Rcpp.h>
-#include <string>
 
 using namespace Rcpp;
 using namespace std;
@@ -72,6 +72,11 @@ DataFrame calcIBD(CharacterVector& poptype,
   const int npar = parents.size();
   const int npop = offspring.size();
   const int M = positions.size();
+
+  Rcout << prob.Dim1() << endl;
+  Rcout << prob.Dim2() << endl;
+  Rcout << prob.Dim3() << endl;
+  Rcout << prob << endl;
 
   NumericVector pos_ext;
   IntegerVector chr_ext;

@@ -1,5 +1,4 @@
 // Martin Boer, Biometris, 1998-2007, last update: 16 jan 2007
-#include "misc.h"
 #include "mblexcept.h"
 #include "TransMatSym2D.h"
 

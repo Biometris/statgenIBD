@@ -1,18 +1,8 @@
 // Martin Boer, Biometris
-#include <set>
-#include <fstream>
-#include <sstream>
-
 #include "misc.h"
-#include "Loc.h"
 #include "HMMalgo.h"
-#include "convert.h"
 #include "TransMatSym2D.h"
-
-#include "popt.h"
-#include "OrdGeno.h"
 #include "InhVector.h"
-#include "markerscore.h"
 #include "analysis_fam.h"
 
 using namespace mbl;

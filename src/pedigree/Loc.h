@@ -1,5 +1,5 @@
 /*!
-\file 
+\file
 \brief  Definition of Locus and Markermap
 \author Martin Boer, Biometris
 \date   1998-2010
@@ -7,20 +7,20 @@
 #ifndef LOCUS_HEADER
 #define LOCUS_HEADER
 
-#include <cmath>
 #include <string>
 #include <vector>
+
 #include "misc.h"
 
-class Locus  
+class Locus
 {
 public:
 	Locus() {}
-	Locus(int c, double p, const std::string& name = "") 
+	Locus(int c, double p, const std::string& name = "")
 		: chr(c), pos(p), loc_name(name) {}
 	int GetChr() const { return chr; }
 	double GetPosition() const { return pos; }
-	std::string GetName() const { return loc_name; } 
+	std::string GetName() const { return loc_name; }
 private:
 	int chr;
 	double pos;
@@ -73,6 +73,6 @@ LinkageMap generate_extended_map(const LinkageMap& Markermap, double max_step_si
 
 bool eval_pos(const Locus& loc);
 
-#endif 
+#endif
 
 

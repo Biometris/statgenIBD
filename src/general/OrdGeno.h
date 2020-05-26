@@ -8,7 +8,6 @@
 #define ORDERED_GENOTYPE_HEADER
 
 #include <string>
-#include <map>
 #include <iostream>
 
 #include "InhVector.h"

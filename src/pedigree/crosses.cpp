@@ -1,20 +1,9 @@
-#include <set>
-#include <fstream>
-#include <sstream>
-#include <algorithm>
 #include <Rcpp.h>
 
-#include "misc.h"
-#include "HMMalgo.h"
-#include "convert.h"
-#include "TransMatSym2D.h"
 #include "Loc.h"
 #include "OrdGeno.h"
-#include "InhVector.h"
-#include "markerscore.h"
 #include "analysis_fam.h"
 #include "crosses.h"
-#include "mainR.h"
 
 using namespace mbl;
 using namespace std;
@@ -30,17 +19,6 @@ int count_parents(const vector<IndProp>& pop)
   return npar;
 }
 
-int count_progeny(const vector<IndProp>& pop)
-{
-  int nfam = 0;
-  for (vector<IndProp>::const_iterator it=pop.begin();it!=pop.end();it++)
-  {
-    if (it->IsMemberFamily())
-      nfam++;
-  }
-  return nfam;
-}
-
 IndProp find_first_progeny(const vector<IndProp>& pop)
 {
   for (vector<IndProp>::const_iterator it=pop.begin();it!=pop.end();it++)
@@ -48,155 +26,13 @@ IndProp find_first_progeny(const vector<IndProp>& pop)
     if (it->IsMemberFamily())
       return *it;
   }
-  throw mblib_error("Cannot find progeny in functio find_first_progeny");
+  throw mblib_error("Cannot find progeny in function find_first_progeny");
   return pop[0]; // dummy
 }
 
 string find_type(const vector<IndProp>& pop)
 {
   return find_first_progeny(pop).GetType();
-}
-
-// print headers for cur position on the genome.
-void print_cur_eval_pos(ostream& outp,
-                        const string pre,
-                        const LinkageMap& eval_pos,
-                        int m)
-{
-  Locus loc = eval_pos[m];
-  outp << "# " << pre << ", evaluation point " << m+1
-       << ", chr " << loc.GetChr()
-       << ", " << loc.GetPosition() << "cM" << endl;
-}
-
-void print_progeny(ostream& outp,
-                   const vector<IndProp>& pop)
-{
-  const int nfam = count_progeny(pop);
-  outp << "# Number of individuals: " << nfam << endl;
-  outp << "# List with individuals: " << endl;
-  outp << "indnr" << '\t' << "name" << endl;
-
-  int cnt=1;
-  for (vector<IndProp>::const_iterator it=pop.begin();it!=pop.end();it++)
-  {
-    if (it->IsMemberFamily())
-      outp << cnt++ << '\t' << it->GetID() << '\n';
-  }
-}
-
-void print_IBDs(ostream& outp,
-                const matrix3D<double>& Z,
-                const LinkageMap& eval_pos)
-{
-  int nfam = Z.Dim1();
-  int M = Z.Dim2();
-  for (int m=0;m<M;m++)
-  {
-    print_cur_eval_pos(outp,"IBD-probabilities ", eval_pos,m);
-    for (int r=0;r<nfam;r++)
-      write_tab_delimit_line(outp,Z[r][m]);
-  }
-}
-
-void print_eval_pos(ostream& outp,
-                    const LinkageMap& eval_pos)
-{
-  const int M = eval_pos.size();
-  outp << "# Number of markers or evaluation points: " << M << endl;
-  outp << "posnr" << setw(5) << "chr" << setw(12) << "posmap" << '\n';
-  for (int m=0;m<M;m++)
-  {
-    int chr = eval_pos[m].GetChr();
-    double pos = eval_pos[m].GetPosition();
-    outp << setw(5) << m+1 << setw(5) << chr << setw(12) << pos << '\n';
-  }
-}
-
-void print_IBD_header(ostream& outp,
-                      int npar)
-{
-  outp << "#" << endl
-       << "# description of columns with IBD probabilities: " << endl;
-  int c=1;
-  for (int i=0;i<npar;i++)
-  {
-    outp << "#  column" << setw(3) << c++
-         << ": both alleles inherited from parent " << i+1 << endl;
-  }
-  if (npar == 2)
-  {
-    outp << "#  column" << setw(3) << c++ << ": heterozygous" << endl;
-  }
-  else if (npar == 3)
-  {
-    for (int i=0;i<2;i++)
-    {
-      outp << "#  column" << setw(3) << c++
-           << ": heterozygous, parents " << i+1 << " and 3" << endl;
-    }
-  }
-  else if (npar == 4)
-  {
-    for (int i=0;i<2;i++)
-    {
-      for (int j=2;j<4;j++)
-      {
-        outp << "#  column" << setw(3) << c++
-             << ": heterozygous, parents " << i+1 << " and " << j+1 << endl;
-      }
-    }
-  }
-  outp << "# " << endl
-       << "# probability random allele of an individual derived from parent i, " << endl
-       << "# where c[k] refers to the columns as defined above: " << endl
-       << "#" << endl;
-  if (npar == 2)
-  {
-    outp << "#  P(parent=1) = c[1] + 0.5*c[3] " << endl
-         << "#  P(parent=2) = c[2] + 0.5*c[3] " << endl;
-  }
-  else if (npar == 3)
-  {
-    outp << "#  P(parent=1) = c[1] + 0.5*c[4] " << endl
-         << "#  P(parent=2) = c[2] + 0.5*c[5] " << endl
-         << "#  P(parent=3) = c[3] + 0.5*c[4] + 0.5*c[5] " << endl;
-  }
-  else if (npar == 4)
-  {
-    outp << "#  P(parent=1) = c[1] + 0.5*c[5] + 0.5*c[6]" << endl
-         << "#  P(parent=2) = c[2] + 0.5*c[7] + 0.5*c[8]" << endl
-         << "#  P(parent=3) = c[3] + 0.5*c[5] + 0.5*c[7]" << endl
-         << "#  P(parent=4) = c[4] + 0.5*c[6] + 0.5*c[8]" << endl;
-  }
-  outp << "# " << endl;
-}
-
-void print_header(ostream& outp,
-                  const vector<IndProp>& pop,
-                  const vector<int>& ndx_par,
-                  const string& type)
-{
-  int npar = ndx_par.size();
-  outp << "# Output of program pedigree.exe (v" << version << ")" << endl;
-  outp << "#" << endl;
-  switch (npar)
-  {
-  case 2:
-    outp << "# analysis of biparental cross"  << endl;
-    break;
-  case 3:
-    outp << "# analysis of three-way cross"  << endl;
-    break;
-  case 4:
-    outp << "# analysis of four-way cross"  << endl;
-    break;
-  }
-  outp << "# population type: " << type << endl;
-  outp << "# parent list: " << endl;
-  outp << "par" << '\t' << "name" << '\n';
-  for (int i=0;i<npar;i++)
-    outp << i+1 << '\t' << pop[ndx_par[i]].GetID() << '\n';
 }
 
 matrix<double> calc_P(const LinkageMap& eval_pos,

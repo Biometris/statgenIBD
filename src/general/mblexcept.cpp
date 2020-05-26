@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "convert.h"
 #include "mblexcept.h"
 

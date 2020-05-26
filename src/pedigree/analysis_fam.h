@@ -7,12 +7,15 @@
 #ifndef ANALYSIS_FAMILIES_HEADER
 #define ANALYSIS_FAMILIES_HEADER
 
+#include <string>
 #include <vector>
 #include <map>
 
 #include "matvec.h"
 #include "popt.h"
 #include "markerscore.h"
+#include "OrdGeno.h"
+#include "Loc.h"
 
 //! calculation of IBD probabilities in families at QTL positions
 /*!

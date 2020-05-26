@@ -8,10 +8,9 @@
 #define CROSSES_HEADER
 
 #include <vector>
-#include <map>
+//#include <map>
 
 #include "matvec.h"
-#include "popt.h"
 #include "util_genetics.h"
 #include "markerscore.h"
 

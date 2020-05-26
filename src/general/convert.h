@@ -8,13 +8,13 @@ For further details and examples see
 http://www.parashift.com/c++-faq-lite/misc-technical-issues.html
 */
 
+#include <string>
+
 #ifndef CONVERT_HEADER
 #define CONVERT_HEADER
 
 #include <typeinfo>
-#include <string>
 #include <sstream>
-#include <iostream>
 #include <stdexcept>
 
 namespace mbl

@@ -1,8 +1,5 @@
-#include <iostream>
 #include <algorithm>
-#include <fstream>
 
-#include "misc.h"
 #include "convert.h"
 #include "mblexcept.h"
 #include "util_genetics.h"

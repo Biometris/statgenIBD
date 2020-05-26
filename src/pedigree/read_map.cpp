@@ -1,13 +1,5 @@
 // Martin Boer, Biometris
-#include <list>
-#include <set>
-#include <map>
-#include <numeric>
-#include <cmath>
 #include <fstream>
-#include <sstream>
-#include <algorithm>
-#include <string>
 #include <Rcpp.h>
 
 // library files
@@ -103,7 +95,6 @@ void print_marker_warnings(const LinkageMap& markermap,
       Rcpp::Rcout << *it << endl;
     Rcpp::Rcout << endl << endl;
   }
-
 }
 
 LinkageMap read_map_file(const string& filename)
@@ -113,7 +104,6 @@ LinkageMap read_map_file(const string& filename)
   if (!inp)
     throw mblib_error("Cannot read file" + filename);
   string str;
-  //int chr_nr = -1;
   while (inp)
   {
     double pos;

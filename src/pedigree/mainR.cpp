@@ -1,18 +1,13 @@
 // Martin Boer, Biometris
 
-#include <iostream>
-#include <iomanip>
-#include <fstream>
-#include <algorithm>
 #include <Rcpp.h>
 
 // library files
 #include "mainR.h"
-#include "convert.h"
 #include "read_map.h"
 #include "crosses.h"
-#include "analysis_fam.h"
-#include "InhVector.h"
+#include "popt.h"
+#include "util_genetics.h"
 
 using namespace std;
 using namespace mbl;

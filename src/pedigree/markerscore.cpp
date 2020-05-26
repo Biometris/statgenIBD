@@ -1,10 +1,8 @@
 // Martin Boer, Biometris
 #include <iostream>
-#include <sstream>
-#include <utility>
 #include <fstream>
 #include <algorithm>
-#include <locale>
+
 #include "misc.h"
 #include "mblexcept.h"
 #include "convert.h"

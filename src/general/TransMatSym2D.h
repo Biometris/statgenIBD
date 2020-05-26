@@ -9,7 +9,6 @@ The Transition Matrix consists of the Kronecker product of symmetric 2x2 matrice
 #ifndef TRANSMATRIX_SYMMETRIC_2D_HEADER
 #define TRANSMATRIX_SYMMETRIC_2D_HEADER
 
-#include "matvec.h"
 #include "misc.h"
 
 namespace mbl

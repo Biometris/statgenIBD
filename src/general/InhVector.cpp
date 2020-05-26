@@ -1,7 +1,3 @@
-#include <iostream>
-#include <iomanip>
-#include <vector>
-
 #include "misc.h"
 #include "convert.h"
 #include "InhVector.h"

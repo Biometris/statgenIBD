@@ -1,6 +1,6 @@
 // Martin Boer, Biometris, 1998-2005, last update: 15 december 2005
 
-#include <cmath>
+#include "convert.h"
 #include "Loc.h"
 
 using namespace std;
@@ -17,7 +17,6 @@ int compare(const Locus& locA,
 	if (locA.pos < locB.pos) return -1;
 	if (locA.pos > locB.pos) return  1;
 
-	/* locA == locB */
 	return 0;
 }
 
@@ -50,7 +49,6 @@ int pos_qtl(const LinkageMap& Markermap,
 	return 0; // dummy
 }
 
-
 vector<mbl::Interval> make_intervals(const LinkageMap& markermap)
 {
 	vector<Interval> result;
@@ -77,7 +75,6 @@ vector<mbl::Interval> make_intervals(const LinkageMap& markermap)
 	return result;
 }
 
-
 double total_length(const LinkageMap& markermap)
 {
 	vector<Interval> intervals = make_intervals(markermap);
@@ -87,7 +84,6 @@ double total_length(const LinkageMap& markermap)
 		sum += intervals[i].Length();
 	return sum;
 }
-
 
 LinkageMap generate_extended_map(const LinkageMap& Markermap,
                                  double max_step_size)
@@ -111,7 +107,7 @@ LinkageMap generate_extended_map(const LinkageMap& Markermap,
 			{
 				int chr = Left.GetChr();
 				double pos = round(left_pos + (i/(1.0*N))*dist,2);
-				string name = "EXT" + itostr(++extra_markers);
+				string name = "EXT" + stringify(++extra_markers);
 				extended_map.push_back(Locus(chr,pos,name));
 			}
 		}
@@ -120,7 +116,6 @@ LinkageMap generate_extended_map(const LinkageMap& Markermap,
 
 	return extended_map;
 }
-
 
 bool eval_pos(const Locus& loc)
 {

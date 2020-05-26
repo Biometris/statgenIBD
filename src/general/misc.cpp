@@ -3,22 +3,14 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <cfloat>
+#include <float.h> // for DBL_MIN
+
 #include "misc.h"
-#include "convert.h"
 #include "mblexcept.h"
 
 using namespace mbl;
 using namespace std;
-
-#ifdef LINUX
-#include <float.h> // for DBL_MIN
-#endif
-
-// conversion from int to string
-string mbl::itostr(int a)
-{
-	return stringify(a);
-}
 
 double mbl::round(double x,
                   int precision)
@@ -86,15 +78,4 @@ unsigned int mbl::pow2(int n)
 {
 	unsigned int x=1;
 	return (x << n);
-}
-
-void mbl::write_bin(ostream& outp, double x)
-{
-	outp.write((char *)& x, sizeof(x));
-}
-
-void mbl::write_bin(ostream& outp, const vector<double>& x)
-{
-	for (vector<double>::const_iterator it = x.begin(); it != x.end(); ++it)
-		write_bin(outp,*it);
 }

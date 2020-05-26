@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <string>
 #include <vector>
 
 #include "mblexcept.h"
@@ -259,7 +260,6 @@ matrix<T> operator*(const matrix<T>& A, const matrix<T>& B)
 	const int A_col = A.NrCols();
 	const int A_row = A.NrRows();
 	const int B_col = B.NrCols();
-	//const int B_row = B.NrRows();
 	matrix<T> C(A_row,B_col);
     for (int i=0;i<A_row;i++)
 		for (int j=0;j<B_col;j++)
@@ -386,9 +386,9 @@ matrix<T> transpose(const matrix<T>& X)
 
 matrix<double> identity_matrix(int n);
 
-void write_bin(std::ostream& outp, const matrix<double>& x);
+// void write_bin(std::ostream& outp, const matrix<double>& x);
 
-void resize_matrix_example();
+// void resize_matrix_example();
 
 template<class T>
 std::vector<T> column(const matrix<T>& X, int c)

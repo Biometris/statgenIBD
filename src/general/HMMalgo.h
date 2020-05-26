@@ -7,11 +7,7 @@
 #ifndef HMM_ALGORITHM
 #define HMM_ALGORITHM
 
-#include <iostream>
-#include <numeric>
-#include <iomanip>
 #include <vector>
-#include <cmath>
 #include "matvec.h"
 #include "TransMatSym2D.h"
 

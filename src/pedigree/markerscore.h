@@ -8,6 +8,7 @@
 #define MARKERSCORES_HEADER
 
 #include <string>
+#include <map>
 #include <iostream>
 
 #include "matvec.h"

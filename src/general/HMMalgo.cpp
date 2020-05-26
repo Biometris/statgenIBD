@@ -1,7 +1,6 @@
 // Martin Boer, Biometris, 1998-2005, last update: 15 december 2005
 
 #include "HMMalgo.h"
-#include "mblexcept.h"
 
 using namespace std;
 using namespace mbl;

@@ -2,7 +2,6 @@
 #define UTIL_GENETICS_HEADER
 
 #include <string>
-#include <vector>
 
 //! Properties of an individual
 /*!

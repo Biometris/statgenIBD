@@ -8,10 +8,8 @@
 #ifndef READ_MAP_PEDIGREE_HEADER
 #define READ_MAP_PEDIGREE_HEADER
 
-#include <iostream>
-#include <vector>
 #include <string>
-#include <map>
+#include <vector>
 
 // library file
 #include "Loc.h"

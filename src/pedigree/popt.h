@@ -7,8 +7,8 @@
 #ifndef POPULATION_TYPE_HEADER
 #define POPULATION_TYPE_HEADER
 
-#include <vector>
 #include <string>
+#include <vector>
 
 #include "OrdGeno.h"
 #include "InhVector.h"
