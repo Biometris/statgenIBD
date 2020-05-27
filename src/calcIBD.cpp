@@ -68,14 +68,9 @@ List calcIBD(CharacterVector& poptype,
   {
     ::Rf_error("c++ exception (unknown reason)");
   }
-
   const int npar = parents.size();
   const int npop = offspring.size();
   const int M = positions.size();
-
-  NumericVector pos_ext;
-  IntegerVector chr_ext;
-  CharacterVector pop_ext;
   const int ncol_prob = prob.Dim3();
   NumericMatrix P(M * npop, ncol_prob);
   int k = 0;
@@ -83,66 +78,26 @@ List calcIBD(CharacterVector& poptype,
   {
     for (int m = 0; m < M; m++)
     {
-      chr_ext.push_back(positions[m].GetChr());
-      pos_ext.push_back(positions[m].GetPosition());
-      pop_ext.push_back(offspring[i]);
-      for (int j=0;j<ncol_prob;j++) {
+      for (int j = 0; j < ncol_prob; j++) {
         P(k, j) = prob[i][m][j];
       }
       k++;
     }
   }
-  DataFrame df;
   CharacterVector parentNames;
   if (npar == 2) {
-    df =  DataFrame::create(Named("chr") = chr_ext,
-                            Named("pos") = pos_ext,
-                            Named("ind") = pop_ext,
-                            Named("p" + parents[0]) = P(_, 0),
-                            Named("p" + parents[1]) = P(_, 1),
-                            Named("pHET")= P(_, 2));
-    parentNames = CharacterVector::create("p" + parents[0],
-                                          "p" + parents[1],
-                                                       "pHet");
+    parentNames = CharacterVector::create("p" + parents[0], "p" + parents[1],
+                                          "pHet");
   } else if (npar==3) {
-    df =  DataFrame::create(Named("chr") = chr_ext,
-                            Named("pos") = pos_ext,
-                            Named("ind") = pop_ext,
-                            Named("p" + parents[0]) = P(_, 0),
-                            Named("p" + parents[1]) = P(_, 1),
-                            Named("p" + parents[2]) = P(_, 2),
-                            Named("pHET_13") = P(_, 3),
-                            Named("pHET_23") = P(_, 4));
-    parentNames = CharacterVector::create("p" + parents[0],
-                                          "p" + parents[1],
-                                                       "p" + parents[2],
-                                                                    "pHET_13",
-                                                                    "pHET_23");
+    parentNames = CharacterVector::create("p" + parents[0], "p" + parents[1],
+                                          "p" + parents[2], "pHET_13",
+                                          "pHET_23");
 
   } else if (npar == 4) {
-    df =  DataFrame::create(Named("chr") = chr_ext,
-                            Named("pos") = pos_ext,
-                            Named("ind") = pop_ext,
-                            Named("p" + parents[0]) = P(_, 0),
-                            Named("p" + parents[1]) = P(_, 1),
-                            Named("p" + parents[2]) = P(_, 2),
-                            Named("p" + parents[3]) = P(_, 3),
-                            Named("pHET_13") = P(_, 4),
-                            Named("pHET_14") = P(_, 5),
-                            Named("pHET_23") = P(_, 6),
-                            Named("pHET_24") = P(_, 7));
-
-
-    parentNames = CharacterVector::create("p" + parents[0],
-                                          "p" + parents[1],
-                                                       "p" + parents[2],
-                                                                    "p" + parents[3],
-                                                                    "pHET_13",
-                                                                    "pHET_14",
-                                                                    "pHET_23",
-                                                                    "pHET_24");
-
-
+    parentNames = CharacterVector::create("p" + parents[0], "p" + parents[1],
+                                          "p" + parents[2], "p" + parents[3],
+                                                                         "pHET_13", "pHET_14", "pHET_23",
+                                                                         "pHET_24");
   }
   // Construct map file from positions.
   CharacterVector posNames = CharacterVector(M);
@@ -158,8 +113,7 @@ List calcIBD(CharacterVector& poptype,
   // Create result list: map + markers.
   P.attr("dim") = IntegerVector {M, npop, ncol_prob};
   P.attr("dimnames") = List::create(posNames, offspring, parentNames);
-  List res = List::create(Named("map") = map, Named("markers") = df,
-                          Named("test") = P);
+  List res = List::create(Named("map") = map, Named("markers") = P);
   res.attr("class") = "statgenIBD";
   return res;
 }
