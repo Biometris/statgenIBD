@@ -15,7 +15,7 @@ getQTL <- function(IBD,
   }
   markerQTLS <- lapply(X = QTLS, FUN = function(QTL) {
     markerQTL <- IBD$markers[QTL, , ]
-    colnames(markerQTL) <- paste0(colnames(markerQTL), "_", QTL)
+    colnames(markerQTL) <- paste0(QTL, "_", colnames(markerQTL))
     return(markerQTL)
   })
   markerQTLS <- do.call(cbind, markerQTLS)
