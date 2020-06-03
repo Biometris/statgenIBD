@@ -87,17 +87,21 @@ List calcIBD(CharacterVector& poptype,
   CharacterVector parentNames;
   if (npar == 2) {
     parentNames = CharacterVector::create("p" + parents[0], "p" + parents[1],
-                                          "pHet");
+                                          "p" + parents[0] + parents[1]);
   } else if (npar==3) {
     parentNames = CharacterVector::create("p" + parents[0], "p" + parents[1],
-                                          "p" + parents[2], "pHET_13",
-                                          "pHET_23");
+                                          "p" + parents[2],
+                                                       "p" + parents[0] + parents[1],
+
+                                                                                 "p" + parents[0] + parents[2]);
 
   } else if (npar == 4) {
     parentNames = CharacterVector::create("p" + parents[0], "p" + parents[1],
                                           "p" + parents[2], "p" + parents[3],
-                                                                         "pHET_13", "pHET_14", "pHET_23",
-                                                                         "pHET_24");
+                                                                         "p" + parents[0] + parents[2],
+                                                                                                   "p" + parents[0] + parents[3],
+                                                                                                                             "p" + parents[1] + parents[2],
+                                                                                                                                                       "p" + parents[1] + parents[3]);
   }
   // Construct map file from positions.
   CharacterVector posNames = CharacterVector(M);
