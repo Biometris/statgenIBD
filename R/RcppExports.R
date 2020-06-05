@@ -5,8 +5,32 @@
 #'
 #' A long description
 #'
+#' IBD probabilities can be calculated for many different types of populations.
+#' In the following table all supported populations are listed. Note that the
+#' value of x in the population types is variable, with its maximum value
+#' depicted in the last column.
+#'
+#' | __Population type__ | __Cross__ | __Description__ | __max. x__ |
+#' | ------ | ----------------- | -------------------------------------- | --- |
+#' | DH | biparental | doubled haploid population | |
+#' | Fx | biparental | Fx population (F1, followed by x-1 generations of selfing) | 8 |
+#' | FxDH | biparental | Fx, followed by DH generation | 8 |
+#' | BCx | biparental | backcross, second parent is recurrent parent | 9 |
+#' | BCxDH | biparental | BCx, followed by DH generation | 9 |
+#' | BC1Sx | biparental | BC1, followed by x generations of selfing | 7 |
+#' | BC1SxDH | biparental | BC1, followed by x generations of selfing and DH | 6 |
+#' | C3 | three-way | three way cross: (AxB) x C |  |
+#' | C3DH | three-way | C3, followed by DH generation |  |
+#' | C3Sx | three-way | C3, followed by x generation of selfing | 7 |
+#' | C3SxDH | three-way | C3, followed by x generation of selfing and DH generation | 6 |
+#' | C4 | four-way | four-way cross: (AxB) x (C x D)	| |
+#' | C4DH | four-way | C4, followed by DH generation |  |
+#' | C4Sx | four-way | C4, followed by x generation of selfing | 6 |
+#' | C4SxDH | four-way | C4, followed by x generation of selfing and DH generation | 6 |
+#'
 #' @param poptype A character string indicating the type of population. One of
-#' ....
+#' DH, Fx, FxDH, BCx, BCxDH, BC1Sx, BC1SxDH, C3, C3DH, C3Sx, C3SxDH, C4, C4DH,
+#' C4Sx, C4SxDH (see Details)
 #' @param locfile A character string indicating the .loc file for the
 #' population. The file should be in Flapjack format.
 #' @param mapfile A character string indicating the .map file for the

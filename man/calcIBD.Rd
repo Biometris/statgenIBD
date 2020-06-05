@@ -8,7 +8,8 @@ calcIBD(poptype, locfile, mapfile, evalposfile = NULL, evaldist = NULL)
 }
 \arguments{
 \item{poptype}{A character string indicating the type of population. One of
-....}
+DH, Fx, FxDH, BCx, BCxDH, BC1Sx, BC1SxDH, C3, C3DH, C3Sx, C3SxDH, C4, C4DH,
+C4Sx, C4SxDH (see Details)}
 
 \item{locfile}{A character string indicating the .loc file for the
 population. The file should be in Flapjack format.}
@@ -28,4 +29,27 @@ A data.frame with IBD probabilities.
 }
 \description{
 A long description
+}
+\details{
+IBD probabilities can be calculated for many different types of populations.
+In the following table all supported populations are listed. Note that the
+value of x in the population types is variable, with its maximum value
+depicted in the last column.\tabular{llll}{
+   \strong{Population type} \tab \strong{Cross} \tab \strong{Description} \tab \strong{max. x} \cr
+   DH \tab biparental \tab doubled haploid population \tab  \cr
+   Fx \tab biparental \tab Fx population (F1, followed by x-1 generations of selfing) \tab 8 \cr
+   FxDH \tab biparental \tab Fx, followed by DH generation \tab 8 \cr
+   BCx \tab biparental \tab backcross, second parent is recurrent parent \tab 9 \cr
+   BCxDH \tab biparental \tab BCx, followed by DH generation \tab 9 \cr
+   BC1Sx \tab biparental \tab BC1, followed by x generations of selfing \tab 7 \cr
+   BC1SxDH \tab biparental \tab BC1, followed by x generations of selfing and DH \tab 6 \cr
+   C3 \tab three-way \tab three way cross: (AxB) x C \tab  \cr
+   C3DH \tab three-way \tab C3, followed by DH generation \tab  \cr
+   C3Sx \tab three-way \tab C3, followed by x generation of selfing \tab 7 \cr
+   C3SxDH \tab three-way \tab C3, followed by x generation of selfing and DH generation \tab 6 \cr
+   C4 \tab four-way \tab four-way cross: (AxB) x (C x D) \tab  \cr
+   C4DH \tab four-way \tab C4, followed by DH generation \tab  \cr
+   C4Sx \tab four-way \tab C4, followed by x generation of selfing \tab 6 \cr
+   C4SxDH \tab four-way \tab C4, followed by x generation of selfing and DH generation \tab 6 \cr
+}
 }
