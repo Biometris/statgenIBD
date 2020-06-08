@@ -4,6 +4,7 @@
 
 // library files
 #include "read_map.h"
+#include "convert.h"
 
 using namespace mbl;
 using namespace std;
@@ -132,7 +133,9 @@ LinkageMap read_eval_pos_file(const string& filename)
     int chr;
     double pos;
     line_stream >> chr >> pos;
-    positions.push_back(Locus(chr,pos,EVAL_POS));
+    string name = "EVAL_" + stringify(chr) + "_" + stringify(pos);
+    //positions.push_back(Locus(chr,pos,EVAL_POS));
+    positions.push_back(Locus(chr, pos, name));
   }
   sort(positions.begin(),positions.end());
   return positions;

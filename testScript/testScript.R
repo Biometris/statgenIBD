@@ -42,7 +42,6 @@ print(res3$markers, digits=4)
 # sum of prob should be equal to one:
 all.equal(rowSums(res3$markers), rep(ncol(res3$markers), nrow(res3$markers)))
 
-## Doesn't work here, all QTL's are named __EVALPOS
-getQTL(res3, "M1_1")
-getQTL(res3, c("M1_1", "M1_6"))
+getQTL(res3, "EVAL_1_0")
+getQTL(res3, c("EVAL_1_0", "EVAL_1_10"))
 

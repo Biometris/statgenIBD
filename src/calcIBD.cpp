@@ -143,7 +143,8 @@ List calcIBD(CharacterVector& poptype,
   P.attr("dim") = IntegerVector {M, npop, ncol_prob};
   P.attr("dimnames") = List::create(posNames, offspring, parentNames);
   // Create result list: map + markers.
-  List res = List::create(Named("map") = map, Named("markers") = P);
+  List res = List::create(Named("map") = map, Named("markers") = P,
+                          Named("poptype") = poptype);
   res.attr("class") = "calcIBD";
   return res;
 }
