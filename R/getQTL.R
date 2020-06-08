@@ -1,9 +1,19 @@
+#' Extract QTLS
+#'
+#' Extract one or more QTLS from an object of class calcIBD.
+#'
+#' @param IBD An object of class calcIBD.
+#' @param QTLS A character vector of QTLS that should be extracted.
+#'
+#' @return A data.frame with IBD probabilities for the extracted QTLS in the
+#' column and genotypes in the rows.
+#'
 #' @export
 getQTL <- function(IBD,
                    QTLS) {
   ## Checks.
-  if (!inherits(IBD, "statgenIBD")) {
-    stop(deparse(substitute(IBD)), "should be an object of class statgenIBD\n")
+  if (!inherits(IBD, "calcIBD")) {
+    stop(deparse(substitute(IBD)), "should be an object of class calcIBD\n")
   }
   if (is.null(QTLS) || !is.character(QTLS)) {
     stop("QTLS should be a character vector\n")

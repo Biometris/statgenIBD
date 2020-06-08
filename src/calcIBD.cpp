@@ -144,6 +144,6 @@ List calcIBD(CharacterVector& poptype,
   P.attr("dimnames") = List::create(posNames, offspring, parentNames);
   // Create result list: map + markers.
   List res = List::create(Named("map") = map, Named("markers") = P);
-  res.attr("class") = "statgenIBD";
+  res.attr("class") = "calcIBD";
   return res;
 }
