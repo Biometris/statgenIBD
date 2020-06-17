@@ -11,7 +11,7 @@ The Transition Matrix consists of the Kronecker product of symmetric 2x2 matrice
 
 #include "misc.h"
 
-namespace mbl
+namespace ibd
 {
 
 class TransMatSym2D : public std::vector<double>

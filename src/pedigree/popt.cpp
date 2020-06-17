@@ -1,10 +1,10 @@
 // Martin Boer, Biometris
 
-#include "mblexcept.h"
+#include "ibdexcept.h"
 #include "popt.h"
 #include "util_genetics.h"
 
-using namespace mbl;
+using namespace ibd;
 using namespace std;
 
 pop_base * init_pop(const std::string& poptype)
@@ -34,7 +34,7 @@ pop_base * init_pop(const std::string& poptype)
 	if (match(x,poptype,"C4Sx"))		return new popC4Sx(x);
 	if (match(x,poptype,"C4SxDH"))		return new popC4SxDH(x);
 
-	throw mblib_error("unknown type " + poptype);
+	throw ibd_error("unknown type " + poptype);
 	return 0;
 }
 

@@ -13,7 +13,7 @@ PKG_SOURCES = \
         general/HMMalgo.cpp\
         general/InhVector.cpp\
         general/matvec.cpp\
-        general/mblexcept.cpp\
+        general/ibdexcept.cpp\
         general/misc.cpp\
         general/OrdGeno.cpp\
         general/TransMatSym2D.cpp\

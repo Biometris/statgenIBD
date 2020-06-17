@@ -8,7 +8,7 @@
 
 using namespace Rcpp;
 using namespace std;
-using namespace mbl;
+using namespace ibd;
 
 //' Calculate IBD probabilities
 //'
@@ -80,7 +80,7 @@ List calcIBD(CharacterVector& poptype,
                    _evalposfile,
                    max_step_size);
   }
-  catch (mblib_error& e)
+  catch (ibd_error& e)
   {
     forward_exception_to_r(e);
   }

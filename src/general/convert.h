@@ -17,7 +17,7 @@ http://www.parashift.com/c++-faq-lite/misc-technical-issues.html
 #include <sstream>
 #include <stdexcept>
 
-namespace mbl
+namespace ibd
 {
 
 class BadConversion : public std::runtime_error

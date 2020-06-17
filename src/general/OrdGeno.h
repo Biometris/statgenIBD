@@ -12,7 +12,7 @@
 
 #include "InhVector.h"
 
-namespace mbl
+namespace ibd
 {
 
 //! Ordered Genotype

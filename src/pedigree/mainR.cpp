@@ -10,7 +10,7 @@
 #include "util_genetics.h"
 
 using namespace std;
-using namespace mbl;
+using namespace ibd;
 using namespace Rcpp;
 
 vector<IndProp> make_ped_file(const string& poptype,
@@ -74,7 +74,7 @@ void marker_selection(LinkageMap& markermap,
   }
   const int M = eval_pos.size();
   if (M < 1)
-    throw mblib_error("no evaluation points!");
+    throw ibd_error("no evaluation points!");
   if (analysis_fam)
   {
     if (markermap.empty())

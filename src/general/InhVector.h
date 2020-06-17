@@ -12,7 +12,7 @@ Inheritance vector is a vector of inheritance indicators (h_i = {0,1})
 #include <iostream>
 #include <vector>
 
-namespace mbl
+namespace ibd
 {
 
 //! Vector with binary inheritance indicators

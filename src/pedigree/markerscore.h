@@ -34,14 +34,14 @@ const score Uscore = score(U_haplo_sc,U_haplo_sc);
 
 score read_score(std::istream& s,
                  char delimit);
-bool check_score(const mbl::OrdGeno& g,
+bool check_score(const ibd::OrdGeno& g,
                  const score& sc);
 
 std::map<score,int> ndx_score(int nparents);
 
 int read_flapjackfile(std::vector<std::string>& geno,
                       std::vector<std::string>& markers,
-                      mbl::matrix<score>& scores,
+                      ibd::matrix<score>& scores,
                       const std::string filename);
 
 

@@ -12,9 +12,9 @@
 #include <string>
 #include <vector>
 
-#include "mblexcept.h"
+#include "ibdexcept.h"
 
-namespace mbl
+namespace ibd
 {
 
 template<class T>
@@ -146,7 +146,7 @@ void chk_equal_size(const std::vector<T>& c1,
 					const std::string& str)
 {
 	if (c1.size() != c2.size())
-		throw mblib_error("unequal size of vectors in " + str);
+		throw ibd_error("unequal size of vectors in " + str);
 }
 
 template<class T>
@@ -345,15 +345,15 @@ template<class T>
 std::istream& operator>>(std::istream& inp, std::vector<T>& v)
 {
 	if (v.empty())
-		throw mblib_error("operator>> vector: empty vector");
+		throw ibd_error("operator>> vector: empty vector");
 	typedef std::vector<T> vec_t;
 	for (typename vec_t::iterator iter = v.begin(); iter != v.end(); iter++)
 	{
 		if (inp.eof())
-			throw mblib_error("operator>> vector: end of file");
+			throw ibd_error("operator>> vector: end of file");
 		inp >> *iter;
 		if (inp.fail())
-			throw mblib_error("operator>> vector: format error");
+			throw ibd_error("operator>> vector: format error");
 	}
 	return inp;
 }
@@ -362,7 +362,7 @@ template<class T>
 std::istream& operator>>(std::istream& inp, matrix<T>& m)
 {
 	if (m.NrCols() == 0 || m.NrRows() == 0)
-		throw mblib_error("operator >> matrix: empty matrix");
+		throw ibd_error("operator >> matrix: empty matrix");
 	typedef matrix<T> mat_t;
 	for (typename mat_t::iterator iter = m.begin(); iter != m.end(); iter++)
 		inp >> *iter;

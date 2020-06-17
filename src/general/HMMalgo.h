@@ -11,7 +11,7 @@
 #include "matvec.h"
 #include "TransMatSym2D.h"
 
-namespace mbl
+namespace ibd
 {
 
 std::vector<double> forward_equation(const std::vector<double>& p_prev,

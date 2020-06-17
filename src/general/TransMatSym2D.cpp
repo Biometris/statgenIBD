@@ -1,9 +1,9 @@
 // Martin Boer, Biometris, 1998-2007, last update: 16 jan 2007
-#include "mblexcept.h"
+#include "ibdexcept.h"
 #include "TransMatSym2D.h"
 
 using namespace std;
-using namespace mbl;
+using namespace ibd;
 
 // Efficient calculation of y = A*x,
 // where A is the kronecker product of n symmetric 2x2 matrices B[k] of the form
@@ -60,11 +60,11 @@ vector<double> product(int k,
 // B[k] =  ( 1-r[k]   r[k]   )
 //         (  r[k]    1-r[k] )
 //
-vector<double> mbl::operator*(const TransMatSym2D& A,
+vector<double> ibd::operator*(const TransMatSym2D& A,
                               const vector<double>& x)
 {
   if (x.size() != A.Dimension())
-    throw mblib_error("Error in multiplication A*y");
+    throw ibd_error("Error in multiplication A*y");
   return product(A.size()-1,0,A,x);
 }
 
@@ -78,11 +78,11 @@ vector<double> mbl::operator*(const TransMatSym2D& A,
 //   kroneck(B[1],...,B[N])^T = kroneck(B[1]^T,...,B[N]^T)= kroneck(B[1],...,B[N])
 // This implicates that:
 // y^T = x^T*A -> y = (x^T*A)^T = A^T * x = A*x
-vector<double> mbl::operator*(const vector<double>& x,
+vector<double> ibd::operator*(const vector<double>& x,
                               const TransMatSym2D& A)
 {
   if (x.size() != A.Dimension())
-    throw mblib_error("Error in multiplication y*A");
+    throw ibd_error("Error in multiplication y*A");
   return product(A.size()-1,0,A,x);
 }
 

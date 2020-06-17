@@ -12,9 +12,9 @@
 #include <vector>
 #include <map>
 
-#include "mblexcept.h"
+#include "ibdexcept.h"
 
-namespace mbl
+namespace ibd
 {
 
 class Interval

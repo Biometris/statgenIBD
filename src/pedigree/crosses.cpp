@@ -5,7 +5,7 @@
 #include "analysis_fam.h"
 #include "crosses.h"
 
-using namespace mbl;
+using namespace ibd;
 using namespace std;
 
 int count_parents(const vector<IndProp>& pop)
@@ -26,7 +26,7 @@ IndProp find_first_progeny(const vector<IndProp>& pop)
     if (it->IsMemberFamily())
       return *it;
   }
-  throw mblib_error("Cannot find progeny in function find_first_progeny");
+  throw ibd_error("Cannot find progeny in function find_first_progeny");
   return pop[0]; // dummy
 }
 

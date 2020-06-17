@@ -2,7 +2,7 @@
 #include "convert.h"
 
 using namespace std;
-using namespace mbl;
+using namespace ibd;
 
 string OrdGeno::print_string() const
 {
@@ -10,40 +10,40 @@ string OrdGeno::print_string() const
 	return str;
 }
 
-int mbl::get_haplo(const OrdGeno& g, bool h)
+int ibd::get_haplo(const OrdGeno& g, bool h)
 {
 	return (h == 0) ? g.first : g.second;
 }
 
-OrdGeno mbl::cross(const OrdGeno& g1, bool h1, const OrdGeno& g2, bool h2)
+OrdGeno ibd::cross(const OrdGeno& g1, bool h1, const OrdGeno& g2, bool h2)
 {
 	int first  = get_haplo(g1,h1);
 	int second = get_haplo(g2,h2);
 	return OrdGeno(first,second);
 }
 
-OrdGeno mbl::selfing(const OrdGeno& g, InhVector& u)
+OrdGeno ibd::selfing(const OrdGeno& g, InhVector& u)
 {
 	bool h1 = u.next_indic();
 	bool h2 = u.next_indic();
 	return cross(g,h1,g,h2);
 }
 
-OrdGeno mbl::selfing(OrdGeno g, InhVector& u, int Ngen)
+OrdGeno ibd::selfing(OrdGeno g, InhVector& u, int Ngen)
 {
 	for (int i=0;i<Ngen;i++)
 		g = selfing(g,u);
 	return g;
 }
 
-OrdGeno mbl::DH(const OrdGeno& g, InhVector& u)
+OrdGeno ibd::DH(const OrdGeno& g, InhVector& u)
 {
 	bool h = u.next_indic();
-	int a = get_haplo(g,h);	
+	int a = get_haplo(g,h);
 	return OrdGeno(a,a);
 }
 
-OrdGeno mbl::BC(const OrdGeno& donor, const OrdGeno& background, InhVector& u, int ngen)
+OrdGeno ibd::BC(const OrdGeno& donor, const OrdGeno& background, InhVector& u, int ngen)
 {
 	OrdGeno g = cross(donor,0,background,0);
 	for (int i=0;i<ngen;i++)
@@ -55,7 +55,7 @@ OrdGeno mbl::BC(const OrdGeno& donor, const OrdGeno& background, InhVector& u, i
 }
 
 // RC: Recurrent cross with background (background assumed to be inbred)
-OrdGeno mbl::RC(const OrdGeno& A, const OrdGeno& background, InhVector& u, int ngen)
+OrdGeno ibd::RC(const OrdGeno& A, const OrdGeno& background, InhVector& u, int ngen)
 {
 	OrdGeno g = A;
 	for (int i=0;i<ngen;i++)
@@ -66,7 +66,7 @@ OrdGeno mbl::RC(const OrdGeno& A, const OrdGeno& background, InhVector& u, int n
 	return g;
 }
 
-std::ostream& mbl::operator<<(std::ostream& outp, const OrdGeno& g)
+std::ostream& ibd::operator<<(std::ostream& outp, const OrdGeno& g)
 {
 	string str = g.print_string();
 	int nr_whitespaces = outp.width() - str.length();

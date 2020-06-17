@@ -3,12 +3,12 @@
 #include "InhVector.h"
 
 using namespace std;
-using namespace mbl;
+using namespace ibd;
 
-InhVector::InhVector(int len,unsigned int init) : x(init), max(mbl::pow2(len)),n(len)
+InhVector::InhVector(int len,unsigned int init) : x(init), max(ibd::pow2(len)),n(len)
 {
 	if (n > 15)
-		throw mblib_error("Inheritance vector too long: " + stringify(n));
+		throw ibd_error("Inheritance vector too long: " + stringify(n));
 }
 
 bool InhVector::next_indic()
@@ -31,7 +31,7 @@ void InhVector::print(std::ostream& outp) const
 	}
 }
 
-ostream& mbl::operator<<(ostream& outp, const InhVector& h)
+ostream& ibd::operator<<(ostream& outp, const InhVector& h)
 {
 	int nr_whitespaces = outp.width() - h.length();
 	outp.width(0);

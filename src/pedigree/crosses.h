@@ -16,8 +16,8 @@
 
 int count_parents(const std::vector<IndProp>& pop);
 
-mbl::matrix3D<double> analysis_cross(const std::vector<IndProp>& pop,
-                                     const mbl::matrix<score>& geno,
+ibd::matrix3D<double> analysis_cross(const std::vector<IndProp>& pop,
+                                     const ibd::matrix<score>& geno,
                                      const LinkageMap& markermap,
                                      const LinkageMap& eval_pos);
 

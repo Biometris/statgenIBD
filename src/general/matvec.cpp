@@ -2,7 +2,7 @@
 
 using namespace std;
 
-mbl::matrix<double> mbl::identity_matrix(int n)
+ibd::matrix<double> ibd::identity_matrix(int n)
 {
 	matrix<double> I(n,n,0.0);
 	for (int i=0;i<n;i++)

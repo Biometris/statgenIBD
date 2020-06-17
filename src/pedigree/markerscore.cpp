@@ -4,12 +4,12 @@
 #include <algorithm>
 
 #include "misc.h"
-#include "mblexcept.h"
+#include "ibdexcept.h"
 #include "convert.h"
 #include "markerscore.h"
 
 using namespace std;
-using namespace mbl;
+using namespace ibd;
 
 score::score(int a, int b) : pair<int,int>(a,b)
 {
@@ -53,7 +53,7 @@ void check_char(istream& s,
 	char x;
 	s >> x;
 	if (x != c)
-		throw mblib_error("missing " + string(1,c));
+		throw ibd_error("missing " + string(1,c));
 }
 
 int read_allele(istream& s)
@@ -70,7 +70,7 @@ int read_allele(istream& s)
 		return int(x);
 	}
 
-	throw mblib_error("error while reading allele");
+	throw ibd_error("error while reading allele");
 	return 0; // dummy
 }
 
@@ -176,7 +176,7 @@ map<score,int> ndx_score(int npar)
 				ndx[score(i,j)] = k++;
 	}
 	else
-		throw mblib_error("npar > 4 !");
+		throw ibd_error("npar > 4 !");
 	return ndx;
 }
 

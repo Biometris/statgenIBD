@@ -5,10 +5,10 @@
 #include "InhVector.h"
 #include "analysis_fam.h"
 
-using namespace mbl;
+using namespace ibd;
 using namespace std;
 
-IBD_fam::IBD_fam(const mbl::matrix<OrdGeno>& P,
+IBD_fam::IBD_fam(const ibd::matrix<OrdGeno>& P,
                  const std::vector<score>& offspring,
                  const LinkageMap& MarkerMap,
                  const std::string& poptype)

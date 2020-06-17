@@ -15,7 +15,7 @@
 const std::string version = "2.75";
 const std::string date    = "april 13, 2020";
 
-int main_pedigreeR(mbl::matrix3D<double>& Z,
+int main_pedigreeR(ibd::matrix3D<double>& Z,
                    std::vector<std::string>& parents,
                    std::vector<std::string>& offspring,
                    LinkageMap& positions,

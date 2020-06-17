@@ -4,7 +4,7 @@
 #include "Loc.h"
 
 using namespace std;
-using namespace mbl;
+using namespace ibd;
 
 MapFunction mapfunction = invhaldane;
 
@@ -45,11 +45,11 @@ int pos_qtl(const LinkageMap& Markermap,
 	for (int i=0;i<nloc-1;i++)
 		if (QTLpos >= Markermap[i] && QTLpos <= Markermap[i+1])
 			return i;
-	throw mblib_error("Evaluation point not in interval!");
+	throw ibd_error("Evaluation point not in interval!");
 	return 0; // dummy
 }
 
-vector<mbl::Interval> make_intervals(const LinkageMap& markermap)
+vector<ibd::Interval> make_intervals(const LinkageMap& markermap)
 {
 	vector<Interval> result;
 	int nloc = markermap.size();

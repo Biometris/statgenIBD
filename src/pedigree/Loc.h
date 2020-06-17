@@ -65,7 +65,7 @@ std::vector<double> make_rec_map(const LinkageMap&);
 
 int pos_qtl(const LinkageMap& Markermap, const Locus& QTLpos);
 
-std::vector<mbl::Interval> make_intervals(const LinkageMap& markermap);
+std::vector<ibd::Interval> make_intervals(const LinkageMap& markermap);
 
 double total_length(const LinkageMap& markermap);
 

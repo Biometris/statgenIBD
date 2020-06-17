@@ -3,9 +3,9 @@
 #include "HMMalgo.h"
 
 using namespace std;
-using namespace mbl;
+using namespace ibd;
 
-vector<double> mbl::forward_equation(const vector<double>& p_prev,
+vector<double> ibd::forward_equation(const vector<double>& p_prev,
                                      const TransMatSym2D& T,
                                      const vector<double>& q)
 {
@@ -17,7 +17,7 @@ vector<double> mbl::forward_equation(const vector<double>& p_prev,
   return p;
 }
 
-vector<double> mbl::backward_equation(const vector<double>& p_next,
+vector<double> ibd::backward_equation(const vector<double>& p_next,
                                       const TransMatSym2D& T,
                                       const vector<double>& q)
 {
@@ -29,7 +29,7 @@ vector<double> mbl::backward_equation(const vector<double>& p_next,
   return p;
 }
 
-matrix<double> mbl::calc_prob_left(const std::vector<double>& pi0,
+matrix<double> ibd::calc_prob_left(const std::vector<double>& pi0,
                                    const matrix<double>& q,
                                    const vector<TransMatSym2D>& T)
 {
@@ -46,7 +46,7 @@ matrix<double> mbl::calc_prob_left(const std::vector<double>& pi0,
   return L;
 }
 
-matrix<double> mbl::calc_prob_right(const matrix<double>& q,
+matrix<double> ibd::calc_prob_right(const matrix<double>& q,
                                     const vector<TransMatSym2D>& T)
 {
   int M = q.NrRows();
@@ -61,7 +61,7 @@ matrix<double> mbl::calc_prob_right(const matrix<double>& q,
   return R;
 }
 
-matrix<double> mbl::calc_prob(const vector<double>& pi0,
+matrix<double> ibd::calc_prob(const vector<double>& pi0,
                               const matrix<double>& q,
                               const vector<TransMatSym2D>& T)
 {

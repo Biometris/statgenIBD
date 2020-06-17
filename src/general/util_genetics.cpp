@@ -1,10 +1,10 @@
 #include <algorithm>
 
 #include "convert.h"
-#include "mblexcept.h"
+#include "ibdexcept.h"
 #include "util_genetics.h"
 
-using namespace mbl;
+using namespace ibd;
 using namespace std;
 
 IndProp::IndProp(std::string id,
@@ -37,7 +37,7 @@ bool match(int& x,
 	string pattern(pat);
 	int cnt = count(pattern.begin(),pattern.end(),'x');
 	if (cnt != 1)
-		throw mblib_error("error in match!");
+		throw ibd_error("error in match!");
 	if (str.size() != pattern.size())
 		return false;
 	else
@@ -69,9 +69,9 @@ bool match(int& x,
 	int cnt_x = count(pattern.begin(),pattern.end(),'x');
 	int cnt_y = count(pattern.begin(),pattern.end(),'y');
 	if (cnt_x != 1)
-		throw mblib_error("error in match!");
+		throw ibd_error("error in match!");
 	if (cnt_y != 1)
-		throw mblib_error("error in match!");
+		throw ibd_error("error in match!");
 
 	if (str.size() != pattern.size())
 		return false;
