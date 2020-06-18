@@ -6,6 +6,9 @@
 #include "Loc.h"
 #include "read_map.h"
 
+
+#include "popt.h"
+
 using namespace Rcpp;
 using namespace std;
 using namespace ibd;
@@ -60,6 +63,10 @@ List calcIBD(CharacterVector& poptype,
              Nullable<CharacterVector&> evalposfile = R_NilValue,
              Nullable<NumericVector&> evaldist = R_NilValue)
 {
+  // only to check poptype has correct format:
+  const pop_base *popt = init_pop(Rcpp::as<std::string>(poptype));
+  bool isDH = Rcpp::as<std::string>(poptype).find("DH") != std::string::npos;
+
   LinkageMap positions;
   matrix3D<double> prob;
   vector<string> parents, offspring;
@@ -95,7 +102,11 @@ List calcIBD(CharacterVector& poptype,
   const int npar = parents.size();
   const int npop = offspring.size();
   const int M = positions.size();
-  const int ncol_prob = prob.Dim3();
+  int ncol_prob = prob.Dim3();
+  if (isDH)
+  {
+    ncol_prob = npar;
+  }
   NumericMatrix P(M * npop, ncol_prob);
   int k = 0;
   for (int i = 0; i < npop; i++)
@@ -109,24 +120,26 @@ List calcIBD(CharacterVector& poptype,
     }
   }
   // Construct vector of names for parents.
-  CharacterVector parentNames;
-  if (npar == 2) {
-    parentNames = CharacterVector::create("p" + parents[0], "p" + parents[1],
-                                          "p" + parents[0] + parents[1]);
-  } else if (npar==3) {
-    parentNames = CharacterVector::create("p" + parents[0], "p" + parents[1],
-                                          "p" + parents[2],
-                                                       "p" + parents[0] + parents[1],
-
-                                                                                 "p" + parents[0] + parents[2]);
-
-  } else if (npar == 4) {
-    parentNames = CharacterVector::create("p" + parents[0], "p" + parents[1],
-                                          "p" + parents[2], "p" + parents[3],
-                                                                         "p" + parents[0] + parents[2],
-                                                                                                   "p" + parents[0] + parents[3],
-                                                                                                                             "p" + parents[1] + parents[2],
-                                                                                                                                                       "p" + parents[1] + parents[3]);
+  CharacterVector parentNames (npar);
+  for (int i =  0; i < npar; i++)
+  {
+    parentNames[i] = "p" + parents[i];
+  }
+  if (!isDH)
+  {
+    if (npar == 2)
+    {
+      parentNames.push_back("p" + parents[0] + parents[1]);
+    } else if (npar == 3)
+    {
+      parentNames.push_back("p" + parents[0] + parents[1]);
+      parentNames.push_back("p" + parents[0] + parents[2]);
+    } else if (npar == 4) {
+      parentNames.push_back("p" + parents[0] + parents[2]);
+      parentNames.push_back("p" + parents[0] + parents[3]);
+      parentNames.push_back("p" + parents[1] + parents[2]);
+      parentNames.push_back("p" + parents[1] + parents[3]);
+    }
   }
   // Construct map file from positions.
   CharacterVector posNames = CharacterVector(M);
