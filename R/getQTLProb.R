@@ -30,9 +30,15 @@ getQTLProb <- function(IBD,
   })
   markerQTLS <- as.data.frame(do.call(cbind, markerQTLS))
   genoCross <- attr(x = IBD, which = "genoCross")
-  markerQTLS <- merge(markerQTLS, genoCross, by.x = "row.names", by.y = "geno")
-  colnames(markerQTLS)[colnames(markerQTLS) == "Row.names"] <- "geno"
-  markerQTLS <- markerQTLS[c("cross", "geno",
-                           setdiff(colnames(markerQTLS), c("cross", "geno")))]
+  if (!is.null(genoCross)) {
+    markerQTLS <- merge(markerQTLS, genoCross, by.x = "row.names", by.y = "geno")
+    colnames(markerQTLS)[colnames(markerQTLS) == "Row.names"] <- "geno"
+    markerQTLS <- markerQTLS[c("cross", "geno",
+                             setdiff(colnames(markerQTLS), c("cross", "geno")))]
+  } else {
+    markerQTLS[["geno"]] <- rownames(markerQTLS)
+    rownames(markerQTLS) <- NULL
+    markerQTLS <- markerQTLS[c("geno", setdiff(colnames(markerQTLS), "geno"))]
+  }
   return(markerQTLS)
 }

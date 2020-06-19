@@ -16,9 +16,6 @@ using namespace Rcpp;
 vector<IndProp> make_ped_file(const string& poptype,
                               const vector<string>& ID)
 {
-  // only to check poptype has correct format:
-  const pop_base *popt = init_pop(poptype);
-
   vector<IndProp> result;
   int npar;
   if (poptype.find("C4") == 0)

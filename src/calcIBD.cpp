@@ -6,8 +6,8 @@
 #include "Loc.h"
 #include "read_map.h"
 
-
 #include "popt.h"
+#include "util_genetics.h"
 
 using namespace Rcpp;
 using namespace std;
@@ -63,10 +63,13 @@ List calcIBD(CharacterVector& poptype,
              Nullable<CharacterVector&> evalposfile = R_NilValue,
              Nullable<NumericVector&> evaldist = R_NilValue)
 {
+  string _poptype = Rcpp::as<std::string>(poptype);
   // only to check poptype has correct format:
-  const pop_base *popt = init_pop(Rcpp::as<std::string>(poptype));
-  bool isDH = Rcpp::as<std::string>(poptype).find("DH") != std::string::npos;
+  const pop_base *popt = init_pop(_poptype);
 
+  int x;
+  bool isDH = _poptype.find("DH") != std::string::npos;
+  bool isBC = match(x, _poptype, "BCx");
   LinkageMap positions;
   matrix3D<double> prob;
   vector<string> parents, offspring;
@@ -81,7 +84,7 @@ List calcIBD(CharacterVector& poptype,
   try
   {
     main_pedigreeR(prob, parents, offspring, positions,
-                   Rcpp::as<std::string>(poptype),
+                   _poptype,
                    Rcpp::as<std::string>(locfile),
                    Rcpp::as<std::string>(mapfile),
                    _evalposfile,
@@ -157,7 +160,8 @@ List calcIBD(CharacterVector& poptype,
   P.attr("dimnames") = List::create(posNames, offspring, parentNames);
   // Create result list: map + markers.
   List res = List::create(Named("map") = map, Named("markers") = P,
-                          Named("poptype") = poptype);
+                          Named("poptype") = poptype,
+                          Named("multiCross") = false);
   res.attr("class") = "calcIBD";
   return res;
 }
