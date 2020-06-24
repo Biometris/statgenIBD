@@ -1,4 +1,14 @@
 #' @export
+summary.calcIBD <- function(object,
+                            ...) {
+  cat("population type: ", object$poptype, "\n")
+  cat("Number of evaluation points: ", nrow(object$markers), "\n")
+  cat("Number of individuals: ", ncol(object$markers),"\n")
+  cat("Parents: ", substring(dimnames(object$markers)[[3]], first = 2), "\n")
+}
+
+
+#' @export
 c.calcIBD <- function(...) {
   args <- list(...)
   for (arg in args) {
