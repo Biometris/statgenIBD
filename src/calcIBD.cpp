@@ -105,7 +105,7 @@ List calcIBD(CharacterVector& poptype,
   const int npar = parents.size();
   const int npop = offspring.size();
   const int M = positions.size();
-  int ncol_prob = prob.Dim3();
+  int ncol_prob = prob.Dim3() - isBC;
   if (isDH)
   {
     ncol_prob = npar;
@@ -116,17 +116,22 @@ List calcIBD(CharacterVector& poptype,
   {
     for (int m = 0; m < M; m++)
     {
-      for (int j = 0; j < ncol_prob; j++) {
-        P(k, j) = prob[i][m][j];
+      {
+        for (int j = isBC; j < ncol_prob + isBC; j++) {
+          P(k, j - isBC) = prob[i][m][j];
+        }
+        k++;
       }
-      k++;
     }
   }
   // Construct vector of names for parents.
-  CharacterVector parentNames (npar);
-  for (int i =  0; i < npar; i++)
+  CharacterVector parentNames (0);
+  for (int i = 0; i < npar; i++)
   {
-    parentNames[i] = "p" + parents[i];
+    if (!(isBC && i == 0))
+    {
+      parentNames.push_back("p" + parents[i]);
+    }
   }
   if (!isDH)
   {
