@@ -20,6 +20,10 @@ c.calcIBD <- function(...) {
   if (!length(pops) == 1) {
     stop("All inputs should have the same population type.\n")
   }
+  maps <- unique(lapply(X = args, FUN = `[[`, "map"))
+  if (!length(maps) == 1) {
+    stop("All inputs should have the same map.\n")
+  }
   markerLst <- lapply(X = args, FUN = `[[`, "markers")
   parentsNw <- unique(unlist(sapply(X = markerLst, FUN = function(mrk) {
     dimnames(mrk)[3]
@@ -37,7 +41,7 @@ c.calcIBD <- function(...) {
       as.data.frame(mrk[i, , ])
     })))
   }
-  res <- structure(list(map = args[[1]]$map,
+  res <- structure(list(map = maps,
                         markers = markersNw,
                         poptype = pops),
                    class = "calcIBD",

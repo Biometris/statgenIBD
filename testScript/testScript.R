@@ -6,7 +6,7 @@ setwd("C:/Projects/R packages/calcIbd/SimExamples/popF4")
 res1 <- calcIBD(poptype     = "F4",
                 locfile     = "cross.loc",
                 mapfile     = "mapfile.map",
-                evalposfile = "eval.txt",
+                #evalposfile = "eval.txt",
                 evaldist = 3
 )
 print(res1$markers, digits=4)

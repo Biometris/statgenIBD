@@ -1,6 +1,5 @@
 stages:
   - build
-  # - test
 
 image: docker-registry.wur.nl/rossu027/r-verasreml:latest
 
@@ -61,21 +60,4 @@ R-devel:
       - $R_LIBS_USER
       - $CI_PROJECT_DIR/.apt
 
-# coverage:
-#   stage: test
-#   allow_failure: true
-#   dependencies:
-#     - R-release
-#   when: on_success
-#   cache:
-#     key: release-cache
-#     paths:
-#       - $R_LIBS_USER
-#       - $CI_PROJECT_DIR/.apt
-#     policy: pull
-#   only:
-#     - develop
-#     - master
-#   script:
-#     - Rscript -e 'covr::package_coverage()'
-#   coverage: '/Coverage:\s*(\d+.\d+\%)/'
+
