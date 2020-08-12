@@ -1,7 +1,5 @@
 // Martin Boer, Biometris
 
-#include <Rcpp.h>
-
 // library files
 #include "mainR.h"
 #include "read_map.h"
@@ -160,8 +158,7 @@ int count_scores(const vector<score>& geno)
   return cnt;
 }
 
-// main part of the program (reading data, calculating IBD-prob, save results)
-int main_pedigreeR(matrix3D<double>& Z,
+int main_pedigreeR(arma::cube& Z,
                    vector<string>& parents,
                    vector<string>& offspring,
                    LinkageMap& positions,
@@ -204,16 +201,8 @@ int main_pedigreeR(matrix3D<double>& Z,
     if (pop[i].IsFounder())
       Nfnd++;
   }
-  matrix3D<double> IBD_fnd;
   marker_selection(markermap, eval_pos, sel_chr, analysis_family, pos_option);
-  int M = markermap.size();
-  IBD_fnd = matrix3D<double>(M, Nfnd, Nfnd);
-  for (int m = 0; m < M; m++)
-    IBD_fnd[m] = identity_matrix(Nfnd);
-
   linking_data(geno, markermap, pop, geno_locfile, ID, marker_names);
-
-  string diag_file;
   // start of analysis.
   Z = analysis_cross(pop, geno, markermap, eval_pos);
   const int npar = count_parents(pop);

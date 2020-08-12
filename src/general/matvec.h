@@ -85,47 +85,6 @@ public:
 	void resize(int nr, int nc, const T& val = T());
 };
 
-template<class T>
-class matrix3D  : public std::vector< matrix<T> >
-{
-private:
-	typedef std::vector< std::vector<T> > mat3d_t;
-public:
-	matrix3D() {}
-	matrix3D(int x, int y, int z)
-		: std::vector< matrix<T> >(x,matrix<T>(y,z)){}
-	matrix3D(int x, int y, int z, const T& init)
-		: std::vector< matrix<T> >(x,matrix<T>(y,z,init)) {}
-	typename mat3d_t::size_type Dim1() const
-		{ return this->size(); }
-	typename mat3d_t::size_type Dim2() const
-		{ return (this->size() == 0) ? 0 : this->front().NrRows();}
-	typename mat3d_t::size_type Dim3() const
-		{ return (this->size() == 0) ? 0 : this->front().NrCols(); }
-};
-
-template<class T>
-class matrix4D  : public std::vector< matrix3D<T> >
-{
-private:
-	typedef std::vector< std::vector<T> > mat4d_t;
-public:
-	matrix4D() {}
-	matrix4D(int u, int x, int y, int z)
-		: std::vector< matrix3D<T> >(u,matrix3D<T>(x,y,z)){}
-	matrix4D(int u, int x, int y, int z, const T& init)
-		: std::vector< matrix3D<T> >(u,matrix<T>(x,y,z,init)) {}
-	typename mat4d_t::size_type Dim1() const
-		{ return this->size(); }
-	typename mat4d_t::size_type Dim2() const
-		{ return (this->size() == 0) ? 0 : this->front().Dim1();}
-	typename mat4d_t::size_type Dim3() const
-		{ return (this->size() == 0) ? 0 : this->front().Dim2();}
-	typename mat4d_t::size_type Dim4() const
-		{ return (this->size() == 0) ? 0 : this->front().Dim3();}
-};
-
-
 template <class T>
 void matrix<T>::resize(int nr, int nc, const T& val)
 {

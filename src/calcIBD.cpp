@@ -1,5 +1,5 @@
 #include <string>
-#include <Rcpp.h>
+#include <RcppArmadillo.h>
 
 #include "mainR.h"
 #include "matvec.h"
@@ -71,7 +71,7 @@ List calcIBD(CharacterVector& poptype,
   bool isDH = _poptype.find("DH") != std::string::npos;
   bool isBC = match(x, _poptype, "BCx");
   LinkageMap positions;
-  matrix3D<double> prob;
+  arma::cube prob;
   vector<string> parents, offspring;
   double max_step_size = -1;
   if (evaldist.isNotNull())
@@ -103,25 +103,12 @@ List calcIBD(CharacterVector& poptype,
     ::Rf_error("c++ exception (unknown reason)");
   }
   const int npar = parents.size();
-  const int npop = offspring.size();
   const int M = positions.size();
-  int ncol_prob = prob.Dim3() - isBC;
-  if (isDH)
-  {
-    ncol_prob = npar;
-  }
-  NumericMatrix P(M * npop, ncol_prob);
-  int k = 0;
-  for (int i = 0; i < npop; i++)
-  {
-    for (int m = 0; m < M; m++)
-    {
-      {
-        for (int j = isBC; j < ncol_prob + isBC; j++) {
-          P(k, j - isBC) = prob[i][m][j];
-        }
-        k++;
-      }
+  unsigned int nSlices = prob.n_slices;
+  // Remove slices with only zero
+  for (arma::uword i = 0; i < nSlices; i++) {
+    if (all(vectorise(prob.slice(nSlices - i - 1)) == 0)) {
+      prob.shed_slice(nSlices - i - 1);
     }
   }
   // Construct vector of names for parents.
@@ -160,8 +147,8 @@ List calcIBD(CharacterVector& poptype,
   }
   DataFrame map = DataFrame::create(Named("chr") = chr, Named("pos") = pos);
   map.attr("row.names") = posNames;
-  // Reshape P to 3D array and add names to dimensions.
-  P.attr("dim") = IntegerVector {M, npop, ncol_prob};
+  // Reshape prob to 3D array and add names to dimensions.
+  NumericVector P = wrap(prob);
   P.attr("dimnames") = List::create(posNames, offspring, parentNames);
   // Create result list: map + markers.
   List res = List::create(Named("map") = map, Named("markers") = P,

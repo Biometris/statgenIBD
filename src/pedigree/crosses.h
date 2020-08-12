@@ -8,7 +8,7 @@
 #define CROSSES_HEADER
 
 #include <vector>
-//#include <map>
+#include <RcppArmadillo.h>
 
 #include "matvec.h"
 #include "util_genetics.h"
@@ -16,9 +16,9 @@
 
 int count_parents(const std::vector<IndProp>& pop);
 
-ibd::matrix3D<double> analysis_cross(const std::vector<IndProp>& pop,
-                                     const ibd::matrix<score>& geno,
-                                     const LinkageMap& markermap,
-                                     const LinkageMap& eval_pos);
+arma::cube analysis_cross(const std::vector<IndProp>& pop,
+                          const ibd::matrix<score>& geno,
+                          const LinkageMap& markermap,
+                          const LinkageMap& eval_pos);
 
 #endif

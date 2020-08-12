@@ -10,14 +10,14 @@ Authors@R: c(person(given = "Martin",
             person(given = "Bart-Jan", 
                    family = "van Rossum", 
                    email = "bart-jan.vanrossum@wur.nl", 
-                   role = c("ctb")))
+                   role = "ctb"))
 Description: Calculation of IBD probabilities for biparental, three and four-way 
     crosses. 
 License: GPL
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.3)
-Imports: Rcpp (>= 1.0.4)
-LinkingTo: Rcpp
+Imports: Rcpp (>= 1.0.4), RcppArmadillo
+LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)

@@ -1,5 +1,3 @@
-#include <Rcpp.h>
-
 #include "Loc.h"
 #include "OrdGeno.h"
 #include "analysis_fam.h"
@@ -10,12 +8,9 @@ using namespace std;
 
 int count_parents(const vector<IndProp>& pop)
 {
-  int npar = 0;
-  for (vector<IndProp>::const_iterator it=pop.begin();it!=pop.end();it++)
-  {
-    if (it->IsInbredParent())
-      npar++;
-  }
+  int npar = count_if(pop.begin(), pop.end(), [](IndProp i) {
+    return i.IsInbredParent();
+  });
   return npar;
 }
 
@@ -35,13 +30,13 @@ string find_type(const vector<IndProp>& pop)
   return find_first_progeny(pop).GetType();
 }
 
-matrix<double> calc_P(const LinkageMap& eval_pos,
-                      int nparents,
-                      const IBD_fam& IBD_ind)
+arma::mat calc_P(const LinkageMap& eval_pos,
+                 int nparents,
+                 const IBD_fam& IBD_ind)
 {
   const int M = eval_pos.size();
   map<score,int> ndx = ndx_score(nparents);
-  matrix<double> P(M,ndx.size(),0.0);
+  arma::mat P(M, ndx.size(), arma::fill::zeros);
   for (int m=0;m<M;m++)
   {
     map<OrdGeno,double> IBD = IBD_ind(eval_pos[m]);
@@ -50,23 +45,22 @@ matrix<double> calc_P(const LinkageMap& eval_pos,
       OrdGeno g = it->first;
       score sc(g.first,g.second);
       int k = ndx[sc];
-      P[m][k] += it->second;
+      P(m, k) += it->second;
     }
   }
   return P;
 }
 
-matrix3D<double> calc_IBDs(const vector<IndProp>& pop,
-                           const vector<int>& ndx_par,
-                           matrix<score> geno,
-                           const LinkageMap& markermap,
-                           const LinkageMap& eval_pos,
-                           const string& type)
+arma::cube calc_IBDs(const vector<IndProp>& pop,
+                     const vector<int>& ndx_par,
+                     matrix<score> geno,
+                     const LinkageMap& markermap,
+                     const LinkageMap& eval_pos,
+                     const string& type)
 {
   const int Nrow = geno.NrRows();
   const int npar = ndx_par.size();
   const int nloc = markermap.size();
-
   matrix<OrdGeno> par(npar,nloc);
   for (int m=0;m<nloc;m++)
   {
@@ -89,14 +83,19 @@ matrix3D<double> calc_IBDs(const vector<IndProp>& pop,
     }
   }
   int r=0;
-  matrix3D<double> Z;
+  arma::cube Z;
   for (vector<IndProp>::const_iterator it=pop.begin();it!=pop.end();it++)
   {
     if (it->IsMemberFamily())
     {
       IBD_fam IBD_ind(par,geno[r],markermap,type);
-      matrix<double> P = calc_P(eval_pos,npar,IBD_ind);
-      Z.push_back(P);
+      arma::mat P = calc_P(eval_pos,npar,IBD_ind);
+      if (Z.n_slices == 0) {
+        Z.resize(P.n_rows, 1, P.n_cols);
+      } else {
+        Z.insert_cols(Z.n_cols, 1);
+      }
+      Z.col(Z.n_cols - 1) = P;
     }
     r++;
   }
@@ -144,16 +143,17 @@ vector<int> get_ndx_par(const vector<IndProp>& pop)
   return ndx_par;
 }
 
-matrix3D<double> analysis_cross(const vector<IndProp>& pop,
-                                const matrix<score>& geno,
-                                const LinkageMap& markermap,
-                                const LinkageMap& eval_pos)
+arma::cube analysis_cross(const vector<IndProp>& pop,
+                          const matrix<score>& geno,
+                          const LinkageMap& markermap,
+                          const LinkageMap& eval_pos)
 {
   Rcpp::Rcout << "analysis of family ........" << endl;
 
   string type = find_type(pop);
   vector<int> ndx_par = get_ndx_par(pop);
-  matrix3D<double> Z = calc_IBDs(pop, ndx_par, geno, markermap, eval_pos, type);
+  arma::cube Z = calc_IBDs(pop, ndx_par, geno, markermap, eval_pos, type);
+
   return Z;
 }
 
