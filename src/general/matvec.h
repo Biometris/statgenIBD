@@ -343,12 +343,6 @@ matrix<T> transpose(const matrix<T>& X)
 	return Xt;
 }
 
-matrix<double> identity_matrix(int n);
-
-// void write_bin(std::ostream& outp, const matrix<double>& x);
-
-// void resize_matrix_example();
-
 template<class T>
 std::vector<T> column(const matrix<T>& X, int c)
 {

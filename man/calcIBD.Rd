@@ -53,3 +53,10 @@ depicted in the last column.\tabular{llll}{
    C4SxDH \tab four-way \tab C4, followed by x generation of selfing and DH generation \tab 6 \cr
 }
 }
+\examples{
+
+calcIBD(poptype = "DH",
+        locfile = system.file("extdata", "SxM_geno.txt", package = "statgenIBD"),
+        mapfile = system.file("extdata", "SxM_map.txt", package = "statgenIBD"))
+
+}

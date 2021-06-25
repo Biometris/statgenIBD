@@ -55,6 +55,12 @@ using namespace ibd;
 //'
 //' @return A data.frame with IBD probabilities.
 //'
+//' @examples
+//'
+//' calcIBD(poptype = "DH",
+//'         locfile = system.file("extdata", "SxM_geno.txt", package = "statgenIBD"),
+//'         mapfile = system.file("extdata", "SxM_map.txt", package = "statgenIBD"))
+//'
 //' @export
 // [[Rcpp::export]]
 List calcIBD(CharacterVector& poptype,

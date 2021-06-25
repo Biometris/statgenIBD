@@ -2,7 +2,7 @@ Package: statgenIBD
 Type: Package
 Title: Calculation of IBD Probabilities
 Version: 0.0.1
-Date: 2020-05-15
+Date: 2021-06-25
 Authors@R: c(person(given = "Martin", 
                     family = "Boer", 
                     email = "martin.boer@wur.nl", 
@@ -16,8 +16,12 @@ Description: Calculation of IBD probabilities for biparental, three and four-way
 License: GPL
 Encoding: UTF-8
 LazyData: true
-Depends: R (>= 3.3)
+Depends: R (>= 3.6)
 Imports: Rcpp (>= 1.0.4), RcppArmadillo
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr

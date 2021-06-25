@@ -153,7 +153,6 @@ arma::cube analysis_cross(const vector<IndProp>& pop,
   string type = find_type(pop);
   vector<int> ndx_par = get_ndx_par(pop);
   arma::cube Z = calc_IBDs(pop, ndx_par, geno, markermap, eval_pos, type);
-
   return Z;
 }
 

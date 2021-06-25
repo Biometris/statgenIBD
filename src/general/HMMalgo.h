@@ -29,10 +29,6 @@ matrix<double> calc_prob_left(const std::vector<double>& pi0,
 matrix<double> calc_prob_right(const matrix<double>& q,
                                const std::vector<TransMatSym2D>& T);
 
-matrix<double> calc_prob(const std::vector<double>& pi0,
-                         const matrix<double>& q,
-                         const std::vector<TransMatSym2D>& T);
-
 }
 
 #endif

@@ -1,0 +1,40 @@
+---
+title: "IBD calculations using statgenIBD"
+author: "Bart-Jan van Rossum"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: false
+    number_sections: true
+bibliography: bibliography.bib
+vignette: >
+  %\VignetteIndexEntry{IBD calculations using statgenIBD}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.dim = c(7, 4)
+)
+library(statgenIBD)
+op <- options(width = 90)
+```
+
+# The statgenIBD package {.unnumbered}
+
+Blabla
+
+# Theory
+
+blabla
+
+# Examples
+
+blablabla
+
+------------------------------------------------------------------------
+
+## References

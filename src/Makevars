@@ -13,7 +13,6 @@ PKG_SOURCES = \
         RcppExports.cpp\
         general/HMMalgo.cpp\
         general/InhVector.cpp\
-        general/matvec.cpp\
         general/ibdexcept.cpp\
         general/misc.cpp\
         general/OrdGeno.cpp\

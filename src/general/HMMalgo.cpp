@@ -1,4 +1,5 @@
 // Martin Boer, Biometris, 1998-2005, last update: 15 december 2005
+#include <RcppArmadillo.h>
 
 #include "HMMalgo.h"
 
@@ -60,24 +61,3 @@ matrix<double> ibd::calc_prob_right(const matrix<double>& q,
     R[loc] = backward_equation(R[loc+1],T[loc],q[loc]);
   return R;
 }
-
-matrix<double> ibd::calc_prob(const vector<double>& pi0,
-                              const matrix<double>& q,
-                              const vector<TransMatSym2D>& T)
-{
-  int M = q.NrRows();
-  int N = q.NrCols();
-
-  matrix<double> L = calc_prob_left(pi0,q,T);
-  matrix<double> R = calc_prob_right(q,T);
-
-  matrix<double> U(M,N);
-  for (int m=0;m<M-1;m++)
-  {
-    U[m] = elem_prod(L[m],T[m]*R[m+1]);
-    make_conditional(U[m]);
-  }
-  U[M-1] = L[M-1];
-  return U;
-}
-
