@@ -10,11 +10,11 @@ Calculation of IBD probabilities for biparental, three and four-way
     crosses.
 }
 \author{
-\strong{Maintainer}: Martin Boer \email{martin.boer@wur.nl}
+\strong{Maintainer}: Bart-Jan van Rossum \email{bart-jan.vanrossum@wur.nl}
 
 Other contributors:
 \itemize{
-  \item Bart-Jan van Rossum \email{bart-jan.vanrossum@wur.nl} [contributor]
+  \item Martin Boer \email{martin.boer@wur.nl} [contributor]
 }
 
 }

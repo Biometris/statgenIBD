@@ -25,10 +25,18 @@ calculations should be limited.}
 distance for in between marker evaluation positions.}
 }
 \value{
-A data.frame with IBD probabilities.
+An object of class \code{calcIBD}, a \code{list} with four elements,
+\describe{
+\item{map}{a \code{data.frame} with chromosome and position of the markers.}
+\item{markers}{a 3-dimensional \code{array} of IBD probabilities with
+markers, genotypes and  parents as array dimensions.}
+\item{poptype}{the population type}
+\item{multiCross}{a boolean indicating if multiple crosses have been
+combined in the \code{calcIBD} object}
+}
 }
 \description{
-A long description
+Calculate IBD probabilities for different types of populations.
 }
 \details{
 IBD probabilities can be calculated for many different types of populations.
@@ -54,9 +62,13 @@ depicted in the last column.\tabular{llll}{
 }
 }
 \examples{
+## Compute IBD probabilities for Steptoe Morex.
+SxMIBD <- calcIBD(poptype = "DH",
+                 locfile = system.file("extdata", "SxM_geno.txt",
+                                       package = "statgenIBD"),
+                 mapfile = system.file("extdata", "SxM_map.txt", package = "statgenIBD"))
 
-calcIBD(poptype = "DH",
-        locfile = system.file("extdata", "SxM_geno.txt", package = "statgenIBD"),
-        mapfile = system.file("extdata", "SxM_map.txt", package = "statgenIBD"))
+## Check summary
+summary(SxMIBD)
 
 }
