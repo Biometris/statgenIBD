@@ -6,8 +6,6 @@ variables:
   APT_PKGS: "build-essential gobjc++ libomp-dev"
 
 before_script:
-  ## Make sure configure and cleanup files are executable.
-  - apt-get update & apt-get install -y build-essential gobjc++ libomp-dev
   - apt-get update
   - apt-get install -y --no-install-recommends ${APT_PKGS}
   - apt-get install -y --no-install-recommends qpdf pandoc pandoc-citeproc
