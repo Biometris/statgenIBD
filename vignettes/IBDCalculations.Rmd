@@ -31,27 +31,92 @@ Blabla
 
 IBD probabilities can be calculated for many different types of populations. In the following table all supported populations are listed. Note that the value of x in the population types is variable, with its maximum value depicted in the last column.
 
++---------------------+------------+------------------------------------------------------------+------------+
 | **Population type** | **Cross**  | **Description**                                            | **max. x** |
-|---------------------|------------|------------------------------------------------------------|------------|
++=====================+============+============================================================+============+
 | DH                  | biparental | doubled haploid population                                 |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | Fx                  | biparental | Fx population (F1, followed by x-1 generations of selfing) | 8          |
++---------------------+------------+------------------------------------------------------------+------------+
 | FxDH                | biparental | Fx, followed by DH generation                              | 8          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BCx                 | biparental | backcross, second parent is recurrent parent               | 9          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BCxDH               | biparental | BCx, followed by DH generation                             | 9          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BC1Sx               | biparental | BC1, followed by x generations of selfing                  | 7          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BC1SxDH             | biparental | BC1, followed by x generations of selfing and DH           | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3                  | three-way  | three way cross: (AxB) x C                                 |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3DH                | three-way  | C3, followed by DH generation                              |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3Sx                | three-way  | C3, followed by x generation of selfing                    | 7          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3SxDH              | three-way  | C3, followed by x generation of selfing and DH generation  | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4                  | four-way   | four-way cross: (AxB) x (C x D)                            |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4DH                | four-way   | C4, followed by DH generation                              |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4Sx                | four-way   | C4, followed by x generation of selfing                    | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4SxDH              | four-way   | C4, followed by x generation of selfing and DH generation  | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 
 # Examples
 
-blablabla
+We will demonstrate the functionality of the package using some example data sets. The first one is the Steptoe Morex data, described by [@Hayes1993]. This is a population of 150 barley doubled haploid lines with parentage Steptoe / Morex. The population was developed for the North American Barley Genome Mapping Project by the Oregon State University Barley Breeding Program. For a full description see the [website](https://wheat.pw.usda.gov/ggpages/SxM/) of the program.
+
+The map and genotypic file for this population are included in the package.
+
+The format for the files corresponds to that used in [Flapjack](https://ics.hutton.ac.uk/flapjack/) The map file should be a **tab**-delimited file without a header. It should contain three columns, corresponding to marker name, chromosome number and position on the chromosome (in basepairs).
+
+```{r inspectMap}
+## Read the map and display the first tows.
+map <- read.table(system.file("extdata", "SxM_map.txt", package = "statgenIBD"))
+head(map)
+```
+
+The genotypic file should be a **tab**-delimited file with a header. This header should contain the marker names. The first column should contain the genotypes, starting with the parents, in this case Morex and Steptoe.
+
+```{r inspectLoc}
+## Read the genotypic file and display the first rows and columns.
+geno <- read.table(system.file("extdata", "SxM_geno.txt", package = "statgenIBD"),
+                   header = TRUE)
+head(geno[, 1:5])
+```
+
+Using the map and genotypic files we can compute the IBD probabilities using `calcIBD`.
+
+```{r sxmIBD}
+## Compute IBD probabilities for Steptoe Morex.
+SxMIBD <- calcIBD(poptype = "DH",
+                  locfile = system.file("extdata", "SxM_geno.txt",
+                                        package = "statgenIBD"),
+                  mapfile = system.file("extdata", "SxM_map.txt",
+                                        package = "statgenIBD"))
+
+## Print summary.
+summary(SxMIBD)
+```
+
+This function computes per genotype and marker the probability that it descended from either parent. If this information was known from the input, the probabilities will simply be 0 for one parent and 1 for the other. E.g. looking at genotype dh001 and marker plc we can see from the genotypic file printed above that it has a value of 2 equal to that of Steptoe. If we now look at the output of \`calcIBD\` it shows a value of 1 for pSteptoe and a value of 0 for pMorex.
+
+```{r check_dh001_plc}
+SxMIBD$markers["plc", "dh001", ]
+```
+
+When a value was missing from the input data, it is imputed by the function. The probabilities are then estimated based on the population type and the values for the surrounding markers. An example for this is the marker ABG053 for genotype dh146. Looking at the output we can see that the probability that this marker came from Morex is about 0.48 and the probability that it came from Steptoe is about 0.52.
+
+```{r check_dh146_plc}
+SxMIBD$markers["ABG053", "dh146", ]
+```
+
+```{r winddown, include = FALSE}
+options(op)
+```
 
 ------------------------------------------------------------------------
 
