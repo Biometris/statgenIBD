@@ -1,5 +1,5 @@
 stages:
-  - build
+  - test
 
 variables:
   OMP_THREAD_LIMIT: "2"
