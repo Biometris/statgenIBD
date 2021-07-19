@@ -1,5 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^data-raw$
 .gitlab-ci.yml
 .gitlab-ci.R
 testScript
+README.Rmd

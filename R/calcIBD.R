@@ -1,3 +1,25 @@
+#' Summary function for objects of class calcIBD.
+#'
+#' Prints a short summary for objects of class \code{\link{calcIBD}}. The
+#' summary consists of the population type, number of evaluation points,
+#' number of individuals and names of the parents in the object.
+#'
+#' @param object An object of class \code{\link{calcIBD}}.
+#' @param ... Not used.
+#'
+#' @return No return value, a summary is printed.
+#'
+#' @examples
+#' ## Compute IBD probabilities for Steptoe Morex.
+#' SxMIBD <- calcIBD(poptype = "DH",
+#'                   locfile = system.file("extdata", "SxM_geno.txt",
+#'                                         package = "statgenIBD"),
+#'                   mapfile = system.file("extdata", "SxM_map.txt",
+#'                                         package = "statgenIBD"))
+#'
+#' ## Print summary
+#' summary(SxMIBD)
+#'
 #' @export
 summary.calcIBD <- function(object,
                             ...) {
@@ -7,7 +29,18 @@ summary.calcIBD <- function(object,
   cat("Parents: ", substring(dimnames(object$markers)[[3]], first = 2), "\n")
 }
 
-
+#' Concatenate function for objects of class calcIBD.
+#'
+#' Concatenates objects of class \code{\link{calcIBD}}. All objects that are
+#' concatenated  should have the same population type and the same map. The
+#' function is mainly meant for combining information for multiple crosses
+#' with overlapping parents.
+#'
+#' @param ... Objects of class \code{\link{calcIBD}}
+#'
+#' @return An object of class \code{\link{calcIBD}} containing data for all
+#' concatenated objects.
+#'
 #' @export
 c.calcIBD <- function(...) {
   args <- list(...)

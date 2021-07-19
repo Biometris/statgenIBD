@@ -64,9 +64,10 @@ depicted in the last column.\tabular{llll}{
 \examples{
 ## Compute IBD probabilities for Steptoe Morex.
 SxMIBD <- calcIBD(poptype = "DH",
-                 locfile = system.file("extdata", "SxM_geno.txt",
-                                       package = "statgenIBD"),
-                 mapfile = system.file("extdata", "SxM_map.txt", package = "statgenIBD"))
+                  locfile = system.file("extdata", "SxM_geno.txt",
+                                        package = "statgenIBD"),
+                  mapfile = system.file("extdata", "SxM_map.txt",
+                                        package = "statgenIBD"))
 
 ## Check summary
 summary(SxMIBD)

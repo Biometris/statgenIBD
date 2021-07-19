@@ -14,6 +14,30 @@ getQTLProb(IBD, QTLS)
 \value{
 A data.frame with IBD probabilities for the extracted QTLS in the
 column and genotypes in the rows.
+
+@examples
+\subsection{Compute IBD probabilities for Steptoe Morex.}{
+
+SxMIBD <- calcIBD(poptype = "DH",
+locfile = system.file("extdata", "SxM_geno.txt",
+package = "statgenIBD"),
+mapfile = system.file("extdata", "SxM_map.txt",
+package = "statgenIBD"))
+}
+
+\subsection{Get probabilities for a single QTL.}{
+
+probOne <- getQTLProb(IBD = SxMIBD,
+QTLS = "plc")
+head(probOne)
+}
+
+\subsection{Get probabilities for a multiple QTLs.}{
+
+probMult <- getQTLProb(IBD = SxMIBD,
+QTLS = c("plc", "tuba1"))
+head(probMult)
+}
 }
 \description{
 Extract IBD probabilities one or more QTLS from an object of class calcIBD.

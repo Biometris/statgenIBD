@@ -1,6 +1,6 @@
 #' Row bind data.frames
 #'
-#' Helper function for row binding data.frames with diffent columns.
+#' Helper function for row binding data.frames with different columns.
 #'
 #' @param dfList A list of data.frames.
 #'
