@@ -20,7 +20,7 @@ for the population. The file should be in tab-delimited format. It should
 consist of exactly three columns, marker, chromosome and position. There
 should be no header.}
 
-\item{evalposfile}{An optional character string indicating a tab separated
+\item{evalposfile}{An optional character string indicating a tab-delimited
 .txt file containing combinations of chromosomes and positions to which the
 calculations should be limited.}
 
@@ -67,9 +67,9 @@ depicted in the last column.\tabular{llll}{
 \examples{
 ## Compute IBD probabilities for Steptoe Morex.
 SxMIBD <- calcIBD(poptype = "DH",
-                  locfile = system.file("extdata", "SxM_geno.txt",
+                  locfile = system.file("extdata/SxM", "SxM_geno.txt",
                                         package = "statgenIBD"),
-                  mapfile = system.file("extdata", "SxM_map.txt",
+                  mapfile = system.file("extdata/SxM", "SxM_map.txt",
                                         package = "statgenIBD"))
 
 ## Check summary.
@@ -78,9 +78,9 @@ summary(SxMIBD)
 ## Compute IBD probabilities for Steptoe Morex.
 ## Add extra evaluation positions so positions are at most 5 apart.
 SxMIBD_Ext <- calcIBD(poptype = "DH",
-                      locfile = system.file("extdata", "SxM_geno.txt",
+                      locfile = system.file("extdata/SxM", "SxM_geno.txt",
                                             package = "statgenIBD"),
-                      mapfile = system.file("extdata", "SxM_map.txt",
+                      mapfile = system.file("extdata/SxM", "SxM_map.txt",
                                             package = "statgenIBD"),
                       evaldist = 5)
 
