@@ -25,11 +25,17 @@ op <- options(width = 90)
 
 # The statgenIBD package {.unnumbered}
 
-Blabla
+The statgenGxE package is developed as an easy-to-use package for Identity By Descent (IBD) calculations.
+
+This vignette describes how to perform these calculations and how to interpret and use its outputs. This will be done using a number of example data sets, both real life and simulated.
 
 # Theory
 
-IBD probabilities can be calculated for many different types of populations. In the following table all supported populations are listed. Note that the value of x in the population types is variable, with its maximum value depicted in the last column.
+bla
+
+# Population types
+
+In the package IBD probabilities can be calculated for many different types of populations. In the following table all supported populations are listed. Note that the value of x in the population types is variable, with its maximum value depicted in the last column.
 
 +---------------------+------------+------------------------------------------------------------+------------+
 | **Population type** | **Cross**  | **Description**                                            | **max. x** |
@@ -67,11 +73,15 @@ IBD probabilities can be calculated for many different types of populations. In 
 
 # Examples
 
-We will demonstrate the functionality of the package using some example data sets. The first one is the Steptoe Morex data, described by [@Hayes1993]. This is a population of 150 barley doubled haploid lines with parentage Steptoe / Morex. The population was developed for the North American Barley Genome Mapping Project by the Oregon State University Barley Breeding Program. For a full description see the [website](https://wheat.pw.usda.gov/ggpages/SxM/) of the program.
+We will demonstrate the basic functionality of the package using some example data sets. The first example will be for a real life data set for a relatively simple doubled haploid population. To highlight some specifics of more complex populations and crosses, we will use simulated data.
+
+## Steptoe Morex
+
+The first example is the Steptoe Morex data, described by [@Hayes1993]. This is a population of 150 barley doubled haploid lines with parentage Steptoe / Morex. The population was developed for the North American Barley Genome Mapping Project by the Oregon State University Barley Breeding Program. For a full description see the [website](https://wheat.pw.usda.gov/ggpages/SxM/) of the program.
 
 The map and genotypic file for this population are included in the package.
 
-The format for the files corresponds to that used in [Flapjack](https://ics.hutton.ac.uk/flapjack/) The map file should be a **tab**-delimited file without a header. It should contain three columns, corresponding to marker name, chromosome number and position on the chromosome (in basepairs).
+Both the map and the genotypic file should be in a **tab**-delimited format. The map file should be a file without a header. It should contain three columns, corresponding to marker name, chromosome number and position on the chromosome (in basepairs).
 
 ```{r inspectMap}
 ## Read the map and display the first tows.
@@ -79,7 +89,7 @@ map <- read.table(system.file("extdata/SxM", "SxM_map.txt", package = "statgenIB
 head(map)
 ```
 
-The genotypic file should be a **tab**-delimited file with a header. This header should contain the marker names. The first column should contain the genotypes, starting with the parents, in this case Morex and Steptoe.
+The genotypic file should a file with a header containing the marker names. The first column should contain the genotypes, starting with the parents, in this case Morex and Steptoe. The name of this column is irrelevant and can even be an empty string as in this example.
 
 ```{r inspectLoc}
 ## Read the genotypic file and display the first rows and columns.
@@ -113,6 +123,8 @@ When a value was missing from the input data, it is imputed by the function. The
 ```{r check_dh146_plc}
 SxMIBD$markers["ABG053", "dh146", ]
 ```
+
+### Evaluation positions
 
 When calling the `calcIBD` function without extra parameters, the only positions for which the calculations are made are the positions present in the map. There are two ways to change this. A first option is to specify the parameter `evaldist`. Setting this to a value of e.g. 5, assures that extra evaluation positions are added in such a way that the maximum distance between evaluation points will be 5.
 
@@ -167,6 +179,8 @@ summary(SxMIBD_posFile)
 As the summary shows, the number of evaluation points now decreased to 21, 3 for each of the 7 chromosomes.
 
 In case both `evalposfile` and `evaldist` are specified the former takes prevalence and `evaldist` is ignored.
+
+## Simulated data
 
 ```{r winddown, include = FALSE}
 options(op)
