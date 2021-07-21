@@ -56,12 +56,12 @@ depicted in the last column.\tabular{llll}{
    BC1SxDH \tab biparental \tab BC1, followed by x generations of selfing and DH \tab 6 \cr
    C3 \tab three-way \tab three way cross: (AxB) x C \tab  \cr
    C3DH \tab three-way \tab C3, followed by DH generation \tab  \cr
-   C3Sx \tab three-way \tab C3, followed by x generation of selfing \tab 7 \cr
-   C3SxDH \tab three-way \tab C3, followed by x generation of selfing and DH generation \tab 6 \cr
-   C4 \tab four-way \tab four-way cross: (AxB) x (C x D) \tab  \cr
+   C3Sx \tab three-way \tab C3, followed by x generations of selfing \tab 7 \cr
+   C3SxDH \tab three-way \tab C3, followed by x generations of selfing and DH generation \tab 6 \cr
+   C4 \tab four-way \tab four-way cross: (AxB) x (CxD) \tab  \cr
    C4DH \tab four-way \tab C4, followed by DH generation \tab  \cr
-   C4Sx \tab four-way \tab C4, followed by x generation of selfing \tab 6 \cr
-   C4SxDH \tab four-way \tab C4, followed by x generation of selfing and DH generation \tab 6 \cr
+   C4Sx \tab four-way \tab C4, followed by x generations of selfing \tab 6 \cr
+   C4SxDH \tab four-way \tab C4, followed by x generations of selfing and DH generation \tab 6 \cr
 }
 }
 \examples{

@@ -58,17 +58,17 @@ In the package IBD probabilities can be calculated for many different types of p
 +---------------------+------------+------------------------------------------------------------+------------+
 | C3DH                | three-way  | C3, followed by DH generation                              |            |
 +---------------------+------------+------------------------------------------------------------+------------+
-| C3Sx                | three-way  | C3, followed by x generation of selfing                    | 7          |
+| C3Sx                | three-way  | C3, followed by x generations of selfing                   | 7          |
 +---------------------+------------+------------------------------------------------------------+------------+
-| C3SxDH              | three-way  | C3, followed by x generation of selfing and DH generation  | 6          |
+| C3SxDH              | three-way  | C3, followed by x generations of selfing and DH generation | 6          |
 +---------------------+------------+------------------------------------------------------------+------------+
-| C4                  | four-way   | four-way cross: (AxB) x (C x D)                            |            |
+| C4                  | four-way   | four-way cross: (AxB) x (CxD)                              |            |
 +---------------------+------------+------------------------------------------------------------+------------+
 | C4DH                | four-way   | C4, followed by DH generation                              |            |
 +---------------------+------------+------------------------------------------------------------+------------+
-| C4Sx                | four-way   | C4, followed by x generation of selfing                    | 6          |
+| C4Sx                | four-way   | C4, followed by x generations of selfing                   | 6          |
 +---------------------+------------+------------------------------------------------------------+------------+
-| C4SxDH              | four-way   | C4, followed by x generation of selfing and DH generation  | 6          |
+| C4SxDH              | four-way   | C4, followed by x generations of selfing and DH generation | 6          |
 +---------------------+------------+------------------------------------------------------------+------------+
 
 # Examples
@@ -98,7 +98,7 @@ geno <- read.table(system.file("extdata/SxM", "SxM_geno.txt", package = "statgen
 head(geno[, 1:5])
 ```
 
-Using the map and genotypic files we can compute the IBD probabilities using `calcIBD`.
+Using the map and genotypic files we can compute the IBD probabilities using `calcIBD`. This function computes, per genotype and marker, the probability that it descended from either parent. If this information was known from the input, the probabilities will simply be 0 for one of the parents and 1 for the other. When a value was missing from the input data, it is imputed by the function. The probabilities are then estimated based on the population type and the values for the surrounding markers.
 
 ```{r sxmIBD}
 ## Compute IBD probabilities for Steptoe Morex.
@@ -112,13 +112,29 @@ SxMIBD <- calcIBD(poptype = "DH",
 summary(SxMIBD)
 ```
 
-This function computes per genotype and marker the probability that it descended from either parent. If this information was known from the input, the probabilities will simply be 0 for one parent and 1 for the other. E.g. looking at genotype dh001 and marker plc we can see from the genotypic file printed above that it has a value of 2 equal to that of Steptoe. If we now look at the output of `calcIBD` it shows a value of 1 for pSteptoe and a value of 0 for pMorex.
+The output of the `calcIBD` function is an object of class `calcIBD`. This object is a `list` that consists of four elements:
+
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| element    | class        | description                                                                                                                                                                                                                                            |
++============+==============+========================================================================================================================================================================================================================================================+
+| map        | `data.frame` | The map for the population.                                                                                                                                                                                                                            |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| markers    | `array`      | A three dimensional array with the IBD probabilities. The dimensions of this array are \#markers x \#genotypes x \#parents. The array contains per combination of marker and genotypes the probabilities that it descended from either of the parents. |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| poptype    | `character`  | The population type.                                                                                                                                                                                                                                   |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| multiCross | `logical`    | An indicator showing whether in this `calcIBD` object multiple crosses where combined. This is always `FALSE` for the output of the `calcIBD` function, but will be `TRUE` when multiple crosses are combined as we will see in the examples.          |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+The `summary` function can be used to get a short description of the content of a `calcIBD` object.
+
+Looking at genotype **dh001** and marker **plc** we can see from the genotypic file printed above that it has a value of 2, equal to that of Steptoe. If we now look at the output of `calcIBD` it shows a value of 1 for pSteptoe and a value of 0 for pMorex.
 
 ```{r check_dh001_plc}
 SxMIBD$markers["plc", "dh001", ]
 ```
 
-When a value was missing from the input data, it is imputed by the function. The probabilities are then estimated based on the population type and the values for the surrounding markers. An example for this is the marker ABG053 for genotype dh146. Looking at the output we can see that the probability that this marker came from Morex is about 0.48 and the probability that it came from Steptoe is about 0.52.
+For the combination of marker **ABG053** and genotype **dh146** the genotypic file contained a missing value. Looking at the output we can see that the probability that this marker came from Morex is about 0.48 and the probability that it came from Steptoe is about 0.52.
 
 ```{r check_dh146_plc}
 SxMIBD$markers["ABG053", "dh146", ]
@@ -180,7 +196,104 @@ As the summary shows, the number of evaluation points now decreased to 21, 3 for
 
 In case both `evalposfile` and `evaldist` are specified the former takes prevalence and `evaldist` is ignored.
 
+### Extracting value for markers of interest
+
+Often only the subset of markers is of interest for further analysis, e.g. for QTL Mapping of for fitting a multi-QTL model. To extract the computed probabilities for such a marker subset from a `calcIBD` object we can use the `getQTLProb` function.
+
+```{r SxMQTLProb_one}
+## Extract marker probabilities for markers plc and ABG053.
+SxM_probs <- getQTLProb(SxMIBD, QTLS = c("plc", "ABG053"))
+head(SxM_probs)
+```
+
+The output of the `getQTLProb` function is a `data.frame` with a column `geno` containing the genotype and for both markers the probability that it descended from Morex and that it descended from Steptoe.
+
 ## Simulated data
+
+Simulated data for several more complex populations and crosses is included in the package. These are very small and just used for the purpose of showing some of the options and output formats in `statgenIBD`.
+
+### F4
+
+First we have a look at an F4 population, i.e. an F1 followed by 3 generations of selfing. This population was constructed from parents GREEN and RED. As we can see from the table in the populations section, when doing computations for an F4 populations, we can use `poptype = "Fx"` where x is replaced by 4.
+
+```{r F4IBD}
+## Compute IBD probabilities for simulated F4 population.
+F4IBD <- calcIBD(poptype = "F4",
+                 locfile = system.file("extdata/popF4", "cross.loc",
+                                       package = "statgenIBD"),
+                 mapfile = system.file("extdata/popF4", "mapfile.map",
+                                       package = "statgenIBD"))
+
+## Print summary.
+summary(F4IBD)
+```
+
+As the summary shows, the output contains probabilities for three parents, GREEN, RED and GREENRED.
+
+### C4S3
+
+Also included is a C4S3 population, a four-way cross followed by 3 generations of selfing. The parents in the four-way cross where YELLOW, BLUE, GREEN and RED.
+
+```{r C3S4DHIBD}
+## Compute IBD probabilities for simulated C4S3 population.
+C4S3IBD <- calcIBD(poptype = "C4S3",
+                   locfile = system.file("extdata/popC4S3", "cross.loc",
+                                         package = "statgenIBD"),
+                   mapfile = system.file("extdata/popC4S3", "mapfile.map",
+                                         package = "statgenIBD"))
+
+## Print summary.
+summary(C4S3IBD)
+```
+
+As the summary shows, the output contains probabilities for eight parents, YELLOW, BLUE, GREEN, RED, YELLOWGREEN, YELLOWRED, BLUEGREEN, BLUERED.
+
+### Multi-cross
+
+The final example shows how IBD computations for multiple populations can be combined. In the example we use simulated data for two F4DH populations, i.e. F4 population as described above followed by a doubled haploid generation. For the first population the parents where A and B, for the second the parents where A and C.
+
+First we compute the IBD probabilities for each of the populations separately.
+
+```{r multiIBD}
+## Compute IBD probabilties for AxB.
+AB <- calcIBD(poptype = "F4DH",
+              locfile = system.file("extdata/multipop", "AxB.loc",
+                                    package = "statgenIBD"),
+              mapfile = system.file("extdata/multipop", "mapfile.map",
+                                    package = "statgenIBD"))
+
+## Print summary.
+summary(AB)
+
+## Compute IBD probabilties for Axc.
+AC <- calcIBD(poptype = "F4DH",
+              locfile = system.file("extdata/multipop", "AxC.loc",
+                                    package = "statgenIBD"),
+              mapfile = system.file("extdata/multipop", "mapfile.map",
+                                    package = "statgenIBD"))
+
+## Print summary.
+summary(AC)
+```
+
+Now we want to combine the results from both computations for further analyses. To combine to `calcIBD` objects we can use the `c` function. This is only possible if both objects contain the same type of population. Also the evaluation points for both object have to be indentical. In this example we have two F4DH populations and we used the same map file in the computations so combining them is fine.
+
+```{r combineIBD}
+ABC <- c(AB, AC)
+summary(ABC)
+```
+
+Looking at the summary, we can see the our combined population now has 180 individuals, 100 from AB and 80 from AC. There are also three parents. For all individuals from population AB the probability for parent C will be 0, as will be the probability for parent B for individuals from population AC.
+
+```{r checkMultiIBD}
+## Extract probabilities for markers M1_1 and M3_3.
+ABCProbs <- getQTLProb(ABC, QTLS = c("M1_1", "M3_3"))
+
+## Print probabilities for genotypes AxB0001 and AxC0001.
+ABCProbs[ABCProbs$geno %in% c("AxB0001", "AxC0001"), ]
+```
+
+Note that the output now contains an extra column cross, indicating the cross the genotype came from.
 
 ```{r winddown, include = FALSE}
 options(op)

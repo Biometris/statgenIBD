@@ -33,12 +33,12 @@ using namespace ibd;
 //' | BC1SxDH | biparental | BC1, followed by x generations of selfing and DH | 6 |
 //' | C3 | three-way | three way cross: (AxB) x C |  |
 //' | C3DH | three-way | C3, followed by DH generation |  |
-//' | C3Sx | three-way | C3, followed by x generation of selfing | 7 |
-//' | C3SxDH | three-way | C3, followed by x generation of selfing and DH generation | 6 |
-//' | C4 | four-way | four-way cross: (AxB) x (C x D)	| |
+//' | C3Sx | three-way | C3, followed by x generations of selfing | 7 |
+//' | C3SxDH | three-way | C3, followed by x generations of selfing and DH generation | 6 |
+//' | C4 | four-way | four-way cross: (AxB) x (CxD)	| |
 //' | C4DH | four-way | C4, followed by DH generation |  |
-//' | C4Sx | four-way | C4, followed by x generation of selfing | 6 |
-//' | C4SxDH | four-way | C4, followed by x generation of selfing and DH generation | 6 |
+//' | C4Sx | four-way | C4, followed by x generations of selfing | 6 |
+//' | C4SxDH | four-way | C4, followed by x generations of selfing and DH generation | 6 |
 //'
 //' @param poptype A character string indicating the type of population. One of
 //' DH, Fx, FxDH, BCx, BCxDH, BC1Sx, BC1SxDH, C3, C3DH, C3Sx, C3SxDH, C4, C4DH,

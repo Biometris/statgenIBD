@@ -65,7 +65,7 @@ c.calcIBD <- function(...) {
   nGeno <- sapply(X = markerLst, FUN = ncol)
   genoCross <- data.frame(cross = paste0("cross",
                                          rep(seq_along(nGeno), times = nGeno)),
-                          geno = genoNw)
+                          geno = as.character(genoNw))
   markersNw <- array(dim = c(nrow(markerLst[[1]]), length(genoNw),
                              length(parentsNw)),
                      dimnames = list(rownames(markerLst[[1]]), genoNw, parentsNw))
@@ -76,9 +76,9 @@ c.calcIBD <- function(...) {
   }
   res <- structure(list(map = maps,
                         markers = markersNw,
-                        poptype = pops),
+                        poptype = pops,
+                        multicross = length(args) > 1),
                    class = "calcIBD",
-                   multicross = length(args) > 1,
                    genoCross = genoCross)
   return(res)
 }
