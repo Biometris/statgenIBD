@@ -102,7 +102,7 @@ SxMIBD <- calcIBD(poptype = "DH",
 summary(SxMIBD)
 ```
 
-This function computes per genotype and marker the probability that it descended from either parent. If this information was known from the input, the probabilities will simply be 0 for one parent and 1 for the other. E.g. looking at genotype dh001 and marker plc we can see from the genotypic file printed above that it has a value of 2 equal to that of Steptoe. If we now look at the output of \`calcIBD\` it shows a value of 1 for pSteptoe and a value of 0 for pMorex.
+This function computes per genotype and marker the probability that it descended from either parent. If this information was known from the input, the probabilities will simply be 0 for one parent and 1 for the other. E.g. looking at genotype dh001 and marker plc we can see from the genotypic file printed above that it has a value of 2 equal to that of Steptoe. If we now look at the output of `calcIBD` it shows a value of 1 for pSteptoe and a value of 0 for pMorex.
 
 ```{r check_dh001_plc}
 SxMIBD$markers["plc", "dh001", ]
@@ -112,6 +112,30 @@ When a value was missing from the input data, it is imputed by the function. The
 
 ```{r check_dh146_plc}
 SxMIBD$markers["ABG053", "dh146", ]
+```
+
+When calling the `calcIBD` function without extra parameters, the only positions for which the calculations are made are the positions present in the map. There are two ways to change this. A first option is to specify the parameter `evaldist`. Setting this to a value of e.g. 5, assures that extra evaluation positions are added in such a way that the maximum distance between evaluation points will be 5.
+
+The extra evaluation points will be spread evenly. If we look at the map for the Steptoe Morex example, we see that the distance between the first two markers on chromosome 1, plc and glx, is 18.7. To assure a maximum distance between evaluation points of 5, 3 extra evaluation points will be added. Since they will be spread evenly, the distance between them will be 18.7/3 = 4.68. The extra evaluation points will be named EXT1, EXT2, ...
+
+```{r sxmIBD_ext}
+## Compute IBD probabilities for Steptoe Morex.
+## Add extra evaluation positions so positions are at most 5 apart.
+SxMIBD_Ext <- calcIBD(poptype = "DH",
+                      locfile = system.file("extdata", "SxM_geno.txt",
+                                            package = "statgenIBD"),
+                      mapfile = system.file("extdata", "SxM_map.txt",
+                                            package = "statgenIBD"),
+                      evaldist = 5)
+
+## Print summary.
+summary(SxMIBD_Ext)
+```
+
+As the summary shows, the number of evaluation point has increased to 290, from 116 in the original calculation with only the map positions. Looking at the first rows of the map in the output, we see that indeed 3 extra evaluation points have been added between plc and glx.
+
+```{r sxmIBD_ext_map}
+head(SxMIBD_Ext$map)
 ```
 
 ```{r winddown, include = FALSE}
