@@ -11,11 +11,14 @@ calcIBD(poptype, locfile, mapfile, evalposfile = NULL, evaldist = NULL)
 DH, Fx, FxDH, BCx, BCxDH, BC1Sx, BC1SxDH, C3, C3DH, C3Sx, C3SxDH, C4, C4DH,
 C4Sx, C4SxDH (see Details)}
 
-\item{locfile}{A character string indicating the .loc file for the
-population. The file should be in Flapjack format.}
+\item{locfile}{A character string indicating the location of the file with
+genotypic information for the population. The file should be in
+tab-delimited format with a header containing marker names.}
 
-\item{mapfile}{A character string indicating the .map file for the
-population. The file should be in Flapjack format.}
+\item{mapfile}{A character string indicating the location of the map file
+for the population. The file should be in tab-delimited format. It should
+consist of exactly three columns, marker, chromosome and position. There
+should be no header.}
 
 \item{evalposfile}{An optional character string indicating a tab separated
 .txt file containing combinations of chromosomes and positions to which the
@@ -69,7 +72,19 @@ SxMIBD <- calcIBD(poptype = "DH",
                   mapfile = system.file("extdata", "SxM_map.txt",
                                         package = "statgenIBD"))
 
-## Check summary
+## Check summary.
 summary(SxMIBD)
+
+## Compute IBD probabilities for Steptoe Morex.
+## Add extra evaluation positions so positions are at most 5 apart.
+SxMIBD_Ext <- calcIBD(poptype = "DH",
+                      locfile = system.file("extdata", "SxM_geno.txt",
+                                            package = "statgenIBD"),
+                      mapfile = system.file("extdata", "SxM_map.txt",
+                                            package = "statgenIBD"),
+                      evaldist = 5)
+
+## Check summary.
+summary(SxMIBD_Ext)
 
 }
