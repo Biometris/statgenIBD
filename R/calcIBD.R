@@ -65,7 +65,7 @@ c.calcIBD <- function(...) {
   nGeno <- sapply(X = markerLst, FUN = ncol)
   genoCross <- data.frame(cross = paste0("cross",
                                          rep(seq_along(nGeno), times = nGeno)),
-                          geno = as.character(genoNw))
+                          geno = genoNw)
   markersNw <- array(dim = c(nrow(markerLst[[1]]), length(genoNw),
                              length(parentsNw)),
                      dimnames = list(rownames(markerLst[[1]]), genoNw, parentsNw))
