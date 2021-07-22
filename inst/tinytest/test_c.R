@@ -1,4 +1,4 @@
-### Test calcIBD summary.
+### Test calcIBD concatenation.
 
 ## Define file locations.
 ABloc <- system.file("extdata/multipop", "AxB.loc", package = "statgenIBD")

@@ -31,7 +31,7 @@ getQTLProb <- function(IBD,
                        QTLS) {
   ## Checks.
   if (!inherits(IBD, "calcIBD")) {
-    stop(deparse(substitute(IBD)), "should be an object of class calcIBD\n")
+    stop(deparse(substitute(IBD)), " should be an object of class calcIBD\n")
   }
   if (is.null(QTLS) || !is.character(QTLS)) {
     stop("QTLS should be a character vector\n")

@@ -15,4 +15,5 @@ devtools::release()
 pkgdown::clean_site()
 pkgdown::build_site()
 
+detach("package:statgenIBD", unload = TRUE)
 covr::gitlab()
