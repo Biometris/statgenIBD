@@ -103,7 +103,7 @@ LinkageMap read_map_file(const string& filename)
   LinkageMap markermap;
   ifstream inp(filename.c_str());
   if (!inp)
-    throw ibd_error("Cannot read file" + filename);
+    throw ibd_error("Cannot read file " + filename);
   string str;
   while (inp)
   {

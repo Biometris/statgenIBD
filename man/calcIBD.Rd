@@ -34,7 +34,7 @@ An object of class \code{calcIBD}, a \code{list} with four elements,
 \item{markers}{a 3-dimensional \code{array} of IBD probabilities with
 markers, genotypes and  parents as array dimensions.}
 \item{poptype}{the population type}
-\item{multiCross}{a boolean indicating if multiple crosses have been
+\item{multiCross}{a logical value indicating if multiple crosses have been
 combined in the \code{calcIBD} object}
 }
 }
