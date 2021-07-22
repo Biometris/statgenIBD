@@ -1,4 +1,4 @@
-### Test calcIBD function
+### Test calcIBD function.
 
 ## Define file locations.
 SxMloc <- system.file("extdata/SxM", "SxM_geno.txt", package = "statgenIBD")

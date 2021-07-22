@@ -44,6 +44,9 @@ summary.calcIBD <- function(object,
 #' @export
 c.calcIBD <- function(...) {
   args <- list(...)
+  if (length(args) == 1) {
+    return(args[[1]])
+  }
   for (arg in args) {
     if (!inherits(arg, "calcIBD")) {
       stop("All inputs should be of class calcIBD.\n")
@@ -56,6 +59,8 @@ c.calcIBD <- function(...) {
   maps <- unique(lapply(X = args, FUN = `[[`, "map"))
   if (!length(maps) == 1) {
     stop("All inputs should have the same map.\n")
+  } else {
+    map <- maps[[1]]
   }
   markerLst <- lapply(X = args, FUN = `[[`, "markers")
   parentsNw <- unique(unlist(sapply(X = markerLst, FUN = function(mrk) {
@@ -74,10 +79,10 @@ c.calcIBD <- function(...) {
       as.data.frame(mrk[i, , ])
     })))
   }
-  res <- structure(list(map = maps,
+  res <- structure(list(map = map,
                         markers = markersNw,
                         poptype = pops,
-                        multicross = length(args) > 1),
+                        multicross = TRUE),
                    class = "calcIBD",
                    genoCross = genoCross)
   return(res)
