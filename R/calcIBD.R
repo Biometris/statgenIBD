@@ -26,7 +26,7 @@ summary.calcIBD <- function(object,
   cat("population type: ", object$poptype, "\n")
   cat("Number of evaluation points: ", nrow(object$markers), "\n")
   cat("Number of individuals: ", ncol(object$markers),"\n")
-  cat("Parents: ", substring(dimnames(object$markers)[[3]], first = 2), "\n")
+  cat("Parents: ", object$parents, "\n")
 }
 
 #' Concatenate function for objects of class calcIBD
@@ -56,6 +56,7 @@ c.calcIBD <- function(...) {
   if (!length(pops) == 1) {
     stop("All inputs should have the same population type.\n")
   }
+  parents <- unique(c(sapply(X = args, FUN = `[[`, "parents")))
   maps <- unique(lapply(X = args, FUN = `[[`, "map"))
   if (!length(maps) == 1) {
     stop("All inputs should have the same map.\n")
@@ -82,6 +83,7 @@ c.calcIBD <- function(...) {
   res <- structure(list(map = map,
                         markers = markersNw,
                         poptype = pops,
+                        parents = parents,
                         multicross = TRUE),
                    class = "calcIBD",
                    genoCross = genoCross)
@@ -98,14 +100,23 @@ c.calcIBD <- function(...) {
 #' @param output Should the plot be output to the current device? If
 #' \code{FALSE}, only a ggplot object is invisibly returned.
 #'
+#' @return A ggplot object is invisibly returned.
+#'
 #' @export
 plot.calcIBD <- function(x,
                          ...,
                          genotype,
-                         title = NULL,
+                         title = genotype,
                          output = TRUE) {
   map <- x$map
   markers <- x$markers
+  ## Input checks.
+  if (!inherits(genotype, "character") || length(genotype) > 1) {
+    stop("genotype should be a character string.\n")
+  }
+  if (!is.null(title) || inherits(title, "character") || length(title) > 1) {
+    stop("title should be a character string.\n")
+  }
   ## Convert to long format for plotting.
   markersLong <- expand.grid(snp = dimnames(markers)[[1]],
                              genotype = dimnames(markers)[[2]],
@@ -115,14 +126,29 @@ plot.calcIBD <- function(x,
   plotDat <- merge(markersLong, map, by.x = "snp", by.y = "row.names")
   ## Restrict to selected genotype.
   plotDat <- plotDat[plotDat[["genotype"]] == genotype, ]
-  ggplot2::ggplot(plotDat,
+  p <- ggplot2::ggplot(plotDat,
                   ggplot2::aes_string(x = "pos", y = "parent",
                                       fill = "prob")) +
     ggplot2::geom_tile(width = 3) +
     ggplot2::facet_grid(". ~ chr", scales = "free", space = "free",
                         switch = "both") +
     ggplot2::scale_fill_binned(type = "viridis") +
+    ggplot2::scale_x_continuous(expand = c(0, 0)) +
+    ggplot2::scale_y_discrete(expand = c(0, 0)) +
     ggplot2::labs(title = genotype) +
-    ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+    ggplot2::theme(
+      plot.title = ggplot2::element_text(hjust = 0.5),
+      panel.background = ggplot2::element_blank(),
+      panel.spacing.x = ggplot2::unit(4, "mm"))
+  if (output) {
+    plot(p)
+  }
+  invisible(p)
 }
+
+markers3DtoLong <- function(x) {
+  markers <- x$markers
+  parents <- 1
+}
+
 

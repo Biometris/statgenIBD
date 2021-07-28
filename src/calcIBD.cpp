@@ -185,8 +185,10 @@ List calcIBD(CharacterVector& poptype,
   NumericVector P = wrap(prob);
   P.attr("dimnames") = List::create(posNames, offspring, parentNames);
   // Create result list: map + markers.
-  List res = List::create(Named("map") = map, Named("markers") = P,
+  List res = List::create(Named("map") = map,
+                          Named("markers") = P,
                           Named("poptype") = poptype,
+                          Named("parents") = parents,
                           Named("multiCross") = false);
   res.attr("class") = "calcIBD";
   return res;

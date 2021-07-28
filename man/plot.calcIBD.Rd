@@ -4,7 +4,7 @@
 \alias{plot.calcIBD}
 \title{Plot function for objects of class calcIBD}
 \usage{
-\method{plot}{calcIBD}(x, ..., genotype, title = NULL, output = TRUE)
+\method{plot}{calcIBD}(x, ..., genotype, title = genotype, output = TRUE)
 }
 \arguments{
 \item{x}{An object of class \code{GWAS}.}
@@ -15,6 +15,9 @@
 
 \item{output}{Should the plot be output to the current device? If
 \code{FALSE}, only a ggplot object is invisibly returned.}
+}
+\value{
+A ggplot object is invisibly returned.
 }
 \description{
 Creates a plot for an object of class calcIBD.

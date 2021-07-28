@@ -37,23 +37,39 @@ bla
 
 In the package IBD probabilities can be calculated for many different types of populations. In the following table all supported populations are listed. Note that the value of x in the population types is variable, with its maximum value depicted in the last column.
 
++---------------------+------------+------------------------------------------------------------+------------+
 | **Population type** | **Cross**  | **Description**                                            | **max. x** |
-|---------------------|------------|------------------------------------------------------------|------------|
++=====================+============+============================================================+============+
 | DH                  | biparental | doubled haploid population                                 |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | Fx                  | biparental | Fx population (F1, followed by x-1 generations of selfing) | 8          |
++---------------------+------------+------------------------------------------------------------+------------+
 | FxDH                | biparental | Fx, followed by DH generation                              | 8          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BCx                 | biparental | backcross, second parent is recurrent parent               | 9          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BCxDH               | biparental | BCx, followed by DH generation                             | 9          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BC1Sx               | biparental | BC1, followed by x generations of selfing                  | 7          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BC1SxDH             | biparental | BC1, followed by x generations of selfing and DH           | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3                  | three-way  | three way cross: (AxB) x C                                 |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3DH                | three-way  | C3, followed by DH generation                              |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3Sx                | three-way  | C3, followed by x generations of selfing                   | 7          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3SxDH              | three-way  | C3, followed by x generations of selfing and DH generation | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4                  | four-way   | four-way cross: (AxB) x (CxD)                              |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4DH                | four-way   | C4, followed by DH generation                              |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4Sx                | four-way   | C4, followed by x generations of selfing                   | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4SxDH              | four-way   | C4, followed by x generations of selfing and DH generation | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 
 # Examples
 
@@ -96,14 +112,21 @@ SxMIBD <- calcIBD(poptype = "DH",
 summary(SxMIBD)
 ```
 
-The output of the `calcIBD` function is an object of class `calcIBD`. This object is a `list` that consists of four elements:
+The output of the `calcIBD` function is an object of class `calcIBD`. This object is a `list` that consists of five elements:
 
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | element    | class        | description                                                                                                                                                                                                                                            |
-|------------|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
++============+==============+========================================================================================================================================================================================================================================================+
 | map        | `data.frame` | The map for the population.                                                                                                                                                                                                                            |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | markers    | `array`      | A three dimensional array with the IBD probabilities. The dimensions of this array are \#markers x \#genotypes x \#parents. The array contains per combination of marker and genotypes the probabilities that it descended from either of the parents. |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | poptype    | `character`  | The population type.                                                                                                                                                                                                                                   |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| parents    | `character`  | The parents.                                                                                                                                                                                                                                           |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | multiCross | `logical`    | An indicator showing whether in this `calcIBD` object multiple crosses where combined. This is always `FALSE` for the output of the `calcIBD` function, but will be `TRUE` when multiple crosses are combined as we will see in the examples.          |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 The `summary` function can be used to get a short description of the content of a `calcIBD` object.
 
@@ -255,7 +278,7 @@ AC <- calcIBD(poptype = "F4DH",
 summary(AC)
 ```
 
-Now we want to combine the results from both computations for further analyses. To combine to `calcIBD` objects we can use the `c` function. This is only possible if both objects contain the same type of population. Also the evaluation points for both object have to be indentical. In this example we have two F4DH populations and we used the same map file in the computations so combining them is fine.
+Now we want to combine the results from both computations for further analyses. To combine to `calcIBD` objects we can use the `c` function. This is only possible if both objects contain the same type of population. Also the evaluation points for both object have to be identical. In this example we have two F4DH populations and we used the same map file in the computations so combining them is fine.
 
 ```{r combineIBD}
 ABC <- c(AB, AC)

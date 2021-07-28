@@ -18,11 +18,13 @@ expect_silent(SxMIBD <- calcIBD(poptype = "DH", locfile = SxMloc,
                                 mapfile = SxMmap))
 
 expect_inherits(SxMIBD, "calcIBD")
-expect_equal(names(SxMIBD), c("map", "markers", "poptype", "multiCross"))
+expect_equal(names(SxMIBD),
+             c("map", "markers", "poptype", "parents", "multiCross"))
 expect_inherits(SxMIBD$map, "data.frame")
 expect_inherits(SxMIBD$markers, "array")
 expect_equal(dim(SxMIBD$markers), c(116, 150, 2))
 expect_inherits(SxMIBD$poptype, "character")
+expect_inherits(SxMIBD$parents, "character")
 expect_inherits(SxMIBD$multiCross, "logical")
 
 ## Check that output content is correct.
