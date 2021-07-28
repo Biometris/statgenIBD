@@ -7,7 +7,7 @@
 \method{plot}{calcIBD}(x, ..., genotype, title = genotype, output = TRUE)
 }
 \arguments{
-\item{x}{An object of class \code{GWAS}.}
+\item{x}{An object of class \code{calcIBD}.}
 
 \item{...}{Further arguments. Unused.}
 

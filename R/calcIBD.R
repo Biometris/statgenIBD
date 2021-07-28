@@ -94,7 +94,7 @@ c.calcIBD <- function(...) {
 #'
 #' Creates a plot for an object of class calcIBD.
 #'
-#' @param x An object of class \code{GWAS}.
+#' @param x An object of class \code{calcIBD}.
 #' @param ... Further arguments. Unused.
 #' @param title A character string, the title of the plot.
 #' @param output Should the plot be output to the current device? If
@@ -114,14 +114,11 @@ plot.calcIBD <- function(x,
   if (!inherits(genotype, "character") || length(genotype) > 1) {
     stop("genotype should be a character string.\n")
   }
-  if (!is.null(title) || inherits(title, "character") || length(title) > 1) {
+  if (!inherits(title, "character") || length(title) > 1) {
     stop("title should be a character string.\n")
   }
   ## Convert to long format for plotting.
-  markersLong <- expand.grid(snp = dimnames(markers)[[1]],
-                             genotype = dimnames(markers)[[2]],
-                             parent = dimnames(markers)[[3]])
-  markersLong[["prob"]] <- c(markers)
+  markersLong <- markers3DtoLong(x)
   ## Merge map info to probabilities.
   plotDat <- merge(markersLong, map, by.x = "snp", by.y = "row.names")
   ## Restrict to selected genotype.
@@ -146,9 +143,37 @@ plot.calcIBD <- function(x,
   invisible(p)
 }
 
+#' Helper function for converting 3D probability matrix to df.
+#'
+#' Helper function for converting 3D probability matrix to df.
+#'
+#' @noRd
+#' @keywords internal
 markers3DtoLong <- function(x) {
   markers <- x$markers
-  parents <- 1
+  parents <- x$parents
+  markerCols <- dimnames(markers)[[3]]
+  ## Create base data.frame for storing long format data.
+  markersLongBase <- expand.grid(snp = dimnames(markers)[[1]],
+                                 genotype = dimnames(markers)[[2]])
+  markersLong <- NULL
+  for (parent in parents) {
+    ## Construct parent column.
+    parentCol <- paste0("p", parent)
+    ## Get other columns containing parent.
+    parentSubCols <- markerCols[grep(pattern = parent, x = markerCols)]
+    parentSubCols <- parentSubCols[-which(parentSubCols == parentCol)]
+    ## Add values for parent to base.
+    markersParent <- markersLongBase
+    markersParent[["parent"]] <- parent
+    ## Compute probability for parent.
+    ## (2 * pPar + psubPar) / 2
+    markersParent[["prob"]] <- c(markers[, , parentCol] +
+      apply(X = markers[, , parentSubCols], MARGIN = 1:2, FUN = sum) / 2)
+    ## Add to markersLong
+    markersLong <- rbind(markersLong, markersParent)
+  }
+  return(markersLong)
 }
 
 
