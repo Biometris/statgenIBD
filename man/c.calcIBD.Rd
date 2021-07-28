@@ -2,7 +2,7 @@
 % Please edit documentation in R/calcIBD.R
 \name{c.calcIBD}
 \alias{c.calcIBD}
-\title{Concatenate function for objects of class calcIBD.}
+\title{Concatenate function for objects of class calcIBD}
 \usage{
 \method{c}{calcIBD}(...)
 }

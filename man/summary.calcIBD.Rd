@@ -2,7 +2,7 @@
 % Please edit documentation in R/calcIBD.R
 \name{summary.calcIBD}
 \alias{summary.calcIBD}
-\title{Summary function for objects of class calcIBD.}
+\title{Summary function for objects of class calcIBD}
 \usage{
 \method{summary}{calcIBD}(object, ...)
 }

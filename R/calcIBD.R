@@ -1,4 +1,4 @@
-#' Summary function for objects of class calcIBD.
+#' Summary function for objects of class calcIBD
 #'
 #' Prints a short summary for objects of class \code{\link{calcIBD}}. The
 #' summary consists of the population type, number of evaluation points,
@@ -29,7 +29,7 @@ summary.calcIBD <- function(object,
   cat("Parents: ", substring(dimnames(object$markers)[[3]], first = 2), "\n")
 }
 
-#' Concatenate function for objects of class calcIBD.
+#' Concatenate function for objects of class calcIBD
 #'
 #' Concatenates objects of class \code{\link{calcIBD}}. All objects that are
 #' concatenated  should have the same population type and the same map. The
@@ -87,3 +87,42 @@ c.calcIBD <- function(...) {
                    genoCross = genoCross)
   return(res)
 }
+
+#' Plot function for objects of class calcIBD
+#'
+#' Creates a plot for an object of class calcIBD.
+#'
+#' @param x An object of class \code{GWAS}.
+#' @param ... Further arguments. Unused.
+#' @param title A character string, the title of the plot.
+#' @param output Should the plot be output to the current device? If
+#' \code{FALSE}, only a ggplot object is invisibly returned.
+#'
+#' @export
+plot.calcIBD <- function(x,
+                         ...,
+                         genotype,
+                         title = NULL,
+                         output = TRUE) {
+  map <- x$map
+  markers <- x$markers
+  ## Convert to long format for plotting.
+  markersLong <- expand.grid(snp = dimnames(markers)[[1]],
+                             genotype = dimnames(markers)[[2]],
+                             parent = dimnames(markers)[[3]])
+  markersLong[["prob"]] <- c(markers)
+  ## Merge map info to probabilities.
+  plotDat <- merge(markersLong, map, by.x = "snp", by.y = "row.names")
+  ## Restrict to selected genotype.
+  plotDat <- plotDat[plotDat[["genotype"]] == genotype, ]
+  ggplot2::ggplot(plotDat,
+                  ggplot2::aes_string(x = "pos", y = "parent",
+                                      fill = "prob")) +
+    ggplot2::geom_tile(width = 3) +
+    ggplot2::facet_grid(". ~ chr", scales = "free", space = "free",
+                        switch = "both") +
+    ggplot2::scale_fill_binned(type = "viridis") +
+    ggplot2::labs(title = genotype) +
+    ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+}
+
