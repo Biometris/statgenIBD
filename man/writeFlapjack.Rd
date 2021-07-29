@@ -7,7 +7,7 @@
 writeFlapjack(x, outFileMap = "ibd_map.txt", outFileGeno = "ibd_geno.txt")
 }
 \arguments{
-\item{x}{An object of class \code{\link{IBD}}.}
+\item{x}{An object of class \code{calcIBD}.}
 
 \item{outFileMap}{A character string, the full path to the output map file.}
 

@@ -3,11 +3,13 @@
 #' Export the results of an IBD calculation to flapjack format so it can be
 #' visualalized there.
 #'
-#' @param x An object of class \code{\link{IBD}}.
+#' @param x An object of class \code{calcIBD}.
 #' @param outFileMap A character string, the full path to the output map file.
 #' @param outFileGeno A character string, the full path to the output genotype
 #' file.
 #'
+#' @importFrom stats reshape
+#' @importFrom utils write.table
 #' @export
 writeFlapjack <- function(x,
                           outFileMap = "ibd_map.txt",
