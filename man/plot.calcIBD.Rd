@@ -11,6 +11,9 @@
 
 \item{...}{Further arguments. Unused.}
 
+\item{genotype}{A character string indicating the genotype for which the
+plot should be made.}
+
 \item{title}{A character string, the title of the plot.}
 
 \item{output}{Should the plot be output to the current device? If

@@ -96,6 +96,8 @@ c.calcIBD <- function(...) {
 #'
 #' @param x An object of class \code{calcIBD}.
 #' @param ... Further arguments. Unused.
+#' @param genotype A character string indicating the genotype for which the
+#' plot should be made.
 #' @param title A character string, the title of the plot.
 #' @param output Should the plot be output to the current device? If
 #' \code{FALSE}, only a ggplot object is invisibly returned.
@@ -116,6 +118,12 @@ plot.calcIBD <- function(x,
   }
   if (!inherits(title, "character") || length(title) > 1) {
     stop("title should be a character string.\n")
+  }
+  if (!inherits(genotype, "character") || length(genotype) > 1) {
+    stop("genotype should be a character string.\n")
+  }
+  if (genotype %in% dimnames(markers)[[2]]) {
+    stop("genotype should be in markers.\n")
   }
   ## Convert to long format for plotting.
   markersLong <- markers3DtoLong(x)

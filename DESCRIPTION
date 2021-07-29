@@ -18,7 +18,9 @@ License: GPL
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.6)
-Imports: Rcpp
+Imports: 
+    ggplot2,
+    Rcpp
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
