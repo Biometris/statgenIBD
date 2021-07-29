@@ -114,10 +114,10 @@ Looking at genotype **dh001** and marker **plc** we can see from the genotypic f
 SxMIBD$markers["plc", "dh001", ]
 ```
 
-For the combination of marker **ABG053** and genotype **dh146** the genotypic file contained a missing value. Looking at the output we can see that the probability that this marker came from Morex is about 0.48 and the probability that it came from Steptoe is about 0.52 [MB: Maybe we should try to find another example, both probabilities equal to 0.5]
+For the combination of marker **ab9313b** and genotype **dh005** the genotypic file contained a missing value. Looking at the output we can see that the probability that this marker came from Morex is about 0.67 and the probability that it came from Steptoe is about 0.33.
 
-```{r check_dh146_plc}
-SxMIBD$markers["ABG053", "dh146", ]
+```{r check_dh005_abg313b}
+SxMIBD$markers["abg313b", "dh005", ]
 ```
 
 ### Evaluation positions
