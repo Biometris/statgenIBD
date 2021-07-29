@@ -1,9 +1,9 @@
 #' Extract Probabilities for markers
 #'
-#' Extract IBD probabilities one or more markers from an object of class
+#' Extract IBD probabilities for one or more markers from an object of class
 #' \code{IBDprob}.
 #'
-#' @param IBD An object of class \code{IBDprob}.
+#' @param IBDprob An object of class \code{IBDprob}.
 #' @param markers A character vector of markers that should be extracted.
 #'
 #' @return A data.frame with IBD probabilities for the extracted markers in the

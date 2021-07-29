@@ -7,9 +7,9 @@
 getProbs(IBDprob, markers)
 }
 \arguments{
-\item{markers}{A character vector of markers that should be extracted.}
+\item{IBDprob}{An object of class \code{IBDprob}.}
 
-\item{IBD}{An object of class \code{IBDprob}.}
+\item{markers}{A character vector of markers that should be extracted.}
 }
 \value{
 A data.frame with IBD probabilities for the extracted markers in the
@@ -40,6 +40,6 @@ head(probMult)
 }
 }
 \description{
-Extract IBD probabilities one or more markers from an object of class
+Extract IBD probabilities for one or more markers from an object of class
 \code{IBDprob}.
 }
