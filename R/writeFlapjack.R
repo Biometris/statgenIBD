@@ -1,9 +1,9 @@
 #' Write to Flapjack format
 #'
 #' Export the results of an IBD calculation to flapjack format so it can be
-#' visualalized there.
+#' visualized there.
 #'
-#' @param x An object of class \code{calcIBD}.
+#' @param IBDprob An object of class \code{IBDprob}.
 #' @param outFileMap A character string, the full path to the output map file.
 #' @param outFileGeno A character string, the full path to the output genotype
 #' file.
@@ -11,12 +11,12 @@
 #' @importFrom stats reshape
 #' @importFrom utils write.table
 #' @export
-writeFlapjack <- function(x,
+writeFlapjack <- function(IBDprob,
                           outFileMap = "ibd_map.txt",
                           outFileGeno = "ibd_geno.txt") {
-  map <- x$map
-  markers <- x$markers
-  parents <- x$parents
+  map <- IBDprob$map
+  markers <- IBDprob$markers
+  parents <- IBDprob$parents
   nPar <- length(parents)
   nGeno <- dim(markers)[[2]]
   nMarkers <- dim(markers)[[1]]

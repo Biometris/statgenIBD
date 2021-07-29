@@ -1,9 +1,9 @@
 #' Extract Probabilities for markers
 #'
 #' Extract IBD probabilities one or more markers from an object of class
-#' calcIBD.
+#' \code{IBDprob}.
 #'
-#' @param IBD An object of class calcIBD.
+#' @param IBD An object of class \code{IBDprob}.
 #' @param markers A character vector of markers that should be extracted.
 #'
 #' @return A data.frame with IBD probabilities for the extracted markers in the
@@ -18,37 +18,38 @@
 #'                                         package = "statgenIBD"))
 #'
 #' ## Get probabilities for a single marker.
-#' probOne <- getProbs(IBD = SxMIBD,
+#' probOne <- getProbs(IBDprob = SxMIBD,
 #'                     markers = "plc")
 #' head(probOne)
 #'
 #' ## Get probabilities for a multiple markers.
-#' probMult <- getProbs(IBD = SxMIBD,
+#' probMult <- getProbs(IBDprob = SxMIBD,
 #'                      markers = c("plc", "tuba1"))
 #' head(probMult)
 #'
 #' @export
-getProbs <- function(IBD,
+getProbs <- function(IBDprob,
                      markers) {
   ## Checks.
-  if (!inherits(IBD, "calcIBD")) {
-    stop(deparse(substitute(IBD)), " should be an object of class calcIBD\n")
+  if (!inherits(IBDprob, "IBDprob")) {
+    stop(deparse(substitute(IBDprob)),
+         " should be an object of class IBDprob\n")
   }
   if (is.null(markers) || !is.character(markers)) {
     stop("markers should be a character vector\n")
   }
-  missQTL <- markers[!markers %in% rownames(IBD$markers)]
-  if (length(missQTL) > 0) {
-    stop("The following markers are not in ", deparse(substitute(IBD)), ": ",
-         paste(missQTL, collapse = ", "), "\n")
+  missMrk <- markers[!markers %in% rownames(IBDprob$markers)]
+  if (length(missMrk) > 0) {
+    stop("The following markers are not in ", deparse(substitute(IBDprob)), ": ",
+         paste(missMrk, collapse = ", "), "\n")
   }
   probs <- lapply(X = markers, FUN = function(marker) {
-    prob <- IBD$markers[marker, , ]
+    prob <- IBDprob$markers[marker, , ]
     colnames(prob) <- paste0(marker, "_", colnames(prob))
     return(prob)
   })
   probs <- as.data.frame(do.call(cbind, probs))
-  genoCross <- attr(x = IBD, which = "genoCross")
+  genoCross <- attr(x = IBDprob, which = "genoCross")
   if (!is.null(genoCross)) {
     probs <- merge(genoCross, probs, by.x = "geno", by.y = "row.names")
     probs <- probs[c("cross", "geno",

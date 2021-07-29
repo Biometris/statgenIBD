@@ -4,10 +4,14 @@
 \alias{writeFlapjack}
 \title{Write to Flapjack format}
 \usage{
-writeFlapjack(x, outFileMap = "ibd_map.txt", outFileGeno = "ibd_geno.txt")
+writeFlapjack(
+  IBDprob,
+  outFileMap = "ibd_map.txt",
+  outFileGeno = "ibd_geno.txt"
+)
 }
 \arguments{
-\item{x}{An object of class \code{calcIBD}.}
+\item{IBDprob}{An object of class \code{IBDprob}.}
 
 \item{outFileMap}{A character string, the full path to the output map file.}
 
@@ -16,5 +20,5 @@ file.}
 }
 \description{
 Export the results of an IBD calculation to flapjack format so it can be
-visualalized there.
+visualized there.
 }

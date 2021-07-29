@@ -4,12 +4,12 @@
 \alias{getProbs}
 \title{Extract Probabilities for markers}
 \usage{
-getProbs(IBD, markers)
+getProbs(IBDprob, markers)
 }
 \arguments{
-\item{IBD}{An object of class calcIBD.}
-
 \item{markers}{A character vector of markers that should be extracted.}
+
+\item{IBD}{An object of class \code{IBDprob}.}
 }
 \value{
 A data.frame with IBD probabilities for the extracted markers in the
@@ -27,19 +27,19 @@ package = "statgenIBD"))
 
 \subsection{Get probabilities for a single marker.}{
 
-probOne <- getProbs(IBD = SxMIBD,
+probOne <- getProbs(IBDprob = SxMIBD,
 markers = "plc")
 head(probOne)
 }
 
 \subsection{Get probabilities for a multiple markers.}{
 
-probMult <- getProbs(IBD = SxMIBD,
+probMult <- getProbs(IBDprob = SxMIBD,
 markers = c("plc", "tuba1"))
 head(probMult)
 }
 }
 \description{
 Extract IBD probabilities one or more markers from an object of class
-calcIBD.
+\code{IBDprob}.
 }

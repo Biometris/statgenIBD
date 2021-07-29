@@ -1,10 +1,10 @@
-#' Summary function for objects of class calcIBD
+#' Summary function for objects of class IBDprob
 #'
-#' Prints a short summary for objects of class \code{\link{calcIBD}}. The
+#' Prints a short summary for objects of class \code{IBDprob}. The
 #' summary consists of the population type, number of evaluation points,
 #' number of individuals and names of the parents in the object.
 #'
-#' @param object An object of class \code{\link{calcIBD}}.
+#' @param object An object of class \code{IBDprob}.
 #' @param ... Not used.
 #'
 #' @return No return value, a summary is printed.
@@ -21,7 +21,7 @@
 #' summary(SxMIBD)
 #'
 #' @export
-summary.calcIBD <- function(object,
+summary.IBDprob <- function(object,
                             ...) {
   cat("population type: ", object$poptype, "\n")
   cat("Number of evaluation points: ", nrow(object$markers), "\n")
@@ -29,27 +29,27 @@ summary.calcIBD <- function(object,
   cat("Parents: ", object$parents, "\n")
 }
 
-#' Concatenate function for objects of class calcIBD
+#' Concatenate function for objects of class IBDprob
 #'
-#' Concatenates objects of class \code{\link{calcIBD}}. All objects that are
+#' Concatenates objects of class \code{IBDprob}. All objects that are
 #' concatenated  should have the same population type and the same map. The
 #' function is mainly meant for combining information for multiple crosses
 #' with overlapping parents.
 #'
-#' @param ... Objects of class \code{\link{calcIBD}}
+#' @param ... Objects of class \code{IBDprob}.
 #'
-#' @return An object of class \code{\link{calcIBD}} containing data for all
+#' @return An object of class \code{IBDprob} containing data for all
 #' concatenated objects.
 #'
 #' @export
-c.calcIBD <- function(...) {
+c.IBDprob <- function(...) {
   args <- list(...)
   if (length(args) == 1) {
     return(args[[1]])
   }
   for (arg in args) {
-    if (!inherits(arg, "calcIBD")) {
-      stop("All inputs should be of class calcIBD.\n")
+    if (!inherits(arg, "IBDprob")) {
+      stop("All inputs should be of class IBDprob.\n")
     }
   }
   pops <- unique(sapply(X = args, FUN = `[[`, "poptype"))
@@ -85,16 +85,16 @@ c.calcIBD <- function(...) {
                         poptype = pops,
                         parents = parents,
                         multicross = TRUE),
-                   class = "calcIBD",
+                   class = "IBDprob",
                    genoCross = genoCross)
   return(res)
 }
 
-#' Plot function for objects of class calcIBD
+#' Plot function for objects of class IBDprob
 #'
-#' Creates a plot for an object of class calcIBD.
+#' Creates a plot for an object of class \code{IBDprob}.
 #'
-#' @param x An object of class \code{calcIBD}.
+#' @param x An object of class \code{IBDprob}.
 #' @param ... Further arguments. Unused.
 #' @param genotype A character string indicating the genotype for which the
 #' plot should be made.
@@ -105,7 +105,7 @@ c.calcIBD <- function(...) {
 #' @return A ggplot object is invisibly returned.
 #'
 #' @export
-plot.calcIBD <- function(x,
+plot.IBDprob <- function(x,
                          ...,
                          genotype,
                          title = genotype,

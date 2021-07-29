@@ -112,7 +112,7 @@ SxMIBD <- calcIBD(poptype = "DH",
 summary(SxMIBD)
 ```
 
-The output of the `calcIBD` function is an object of class `calcIBD`. This object is a `list` that consists of five elements:
+The output of the `calcIBD` function is an object of class `IBDprob`. This object is a `list` that consists of five elements:
 
 +------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | element    | class        | description                                                                                                                                                                                                                                            |
@@ -125,10 +125,10 @@ The output of the `calcIBD` function is an object of class `calcIBD`. This objec
 +------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | parents    | `character`  | The parents.                                                                                                                                                                                                                                           |
 +------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| multiCross | `logical`    | An indicator showing whether in this `calcIBD` object multiple crosses where combined. This is always `FALSE` for the output of the `calcIBD` function, but will be `TRUE` when multiple crosses are combined as we will see in the examples.          |
+| multiCross | `logical`    | An indicator showing whether in this `IBDprob` object multiple crosses where combined. This is always `FALSE` for the output of the `calcIBD` function, but will be `TRUE` when multiple crosses are combined as we will see in the examples.          |
 +------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-The `summary` function can be used to get a short description of the content of a `calcIBD` object.
+The `summary` function can be used to get a short description of the content of a `IBDprob` object.
 
 Looking at genotype **dh001** and marker **plc** we can see from the genotypic file printed above that it has a value of 2, equal to that of Steptoe. If we now look at the output of `calcIBD` it shows a value of 1 for pSteptoe and a value of 0 for pMorex.
 
@@ -278,7 +278,7 @@ AC <- calcIBD(poptype = "F4DH",
 summary(AC)
 ```
 
-Now we want to combine the results from both computations for further analyses. To combine to `calcIBD` objects we can use the `c` function. This is only possible if both objects contain the same type of population. Also the evaluation points for both object have to be identical. In this example we have two F4DH populations and we used the same map file in the computations so combining them is fine.
+Now we want to combine the results from both computations for further analyses. To combine to `IBDprob` objects we can use the `c` function. This is only possible if both objects contain the same type of population. Also the evaluation points for both object have to be identical. In this example we have two F4DH populations and we used the same map file in the computations so combining them is fine.
 
 ```{r combineIBD}
 ABC <- c(AB, AC)

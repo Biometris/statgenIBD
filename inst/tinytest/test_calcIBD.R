@@ -17,7 +17,7 @@ expect_error(calcIBD(poptype = "DH", locfile = SxMloc, mapfile = "tst"),
 expect_silent(SxMIBD <- calcIBD(poptype = "DH", locfile = SxMloc,
                                 mapfile = SxMmap))
 
-expect_inherits(SxMIBD, "calcIBD")
+expect_inherits(SxMIBD, "IBDprob")
 expect_equal(names(SxMIBD),
              c("map", "markers", "poptype", "parents", "multiCross"))
 expect_inherits(SxMIBD$map, "data.frame")

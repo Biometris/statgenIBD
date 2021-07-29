@@ -1,4 +1,4 @@
-### Test calcIBD concatenation.
+### Test IBDprob concatenation.
 
 ## Define file locations.
 ABloc <- system.file("extdata/multipop", "AxB.loc", package = "statgenIBD")
@@ -16,7 +16,7 @@ ACalt2 <- calcIBD(poptype = "F4DH", locfile = ACloc, mapfile = ABCmap,
 
 ## Check that input checks are working correctly.
 expect_error(c(AB, "tst"),
-             "All inputs should be of class calcIBD")
+             "All inputs should be of class IBDprob")
 expect_error(c(AB, ACalt1),
              "All inputs should have the same population type")
 expect_error(c(AB, ACalt2),
@@ -28,7 +28,7 @@ expect_equal(c(AB), AB)
 ## Multiple outputs should be combined correctly.
 ABC <- c(AB, AC)
 
-expect_inherits(ABC, "calcIBD")
+expect_inherits(ABC, "IBDprob")
 expect_equal(ABC$map, AB$map)
 expect_equal_to_reference(ABC$markers, "ABC_markers")
 expect_equal(ABC$poptype, AB$poptype)

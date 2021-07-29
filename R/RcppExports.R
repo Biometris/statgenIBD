@@ -43,17 +43,17 @@
 #' calculations should be limited.
 #' @param evaldist An optional numerical value indicating the maximum
 #' distance for in between marker evaluation positions.
-#' @param verbose Should message indicating the progress of the process be
+#' @param verbose Should messages indicating the progress of the process be
 #' printed?
 #'
-#' @return An object of class \code{calcIBD}, a \code{list} with four elements,
+#' @return An object of class \code{IBDprob}, a \code{list} with four elements,
 #' \describe{
 #' \item{map}{a \code{data.frame} with chromosome and position of the markers.}
 #' \item{markers}{a 3-dimensional \code{array} of IBD probabilities with
 #' markers, genotypes and  parents as array dimensions.}
 #' \item{poptype}{the population type}
 #' \item{multiCross}{a logical value indicating if multiple crosses have been
-#' combined in the \code{calcIBD} object}
+#' combined in the \code{IBDprob} object}
 #' }
 #'
 #' @examples
