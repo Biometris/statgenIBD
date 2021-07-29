@@ -89,7 +89,6 @@ LinkageMap generate_extended_map(const LinkageMap& Markermap,
                                  double max_step_size)
 {
 	LinkageMap extended_map;
-	int extra_markers = 0;
 	int nloc = Markermap.size();
 	int m;
 	for (m=0;m<nloc-1;m++)
@@ -107,7 +106,7 @@ LinkageMap generate_extended_map(const LinkageMap& Markermap,
 			{
 				int chr = Left.GetChr();
 				double pos = round(left_pos + (i/(1.0*N))*dist,2);
-				string name = "EXT" + stringify(++extra_markers);
+				string name = "EXT_" + stringify(chr) + "_" + stringify(pos);
 				extended_map.push_back(Locus(chr,pos,name));
 			}
 		}

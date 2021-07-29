@@ -81,7 +81,7 @@ The first example is the Steptoe Morex data, described by [@Hayes1993]. This is 
 
 The map and genotypic file for this population are included in the package.
 
-Both the map and the genotypic file should be in a **tab**-delimited format. The map file should be a file without a header. It should contain three columns, corresponding to marker name, chromosome number and position on the chromosome (in basepairs).
+Both the map and the genotypic file should be in a **tab**-delimited format. The map file should be a file without a header. It should contain three columns, corresponding to marker name, chromosome number and position on the chromosome (in centimorgan).
 
 ```{r inspectMap}
 ## Read the map and display the first tows.
@@ -146,7 +146,7 @@ SxMIBD$markers["ABG053", "dh146", ]
 
 When calling the `calcIBD` function without extra parameters, the only positions for which the calculations are made are the positions present in the map. There are two ways to change this. A first option is to specify the parameter `evaldist`. Setting this to a value of e.g. 5, assures that extra evaluation positions are added in such a way that the maximum distance between evaluation points will be 5.
 
-The extra evaluation points will be spread evenly. If we look at the map for the Steptoe Morex example, we see that the distance between the first two markers on chromosome 1, **plc** and **glx**, is 18.7. To assure a maximum distance between evaluation points of 5, 3 extra evaluation points will be added. Since they will be spread evenly, the distance between them will be 18.7/3 = 4.68. The extra evaluation points will be named EXT1, EXT2, ...
+The extra evaluation points will be spread evenly. If we look at the map for the Steptoe Morex example, we see that the distance between the first two markers on chromosome 1, **plc** and **glx**, is 18.7. To assure a maximum distance between evaluation points of 5, 3 extra evaluation points will be added. Since they will be spread evenly, the distance between them will be 18.7/3 = 4.68. The extra evaluation points will be named EXT_chr_pos, e.g the extra evaluation point at position 4.68 of chromosome 1, will be named EXT_1\_4.68.
 
 ```{r sxmIBD_ext}
 ## Compute IBD probabilities for Steptoe Morex.
@@ -304,3 +304,4 @@ options(op)
 ------------------------------------------------------------------------
 
 ## References
+

@@ -49,7 +49,7 @@ using namespace ibd;
 //' @param mapfile A character string indicating the location of the map file
 //' for the population. The file should be in tab-delimited format. It should
 //' consist of exactly three columns, marker, chromosome and position. There
-//' should be no header.
+//' should be no header. The positions in the file should be in centimorgan.
 //' @param evalposfile An optional character string indicating a tab-delimited
 //' .txt file containing combinations of chromosomes and positions to which the
 //' calculations should be limited.
