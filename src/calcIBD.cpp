@@ -55,6 +55,8 @@ using namespace ibd;
 //' calculations should be limited.
 //' @param evaldist An optional numerical value indicating the maximum
 //' distance for in between marker evaluation positions.
+//' @param verbose Should message indicating the progress of the process be
+//' printed?
 //'
 //' @return An object of class \code{calcIBD}, a \code{list} with four elements,
 //' \describe{

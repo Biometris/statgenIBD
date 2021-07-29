@@ -33,6 +33,9 @@ calculations should be limited.}
 
 \item{evaldist}{An optional numerical value indicating the maximum
 distance for in between marker evaluation positions.}
+
+\item{verbose}{Should message indicating the progress of the process be
+printed?}
 }
 \value{
 An object of class \code{calcIBD}, a \code{list} with four elements,
