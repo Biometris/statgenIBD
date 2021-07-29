@@ -78,7 +78,7 @@
 #' summary(SxMIBD_Ext)
 #'
 #' @export
-calcIBD <- function(poptype, locfile, mapfile, evalposfile = NULL, evaldist = NULL) {
-    .Call(`_statgenIBD_calcIBD`, poptype, locfile, mapfile, evalposfile, evaldist)
+calcIBD <- function(poptype, locfile, mapfile, evalposfile = NULL, evaldist = NULL, verbose = FALSE) {
+    .Call(`_statgenIBD_calcIBD`, poptype, locfile, mapfile, evalposfile, evaldist, verbose)
 }
 

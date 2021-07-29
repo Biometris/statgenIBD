@@ -146,9 +146,12 @@ vector<int> get_ndx_par(const vector<IndProp>& pop)
 arma::cube analysis_cross(const vector<IndProp>& pop,
                           const matrix<score>& geno,
                           const LinkageMap& markermap,
-                          const LinkageMap& eval_pos)
+                          const LinkageMap& eval_pos,
+                          const bool& verbose = false)
 {
-  Rcpp::Rcout << "analysis of family ........" << endl;
+  if (verbose) {
+    Rcpp::Rcout << "analysis of family ........" << endl;
+  }
 
   string type = find_type(pop);
   vector<int> ndx_par = get_ndx_par(pop);

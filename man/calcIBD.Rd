@@ -4,7 +4,14 @@
 \alias{calcIBD}
 \title{Calculate IBD probabilities}
 \usage{
-calcIBD(poptype, locfile, mapfile, evalposfile = NULL, evaldist = NULL)
+calcIBD(
+  poptype,
+  locfile,
+  mapfile,
+  evalposfile = NULL,
+  evaldist = NULL,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{poptype}{A character string indicating the type of population. One of

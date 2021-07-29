@@ -166,7 +166,8 @@ int main_pedigreeR(arma::cube& Z,
                    const string& locfile,
                    const string& mapfile,
                    const string& eval_pos_file,
-                   const double& max_step_size)
+                   const double& max_step_size,
+                   const bool& verbose = false)
 {
   // read all the data
   matrix<score> geno;
@@ -176,7 +177,10 @@ int main_pedigreeR(arma::cube& Z,
 
   matrix<score> geno_locfile;
   vector<string> ID, marker_names;
-  Rcout << "reading data .............." << endl;
+  if (verbose)
+  {
+    Rcout << "reading data .............." << endl;
+  }
   read_flapjackfile(ID, marker_names, geno_locfile, locfile);
 
   vector<IndProp> pop = make_ped_file(poptype, ID);
@@ -204,7 +208,7 @@ int main_pedigreeR(arma::cube& Z,
   marker_selection(markermap, eval_pos, sel_chr, analysis_family, pos_option);
   linking_data(geno, markermap, pop, geno_locfile, ID, marker_names);
   // start of analysis.
-  Z = analysis_cross(pop, geno, markermap, eval_pos);
+  Z = analysis_cross(pop, geno, markermap, eval_pos, verbose);
   const int npar = count_parents(pop);
   for (int i=0; i < npar; i++)
     parents.push_back(ID[i]);

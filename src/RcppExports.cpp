@@ -12,8 +12,8 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // calcIBD
-List calcIBD(CharacterVector& poptype, CharacterVector& locfile, CharacterVector& mapfile, Nullable<CharacterVector&> evalposfile, Nullable<NumericVector&> evaldist);
-RcppExport SEXP _statgenIBD_calcIBD(SEXP poptypeSEXP, SEXP locfileSEXP, SEXP mapfileSEXP, SEXP evalposfileSEXP, SEXP evaldistSEXP) {
+List calcIBD(CharacterVector& poptype, CharacterVector& locfile, CharacterVector& mapfile, Nullable<CharacterVector&> evalposfile, Nullable<NumericVector&> evaldist, const bool& verbose);
+RcppExport SEXP _statgenIBD_calcIBD(SEXP poptypeSEXP, SEXP locfileSEXP, SEXP mapfileSEXP, SEXP evalposfileSEXP, SEXP evaldistSEXP, SEXP verboseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -22,13 +22,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< CharacterVector& >::type mapfile(mapfileSEXP);
     Rcpp::traits::input_parameter< Nullable<CharacterVector&> >::type evalposfile(evalposfileSEXP);
     Rcpp::traits::input_parameter< Nullable<NumericVector&> >::type evaldist(evaldistSEXP);
-    rcpp_result_gen = Rcpp::wrap(calcIBD(poptype, locfile, mapfile, evalposfile, evaldist));
+    Rcpp::traits::input_parameter< const bool& >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(calcIBD(poptype, locfile, mapfile, evalposfile, evaldist, verbose));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_statgenIBD_calcIBD", (DL_FUNC) &_statgenIBD_calcIBD, 5},
+    {"_statgenIBD_calcIBD", (DL_FUNC) &_statgenIBD_calcIBD, 6},
     {NULL, NULL, 0}
 };
 

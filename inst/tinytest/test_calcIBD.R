@@ -34,4 +34,16 @@ expect_equal_to_reference(SxMIBD$markers, "SxMIBD_markers", tolerance = 10e-6)
 expect_equal(SxMIBD$poptype, "DH")
 expect_false(SxMIBD$multiCross)
 
+## Check that option verbose works correctly.
+
+outMsg <- capture.output(msg0 <- calcIBD(poptype = "DH", locfile = SxMloc,
+                                         mapfile = SxMmap))
+outMsg2 <- capture.output(msg1 <- calcIBD(poptype = "DH", locfile = SxMloc,
+                                          mapfile = SxMmap, verbose = TRUE))
+expect_equal(outMsg, character())
+expect_true(any(grepl(pattern = "reading data", x = outMsg2)))
+expect_true(any(grepl(pattern = "analysis of family", x = outMsg2)))
+
+
+
 

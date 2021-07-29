@@ -19,6 +19,7 @@ int count_parents(const std::vector<IndProp>& pop);
 arma::cube analysis_cross(const std::vector<IndProp>& pop,
                           const ibd::matrix<score>& geno,
                           const LinkageMap& markermap,
-                          const LinkageMap& eval_pos);
+                          const LinkageMap& eval_pos,
+                          const bool& verbose);
 
 #endif

@@ -95,7 +95,8 @@ List calcIBD(CharacterVector& poptype,
              CharacterVector& locfile,
              CharacterVector& mapfile,
              Nullable<CharacterVector&> evalposfile = R_NilValue,
-             Nullable<NumericVector&> evaldist = R_NilValue)
+             Nullable<NumericVector&> evaldist = R_NilValue,
+             const bool& verbose = false)
 {
   string _poptype = Rcpp::as<std::string>(poptype);
   // only to check poptype has correct format:
@@ -122,7 +123,8 @@ List calcIBD(CharacterVector& poptype,
                    Rcpp::as<std::string>(locfile),
                    Rcpp::as<std::string>(mapfile),
                    _evalposfile,
-                   max_step_size);
+                   max_step_size,
+                   verbose);
   }
   catch (ibd_error& e)
   {

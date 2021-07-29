@@ -24,7 +24,8 @@ int main_pedigreeR(arma::cube& Z,
                    const std::string& locfile,
                    const std::string& mapfile,
                    const std::string& eval_pos,
-                   const double& max_step_size);
+                   const double& max_step_size,
+                   const bool& verbose);
 
 #endif
 
