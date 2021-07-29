@@ -122,7 +122,7 @@ plot.calcIBD <- function(x,
   if (!inherits(genotype, "character") || length(genotype) > 1) {
     stop("genotype should be a character string.\n")
   }
-  if (genotype %in% dimnames(markers)[[2]]) {
+  if (!genotype %in% dimnames(markers)[[2]]) {
     stop("genotype should be in markers.\n")
   }
   ## Convert to long format for plotting.
@@ -137,7 +137,7 @@ plot.calcIBD <- function(x,
     ggplot2::geom_tile(width = 3) +
     ggplot2::facet_grid(". ~ chr", scales = "free", space = "free",
                         switch = "both") +
-    ggplot2::scale_fill_binned(type = "viridis") +
+    ggplot2::scale_fill_gradient(low = "white", high = "black") +
     ggplot2::scale_x_continuous(expand = c(0, 0)) +
     ggplot2::scale_y_discrete(expand = c(0, 0)) +
     ggplot2::labs(title = genotype) +
