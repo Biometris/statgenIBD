@@ -202,13 +202,13 @@ In case both `evalposfile` and `evaldist` are specified the former takes prevale
 
 Often only the subset of markers is of interest for further analysis, e.g. for QTL Mapping of for fitting a multi-QTL model. To extract the computed probabilities for such a marker subset from a `calcIBD` object we can use the `getQTLProb` function.
 
-```{r SxMQTLProb_one}
+```{r SxMProbs_one}
 ## Extract marker probabilities for markers plc and ABG053.
-SxM_probs <- getQTLProb(SxMIBD, QTLS = c("plc", "ABG053"))
+SxM_probs <- getProbs(SxMIBD, markers = c("plc", "ABG053"))
 head(SxM_probs)
 ```
 
-The output of the `getQTLProb` function is a `data.frame` with a column `geno` containing the genotype and for both markers the probability that it descended from Morex and that it descended from Steptoe.
+The output of the `getProbs` function is a `data.frame` with a column `geno` containing the genotype and for both markers the probability that it descended from Morex and that it descended from Steptoe.
 
 ## Simulated data
 
@@ -289,7 +289,7 @@ Looking at the summary, we can see the our combined population now has 180 indiv
 
 ```{r checkMultiIBD}
 ## Extract probabilities for markers M1_1 and M3_3.
-ABCProbs <- getQTLProb(ABC, QTLS = c("M1_1", "M3_3"))
+ABCProbs <- getProbs(ABC, markers = c("M1_1", "M3_3"))
 
 ## Print probabilities for genotypes AxB0001 and AxC0001.
 ABCProbs[ABCProbs$geno %in% c("AxB0001", "AxC0001"), ]
