@@ -38,8 +38,7 @@
 #' for the population. The file should be in tab-delimited format. It should
 #' consist of exactly three columns, marker, chromosome and position. There
 #' should be no header. The positions in the file should be in centimorgan.
-#' @param evalposfile An optional character string indicating a tab-delimited
-#' .txt file containing combinations of chromosomes and positions to which the
+#' @param evalpos A data.frame with evaluation positions to which the
 #' calculations should be limited.
 #' @param evaldist An optional numerical value indicating the maximum
 #' distance for in between marker evaluation positions.
@@ -80,7 +79,7 @@
 #' summary(SxMIBD_Ext)
 #'
 #' @export
-calcIBD <- function(poptype, locfile, mapfile, evalposfile = NULL, evaldist = NULL, verbose = FALSE) {
-    .Call(`_statgenIBD_calcIBD`, poptype, locfile, mapfile, evalposfile, evaldist, verbose)
+calcIBD <- function(poptype, locfile, mapfile, evalpos = NULL, evaldist = NULL, verbose = FALSE) {
+    .Call(`_statgenIBD_calcIBD`, poptype, locfile, mapfile, evalpos, evaldist, verbose)
 }
 

@@ -141,3 +141,18 @@ LinkageMap read_eval_pos_file(const string& filename)
   return positions;
 }
 
+LinkageMap read_eval_pos_df(const Rcpp::DataFrame& evalposdf)
+{
+  Rcpp::NumericVector pos = evalposdf["pos"];
+  Rcpp::NumericVector chr = evalposdf["chr"];
+  LinkageMap positions;
+  for (int m=0;m<evalposdf.nrows();m++)
+  {
+    string name = "EVAL_" + stringify(chr[m]) + "_" + stringify(pos[m]);
+    positions.push_back(Locus(chr[m], pos[m], name));
+  }
+  sort(positions.begin(),positions.end());
+  return(positions);
+}
+
+

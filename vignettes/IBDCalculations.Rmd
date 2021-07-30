@@ -37,23 +37,39 @@ The calculations are based on Hidden Markov Models (HMM)...[here we can use or r
 
 In the package IBD probabilities can be calculated for many different types of populations. In the following table all supported populations are listed. Note that the value of x in the population types is variable, with its maximum value depicted in the last column.
 
++---------------------+------------+------------------------------------------------------------+------------+
 | **Population type** | **Cross**  | **Description**                                            | **max. x** |
-|---------------------|------------|------------------------------------------------------------|------------|
++=====================+============+============================================================+============+
 | DH                  | biparental | doubled haploid population                                 |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | Fx                  | biparental | Fx population (F1, followed by x-1 generations of selfing) | 8          |
++---------------------+------------+------------------------------------------------------------+------------+
 | FxDH                | biparental | Fx, followed by DH generation                              | 8          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BCx                 | biparental | backcross, second parent is recurrent parent               | 9          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BCxDH               | biparental | BCx, followed by DH generation                             | 9          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BC1Sx               | biparental | BC1, followed by x generations of selfing                  | 7          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BC1SxDH             | biparental | BC1, followed by x generations of selfing and DH           | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3                  | three-way  | three way cross: (AxB) x C                                 |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3DH                | three-way  | C3, followed by DH generation                              |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3Sx                | three-way  | C3, followed by x generations of selfing                   | 7          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3SxDH              | three-way  | C3, followed by x generations of selfing and DH generation | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4                  | four-way   | four-way cross: (AxB) x (CxD)                              |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4DH                | four-way   | C4, followed by DH generation                              |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4Sx                | four-way   | C4, followed by x generations of selfing                   | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4SxDH              | four-way   | C4, followed by x generations of selfing and DH generation | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 
 # Examples
 
@@ -98,13 +114,19 @@ summary(SxMIBD)
 
 The output of the `calcIBD` function is an object of class `IBDprob`. This object is a `list` that consists of five elements:
 
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | element    | class        | description                                                                                                                                                                                                                                            |
-|------------|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
++============+==============+========================================================================================================================================================================================================================================================+
 | map        | `data.frame` | The map for the population.                                                                                                                                                                                                                            |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | markers    | `array`      | A three dimensional array with the IBD probabilities. The dimensions of this array are \#markers x \#genotypes x \#parents. The array contains per combination of marker and genotypes the probabilities that it descended from either of the parents. |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | poptype    | `character`  | The population type.                                                                                                                                                                                                                                   |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | parents    | `character`  | The parents.                                                                                                                                                                                                                                           |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | multiCross | `logical`    | An indicator showing whether in this `IBDprob` object multiple crosses where combined. This is always `FALSE` for the output of the `calcIBD` function, but will be `TRUE` when multiple crosses are combined as we will see in the examples.          |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 The `summary` function can be used to get a short description of the content of a `IBDprob` object.
 
@@ -147,34 +169,33 @@ As the summary shows, the number of evaluation point has increased to 290, from 
 head(SxMIBD_Ext$map)
 ```
 
-A second way of changing the position for which the computations are made, is by specifying them in a .txt file. This file should be tab-delimited and can be specified in the `calcIBD` function using the `evalposfile` parameter.
+A second way of changing the position for which the computations are made, is by specifying them in a `data.frame`. This `data.frame` should have two columns, "chr" and "pos" and can be specified in the `calcIBD` function using the `evalpos` parameter.
 
-In the package a very simple example of such a file is included for the Steptoe Morex data. It specifies three evaluation positions for each of the chromosomes.
+In the package a very simple example of such a `data.frame` for the Steptoe Morex data is included as a .txt file . In it three evaluation positions are specified for each of the chromosomes.
 
 ```{r inspectPosFile}
-## Read the map and display the first tows.
-evalposfile <- read.table(system.file("extdata/SxM", "SxM_eval.txt", package = "statgenIBD"))
-head(evalposfile)
+## Read the evalpos file and display the first rows.
+evalpos <- read.table(system.file("extdata/SxM", "SxM_eval.txt", package = "statgenIBD"), header = TRUE)
+head(evalpos)
 ```
 
-When using a file with evaluation position, IBD calculations are made only for the positions in the file. The information in the mapfile is still used in those computations, but for the marker position themselves the evaluations are not done. The evaluation points will be named EVAL_chr_pos, e.g the first evaluation point in the file, at position 0 of chromosome 1, will be named EVAL_1\_0.
+When using a `data.frame` with evaluation position, IBD calculations are made only for the positions in the `data.frame`. The information in the mapfile is still used in those computations, but for the marker position themselves the evaluations are not done. The evaluation points will be named EVAL_chr_pos, e.g the first evaluation point in the file, at position 0 of chromosome 1, will be named EVAL_1\_0.
 
 ```{r sxmIBD_posFile}
-SxMIBD_posFile <- calcIBD(poptype = "DH",
+SxMIBD_evalpos <- calcIBD(poptype = "DH",
                           locfile = system.file("extdata/SxM", "SxM_geno.txt",
                                                 package = "statgenIBD"),
                           mapfile = system.file("extdata/SxM", "SxM_map.txt",
                                                 package = "statgenIBD"),
-                          evalposfile = system.file("extdata/SxM", "SxM_eval.txt",
-                                                    package = "statgenIBD"))
+                          evalpos = evalpos)
 
 ## Print summary.
-summary(SxMIBD_posFile)
+summary(SxMIBD_evalpos)
 ```
 
 As the summary shows, the number of evaluation points now decreased to 21, 3 for each of the 7 chromosomes.
 
-In case both `evalposfile` and `evaldist` are specified the former takes prevalence and `evaldist` is ignored.
+In case both `evalpos` and `evaldist` are specified the former takes prevalence and `evaldist` is ignored.
 
 ### Extracting value for markers of interest
 

@@ -8,7 +8,7 @@ calcIBD(
   poptype,
   locfile,
   mapfile,
-  evalposfile = NULL,
+  evalpos = NULL,
   evaldist = NULL,
   verbose = FALSE
 )
@@ -27,8 +27,7 @@ for the population. The file should be in tab-delimited format. It should
 consist of exactly three columns, marker, chromosome and position. There
 should be no header. The positions in the file should be in centimorgan.}
 
-\item{evalposfile}{An optional character string indicating a tab-delimited
-.txt file containing combinations of chromosomes and positions to which the
+\item{evalpos}{A data.frame with evaluation positions to which the
 calculations should be limited.}
 
 \item{evaldist}{An optional numerical value indicating the maximum

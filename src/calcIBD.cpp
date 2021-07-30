@@ -50,8 +50,7 @@ using namespace ibd;
 //' for the population. The file should be in tab-delimited format. It should
 //' consist of exactly three columns, marker, chromosome and position. There
 //' should be no header. The positions in the file should be in centimorgan.
-//' @param evalposfile An optional character string indicating a tab-delimited
-//' .txt file containing combinations of chromosomes and positions to which the
+//' @param evalpos A data.frame with evaluation positions to which the
 //' calculations should be limited.
 //' @param evaldist An optional numerical value indicating the maximum
 //' distance for in between marker evaluation positions.
@@ -96,7 +95,7 @@ using namespace ibd;
 List calcIBD(CharacterVector& poptype,
              CharacterVector& locfile,
              CharacterVector& mapfile,
-             Nullable<CharacterVector&> evalposfile = R_NilValue,
+             Nullable<DataFrame&> evalpos = R_NilValue,
              Nullable<NumericVector&> evaldist = R_NilValue,
              const bool& verbose = false)
 {
@@ -113,18 +112,13 @@ List calcIBD(CharacterVector& poptype,
   double max_step_size = -1;
   if (evaldist.isNotNull())
     max_step_size = Rcpp::as<double>(evaldist);
-  std::string _evalposfile;
-  if (evalposfile.isNotNull())
-    _evalposfile = Rcpp::as<std::string>(evalposfile);
-  else
-    _evalposfile = "";
   try
   {
     main_pedigreeR(prob, parents, offspring, positions,
                    _poptype,
                    Rcpp::as<std::string>(locfile),
                    Rcpp::as<std::string>(mapfile),
-                   _evalposfile,
+                   evalpos,
                    max_step_size,
                    verbose);
   }

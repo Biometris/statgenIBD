@@ -165,7 +165,7 @@ int main_pedigreeR(arma::cube& Z,
                    const string& poptype,
                    const string& locfile,
                    const string& mapfile,
-                   const string& eval_pos_file,
+                   const DataFrame& eval_pos_df,
                    const double& max_step_size,
                    const bool& verbose = false)
 {
@@ -188,10 +188,10 @@ int main_pedigreeR(arma::cube& Z,
   markermap = reduce_markermap(markermap, marker_names);
   print_marker_warnings(markermap, marker_names);
   LinkageMap eval_pos;
-  bool pos_option = eval_pos_file.length() > 0;
+  bool pos_option = eval_pos_df.length() > 0;
   if (pos_option)
   {
-    eval_pos = read_eval_pos_file(eval_pos_file);
+    eval_pos = read_eval_pos_df(eval_pos_df);
   }
   else if (max_step_size > 0)
     eval_pos = generate_extended_map(markermap, max_step_size);
