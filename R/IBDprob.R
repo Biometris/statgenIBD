@@ -150,38 +150,3 @@ plot.IBDprob <- function(x,
   }
   invisible(p)
 }
-
-#' Helper function for converting 3D probability matrix to df.
-#'
-#' Helper function for converting 3D probability matrix to df.
-#'
-#' @noRd
-#' @keywords internal
-markers3DtoLong <- function(x) {
-  markers <- x$markers
-  parents <- x$parents
-  markerCols <- dimnames(markers)[[3]]
-  ## Create base data.frame for storing long format data.
-  markersLongBase <- expand.grid(snp = dimnames(markers)[[1]],
-                                 genotype = dimnames(markers)[[2]])
-  markersLong <- NULL
-  for (parent in parents) {
-    ## Construct parent column.
-    parentCol <- paste0("p", parent)
-    ## Get other columns containing parent.
-    parentSubCols <- markerCols[grep(pattern = parent, x = markerCols)]
-    parentSubCols <- parentSubCols[-which(parentSubCols == parentCol)]
-    ## Add values for parent to base.
-    markersParent <- markersLongBase
-    markersParent[["parent"]] <- parent
-    ## Compute probability for parent.
-    ## (2 * pPar + psubPar) / 2
-    markersParent[["prob"]] <- c(markers[, , parentCol] +
-      apply(X = markers[, , parentSubCols], MARGIN = 1:2, FUN = sum) / 2)
-    ## Add to markersLong
-    markersLong <- rbind(markersLong, markersParent)
-  }
-  return(markersLong)
-}
-
-
