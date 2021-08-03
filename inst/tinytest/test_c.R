@@ -31,6 +31,7 @@ ABC <- c(AB, AC)
 expect_inherits(ABC, "IBDprob")
 expect_equal(ABC$map, AB$map)
 expect_equal_to_reference(ABC$markers, "ABC_markers")
+expect_equal(ABC$parents, c("A", "B", "C"))
 expect_equal(ABC$poptype, AB$poptype)
 expect_true(ABC$multicross)
 

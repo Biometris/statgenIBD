@@ -119,9 +119,6 @@ plot.IBDprob <- function(x,
   if (!inherits(title, "character") || length(title) > 1) {
     stop("title should be a character string.\n")
   }
-  if (!inherits(genotype, "character") || length(genotype) > 1) {
-    stop("genotype should be a character string.\n")
-  }
   if (!genotype %in% dimnames(markers)[[2]]) {
     stop("genotype should be in markers.\n")
   }
@@ -140,7 +137,7 @@ plot.IBDprob <- function(x,
     ggplot2::scale_fill_gradient(low = "white", high = "black") +
     ggplot2::scale_x_continuous(expand = c(0, 0)) +
     ggplot2::scale_y_discrete(expand = c(0, 0)) +
-    ggplot2::labs(title = genotype) +
+    ggplot2::labs(title = title) +
     ggplot2::theme(
       plot.title = ggplot2::element_text(hjust = 0.5),
       panel.background = ggplot2::element_blank(),
