@@ -116,6 +116,38 @@ LinkageMap generate_extended_map(const LinkageMap& Markermap,
 	return extended_map;
 }
 
+LinkageMap generate_grid_map(const LinkageMap& Markermap,
+                             double max_step_size)
+{
+  LinkageMap grid_map;
+  int nloc = Markermap.size();
+  int chr_nr = -1;
+  double left = 0.0;
+  double right;
+  for (int i=0;i<nloc;i++)
+  {
+    if (chr_nr != Markermap[i].GetChr())
+    {
+      chr_nr = Markermap[i].GetChr();
+      left = Markermap[i].GetPosition();
+    }
+    if ((i==nloc-1) || Markermap[i].GetChr() != Markermap[i+1].GetChr())
+    {
+      right = Markermap[i].GetPosition();
+      double dist = right - left;
+      int N = (int) ceil(dist/max_step_size - 1.0e-5);
+      for (int i=1;i<N;i++)
+      {
+        int chr = chr_nr;
+        double pos = round(left + (i/(1.0*N))*dist,2);
+        string name = "EXT_" + stringify(chr) + "_" + stringify(pos);
+        grid_map.push_back(Locus(chr,pos,name));
+      }
+    }
+  }
+  return grid_map;
+}
+
 bool eval_pos(const Locus& loc)
 {
 	return (loc.GetName().find(EVAL_POS) == 0);

@@ -10,13 +10,14 @@ calcIBD(
   mapfile,
   evalpos = NULL,
   evaldist = NULL,
+  grid = TRUE,
   verbose = FALSE
 )
 }
 \arguments{
 \item{poptype}{A character string indicating the type of population. One of
 DH, Fx, FxDH, BCx, BCxDH, BC1Sx, BC1SxDH, C3, C3DH, C3Sx, C3SxDH, C4, C4DH,
-C4Sx, C4SxDH (see Details)}
+C4Sx, C4SxDH (see Details).}
 
 \item{locfile}{A character string indicating the location of the file with
 genotypic information for the population. The file should be in
@@ -31,7 +32,12 @@ should be no header. The positions in the file should be in centimorgan.}
 calculations should be limited.}
 
 \item{evaldist}{An optional numerical value indicating the maximum
-distance for in between marker evaluation positions.}
+distance for marker positions. Extra markers will be added based on the
+value of \code{grid}.}
+
+\item{grid}{Should the extra markers that are added to assure the a
+maximum distince of \code{evaldist} be on a grid (\code{TRUE}) or in between
+marker existing marker positions (\code{FALSE}).}
 
 \item{verbose}{Should messages indicating the progress of the process be
 printed?}
@@ -42,6 +48,7 @@ An object of class \code{IBDprob}, a \code{list} with four elements,
 \item{map}{a \code{data.frame} with chromosome and position of the markers.}
 \item{markers}{a 3-dimensional \code{array} of IBD probabilities with
 markers, genotypes and  parents as array dimensions.}
+\item{parents}{the parents}
 \item{poptype}{the population type}
 \item{multiCross}{a logical value indicating if multiple crosses have been
 combined in the \code{IBDprob} object}
@@ -85,7 +92,8 @@ SxMIBD <- calcIBD(poptype = "DH",
 summary(SxMIBD)
 
 ## Compute IBD probabilities for Steptoe Morex.
-## Add extra evaluation positions so positions are at most 5 apart.
+## Add extra evaluation positions in between exiting marker positions
+## to assure evaluation positions are at most 5 cM apart.
 SxMIBD_Ext <- calcIBD(poptype = "DH",
                       locfile = system.file("extdata/SxM", "SxM_geno.txt",
                                             package = "statgenIBD"),

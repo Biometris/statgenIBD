@@ -71,6 +71,8 @@ double total_length(const LinkageMap& markermap);
 
 LinkageMap generate_extended_map(const LinkageMap& Markermap, double max_step_size);
 
+LinkageMap generate_grid_map(const LinkageMap& Markermap, double max_step_size);
+
 bool eval_pos(const Locus& loc);
 
 #endif

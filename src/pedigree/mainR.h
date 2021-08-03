@@ -25,6 +25,7 @@ int main_pedigreeR(arma::cube& Z,
                    const std::string& mapfile,
                    const Rcpp::DataFrame& eval_pos_df,
                    const double& max_step_size,
+                   const bool& grid,
                    const bool& verbose);
 
 #endif

@@ -42,7 +42,7 @@ using namespace ibd;
 //'
 //' @param poptype A character string indicating the type of population. One of
 //' DH, Fx, FxDH, BCx, BCxDH, BC1Sx, BC1SxDH, C3, C3DH, C3Sx, C3SxDH, C4, C4DH,
-//' C4Sx, C4SxDH (see Details)
+//' C4Sx, C4SxDH (see Details).
 //' @param locfile A character string indicating the location of the file with
 //' genotypic information for the population. The file should be in
 //' tab-delimited format with a header containing marker names.
@@ -53,7 +53,11 @@ using namespace ibd;
 //' @param evalpos A data.frame with evaluation positions to which the
 //' calculations should be limited.
 //' @param evaldist An optional numerical value indicating the maximum
-//' distance for in between marker evaluation positions.
+//' distance for marker positions. Extra markers will be added based on the
+//' value of \code{grid}.
+//' @param grid Should the extra markers that are added to assure the a
+//' maximum distince of \code{evaldist} be on a grid (\code{TRUE}) or in between
+//' marker existing marker positions (\code{FALSE}).
 //' @param verbose Should messages indicating the progress of the process be
 //' printed?
 //'
@@ -62,6 +66,7 @@ using namespace ibd;
 //' \item{map}{a \code{data.frame} with chromosome and position of the markers.}
 //' \item{markers}{a 3-dimensional \code{array} of IBD probabilities with
 //' markers, genotypes and  parents as array dimensions.}
+//' \item{parents}{the parents}
 //' \item{poptype}{the population type}
 //' \item{multiCross}{a logical value indicating if multiple crosses have been
 //' combined in the \code{IBDprob} object}
@@ -79,7 +84,8 @@ using namespace ibd;
 //' summary(SxMIBD)
 //'
 //' ## Compute IBD probabilities for Steptoe Morex.
-//' ## Add extra evaluation positions so positions are at most 5 apart.
+//' ## Add extra evaluation positions in between exiting marker positions
+//' ## to assure evaluation positions are at most 5 cM apart.
 //' SxMIBD_Ext <- calcIBD(poptype = "DH",
 //'                       locfile = system.file("extdata/SxM", "SxM_geno.txt",
 //'                                             package = "statgenIBD"),
@@ -97,6 +103,7 @@ List calcIBD(CharacterVector& poptype,
              CharacterVector& mapfile,
              Nullable<DataFrame&> evalpos = R_NilValue,
              Nullable<NumericVector&> evaldist = R_NilValue,
+             const bool& grid = true,
              const bool& verbose = false)
 {
   string _poptype = Rcpp::as<std::string>(poptype);
@@ -120,6 +127,7 @@ List calcIBD(CharacterVector& poptype,
                    Rcpp::as<std::string>(mapfile),
                    evalpos,
                    max_step_size,
+                   grid,
                    verbose);
   }
   catch (ibd_error& e)

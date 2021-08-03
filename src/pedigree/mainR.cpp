@@ -167,6 +167,7 @@ int main_pedigreeR(arma::cube& Z,
                    const string& mapfile,
                    const DataFrame& eval_pos_df,
                    const double& max_step_size,
+                   const bool& grid = true,
                    const bool& verbose = false)
 {
   // read all the data
@@ -194,7 +195,13 @@ int main_pedigreeR(arma::cube& Z,
     eval_pos = read_eval_pos_df(eval_pos_df);
   }
   else if (max_step_size > 0)
-    eval_pos = generate_extended_map(markermap, max_step_size);
+    if (grid)
+    {
+      eval_pos = generate_grid_map(markermap, max_step_size);
+    }
+    else {
+      eval_pos = generate_extended_map(markermap, max_step_size);
+    }
   else
     eval_pos = markermap;
   // Count number of inbred founders:
