@@ -8,12 +8,19 @@
 #' @param outFileGeno A character string, the full path to the output genotype
 #' file.
 #'
+#' @return No output. Output files a written to a folder.
+#'
 #' @importFrom stats reshape
 #' @importFrom utils write.table
 #' @export
 writeFlapjack <- function(IBDprob,
                           outFileMap = "ibd_map.txt",
                           outFileGeno = "ibd_geno.txt") {
+  if (!inherits(IBDprob, "IBDprob")) {
+    stop("IBDprob should be an object of class IBDprob.\n")
+  }
+  chkFile(outFileMap, fileType = "txt")
+  chkFile(outFileGeno, fileType = "txt")
   map <- IBDprob$map
   markers <- IBDprob$markers
   parents <- IBDprob$parents
@@ -21,7 +28,7 @@ writeFlapjack <- function(IBDprob,
   nGeno <- dim(markers)[[2]]
   nMarkers <- dim(markers)[[1]]
   ## Convert to long format.
-  markersLong <- markers3DtoLong(x)
+  markersLong <- markers3DtoLong(IBDprob)
   markersWide <- reshape(data = markersLong, idvar = c("genotype", "snp"),
                          timevar = "parent", direction = "wide")
   for (i in 1:nrow(markersWide)) {
@@ -37,7 +44,8 @@ writeFlapjack <- function(IBDprob,
               col.names = FALSE, append = TRUE)
   ## Write marker file.
   cat(file = outFileGeno, "# fjFile = GENOTYPE\n\t")
+  cat(colnames(res), file = outFileGeno, append = TRUE)
   write.table(res, file = outFileGeno,
               quote = FALSE, sep = "\t", na = "-", row.names = TRUE,
-              col.names = TRUE, append = TRUE)
+              col.names = FALSE, append = TRUE)
 }

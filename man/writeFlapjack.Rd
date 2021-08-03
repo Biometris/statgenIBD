@@ -18,6 +18,9 @@ writeFlapjack(
 \item{outFileGeno}{A character string, the full path to the output genotype
 file.}
 }
+\value{
+No output. Output files a written to a folder.
+}
 \description{
 Export the results of an IBD calculation to flapjack format so it can be
 visualized there.

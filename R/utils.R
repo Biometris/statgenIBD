@@ -26,6 +26,20 @@ dfBind <- function(dfList) {
   )
 }
 
+#' @noRd
+#' @keywords internal
+chkFile <- function(outFile,
+                    fileType = "csv") {
+  if (!is.character(outFile) || length(outFile) > 1 ||
+      tools::file_ext(outFile) != fileType) {
+    stop("outFile should be a single character string ending in .",
+         fileType, ".\n")
+  }
+  if (file.access(dirname(outFile), 2)) {
+    stop("No permission to write to ", outFile, ".\n")
+  }
+}
+
 #' Helper function for converting 3D probability matrix to df.
 #'
 #' Helper function for converting 3D probability matrix to df.

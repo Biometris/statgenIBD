@@ -1,4 +1,4 @@
-### Test getProbs function..
+### Test getProbs function.
 
 ## Define file locations.
 ABloc <- system.file("extdata/multipop", "AxB.loc", package = "statgenIBD")
