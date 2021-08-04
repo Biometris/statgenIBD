@@ -32,5 +32,21 @@ expect_equal(AB_M1_1, AB_M1_1_M3_3[, 1:3])
 
 ABC_M1_1 <- getProbs(IBDprob = ABC, markers = "M1_1")
 expect_equal(colnames(ABC_M1_1),
-             c("cross", "geno", "M1_1_pA", "M1_1_pB", "M1_1_pC"))
+             c("cross", "geno", "M1_1_A", "M1_1_B", "M1_1_C"))
+
+## Check that option sumProbs functions correctly.
+
+## Define file locations.
+F4loc <- system.file("extdata/popF4", "cross.loc", package = "statgenIBD")
+F4map <- system.file("extdata/popF4", "mapfile.map", package = "statgenIBD")
+
+F4 <- calcIBD(poptype = "F4", locfile = F4loc, mapfile = F4map)
+
+F4_M1_1a <- getProbs(IBDprob = F4, markers = "M1_1", sumProbs = FALSE)
+F4_M1_1b <- getProbs(IBDprob = F4, markers = "M1_1", sumProbs = TRUE)
+
+expect_equal(F4_M1_1b[["M1_1_GREEN"]],
+             F4_M1_1a[["M1_1_GREEN"]] + 0.5 * F4_M1_1a[["M1_1_GREENRED"]])
+expect_equal(F4_M1_1b[["M1_1_RED"]],
+             F4_M1_1a[["M1_1_RED"]] + 0.5 * F4_M1_1a[["M1_1_GREENRED"]])
 

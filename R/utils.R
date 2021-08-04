@@ -46,9 +46,14 @@ chkFile <- function(outFile,
 #'
 #' @noRd
 #' @keywords internal
-markers3DtoLong <- function(x) {
+markers3DtoLong <- function(x,
+                            markerSel = NULL) {
   markers <- x$markers
   parents <- x$parents
+  ## Restrict markers to selected markers
+  if (!is.null(markerSel)) {
+    markers <- markers[markerSel, , , drop = FALSE]
+  }
   markerCols <- dimnames(markers)[[3]]
   ## Create base data.frame for storing long format data.
   markersLongBase <- expand.grid(snp = dimnames(markers)[[1]],
@@ -65,9 +70,10 @@ markers3DtoLong <- function(x) {
     markersParent[["parent"]] <- parent
     ## Compute probability for parent.
     ## (2 * pPar + psubPar) / 2
-    markersParent[["prob"]] <- c(markers[, , parentCol] +
-                                   apply(X = markers[, , parentSubCols],
-                                         MARGIN = 1:2, FUN = sum) / 2)
+    markersParent[["prob"]] <-
+      c(markers[, , parentCol] +
+          apply(X = markers[, , parentSubCols, drop = FALSE],
+                MARGIN = 1:2, FUN = sum) / 2)
     ## Add to markersLong
     markersLong <- rbind(markersLong, markersParent)
   }
@@ -80,9 +86,10 @@ markers3DtoLong <- function(x) {
 #'
 #' @noRd
 #' @keywords internal
-markers3DtoMat <- function(x) {
+markers3DtoMat <- function(x,
+                           markerSel = NULL) {
   ## Use markers3DtoLong for summing homozygeous and heterozygeous probs.
-  markersLong <- markers3DtoLong(x)
+  markersLong <- markers3DtoLong(x, markerSel = markerSel)
   ## lex.order = TRUE is needed to get a proper sorting in the header of
   ## the output matrix.
   markersLong[["snpPar"]] <- interaction(markersLong$snp,

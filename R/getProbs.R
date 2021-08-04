@@ -5,6 +5,10 @@
 #'
 #' @param IBDprob An object of class \code{IBDprob}.
 #' @param markers A character vector of markers that should be extracted.
+#' @param sumProb Should the probabilities by summed per parent. If \code{TRUE}
+#' the probability for e.g. parent A in a cross with parent B will be calculated
+#' as pA + 0.5 * pAB. If \code{FALSE} both pA and pAB will be output without
+#' further calculations.
 #'
 #' @return A data.frame with IBD probabilities for the extracted markers in the
 #' column and genotypes in the rows.
@@ -29,7 +33,8 @@
 #'
 #' @export
 getProbs <- function(IBDprob,
-                     markers) {
+                     markers,
+                     sumProbs = FALSE) {
   ## Checks.
   if (!inherits(IBDprob, "IBDprob")) {
     stop(deparse(substitute(IBDprob)),
@@ -43,14 +48,22 @@ getProbs <- function(IBDprob,
     stop("The following markers are not in ", deparse(substitute(IBDprob)), ": ",
          paste(missMrk, collapse = ", "), "\n")
   }
-  probs <- lapply(X = markers, FUN = function(marker) {
-    prob <- IBDprob$markers[marker, , ]
-    colnames(prob) <- paste0(marker, "_", colnames(prob))
-    return(prob)
-  })
-  probs <- as.data.frame(do.call(cbind, probs))
+  if (sumProbs) {
+    ## probabilities are summed, e.g. pA = pA + 0.5 * pAB
+    probs <- as.data.frame(markers3DtoMat(IBDprob, markers))
+  } else {
+    ## probabilites are taken directly from array, so leaving pA and PAB in.
+    probs <- lapply(X = markers, FUN = function(marker) {
+      prob <- IBDprob$markers[marker, , ]
+      colnames(prob) <- paste0(marker, "_",
+                               substring(colnames(prob), first = 2))
+      return(prob)
+    })
+    probs <- as.data.frame(do.call(cbind, probs))
+  }
   genoCross <- attr(x = IBDprob, which = "genoCross")
   if (!is.null(genoCross)) {
+    ## Add a cross column only if relevant.
     probs <- merge(genoCross, probs, by.x = "geno", by.y = "row.names")
     probs <- probs[c("cross", "geno",
                      setdiff(colnames(probs), c("cross", "geno")))]

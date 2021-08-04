@@ -4,12 +4,17 @@
 \alias{getProbs}
 \title{Extract Probabilities for markers}
 \usage{
-getProbs(IBDprob, markers)
+getProbs(IBDprob, markers, sumProbs = FALSE)
 }
 \arguments{
 \item{IBDprob}{An object of class \code{IBDprob}.}
 
 \item{markers}{A character vector of markers that should be extracted.}
+
+\item{sumProb}{Should the probabilities by summed per parent. If \code{TRUE}
+the probability for e.g. parent A in a cross with parent B will be calculated
+as pA + 0.5 * pAB. If \code{FALSE} both pA and pAB will be output without
+further calculations.}
 }
 \value{
 A data.frame with IBD probabilities for the extracted markers in the
