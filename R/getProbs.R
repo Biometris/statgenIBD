@@ -5,7 +5,7 @@
 #'
 #' @param IBDprob An object of class \code{IBDprob}.
 #' @param markers A character vector of markers that should be extracted.
-#' @param sumProb Should the probabilities by summed per parent. If \code{TRUE}
+#' @param sumProbs Should the probabilities by summed per parent. If \code{TRUE}
 #' the probability for e.g. parent A in a cross with parent B will be calculated
 #' as pA + 0.5 * pAB. If \code{FALSE} both pA and pAB will be output without
 #' further calculations.

@@ -37,23 +37,41 @@ The calculations are based on Hidden Markov Models (HMM)...[here we can use or r
 
 In the package IBD probabilities can be calculated for many different types of populations. In the following table all supported populations are listed. Note that the value of x in the population types is variable, with its maximum value depicted in the last column.
 
++---------------------+------------+------------------------------------------------------------+------------+
 | **Population type** | **Cross**  | **Description**                                            | **max. x** |
-|---------------------|------------|------------------------------------------------------------|------------|
++=====================+============+============================================================+============+
 | DH                  | biparental | doubled haploid population                                 |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | Fx                  | biparental | Fx population (F1, followed by x-1 generations of selfing) | 8          |
++---------------------+------------+------------------------------------------------------------+------------+
 | FxDH                | biparental | Fx, followed by DH generation                              | 8          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BCx                 | biparental | backcross, second parent is recurrent parent               | 9          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BCxDH               | biparental | BCx, followed by DH generation                             | 9          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BC1Sx               | biparental | BC1, followed by x generations of selfing                  | 7          |
++---------------------+------------+------------------------------------------------------------+------------+
 | BC1SxDH             | biparental | BC1, followed by x generations of selfing and DH           | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3                  | three-way  | three way cross: (AxB) x C                                 |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3DH                | three-way  | C3, followed by DH generation                              |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3Sx                | three-way  | C3, followed by x generations of selfing                   | 7          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C3SxDH              | three-way  | C3, followed by x generations of selfing and DH generation | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4                  | four-way   | four-way cross: (AxB) x (CxD)                              |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4DH                | four-way   | C4, followed by DH generation                              |            |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4Sx                | four-way   | C4, followed by x generations of selfing                   | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
 | C4SxDH              | four-way   | C4, followed by x generations of selfing and DH generation | 6          |
++---------------------+------------+------------------------------------------------------------+------------+
+
+For IBD calculations in more complex populations, can be done using the [Rabbit](https://github.com/chaozhi/RABBIT) software [@zheng2014].
 
 # Examples
 
@@ -65,7 +83,7 @@ The first example is the Steptoe Morex data, described by [@Hayes1993]. This is 
 
 The map and genotypic file for this population are included in the package.
 
-Both the map and the genotypic file should be in a **tab**-delimited format, and has the same format as used in Flapjack, see: [website](http://flapjack.hutton.ac.uk/en/latest/projects_&_data_formats.html#data-sets-maps-and-genotypes). The map file should be a file without a header. It should contain three columns, corresponding to marker name, chromosome number and position on the chromosome in centiMorgan.
+Both the map and the genotypic file should be in a **tab**-delimited format, and have the same format as used in [Flapjack](http://flapjack.hutton.ac.uk/en/latest/projects_&_data_formats.html#data-sets-maps-and-genotypes) [@milne2010]. The map file should be a file without a header. It should contain three columns, corresponding to marker name, chromosome number and position on the chromosome in centiMorgan.
 
 ```{r inspectMap}
 ## Read the map and display the first tows.
@@ -98,13 +116,19 @@ summary(SxMIBD)
 
 The output of the `calcIBD` function is an object of class `IBDprob`. This object is a `list` that consists of five elements:
 
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | element    | class        | description                                                                                                                                                                                                                                            |
-|------------|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
++============+==============+========================================================================================================================================================================================================================================================+
 | map        | `data.frame` | The map for the population.                                                                                                                                                                                                                            |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | markers    | `array`      | A three dimensional array with the IBD probabilities. The dimensions of this array are \#markers x \#genotypes x \#parents. The array contains per combination of marker and genotypes the probabilities that it descended from either of the parents. |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | poptype    | `character`  | The population type.                                                                                                                                                                                                                                   |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | parents    | `character`  | The parents.                                                                                                                                                                                                                                           |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | multiCross | `logical`    | An indicator showing whether in this `IBDprob` object multiple crosses where combined. This is always `FALSE` for the output of the `calcIBD` function, but will be `TRUE` when multiple crosses are combined as we will see in the examples.          |
++------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 The `summary` function can be used to get a short description of the content of a `IBDprob` object.
 
@@ -114,21 +138,56 @@ Looking at genotype **dh001** and marker **plc** we can see from the genotypic f
 SxMIBD$markers["plc", "dh001", ]
 ```
 
-For the combination of marker **ab9313b** and genotype **dh005** the genotypic file contained a missing value. Looking at the output we can see that the probability that this marker came from Morex is about 0.67 and the probability that it came from Steptoe is about 0.33.
+For the combination of marker **abg313b** and genotype **dh005** the genotypic file contained a missing value. Looking at the output we can see that the probability that this marker came from Morex is about 0.67 and the probability that it came from Steptoe is about 0.33.
 
 ```{r check_dh005_abg313b}
 SxMIBD$markers["abg313b", "dh005", ]
 ```
 
+### Visualizing results
+
+The calculated IBD probabilities can be visualized using the `plot` function. This will generate a plot of the probabilities per parent for a selected genotype. The plot for **dh005** is made below. Note that it contains a lot of white space since the markers in the file are spread widely along the genome. In the next section we will show how to make predictions on a denser grid.
+
+```{r plotsxmIBD}
+## Visualize IBD probabilities for dh005
+plot(SxMIBD, 
+     genotype = "dh005")
+```
+
 ### Evaluation positions
 
-When calling the `calcIBD` function without extra parameters, the only positions for which the calculations are made are the positions present in the map. There are two ways to change this. A first option is to specify the parameter `evaldist`. Setting this to a value of e.g. 5, assures that extra evaluation positions are added in such a way that the maximum distance between evaluation points will be 5.
+When calling the `calcIBD` function without extra parameters, the only positions for which the calculations are made are the positions present in the map. There are two ways to change this. A first option is to specify the parameter `evaldist`. Setting this to a value of e.g. 5, assures that extra evaluation positions are added in such a way that the maximum distance between evaluation points will be 5 cM.
 
-The extra evaluation points will be spread evenly. If we look at the map for the Steptoe Morex example, we see that the distance between the first two markers on chromosome 1, **plc** and **glx**, is 18.7. To assure a maximum distance between evaluation points of 5, 3 extra evaluation points will be added. Since they will be spread evenly, the distance between them will be 18.7/3 = 4.68. The extra evaluation points will be named EXT_chr_pos, e.g the extra evaluation point at position 4.68 of chromosome 1, will be named EXT_1\_4.68.
+Adding the extra evaluation points can be done on a grid by setting `grid = TRUE`. Doing this defines a grid of evaluation point from the beginning of each chromosome to the end with a distance between the evaluation points of `evaldist`. The original marker positions will be ignored in this case.
+
+```{r sxmIBD_extGrid}
+## Compute IBD probabilities for Steptoe Morex.
+## Add extra evaluation positions on dense grid.
+SxMIBD_Ext_grid <- calcIBD(poptype = "DH",
+                           locfile = system.file("extdata/SxM", "SxM_geno.txt",
+                                                 package = "statgenIBD"),
+                           mapfile = system.file("extdata/SxM", "SxM_map.txt",
+                                                 package = "statgenIBD"),
+                           evaldist = 1,
+                           grid = TRUE)
+
+## Print summary.
+summary(SxMIBD_Ext_grid)
+```
+
+As the summary shows, the number of evaluation point has increased to 1138. This will also show when we visualize the results. The positions of the crossovers on the different chromosomes are clearly visible now.
+
+```{r SxMIBD_Ext_grid}
+## Visualize IBD probabilities for dh005
+plot(SxMIBD_Ext_grid, 
+     genotype = "dh005")
+```
+
+When setting `grid = FALSE` extra evaluation positions will be included between existing marker positions. These extra evaluation points will be spread evenly. If we look at the map for the Steptoe Morex example, we see that the distance between the first two markers on chromosome 1, **plc** and **glx**, is 18.7. To assure a maximum distance between evaluation points of 5, 3 extra evaluation points will be added. Since they will be spread evenly, the distance between them will be 18.7/3 = 4.68. The extra evaluation points will be named EXT_chr_pos, e.g the extra evaluation point at position 4.68 of chromosome 1, will be named EXT_1\_4.68.
 
 ```{r sxmIBD_ext}
 ## Compute IBD probabilities for Steptoe Morex.
-## Add extra evaluation positions so positions are at most 5 apart.
+## Add extra evaluation positions between existing markers.
 SxMIBD_Ext <- calcIBD(poptype = "DH",
                       locfile = system.file("extdata/SxM", "SxM_geno.txt",
                                             package = "statgenIBD"),
@@ -153,7 +212,8 @@ In the package a very simple example of such a `data.frame` for the Steptoe More
 
 ```{r inspectPosFile}
 ## Read the evalpos file and display the first rows.
-evalpos <- read.table(system.file("extdata/SxM", "SxM_eval.txt", package = "statgenIBD"), header = TRUE)
+evalpos <- read.table(system.file("extdata/SxM", "SxM_eval.txt", package = "statgenIBD"), 
+                      header = TRUE)
 head(evalpos)
 ```
 
@@ -187,6 +247,21 @@ head(SxM_probs)
 
 The output of the `getProbs` function is a `data.frame` with a column `geno` containing the genotype and for both markers the probability that it descended from Morex and that it descended from Steptoe.
 
+### Write results to Flapjack format
+
+The results of IBD calculations can be written to Flapjack format using `writeFlapjack`. Two files will be written that can be imported directly into Flapjack, a map file and a genotypic file. For the genotypic file the probabilities from the IBD calculations are converted combinations of parents. If for a genotype x marker combination the probability that it comes from a particular parent is high enough (higher than $0.85 / number_of_parents$), that parent is included in the output for that genotype x marker combination.
+
+```{r SxMwriteFlapjack, eval=FALSE}
+## Write results to Flapjack format.
+writeFlapjack(SxMIBD,
+              outFileMap = "map.txt",
+              outFileGeno = "geno.txt")
+```
+
+When opened in Flapjack the results look like this:
+
+![](SxM_flapjack.png){width="100%"}
+
 ## Simulated data
 
 Simulated data for several more complex populations and crosses is included in the package. These are very small and just used for the purpose of showing some of the options and output formats in `statgenIBD`.
@@ -208,6 +283,21 @@ summary(F4IBD)
 ```
 
 As the summary shows, the output contains probabilities for two parents, GREEN and RED. The heterozygote, having an allele from both parents is called GREENRED.
+
+As in the previous example we can extract the IBD probabilities for further analysis. However in this case it might be useful to not get the probabilities for GREEN, RED and GREENRED, but to get the probabilities for the two parents including GREENRED. The probability for GREEN is then calculated as probability GREEN + 0.5 \* probability GREENRED. Summing the probabilities like this can be done by specifying `sumProbs = TRUE` in `getProbs`.
+
+```{r F4Probs}
+## Extract marker probabilities for markers M1_2 and M1_4.
+F4_probs <- getProbs(F4IBD, markers = c("M1_2", "M1_4"))
+head(F4_probs)
+```
+
+```{r F4Probs_sum}
+## Extract marker probabilities for markers M1_2 and M1_4.
+## Sum the probabilities to probabilities per parent.
+F4_probs_sum <- getProbs(F4IBD, markers = c("M1_2", "M1_4"), sumProbs = TRUE)
+head(F4_probs_sum)
+```
 
 ### C4S3
 
