@@ -268,23 +268,23 @@ Simulated data for several more complex populations and crosses is included in t
 
 ### F4
 
-First we have a look at an F4 of a two-way RIL population, i.e. an F1 followed by 3 generations of selfing. This population was constructed from parents GREEN and RED. As we can see from the table in the populations section, when doing computations for an F4 populations, we can use `poptype = "Fx"` where x is replaced by 4.
+First we have a look at an F4 of a two-way RIL population, i.e. an F1 followed by 3 generations of selfing. This population was constructed from parents A and B. As we can see from the table in the populations section, when doing computations for an F4 populations, we can use `poptype = "Fx"` where x is replaced by 4.
 
 ```{r F4IBD}
 ## Compute IBD probabilities for simulated F4 population.
 F4IBD <- calcIBD(poptype = "F4",
-                 locfile = system.file("extdata/popF4", "cross.loc",
+                 locfile = system.file("extdata/popF4", "cross.txt",
                                        package = "statgenIBD"),
-                 mapfile = system.file("extdata/popF4", "mapfile.map",
+                 mapfile = system.file("extdata/popF4", "mapfile.txt",
                                        package = "statgenIBD"))
 
 ## Print summary.
 summary(F4IBD)
 ```
 
-As the summary shows, the output contains probabilities for two parents, GREEN and RED. The heterozygote, having an allele from both parents is called GREENRED.
+As the summary shows, the output contains probabilities for two parents, A and B. The heterozygote, having an allele from both parents is called AB.
 
-As in the previous example we can extract the IBD probabilities for further analysis. However in this case it might be useful to not get the probabilities for GREEN, RED and GREENRED, but to get the probabilities for the two parents including GREENRED. The probability for GREEN is then calculated as probability GREEN + 0.5 \* probability GREENRED. Summing the probabilities like this can be done by specifying `sumProbs = TRUE` in `getProbs`.
+As in the previous example we can extract the IBD probabilities for further analysis. However in this case it might be useful to not get the probabilities for A, B and AB, but to get the probabilities for the two parents including AB. The probability for A is then calculated as probability A + 0.5 \* probability AB. Summing the probabilities like this can be done by specifying `sumProbs = TRUE` in `getProbs`.
 
 ```{r F4Probs}
 ## Extract marker probabilities for markers M1_2 and M1_4.
@@ -301,34 +301,34 @@ head(F4_probs_sum)
 
 ### C4S3
 
-Also included is a C4S3 population, a four-way cross followed by 3 generations of selfing. The parents in the four-way cross where YELLOW, BLUE, GREEN and RED, with crossing scheme: (YELLOW x BLUE) x (GREEN x RED).
+Also included is a C4S3 population, a four-way cross followed by 3 generations of selfing. The parents in the four-way cross where A, B, C and D, the first 4 rows in the genotypic file. The crossing scheme was (A x B) x (C x D), followed by 3 generations of selfing. 
 
 ```{r C3S4DHIBD}
 ## Compute IBD probabilities for simulated C4S3 population.
 C4S3IBD <- calcIBD(poptype = "C4S3",
-                   locfile = system.file("extdata/popC4S3", "cross.loc",
+                   locfile = system.file("extdata/popC4S3", "cross.txt",
                                          package = "statgenIBD"),
-                   mapfile = system.file("extdata/popC4S3", "mapfile.map",
+                   mapfile = system.file("extdata/popC4S3", "mapfile.txt",
                                          package = "statgenIBD"))
 
 ## Print summary.
 summary(C4S3IBD)
 ```
 
-As the summary shows, the output contains probabilities for four parents, YELLOW, BLUE, GREEN, RED, plus the four possible heterozygote genotypes: YELLOWGREEN, YELLOWRED, BLUEGREEN, BLUERED.
+As the summary shows, the output contains probabilities for four parents, A, B, C, D, plus the four possible heterozygote genotypes: AC, AD, BC, BD.
 
 ### Multi-cross
 
-The final example shows how IBD computations for multiple populations can be combined. In the example we use simulated data for two F4DH populations, i.e. F4 population as described above followed by a doubled haploid generation. For the first population the parents where A and B, for the second the parents where A and C.
+The final example shows how IBD computations for multiple populations can be combined. In the example we use simulated data for two F4DH populations, i.e. F4 population as described above followed by a doubled haploid generation. For the first population the parents where A and B, for the second the parents where A and C. This is a simple example of a NAM population, having parent A as central parent. 
 
 First we compute the IBD probabilities for each of the populations separately.
 
 ```{r multiIBD}
 ## Compute IBD probabilties for AxB.
 AB <- calcIBD(poptype = "F4DH",
-              locfile = system.file("extdata/multipop", "AxB.loc",
+              locfile = system.file("extdata/multipop", "AxB.txt",
                                     package = "statgenIBD"),
-              mapfile = system.file("extdata/multipop", "mapfile.map",
+              mapfile = system.file("extdata/multipop", "mapfile.txt",
                                     package = "statgenIBD"))
 
 ## Print summary.
@@ -336,9 +336,9 @@ summary(AB)
 
 ## Compute IBD probabilties for Axc.
 AC <- calcIBD(poptype = "F4DH",
-              locfile = system.file("extdata/multipop", "AxC.loc",
+              locfile = system.file("extdata/multipop", "AxC.txt",
                                     package = "statgenIBD"),
-              mapfile = system.file("extdata/multipop", "mapfile.map",
+              mapfile = system.file("extdata/multipop", "mapfile.txt",
                                     package = "statgenIBD"))
 
 ## Print summary.
