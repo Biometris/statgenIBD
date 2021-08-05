@@ -12,21 +12,6 @@
   journal = {Theoretical and Applied Genetics}
 }
 
-@article{zheng2014,
-	title = {A General Modeling Framework for Genome Ancestral Origins in Multiparental Populations},
-	author = {{Zheng}, {Chaozhi} and {Boer}, {Martin P} and {van Eeuwijk}, {Fred A}},
-	year = {2014},
-	month = {09},
-	date = {2014-09-01},
-	journal = {Genetics},
-	pages = {87--101},
-	volume = {198},
-	number = {1},
-	doi = {10.1534/genetics.114.163006},
-	url = {http://dx.doi.org/10.1534/genetics.114.163006},
-	langid = {en}
-}
-
 @article{milne2010,
 	title = {Flapjack--graphical genotype visualization},
 	author = {{Milne}, {I.} and {Shaw}, {P.} and {Stephen}, {G.} and {Bayer}, {M.} and {Cardle}, {L.} and {Thomas}, {W. T. B.} and {Flavell}, {A. J.} and {Marshall}, {D.}},
@@ -41,3 +26,108 @@
 	url = {http://dx.doi.org/10.1093/bioinformatics/btq580},
 	langid = {en}
 }
+
+@article{VanEeuwijk2009,
+abstract = {Two outlines for mixed model based approaches to quantitative trait locus (QTL) mapping in existing maize hybrid selection programs are presented: a restricted maximum likelihood (REML) and a Bayesian Markov Chain Monte Carlo (MCMC) approach. The methods use the in-silico-mapping procedure developed by Parisseaux and Bernardo (2004) as a starting point. The original single-point approach is extended to a multi-point approach that facilitates interval mapping procedures. For computational and conceptual reasons, we partition the full set of relationships from founders to parents of hybrids into two types of relations by defining so-called intermediate founders. QTL effects are defined in terms of those intermediate founders. Marker based identity by descent relationships between intermediate founders define structuring matrices for the QTL effects that change along the genome. The dimension of the vector of QTL effects is reduced by the fact that there are fewer intermediate founders than parents. Furthermore, additional reduction in the number of QTL effects follows from the identification of founder groups by various algorithms. As a result, we obtain a powerful mixed model based statistical framework to identify QTLs in genetic backgrounds relevant to the elite germplasm of a commercial breeding program. The identification of such QTLs will provide the foundation for effective marker assisted and genome wide selection strategies. Analyses of an example data set show that QTLs are primarily identified in different heterotic groups and point to complementation of additive QTL effects as an important factor in hybrid performance.},
+author = {van Eeuwijk, Fred A. and Boer, Martin and Totir, L. Radu and Bink, Marco and Wright, Deanne and Winkler, Christopher R. and Podlich, Dean and Boldman, Keith and Baumgarten, Andy and Smalley, Matt and Arbelbide, Martin and ter Braak, Cajo J. F. and Cooper, Mark},
+doi = {10.1007/S00122-009-1205-0},
+file = {:C$\backslash$:/Users/boer032/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/van Eeuwijk et al. - 2009 - Mixed model approaches for the identification of QTLs within a maize hybrid breeding program.pdf:pdf},
+issn = {1432-2242},
+journal = {Theor. Appl. Genet. 2009 1202},
+keywords = {Agriculture,Biochemistry,Biotechnology,Plant Biochemistry,Plant Breeding/Biotechnology,Plant Genetics and Genomics,general},
+month = {nov},
+number = {2},
+pages = {429--440},
+publisher = {Springer},
+title = {{Mixed model approaches for the identification of QTLs within a maize hybrid breeding program}},
+url = {https://link.springer.com/article/10.1007/s00122-009-1205-0},
+volume = {120},
+year = {2009}
+}
+
+@article{Lander1987,
+abstract = {Human genetic linkage maps are most accurately constructed by using information from many loci simultaneously. Traditional methods for such multilocus linkage analysis are computationally prohibitive in general, even with supercomputers. The problem has acquired practical importance because of the current international collaboration aimed at constructing a complete human linkage map of DNA markers through the study of three-generation pedigrees. We describe here several alternative algorithms for constructing human linkage maps given a specified gene order. One method allows maximum-likelihood multilocus linkage maps for dozens of DNA markers in such three-generation pedigrees to be constructed in minutes. A fundamental problem with constructing genetic linkage maps in humans is that important data are often missing. Whereas a Drosophila geneticist may arrange crosses to avoid or resolve any potential ambiguities, human geneticists must take crosses as they find them in natural populations. Human geneticists thus cannot simply "count recombi-nants" in a cross, since they typically lack the information needed to identify unambiguously where recombination events occurred. The reasons are three: (0 Parents are typically homozygous, and thus uninformative, for some of the loci of interest. (il) Even where parents are heterozygous, it is often unknown which alleles at various loci are in cis and which are in trans (i.e., the linkage phase is unknown). (iii) Genotype cannot always be uniquely inferred from phenotype. To address this problem, Fisher (1), Haldane and Smith (2), and Morton (3) developed a theoretical approach based on the method of maximum likelihood: considering all possibilities for the missing data, map distances are chosen to maximize the probability that the observed data would have occurred. When no data are missing, the approach reduces to counting recombinants. Elston and Stewart (4) proposed a general algorithm for computing the required likelihoods. Using this algorithm, Ott (5) produced a computer program, LIPED, that allowed a geneticist efficiently to determine the recombination fraction 6 between a pair of genetic loci. The dearth of adequately polymorphic human genetic markers made it unnecessary to consider any but two-point crosses. Recent advances in molecular biology, however, have made it practical to score hundreds of genetic markers in humans: each a variation in DNA sequence conveniently observed as a restriction fragment length polymorphism (RFLP). Botstein et al. (6) suggested that RFLPs could be used for the systematic study of human heredity and proposed the construction of a true linkage map of the entire human genome. Lander and Botstein (7, 8) have shown that such an RFLP linkage map would allow more powerful analytical strategies for the study of human diseases and traits. Genetic maps are most accurately constructed by using multipoint crosses. In humans, the case for multilocus analysis is even stronger: gathering enough information to map, for example, a disease-causing locus may require pooling data from many families, each informative for a different set of marker loci. Studying a dozen or more loci simultaneously may thus often be desirable. Such multilocus analysis, however, faces severe computational obstacles: (i) With m loci under study, there are ½im! potential gene orders. (it) For even a single gene order, the traditional approach to constructing human linkage maps requires computing time that scales exponentially with the number of loci studied. Many hours of computer time may be required to analyze four or five loci in a single order, despite excellent computer programs (9, 10). For a larger number of loci, "simultaneous analysis with current algorithms is prohibitively time-consuming, even on a supercomputer" (12). This paper addresses the second problem: given a gene order, we explore ways to make multilocus linkage analysis and computation of likelihoods practical, even for dozens of loci. The main ideas are (i) a different search principle and (it) an algorithm for each step of the search that scales linearly rather than exponentially with the number of loci studied. Provided that the pedigrees under study are not toolarge, the simultaneous study of any number of loci becomes feasible. When gene order is not known, the methods can be used to compare the likelihood of alternative gene orders. Statement of Problem Let M1,. .. , Mm be m genetic loci, listed in the correct (or assumed) chromosomal order. Given information about the phenotypes of members of several pedigrees, we wish to construct the best genetic map. Specifically, let Oi denote the recombination fraction between adjacent loci Mi and Mi+1. We want to find the value of 6 = (61,. .. , Om-,) that maximizes the chance of the data having arisen. For simplicity , we shall ignore crossover interference; i.e., assume complete independence of recombination between all chro-mosomal intervals. Although a useful starting point, this assumption requires future scrutiny, since interference certainly exists in well-studied organisms such as Drosophila melanogaster. Also, we shall suppose here that phenotypes due to different loci are not epistatic. Finding 6 requires searching a multidimensional space. An iterative procedure must be specified to replace a previous guess 6o1d by a revised guess 01", at which the likelihood is (one hopes) higher. Traditional Approach. The traditional approach (9, 10, 13) is to approximate the derivative of the likelihood function L(@) at fold by computing the likelihood at 6old, and at m-1 further points each displaced slightly in a different coordinate Abbreviation: RFLP, restriction fragment length polymorphism. 2363 The publication costs of this article were defrayed in part by page charge payment. This article must therefore be hereby marked "advertisement" in accordance with 18 U.S.C. {\S}1734 solely to indicate this fact.},
+author = {Lander, Eric S and Green, Philip},
+file = {:C$\backslash$:/Users/boer032/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Landert, Green - 1987 - Construction of multilocus genetic linkage maps in humans (restriction fragment length polymorphismEM algorithmg.pdf:pdf},
+journal = {Proc. Nati. Acad. Sci. USA},
+pages = {2363--2367},
+title = {{Construction of multilocus genetic linkage maps in humans (restriction fragment length polymorphism/EM algorithm/genetic reconstruction algorithm/human genetics/plant genetics)}},
+volume = {84},
+year = {1987}
+}
+@article{Zheng2019,
+abstract = {Construction of genetic linkage maps has become a routine step for mapping quantitative trait loci (QTL), particularly in animal and plant breeding populations. Many multiparental populations have recently been produced to increase genetic diversity and QTL mapping resolution. However, few software packages are available for map construction in these populations. In this paper, we build a general framework for the construction of genetic linkage maps from genotypic data in diploid populations, including bi- and multiparental populations, cross-pollinated (CP) populations, and breeding pedigrees. The framework is implemented as an automatic pipeline called magicMap, where the maximum multilocus likelihood approach utilizes genotypic information efficiently. We evaluate magicMap by extensive simulations and eight real datasets: One biparental, one CP, four multiparent advanced generation intercross (MAGIC), and two nested association mapping (NAM) populations, the number of markers ranging from a few hundred to tens of thousands. Not only is magicMap the only software capable of accommodating all of these designs, it is more accurate and robust to missing genotypes and genotyping errors than commonly used packages.},
+author = {Zheng, Chaozhi and Boer, Martin P and van Eeuwijk, Fred A},
+doi = {10.1534/GENETICS.119.302229},
+file = {:C$\backslash$:/Users/boer032/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Zheng, Boer, van Eeuwijk - 2019 - Construction of Genetic Linkage Maps in Multiparental Populations.pdf:pdf},
+journal = {Genetics},
+keywords = {Cross-pollinated (CP),Genetic map construction,Hidden Markov model (HMM),MPP,Multiparent advanced generation intercross (MAGIC),Multiparental populations,Nested association mapping (NAM)},
+month = {aug},
+number = {4},
+pages = {1031--1044},
+publisher = {Oxford Academic},
+title = {{Construction of Genetic Linkage Maps in Multiparental Populations}},
+url = {https://academic.oup.com/genetics/article/212/4/1031/5931406},
+volume = {212},
+year = {2019}
+}
+
+@article{Zheng2014,
+	title = {A General Modeling Framework for Genome Ancestral Origins in Multiparental Populations},
+  author = {Zheng, Chaozhi and Boer, Martin P and van Eeuwijk, Fred A},
+	year = {2014},
+	month = {09},
+	date = {2014-09-01},
+	journal = {Genetics},
+	pages = {87--101},
+	volume = {198},
+	number = {1},
+	doi = {10.1534/genetics.114.163006},
+	url = {http://dx.doi.org/10.1534/genetics.114.163006},
+	langid = {en}
+}
+
+
+@article{Zheng2018,
+abstract = {The study of gene flow in pedigrees is of strong interest for the development of quantitative trait loci (QTL) mapping methods in multiparental populations. We developed a Markovian framework for modeling ancestral origins along two homologous chromosomes within individuals in fixed pedigrees. A highly beneficial property of our method is that the size of state space depends linearly or quadratically on the number of pedigree founders, whereas this increases exponentially with pedigree size in alternative methods. To calculate the parameter values of the Markov process, we describe two novel recursive algorithms that differ with respect to the pedigree founders being assumed to be exchangeable or not. Our algorithms apply equally to autosomes and sex chromosomes, another desirable feature of our approach. We tested the accuracy of the algorithms by a million simulations on a pedigree. We demonstrated two applications of the recursive algorithms in multiparental populations: design a breeding scheme for maximizing the overall density of recombination breakpoints and thus the QTL mapping resolution, and incorporate pedigree information into hidden Markov models in ancestral inference from genotypic data; the conditional probabilities and the recombination breakpoint data resulting from ancestral inference can facilitate follow-up QTL mapping. The results show that the generality of the recursive algorithms can greatly increase the application range of genetic analysis such as ancestral inference in multiparental populations.},
+author = {Zheng, Chaozhi and Boer, Martin P and van Eeuwijk, Fred A},
+doi = {10.1534/G3.118.200340},
+file = {:C$\backslash$:/Users/boer032/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Zheng, Boer, van Eeuwijk - 2018 - Recursive Algorithms for Modeling Genomic Ancestral Origins in a Fixed Pedigree.pdf:pdf},
+journal = {G3 Genes|Genomes|Genetics},
+keywords = {Ancestral inference,Collaborative cross (CC),Identical by descent,Junction theory,Multiparent advanced generation intercross (MAGIC),Multiparental populations mpp,QTL mapping,Recombinant inbred line (RIL),Resolution},
+month = {oct},
+number = {10},
+pages = {3231--3245},
+publisher = {Oxford Academic},
+title = {{Recursive Algorithms for Modeling Genomic Ancestral Origins in a Fixed Pedigree}},
+url = {https://academic.oup.com/g3journal/article/8/10/3231/6027011},
+volume = {8},
+year = {2018}
+}
+
+@article{Zheng2015,
+abstract = {We present a general hidden Markov model framework called reconstructing ancestry blocks bit by bit (RABBIT) for reconstructing genome ancestry blocks from single-nucleotide polymorphism (SNP) array data, a required step for quantitative trait locus (QTL) mapping. The framework can be applied to a wide range of mapping populations such as the Arabidopsis multiparent advanced generation intercross (MAGIC), the mouse Collaborative Cross (CC), and the diversity outcross (DO) for both autosomes and X chromosomes if they exist. The model underlying RABBIT accounts for the joint pattern of recombination breakpoints between two homologous chromosomes and missing data and allelic typing errors in the genotype data of both sampled individuals and founders. Studies on simulated data of the MAGIC and the CC and real data of the MAGIC, the DO, and the CC demonstrate that RABBIT is more robust and accurate in reconstructing recombination bin maps than some commonly used methods.},
+author = {Zheng, Chaozhi and Boer, Martin P and van Eeuwijk, Fred A},
+doi = {10.1534/GENETICS.115.177873},
+file = {:C$\backslash$:/Users/boer032/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Zheng, Boer, van Eeuwijk - 2015 - Reconstruction of Genome Ancestry Blocks in Multiparental Populations.pdf:pdf},
+journal = {Genetics},
+keywords = {Collaborative cross (CC),Diversity outcross (DO),Haplotype reconstruction,Hidden Markov model,MPP,Multiparent advanced generation inter-cross (MAGIC),Multiparental populations},
+month = {aug},
+number = {4},
+pages = {1073--1087},
+publisher = {Oxford Academic},
+title = {{Reconstruction of Genome Ancestry Blocks in Multiparental Populations}},
+url = {https://academic.oup.com/genetics/article/200/4/1073/5936150},
+volume = {200},
+year = {2015}
+}
+
+@article{Huang2011,
+abstract = {To exploit the diversity in Arabidopsis thaliana, eight founder accessions were crossed to produce six recombinant inbred line (RIL) subpopulations, together called an Arabidopsis multiparent RIL (AMPRIL) population. Founders were crossed pairwise to produce four F1 hybrids. These F1s were crossed according to a diallel scheme. The resulting offspring was then selfed for three generations. The F4 generation was genotyped with SNP and microsa-tellite markers. Data for flowering time and leaf morphology traits were determined in the F5 generation. Quantitative trait locus (QTL) analysis for these traits was performed using especially developed mixed-model methodology, allowing tests for QTL main effects, QTL by background interactions, and QTL by QTL interactions. Because RILs were genotyped in the F4 generation and phe-notyped in the F5 generation, residual heterozygosity could be used to confirm and fine-map a number of the QTLs in the selfed progeny of lines containing such heterozygosity. The AMPRIL population is an attractive resource for the study of complex traits.},
+author = {Huang, Xueqing and Paulo, Maria-Jo{\~{a}}o and Boer, Martin and Effgen, Sigi and Keizer, Paul and Koornneef, Maarten and {Van Eeuwijk}, Fred A},
+doi = {10.1073/pnas.1100465108},
+title = {{Analysis of natural allelic variation in Arabidopsis using a multiparent recombinant inbred line population}},
+url = {www.pnas.org/cgi/doi/10.1073/pnas.1100465108},
+year = {2011}
+}
+

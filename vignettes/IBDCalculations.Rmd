@@ -1,6 +1,6 @@
 ---
 title: "IBD calculations using statgenIBD"
-author: "Bart-Jan van Rossum"
+author: "Bart-Jan van Rossum and Martin Boer"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
@@ -31,7 +31,7 @@ This vignette describes how to perform these calculations and how to interpret a
 
 # Theory
 
-The calculations are based on Hidden Markov Models (HMM)...[here we can use or refer to PNAS 2011 paper AMPRIL population. Also refer to Lander and Green?]
+The calculations of the IBDs are based on Hidden Markov Models (HMM) and inheritance vectors. For details of the theory see @Lander1987 and @Huang2011, supplementary material. 
 
 # Population types
 
@@ -71,7 +71,7 @@ In the package IBD probabilities can be calculated for many different types of p
 | C4SxDH              | four-way   | C4, followed by x generations of selfing and DH generation | 6          |
 +---------------------+------------+------------------------------------------------------------+------------+
 
-For IBD calculations in more complex populations, can be done using the [Rabbit](https://github.com/chaozhi/RABBIT) software [@zheng2014].
+For IBD calculations of more complex population types, including MAGIC and population with complicated pedigree structure, see [RABBIT](https://github.com/chaozhi/RABBIT) software [@Zheng2014;@Zheng2015; @Zheng2018]. 
 
 # Examples
 
@@ -158,7 +158,7 @@ plot(SxMIBD,
 
 When calling the `calcIBD` function without extra parameters, the only positions for which the calculations are made are the positions present in the map. There are two ways to change this. A first option is to specify the parameter `evaldist`. Setting this to a value of e.g. 5, assures that extra evaluation positions are added in such a way that the maximum distance between evaluation points will be 5 cM.
 
-Adding the extra evaluation points can be done on a grid by setting `grid = TRUE`. Doing this defines a grid of evaluation point from the beginning of each chromosome to the end with a distance between the evaluation points of `evaldist`. The original marker positions will be ignored in this case.
+Adding the extra evaluation points can be done on a grid by setting `grid = TRUE`. Doing this defines a grid of evaluation point from the beginning of each chromosome to the end with a distance between the evaluation points of `evaldist`. The original marker positions will be ignored in this case. To use evaluation points on a regular grid is important for haplotype construction and can be efficient for detection of QTLs using a scan along the genome [@VanEeuwijk2009].
 
 ```{r sxmIBD_extGrid}
 ## Compute IBD probabilities for Steptoe Morex.
@@ -249,7 +249,7 @@ The output of the `getProbs` function is a `data.frame` with a column `geno` con
 
 ### Write results to Flapjack format
 
-The results of IBD calculations can be written to Flapjack format using `writeFlapjack`. Two files will be written that can be imported directly into Flapjack, a map file and a genotypic file. For the genotypic file the probabilities from the IBD calculations are converted combinations of parents. If for a genotype x marker combination the probability that it comes from a particular parent is high enough (higher than $0.85 / number_of_parents$), that parent is included in the output for that genotype x marker combination.
+The results of IBD calculations can be written to Flapjack format using `writeFlapjack`. Two files will be written that can be imported directly into Flapjack, a map file and a genotypic file. For the genotypic file the probabilities from the IBD calculations are converted combinations of parents. If for a genotype x marker combination the probability that it comes from a particular parent is high enough (higher than $0.85 / number \; of \; parents$), that parent is included in the output for that genotype x marker combination.
 
 ```{r SxMwriteFlapjack, eval=FALSE}
 ## Write results to Flapjack format.
