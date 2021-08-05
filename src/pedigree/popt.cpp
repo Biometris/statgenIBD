@@ -1,5 +1,3 @@
-// Martin Boer, Biometris
-
 #include "ibdexcept.h"
 #include "popt.h"
 #include "util_genetics.h"

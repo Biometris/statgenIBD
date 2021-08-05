@@ -1,9 +1,3 @@
-/*!
- \file
- \brief  Hidden Markov Models algorithms
- \author Martin Boer, Biometris
- \date   1998-2007
- */
 #ifndef HMM_ALGORITHM
 #define HMM_ALGORITHM
 

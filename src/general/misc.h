@@ -1,9 +1,3 @@
-/*!
-\file
-\brief  Miscellaneous functions and classes
-\author Martin Boer, Biometris
-\date   1998-2007
-*/
 #ifndef MISCELLANEOUS_HEADER
 #define MISCELLANEOUS_HEADER
 

@@ -1,4 +1,3 @@
-// Martin Boer, Biometris, 1998-2006, last update: october 31 2006
 #include <algorithm>
 #include <numeric>
 #include <fstream>

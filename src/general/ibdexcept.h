@@ -1,9 +1,3 @@
-/*!
- \file
- \brief  Exception handling in ibd-library
- \author Martin Boer, Biometris
- \date   1998-2007
- */
 #ifndef IBD_EXCEPTION_HEADER
 #define IBD_EXCEPTION_HEADER
 

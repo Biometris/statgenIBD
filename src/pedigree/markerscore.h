@@ -1,9 +1,3 @@
-/*!
- \file
- \brief  Definition of marker scores.
- \author Martin Boer, Biometris
- \date   2006-2010
- */
 #ifndef MARKERSCORES_HEADER
 #define MARKERSCORES_HEADER
 

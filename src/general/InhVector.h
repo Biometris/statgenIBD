@@ -1,11 +1,3 @@
-/*!
-\file
-\brief  Definition of Inheritance Vector
-\author Martin Boer, Biometris
-\date   2006-2008
-
-Inheritance vector is a vector of inheritance indicators (h_i = {0,1})
-*/
 #ifndef INHERITANCEVECTOR_HEADER
 #define INHERITANCEVECTOR_HEADER
 

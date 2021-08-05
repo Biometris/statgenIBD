@@ -1,6 +1,3 @@
-// Martin Boer, Biometris
-
-// library files
 #include "mainR.h"
 #include "read_map.h"
 #include "crosses.h"

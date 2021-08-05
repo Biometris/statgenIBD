@@ -1,10 +1,3 @@
-/*!
-\file
-\brief  Read markermap and calculate recombinations.
-\author Martin Boer, Biometris
-\date   2006-2010
-*/
-
 #ifndef READ_MAP_PEDIGREE_HEADER
 #define READ_MAP_PEDIGREE_HEADER
 

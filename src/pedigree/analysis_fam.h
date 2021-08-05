@@ -1,9 +1,3 @@
-/*!
- \file
- \brief  IBD-analysis of families
- \author Martin Boer, Biometris
- \date   2006-2010
- */
 #ifndef ANALYSIS_FAMILIES_HEADER
 #define ANALYSIS_FAMILIES_HEADER
 

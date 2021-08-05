@@ -1,9 +1,3 @@
-/*!
-\file
-\brief  vectors, matrix and 3-dim. matrices
-\author Martin Boer, Biometris
-\date   1998-2010
-*/
 #ifndef MATVEC_HEADER
 #define MATVEC_HEADER
 

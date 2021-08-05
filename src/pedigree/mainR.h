@@ -1,9 +1,3 @@
-/*!
- \file
- \brief  header file with some defined constants
- \author Martin Boer, Biometris
- \date   2006-2011
- */
 #ifndef HEADER_MAIN_PEDIGREE
 #define HEADER_MAIN_PEDIGREE
 

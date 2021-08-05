@@ -1,4 +1,3 @@
-// Martin Boer, Biometris, 1998-2007, last update: 16 jan 2007
 #include "ibdexcept.h"
 #include "TransMatSym2D.h"
 

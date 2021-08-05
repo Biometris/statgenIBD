@@ -1,11 +1,3 @@
-/*!
-\file
-\brief  Transition Matrix
-\author Martin Boer, Biometris
-\date   1998-2007
-
-The Transition Matrix consists of the Kronecker product of symmetric 2x2 matrices.
-*/
 #ifndef TRANSMATRIX_SYMMETRIC_2D_HEADER
 #define TRANSMATRIX_SYMMETRIC_2D_HEADER
 

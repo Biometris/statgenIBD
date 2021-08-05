@@ -1,4 +1,3 @@
-// Martin Boer, Biometris
 #include "misc.h"
 #include "HMMalgo.h"
 #include "TransMatSym2D.h"

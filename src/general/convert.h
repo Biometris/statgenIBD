@@ -1,13 +1,3 @@
-/*!
-\file
-\brief  Conversion from and to std::string
-\author Andy Beatty, Martin Boer
-\date   jan 12, 2007
-
-For further details and examples see
-http://www.parashift.com/c++-faq-lite/misc-technical-issues.html
-*/
-
 #include <string>
 
 #ifndef CONVERT_HEADER

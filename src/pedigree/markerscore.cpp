@@ -1,4 +1,3 @@
-// Martin Boer, Biometris
 #include <iostream>
 #include <fstream>
 #include <algorithm>

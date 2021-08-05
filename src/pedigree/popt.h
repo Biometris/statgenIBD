@@ -1,9 +1,3 @@
-/*!
-\file
-\brief  Population Types
-\author Martin Boer, Biometris
-\date   2006-2010
-*/
 #ifndef POPULATION_TYPE_HEADER
 #define POPULATION_TYPE_HEADER
 

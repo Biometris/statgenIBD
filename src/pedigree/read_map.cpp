@@ -1,8 +1,6 @@
-// Martin Boer, Biometris
 #include <fstream>
 #include <Rcpp.h>
 
-// library files
 #include "read_map.h"
 #include "convert.h"
 

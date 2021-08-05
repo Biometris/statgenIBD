@@ -1,9 +1,3 @@
-/*!
-\file
-\brief  Definition of ordered genotypes and some functions
-\author Martin Boer, Biometris
-\date   2006-2010
-*/
 #ifndef ORDERED_GENOTYPE_HEADER
 #define ORDERED_GENOTYPE_HEADER
 

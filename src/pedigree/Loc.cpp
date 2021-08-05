@@ -1,5 +1,3 @@
-// Martin Boer, Biometris, 1998-2005, last update: 15 december 2005
-
 #include "convert.h"
 #include "Loc.h"
 

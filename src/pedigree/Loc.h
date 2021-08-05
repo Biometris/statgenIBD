@@ -1,9 +1,3 @@
-/*!
-\file
-\brief  Definition of Locus and Markermap
-\author Martin Boer, Biometris
-\date   1998-2010
-*/
 #ifndef LOCUS_HEADER
 #define LOCUS_HEADER
 
