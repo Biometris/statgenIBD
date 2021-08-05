@@ -1,9 +1,9 @@
 ### Test IBDprob concatenation.
 
 ## Define file locations.
-ABloc <- system.file("extdata/multipop", "AxB.loc", package = "statgenIBD")
-ACloc <- system.file("extdata/multipop", "AxC.loc", package = "statgenIBD")
-ABCmap <- system.file("extdata/multipop", "mapfile.map", package = "statgenIBD")
+ABloc <- system.file("extdata/multipop", "AxB.txt", package = "statgenIBD")
+ACloc <- system.file("extdata/multipop", "AxC.txt", package = "statgenIBD")
+ABCmap <- system.file("extdata/multipop", "mapfile.txt", package = "statgenIBD")
 
 ## IBD calculations for two populations separately.
 AB <- calcIBD(poptype = "F4DH", locfile = ABloc, mapfile = ABCmap)

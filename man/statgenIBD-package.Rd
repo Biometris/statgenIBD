@@ -12,9 +12,9 @@ Calculation of IBD probabilities for biparental, three and four-way
 \author{
 \strong{Maintainer}: Bart-Jan van Rossum \email{bart-jan.vanrossum@wur.nl} (\href{https://orcid.org/0000-0002-8673-2514}{ORCID})
 
-Other contributors:
+Authors:
 \itemize{
-  \item Martin Boer \email{martin.boer@wur.nl} [contributor]
+  \item Martin Boer \email{martin.boer@wur.nl}
 }
 
 }

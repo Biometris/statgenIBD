@@ -1,9 +1,9 @@
 ### Test getProbs function.
 
 ## Define file locations.
-ABloc <- system.file("extdata/multipop", "AxB.loc", package = "statgenIBD")
-ACloc <- system.file("extdata/multipop", "AxC.loc", package = "statgenIBD")
-ABCmap <- system.file("extdata/multipop", "mapfile.map", package = "statgenIBD")
+ABloc <- system.file("extdata/multipop", "AxB.txt", package = "statgenIBD")
+ACloc <- system.file("extdata/multipop", "AxC.txt", package = "statgenIBD")
+ABCmap <- system.file("extdata/multipop", "mapfile.txt", package = "statgenIBD")
 
 ## IBD calculations for two populations separately.
 AB <- calcIBD(poptype = "F4DH", locfile = ABloc, mapfile = ABCmap)
@@ -37,16 +37,16 @@ expect_equal(colnames(ABC_M1_1),
 ## Check that option sumProbs functions correctly.
 
 ## Define file locations.
-F4loc <- system.file("extdata/popF4", "cross.loc", package = "statgenIBD")
-F4map <- system.file("extdata/popF4", "mapfile.map", package = "statgenIBD")
+F4loc <- system.file("extdata/popF4", "cross.txt", package = "statgenIBD")
+F4map <- system.file("extdata/popF4", "mapfile.txt", package = "statgenIBD")
 
 F4 <- calcIBD(poptype = "F4", locfile = F4loc, mapfile = F4map)
 
 F4_M1_1a <- getProbs(IBDprob = F4, markers = "M1_1", sumProbs = FALSE)
 F4_M1_1b <- getProbs(IBDprob = F4, markers = "M1_1", sumProbs = TRUE)
 
-expect_equal(F4_M1_1b[["M1_1_GREEN"]],
-             F4_M1_1a[["M1_1_GREEN"]] + 0.5 * F4_M1_1a[["M1_1_GREENRED"]])
-expect_equal(F4_M1_1b[["M1_1_RED"]],
-             F4_M1_1a[["M1_1_RED"]] + 0.5 * F4_M1_1a[["M1_1_GREENRED"]])
+expect_equal(F4_M1_1b[["M1_1_A"]],
+             F4_M1_1a[["M1_1_A"]] + 0.5 * F4_M1_1a[["M1_1_AB"]])
+expect_equal(F4_M1_1b[["M1_1_B"]],
+             F4_M1_1a[["M1_1_B"]] + 0.5 * F4_M1_1a[["M1_1_AB"]])
 
