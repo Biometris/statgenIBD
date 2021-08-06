@@ -2,9 +2,12 @@ Package: statgenIBD
 Type: Package
 Title: Calculation of IBD Probabilities
 Description: Calculation of IBD probabilities for biparental, three and four-way 
-    crosses. 
-Version: 0.0.1
-Date: 2021-06-25
+    crosses. Calculations are based on Hidden Markov Models (HMM) and 
+    inheritance vectors following Lander 
+    (\url{https://www.jstor.org/stable/29713}) and Huang
+    (\doi{10.1073/pnas.1100465108})
+Version: 1.0.0
+Date: 2021-08-05
 Authors@R: c(person(given = "Martin", 
                     family = "Boer", 
                     email = "martin.boer@wur.nl", 

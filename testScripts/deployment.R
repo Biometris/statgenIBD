@@ -12,18 +12,10 @@ devtools::release()
 
 
 ## Build site.
-# pkgdown::clean_site()
-# pkgdown::build_site()
+pkgdown::clean_site()
+pkgdown::build_site()
 
 detach("package:statgenIBD", unload = TRUE)
 covr::gitlab()
 
 
-SxMIBD_Ext <- calcIBD(poptype = "DH",
-                      locfile = system.file("extdata/SxM", "SxM_geno.txt",
-                                            package = "statgenIBD"),
-                      mapfile = system.file("extdata/SxM", "SxM_map.txt",
-                                            package = "statgenIBD"),
-                      evaldist = 5,
-                      grid = FALSE)
-plot(SxMIBD_Ext, genotype = "dh016")

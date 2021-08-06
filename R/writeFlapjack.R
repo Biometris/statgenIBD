@@ -1,6 +1,6 @@
 #' Write to Flapjack format
 #'
-#' Export the results of an IBD calculation to flapjack format so it can be
+#' Export the results of an IBD calculation to Flapjack format so it can be
 #' visualized there.
 #'
 #' @param IBDprob An object of class \code{IBDprob}.
@@ -8,7 +8,20 @@
 #' @param outFileGeno A character string, the full path to the output genotype
 #' file.
 #'
-#' @return No output. Output files a written to a folder.
+#' @return No output. Output files are written to a folder.
+#'
+#' @examples
+#' ## Compute IBD probabilities for Steptoe Morex.
+#' SxMIBD <- calcIBD(poptype = "DH",
+#'                   locfile = system.file("extdata/SxM", "SxM_geno.txt",
+#'                                         package = "statgenIBD"),
+#'                   mapfile = system.file("extdata/SxM", "SxM_map.txt",
+#'                                         package = "statgenIBD"))
+#'
+#' ## Write output in Flapjack format to temporary files.
+#' writeFlapjack(SxMIBD,
+#'               outFileMap = tempfile(fileext = ".txt"),
+#'               outFileGeno = tempfile(fileext = ".txt"))
 #'
 #' @importFrom stats reshape
 #' @importFrom utils write.table

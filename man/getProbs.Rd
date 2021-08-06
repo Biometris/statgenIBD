@@ -19,32 +19,27 @@ further calculations.}
 \value{
 A data.frame with IBD probabilities for the extracted markers in the
 column and genotypes in the rows.
-
-@examples
-\subsection{Compute IBD probabilities for Steptoe Morex.}{
-
-SxMIBD <- calcIBD(poptype = "DH",
-locfile = system.file("extdata/SxM", "SxM_geno.txt",
-package = "statgenIBD"),
-mapfile = system.file("extdata/SxM", "SxM_map.txt",
-package = "statgenIBD"))
-}
-
-\subsection{Get probabilities for a single marker.}{
-
-probOne <- getProbs(IBDprob = SxMIBD,
-markers = "plc")
-head(probOne)
-}
-
-\subsection{Get probabilities for a multiple markers.}{
-
-probMult <- getProbs(IBDprob = SxMIBD,
-markers = c("plc", "tuba1"))
-head(probMult)
-}
 }
 \description{
 Extract IBD probabilities for one or more markers from an object of class
 \code{IBDprob}.
+}
+\examples{
+## Compute IBD probabilities for Steptoe Morex.
+SxMIBD <- calcIBD(poptype = "DH",
+                  locfile = system.file("extdata/SxM", "SxM_geno.txt",
+                                        package = "statgenIBD"),
+                  mapfile = system.file("extdata/SxM", "SxM_map.txt",
+                                        package = "statgenIBD"))
+
+## Get probabilities for a single marker.
+probOne <- getProbs(IBDprob = SxMIBD,
+                    markers = "plc")
+head(probOne)
+
+## Get probabilities for a multiple markers.
+probMult <- getProbs(IBDprob = SxMIBD,
+                     markers = c("plc", "tuba1"))
+head(probMult)
+
 }

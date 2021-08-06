@@ -7,6 +7,7 @@ output:
     toc: false
     number_sections: true
 bibliography: bibliography.bib
+link-citations: yes
 vignette: >
   %\VignetteIndexEntry{IBD calculations using statgenIBD}
   %\VignetteEncoding{UTF-8}
@@ -25,17 +26,13 @@ op <- options(width = 90)
 
 # The statgenIBD package {.unnumbered}
 
-The `statgenIBD` package is developed as an easy-to-use package for Identity By Descent (IBD) calculations for most common populations used in plant breeding.
+The `statgenIBD` package is developed as an easy-to-use package for Identity By Descent (IBD) calculations for most common populations used in plant breeding. The calculations of the IBDs are based on Hidden Markov Models (HMM) and inheritance vectors. For details of the theory see @Lander1987 and @Huang2011.
 
 This vignette describes how to perform these calculations and how to interpret and use its outputs. This will be done using a number of example data sets, both real life and simulated.
 
-# Theory
-
-The calculations of the IBDs are based on Hidden Markov Models (HMM) and inheritance vectors. For details of the theory see @Lander1987 and @Huang2011, supplementary material. 
-
 # Population types
 
-In the package IBD probabilities can be calculated for many different types of populations. In the following table all supported populations are listed. Note that the value of x in the population types is variable, with its maximum value depicted in the last column.
+In the package, IBD probabilities can be calculated for many different types of populations. In the following table all supported populations are listed. Note that the value of x in the population types is variable, with its maximum value depicted in the last column.
 
 +---------------------+------------+------------------------------------------------------------+------------+
 | **Population type** | **Cross**  | **Description**                                            | **max. x** |
@@ -71,7 +68,7 @@ In the package IBD probabilities can be calculated for many different types of p
 | C4SxDH              | four-way   | C4, followed by x generations of selfing and DH generation | 6          |
 +---------------------+------------+------------------------------------------------------------+------------+
 
-For IBD calculations of more complex population types, including MAGIC and population with complicated pedigree structure, see [RABBIT](https://github.com/chaozhi/RABBIT) software [@Zheng2014;@Zheng2015; @Zheng2018]. 
+For IBD calculations of more complex population types, including MAGIC and population with complicated pedigree structure, see [RABBIT](https://github.com/chaozhi/RABBIT) software [@Zheng2014; @Zheng2015; @Zheng2018].
 
 # Examples
 
@@ -100,7 +97,7 @@ geno <- read.table(system.file("extdata/SxM", "SxM_geno.txt", package = "statgen
 head(geno[, 1:5])
 ```
 
-Using the map and genotypic files we can compute the IBD probabilities using `calcIBD`. This function computes, per genotype and marker, the probability that it descended from either parent. If this information is known from the marker, the probabilities will simply be 0 for one of the parents and 1 for the other. When a marker score is missing from the input data, the probabilities are calculated using neighboring markers.
+Using the map and genotypic files we can compute the IBD probabilities using `calcIBD`. This function computes, per genotype and marker, the probability that it descended from either parent. If this information is known for the marker from the input, the probabilities will simply be 0 for one of the parents and 1 for the other. When a marker score is missing from the input, the probabilities are calculated using neighboring markers.
 
 ```{r sxmIBD}
 ## Compute IBD probabilities for Steptoe Morex.
@@ -146,7 +143,7 @@ SxMIBD$markers["abg313b", "dh005", ]
 
 ### Visualizing results
 
-The calculated IBD probabilities can be visualized using the `plot` function. This will generate a plot of the probabilities per parent for a selected genotype. The plot for **dh005** is made below. Note that it contains a lot of white space since the markers in the file are spread widely along the genome. In the next section we will show how to make predictions on a denser grid.
+The calculated IBD probabilities can be visualized using the `plot` function. This will generate a plot of the probabilities per parent for a selected genotype. The plot for **dh005** is made below. Note that it contains a lot of white space since the markers in the file are spread widely along the genome. In the next section we will show how to compute probabilities on a denser grid.
 
 ```{r plotsxmIBD}
 ## Visualize IBD probabilities for dh005
@@ -158,7 +155,7 @@ plot(SxMIBD,
 
 When calling the `calcIBD` function without extra parameters, the only positions for which the calculations are made are the positions present in the map. There are two ways to change this. A first option is to specify the parameter `evaldist`. Setting this to a value of e.g. 5, assures that extra evaluation positions are added in such a way that the maximum distance between evaluation points will be 5 cM.
 
-Adding the extra evaluation points can be done on a grid by setting `grid = TRUE`. Doing this defines a grid of evaluation point from the beginning of each chromosome to the end with a distance between the evaluation points of `evaldist`. The original marker positions will be ignored in this case. To use evaluation points on a regular grid is important for haplotype construction and can be efficient for detection of QTLs using a scan along the genome [@VanEeuwijk2009].
+Adding the extra evaluation points can be done on a grid by setting `grid = TRUE`. Doing this defines a grid of evaluation points from the beginning of each chromosome to the end with a distance between the evaluation points of `evaldist`. The original marker positions will be ignored in this case. To use evaluation points on a regular grid is important for haplotype construction and can be efficient for detection of QTLs using a scan along the genome [@VanEeuwijk2009].
 
 ```{r sxmIBD_extGrid}
 ## Compute IBD probabilities for Steptoe Morex.
@@ -175,7 +172,7 @@ SxMIBD_Ext_grid <- calcIBD(poptype = "DH",
 summary(SxMIBD_Ext_grid)
 ```
 
-As the summary shows, the number of evaluation point has increased to 1138. This will also show when we visualize the results. The positions of the crossovers on the different chromosomes are clearly visible now.
+As the summary shows, the number of evaluation points has increased to 1138. This will also show when we visualize the results. The positions of the crossovers on the different chromosomes are clearly visible now.
 
 ```{r SxMIBD_Ext_grid}
 ## Visualize IBD probabilities for dh005
@@ -193,7 +190,8 @@ SxMIBD_Ext <- calcIBD(poptype = "DH",
                                             package = "statgenIBD"),
                       mapfile = system.file("extdata/SxM", "SxM_map.txt",
                                             package = "statgenIBD"),
-                      evaldist = 5)
+                      evaldist = 5,
+                      grid = FALSE)
 
 ## Print summary.
 summary(SxMIBD_Ext)
@@ -217,7 +215,7 @@ evalpos <- read.table(system.file("extdata/SxM", "SxM_eval.txt", package = "stat
 head(evalpos)
 ```
 
-When using a `data.frame` with evaluation position, IBD calculations are made only for the positions in the `data.frame`. The information in the mapfile is still used in those computations, but for the marker position themselves the evaluations are not done. The evaluation points will be named EVAL_chr_pos, e.g the first evaluation point in the file, at position 0 of chromosome 1, will be named EVAL_1\_0.
+When using a `data.frame` with evaluation position, IBD calculations are made only for the positions in the `data.frame`. The information in the mapfile is still used in those computations, but for the marker positions themselves the evaluations are not done. The evaluation points will be named EVAL_chr_pos, e.g the first evaluation point in the file, at position 0 of chromosome 1, will be named EVAL_1\_0.
 
 ```{r sxmIBD_posFile}
 SxMIBD_evalpos <- calcIBD(poptype = "DH",
@@ -237,7 +235,7 @@ In case both `evalpos` and `evaldist` are specified the former takes prevalence 
 
 ### Extracting value for markers of interest
 
-Often only the subset of markers is of interest for further analysis, e.g. for QTL Mapping of for fitting a multi-QTL model. To extract the computed probabilities for such a marker subset from a `calcIBD` object we can use the `getQTLProb` function.
+Often only the subset of markers is of interest for further analysis, e.g. for QTL Mapping of for fitting a multi-QTL model. To extract the computed probabilities for such a marker subset from a `calcIBD` object we can use the `getProbs` function.
 
 ```{r SxMProbs_one}
 ## Extract marker probabilities for markers plc and ABG053.
@@ -249,7 +247,7 @@ The output of the `getProbs` function is a `data.frame` with a column `geno` con
 
 ### Write results to Flapjack format
 
-The results of IBD calculations can be written to Flapjack format using `writeFlapjack`. Two files will be written that can be imported directly into Flapjack, a map file and a genotypic file. For the genotypic file the probabilities from the IBD calculations are converted combinations of parents. If for a genotype x marker combination the probability that it comes from a particular parent is high enough (higher than $0.85 / number \; of \; parents$), that parent is included in the output for that genotype x marker combination.
+The results of IBD calculations can be written to Flapjack format using `writeFlapjack`. Two files will be written that can be imported directly into Flapjack, a map file and a genotypic file. For the genotypic file the probabilities from the IBD calculations are converted to combinations of parents. If for a genotype x marker combination the probability that it comes from a particular parent is high enough (higher than $0.85 / number \; of \; parents$), that parent is included in the output for that genotype x marker combination.
 
 ```{r SxMwriteFlapjack, eval=FALSE}
 ## Write results to Flapjack format.
@@ -284,7 +282,7 @@ summary(F4IBD)
 
 As the summary shows, the output contains probabilities for two parents, A and B. The heterozygote, having an allele from both parents is called AB.
 
-As in the previous example we can extract the IBD probabilities for further analysis. However in this case it might be useful to not get the probabilities for A, B and AB, but to get the probabilities for the two parents including AB. The probability for A is then calculated as probability A + 0.5 \* probability AB. Summing the probabilities like this can be done by specifying `sumProbs = TRUE` in `getProbs`.
+As in the previous example we can extract the IBD probabilities for further analysis. However in this case it might be useful to not get the probabilities for A, B and AB, but to get the probabilities for the two parents including AB. The probability for A is then calculated as $probability A + 0.5 * probability AB$. Summing the probabilities like this can be done by specifying `sumProbs = TRUE` in `getProbs`.
 
 ```{r F4Probs}
 ## Extract marker probabilities for markers M1_2 and M1_4.
@@ -301,7 +299,7 @@ head(F4_probs_sum)
 
 ### C4S3
 
-Also included is a C4S3 population, a four-way cross followed by 3 generations of selfing. The parents in the four-way cross where A, B, C and D, the first 4 rows in the genotypic file. The crossing scheme was (A x B) x (C x D), followed by 3 generations of selfing. 
+Also included is a C4S3 population, a four-way cross followed by 3 generations of selfing. The parents in the four-way cross where A, B, C and D, the first 4 rows in the genotypic file. The crossing scheme was (A x B) x (C x D), followed by 3 generations of selfing.
 
 ```{r C3S4DHIBD}
 ## Compute IBD probabilities for simulated C4S3 population.
@@ -319,7 +317,7 @@ As the summary shows, the output contains probabilities for four parents, A, B, 
 
 ### Multi-cross
 
-The final example shows how IBD computations for multiple populations can be combined. In the example we use simulated data for two F4DH populations, i.e. F4 population as described above followed by a doubled haploid generation. For the first population the parents where A and B, for the second the parents where A and C. This is a simple example of a NAM population, having parent A as central parent. 
+The final example shows how IBD computations for multiple populations can be combined. In the example we use simulated data for two F4DH populations, i.e. F4 population as described above followed by a doubled haploid generation. For the first population the parents where A and B, for the second the parents where A and C. This is a simple example of a NAM population, having parent A as central parent.
 
 First we compute the IBD probabilities for each of the populations separately.
 
@@ -345,7 +343,7 @@ AC <- calcIBD(poptype = "F4DH",
 summary(AC)
 ```
 
-Now we want to combine the results from both computations for further analyses. To combine to `IBDprob` objects we can use the `c` function. This is only possible if both objects contain the same type of population. Also the evaluation points for both object have to be identical. In this example we have two F4DH populations and we used the same map file in the computations so combining them is fine.
+Now we want to combine the results from both computations for further analyses. To combine to `IBDprob` objects we can use the `c` function. This is only possible if both objects contain the same type of population. Also the evaluation points for both objects have to be identical. In this example we have two F4DH populations and we used the same map file in the computations so combining them is fine.
 
 ```{r combineIBD}
 ABC <- c(AB, AC)
@@ -363,6 +361,13 @@ ABCProbs[ABCProbs$geno %in% c("AxB0001", "AxC0001"), ]
 ```
 
 Note that the output now contains an extra column cross, indicating the cross the genotype came from.
+
+The value of 0 for either parent B or parent C also shows clearly in the plots below. The left plot shows an individual from the first cross, the right one an individual from the second cross.
+
+```{r plotMultiIBD, fig.show="hold", out.width="47%"}
+plot(ABC, genotype = "AxB0001")
+plot(ABC, genotype = "AxC0001")
+```
 
 ```{r winddown, include = FALSE}
 options(op)

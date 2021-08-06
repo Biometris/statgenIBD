@@ -13,7 +13,7 @@
 #' @return A data.frame with IBD probabilities for the extracted markers in the
 #' column and genotypes in the rows.
 #'
-#'  @examples
+#' @examples
 #' ## Compute IBD probabilities for Steptoe Morex.
 #' SxMIBD <- calcIBD(poptype = "DH",
 #'                   locfile = system.file("extdata/SxM", "SxM_geno.txt",

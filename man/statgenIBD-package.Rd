@@ -7,7 +7,10 @@
 \title{statgenIBD: Calculation of IBD Probabilities}
 \description{
 Calculation of IBD probabilities for biparental, three and four-way 
-    crosses.
+    crosses. Calculations are based on Hidden Markov Models (HMM) and 
+    inheritance vectors following Lander 
+    (\url{https://www.jstor.org/stable/29713}) and Huang
+    (\doi{10.1073/pnas.1100465108})
 }
 \author{
 \strong{Maintainer}: Bart-Jan van Rossum \email{bart-jan.vanrossum@wur.nl} (\href{https://orcid.org/0000-0002-8673-2514}{ORCID})

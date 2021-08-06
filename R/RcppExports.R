@@ -49,15 +49,15 @@
 #' @param verbose Should messages indicating the progress of the process be
 #' printed?
 #'
-#' @return An object of class \code{IBDprob}, a \code{list} with four elements,
+#' @return An object of class \code{IBDprob}, a \code{list} with five elements,
 #' \describe{
 #' \item{map}{a \code{data.frame} with chromosome and position of the markers.}
 #' \item{markers}{a 3-dimensional \code{array} of IBD probabilities with
 #' markers, genotypes and  parents as array dimensions.}
-#' \item{parents}{the parents}
-#' \item{poptype}{the population type}
+#' \item{parents}{the parents.}
+#' \item{poptype}{the population type.}
 #' \item{multiCross}{a logical value indicating if multiple crosses have been
-#' combined in the \code{IBDprob} object}
+#' combined in the \code{IBDprob} object.}
 #' }
 #'
 #' @examples

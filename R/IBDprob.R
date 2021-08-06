@@ -41,6 +41,26 @@ summary.IBDprob <- function(object,
 #' @return An object of class \code{IBDprob} containing data for all
 #' concatenated objects.
 #'
+#' @examples
+#' ## Compute IBD probabilties for AxB.
+#' AB <- calcIBD(poptype = "F4DH",
+#'              locfile = system.file("extdata/multipop", "AxB.txt",
+#'              package = "statgenIBD"),
+#'              mapfile = system.file("extdata/multipop", "mapfile.txt",
+#'                                    package = "statgenIBD"))
+#' ## Compute IBD probabilties for Axc.
+#' AC <- calcIBD(poptype = "F4DH",
+#'               locfile = system.file("extdata/multipop", "AxC.txt",
+#'                                    package = "statgenIBD"),
+#'              mapfile = system.file("extdata/multipop", "mapfile.txt",
+#'                                   package = "statgenIBD"))
+#'
+#' ## Combine results.
+#' ABC <- c(AB, AC)
+#'
+#' ## Check summary.
+#' summary(ABC)
+#'
 #' @export
 c.IBDprob <- function(...) {
   args <- list(...)
@@ -103,6 +123,21 @@ c.IBDprob <- function(...) {
 #' \code{FALSE}, only a ggplot object is invisibly returned.
 #'
 #' @return A ggplot object is invisibly returned.
+#'
+#' @examples
+#' ## Compute IBD probabilities for Steptoe Morex.
+#' ## Add extra evaluation positions in between exiting marker positions
+#' ## to assure evaluation positions are at most 2 cM apart.
+#' SxMIBD_Ext <- calcIBD(poptype = "DH",
+#'                       locfile = system.file("extdata/SxM", "SxM_geno.txt",
+#'                                             package = "statgenIBD"),
+#'                       mapfile = system.file("extdata/SxM", "SxM_map.txt",
+#'                                             package = "statgenIBD"),
+#'                       evaldist = 2)
+#'
+#' ## Plot results for genotype dh005.
+#' plot(SxMIBD_Ext,
+#'      genotype = "dh005")
 #'
 #' @export
 plot.IBDprob <- function(x,
