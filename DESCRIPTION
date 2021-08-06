@@ -3,11 +3,13 @@ Type: Package
 Title: Calculation of IBD Probabilities
 Description: Calculation of IBD probabilities for biparental, three and four-way 
     crosses. Calculations are based on Hidden Markov Models (HMM) and 
-    inheritance vectors following Lander 
-    (\url{https://www.jstor.org/stable/29713}) and Huang
-    (\doi{10.1073/pnas.1100465108})
+    inheritance vectors following Lander and Green
+    (\url{<https://www.jstor.org/stable/29713>}) and Huang
+    (\doi{10.1073/pnas.1100465108}). One of a series of statistical genetic 
+    packages for streamlining the analysis of typical plant breeding experiments
+    developed by Biometris.
 Version: 1.0.0
-Date: 2021-08-05
+Date: 2021-08-08
 Authors@R: c(person(given = "Martin", 
                     family = "Boer", 
                     email = "martin.boer@wur.nl", 

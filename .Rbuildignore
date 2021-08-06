@@ -5,3 +5,7 @@
 .gitlab-ci.R
 testScript
 README.Rmd
+^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

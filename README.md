@@ -10,7 +10,8 @@ downloads](https://cranlogs.r-pkg.org/badges/statgenIBD)](https://www.r-pkg.org/
 [![codecov](https://codecov.io/gh/Biometris/statgenIBD/branch/master/graph/badge.svg)](https://codecov.io/gh/Biometris/statgenIBD)
 
 **statgenIBD** is an R package for calculating IBD probabilities for
-biparental, three and four-way crosses.
+biparental, three and four-way crosses. Calculations are based on Hidden
+Markov Models (HMM) and inheritance vectors.
 
 ## Installation
 
