@@ -38,7 +38,7 @@ expect_equal(colnames(ABC_M1_1),
 
 ## Define file locations.
 F4markers <- system.file("extdata/popF4", "cross.txt", package = "statgenIBD")
-F4map <- system.file("extdata/popF4", "mapFile.txt", package = "statgenIBD")
+F4map <- system.file("extdata/popF4", "mapfile.txt", package = "statgenIBD")
 
 F4 <- calcIBD(popType = "F4", markerFile = F4markers, mapFile = F4map)
 
