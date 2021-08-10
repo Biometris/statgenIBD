@@ -106,15 +106,24 @@ bool check_score(const OrdGeno& g, const score& sc)
 			((g.first == sc.second)&&(g.second == sc.first)));
 }
 
+string trim(const string& str)
+{
+    const char* whitespace = " \t\v\r\n";
+    std::size_t start = str.find_first_not_of(whitespace);
+    std::size_t end = str.find_last_not_of(whitespace);
+    return start == end ? std::string() : str.substr(start, end - start + 1);
+}
+
+
 vector<string> read_tab_delimited_line(istream& inp)
 {
   vector<string> result;
 	string line,str;
 	getline(inp,line);
   istringstream line_stream(line);
-	while (getline(line_stream,str,'\t'))
+	while (getline(line_stream,str,'\t')) 
 	{
-		result.push_back(str);
+		result.push_back(trim(str));
 	}
 	return result;
 }
