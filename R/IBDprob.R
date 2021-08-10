@@ -155,7 +155,7 @@ plot.IBDprob <- function(x,
     stop("title should be a character string.\n")
   }
   if (!genotype %in% dimnames(markers)[[2]]) {
-    stop("genotype should be in markers.\n")
+    stop(paste("genotype",genotype,"not defined\n"))
   }
   ## Convert to long format for plotting.
   markersLong <- markers3DtoLong(x)
