@@ -18,7 +18,7 @@ expect_true(any(grepl("Parents:  Morex Steptoe", SxMSumm)))
 expect_error(plot(SxMIBD, genotype = 1),
              "should be a character string")
 expect_error(plot(SxMIBD, genotype = "a"),
-             "genotype should be in markers")
+             "genotype a not defined")
 expect_error(plot(SxMIBD, genotype = "dh001", title = 1),
              "title should be a character string")
 
