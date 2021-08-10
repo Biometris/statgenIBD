@@ -3,7 +3,7 @@
 ## Define file locations.
 ABmarkers <- system.file("extdata/multipop", "AxB.txt", package = "statgenIBD")
 ACmarkers <- system.file("extdata/multipop", "AxC.txt", package = "statgenIBD")
-ABCmap <- system.file("extdata/multipop", "mapFile.txt", package = "statgenIBD")
+ABCmap <- system.file("extdata/multipop", "mapfile.txt", package = "statgenIBD")
 
 ## IBD calculations for two populations separately.
 AB <- calcIBD(popType = "F4DH", markerFile = ABmarkers, mapFile = ABCmap)
