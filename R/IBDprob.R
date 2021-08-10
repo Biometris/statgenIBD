@@ -11,10 +11,10 @@
 #'
 #' @examples
 #' ## Compute IBD probabilities for Steptoe Morex.
-#' SxMIBD <- calcIBD(poptype = "DH",
-#'                   locfile = system.file("extdata/SxM", "SxM_geno.txt",
-#'                                         package = "statgenIBD"),
-#'                   mapfile = system.file("extdata/SxM", "SxM_map.txt",
+#' SxMIBD <- calcIBD(popType = "DH",
+#'                   markerFile = system.file("extdata/SxM", "SxM_geno.txt",
+#'                                           package = "statgenIBD"),
+#'                   mapFile = system.file("extdata/SxM", "SxM_map.txt",
 #'                                         package = "statgenIBD"))
 #'
 #' ## Print summary
@@ -23,7 +23,7 @@
 #' @export
 summary.IBDprob <- function(object,
                             ...) {
-  cat("population type: ", object$poptype, "\n")
+  cat("population type: ", object$popType, "\n")
   cat("Number of evaluation points: ", nrow(object$markers), "\n")
   cat("Number of individuals: ", ncol(object$markers),"\n")
   cat("Parents: ", object$parents, "\n")
@@ -43,17 +43,17 @@ summary.IBDprob <- function(object,
 #'
 #' @examples
 #' ## Compute IBD probabilties for AxB.
-#' AB <- calcIBD(poptype = "F4DH",
-#'              locfile = system.file("extdata/multipop", "AxB.txt",
-#'              package = "statgenIBD"),
-#'              mapfile = system.file("extdata/multipop", "mapfile.txt",
-#'                                    package = "statgenIBD"))
-#' ## Compute IBD probabilties for Axc.
-#' AC <- calcIBD(poptype = "F4DH",
-#'               locfile = system.file("extdata/multipop", "AxC.txt",
-#'                                    package = "statgenIBD"),
-#'              mapfile = system.file("extdata/multipop", "mapfile.txt",
+#' AB <- calcIBD(popType = "F4DH",
+#'              markerFile = system.file("extdata/multipop", "AxB.txt",
+#'                                   package = "statgenIBD"),
+#'              mapFile = system.file("extdata/multipop", "mapfile.txt",
 #'                                   package = "statgenIBD"))
+#' ## Compute IBD probabilties for Axc.
+#' AC <- calcIBD(popType = "F4DH",
+#'               markerFile = system.file("extdata/multipop", "AxC.txt",
+#'                                       package = "statgenIBD"),
+#'               mapFile = system.file("extdata/multipop", "mapfile.txt",
+#'                                    package = "statgenIBD"))
 #'
 #' ## Combine results.
 #' ABC <- c(AB, AC)
@@ -72,7 +72,7 @@ c.IBDprob <- function(...) {
       stop("All inputs should be of class IBDprob.\n")
     }
   }
-  pops <- unique(sapply(X = args, FUN = `[[`, "poptype"))
+  pops <- unique(sapply(X = args, FUN = `[[`, "popType"))
   if (!length(pops) == 1) {
     stop("All inputs should have the same population type.\n")
   }
@@ -102,7 +102,7 @@ c.IBDprob <- function(...) {
   }
   res <- structure(list(map = map,
                         markers = markersNw,
-                        poptype = pops,
+                        popType = pops,
                         parents = parents,
                         multicross = TRUE),
                    class = "IBDprob",
@@ -128,12 +128,12 @@ c.IBDprob <- function(...) {
 #' ## Compute IBD probabilities for Steptoe Morex.
 #' ## Add extra evaluation positions in between exiting marker positions
 #' ## to assure evaluation positions are at most 2 cM apart.
-#' SxMIBD_Ext <- calcIBD(poptype = "DH",
-#'                       locfile = system.file("extdata/SxM", "SxM_geno.txt",
-#'                                             package = "statgenIBD"),
-#'                       mapfile = system.file("extdata/SxM", "SxM_map.txt",
-#'                                             package = "statgenIBD"),
-#'                       evaldist = 2)
+#' SxMIBD_Ext <- calcIBD(popType = "DH",
+#'                       markerFile = system.file("extdata/SxM", "SxM_geno.txt",
+#'                                               package = "statgenIBD"),
+#'                       mapFile = system.file("extdata/SxM", "SxM_map.txt",
+#'                                            package = "statgenIBD"),
+#'                       evalDist = 2)
 #'
 #' ## Plot results for genotype dh005.
 #' plot(SxMIBD_Ext,

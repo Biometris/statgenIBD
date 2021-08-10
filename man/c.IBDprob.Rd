@@ -21,17 +21,17 @@ with overlapping parents.
 }
 \examples{
 ## Compute IBD probabilties for AxB.
-AB <- calcIBD(poptype = "F4DH",
-             locfile = system.file("extdata/multipop", "AxB.txt",
-             package = "statgenIBD"),
-             mapfile = system.file("extdata/multipop", "mapfile.txt",
-                                   package = "statgenIBD"))
-## Compute IBD probabilties for Axc.
-AC <- calcIBD(poptype = "F4DH",
-              locfile = system.file("extdata/multipop", "AxC.txt",
-                                   package = "statgenIBD"),
-             mapfile = system.file("extdata/multipop", "mapfile.txt",
+AB <- calcIBD(popType = "F4DH",
+             markerFile = system.file("extdata/multipop", "AxB.txt",
+                                  package = "statgenIBD"),
+             mapFile = system.file("extdata/multipop", "mapfile.txt",
                                   package = "statgenIBD"))
+## Compute IBD probabilties for Axc.
+AC <- calcIBD(popType = "F4DH",
+              markerFile = system.file("extdata/multipop", "AxC.txt",
+                                      package = "statgenIBD"),
+              mapFile = system.file("extdata/multipop", "mapfile.txt",
+                                   package = "statgenIBD"))
 
 ## Combine results.
 ABC <- c(AB, AC)

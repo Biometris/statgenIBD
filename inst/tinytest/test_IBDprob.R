@@ -3,10 +3,10 @@
 ## Test summary.
 
 ## Define file locations.
-SxMloc <- system.file("extdata/SxM", "SxM_geno.txt", package = "statgenIBD")
+SxMmarkers <- system.file("extdata/SxM", "SxM_geno.txt", package = "statgenIBD")
 SxMmap <- system.file("extdata/SxM", "SxM_map.txt", package = "statgenIBD")
 
-SxMIBD <- calcIBD(poptype = "DH", locfile = SxMloc, mapfile = SxMmap)
+SxMIBD <- calcIBD(popType = "DH", markerFile = SxMmarkers, mapFile = SxMmap)
 
 SxMSumm <- capture.output(summary(SxMIBD))
 expect_true(any(grepl("population type:  DH", SxMSumm)))

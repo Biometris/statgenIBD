@@ -21,10 +21,10 @@ number of individuals and names of the parents in the object.
 }
 \examples{
 ## Compute IBD probabilities for Steptoe Morex.
-SxMIBD <- calcIBD(poptype = "DH",
-                  locfile = system.file("extdata/SxM", "SxM_geno.txt",
-                                        package = "statgenIBD"),
-                  mapfile = system.file("extdata/SxM", "SxM_map.txt",
+SxMIBD <- calcIBD(popType = "DH",
+                  markerFile = system.file("extdata/SxM", "SxM_geno.txt",
+                                          package = "statgenIBD"),
+                  mapFile = system.file("extdata/SxM", "SxM_map.txt",
                                         package = "statgenIBD"))
 
 ## Print summary

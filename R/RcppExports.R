@@ -28,23 +28,23 @@
 #' | C4Sx | four-way | C4, followed by x generations of selfing | 6 |
 #' | C4SxDH | four-way | C4, followed by x generations of selfing and DH generation | 6 |
 #'
-#' @param poptype A character string indicating the type of population. One of
+#' @param popType A character string indicating the type of population. One of
 #' DH, Fx, FxDH, BCx, BCxDH, BC1Sx, BC1SxDH, C3, C3DH, C3Sx, C3SxDH, C4, C4DH,
 #' C4Sx, C4SxDH (see Details).
-#' @param locfile A character string indicating the location of the file with
+#' @param markerFile A character string indicating the location of the file with
 #' genotypic information for the population. The file should be in
 #' tab-delimited format with a header containing marker names.
-#' @param mapfile A character string indicating the location of the map file
+#' @param mapFile A character string indicating the location of the map file
 #' for the population. The file should be in tab-delimited format. It should
 #' consist of exactly three columns, marker, chromosome and position. There
 #' should be no header. The positions in the file should be in centimorgan.
-#' @param evalpos A data.frame with evaluation positions to which the
+#' @param evalPos A data.frame with evaluation positions to which the
 #' calculations should be limited.
-#' @param evaldist An optional numerical value indicating the maximum
+#' @param evalDist An optional numerical value indicating the maximum
 #' distance for marker positions. Extra markers will be added based on the
 #' value of \code{grid}.
 #' @param grid Should the extra markers that are added to assure the a
-#' maximum distince of \code{evaldist} be on a grid (\code{TRUE}) or in between
+#' maximum distince of \code{evalDist} be on a grid (\code{TRUE}) or in between
 #' marker existing marker positions (\code{FALSE}).
 #' @param verbose Should messages indicating the progress of the process be
 #' printed?
@@ -55,17 +55,17 @@
 #' \item{markers}{a 3-dimensional \code{array} of IBD probabilities with
 #' markers, genotypes and  parents as array dimensions.}
 #' \item{parents}{the parents.}
-#' \item{poptype}{the population type.}
+#' \item{popType}{the population type.}
 #' \item{multiCross}{a logical value indicating if multiple crosses have been
 #' combined in the \code{IBDprob} object.}
 #' }
 #'
 #' @examples
 #' ## Compute IBD probabilities for Steptoe Morex.
-#' SxMIBD <- calcIBD(poptype = "DH",
-#'                   locfile = system.file("extdata/SxM", "SxM_geno.txt",
+#' SxMIBD <- calcIBD(popType = "DH",
+#'                   markerFile = system.file("extdata/SxM", "SxM_geno.txt",
 #'                                         package = "statgenIBD"),
-#'                   mapfile = system.file("extdata/SxM", "SxM_map.txt",
+#'                   mapFile = system.file("extdata/SxM", "SxM_map.txt",
 #'                                         package = "statgenIBD"))
 #'
 #' ## Check summary.
@@ -74,18 +74,18 @@
 #' ## Compute IBD probabilities for Steptoe Morex.
 #' ## Add extra evaluation positions in between exiting marker positions
 #' ## to assure evaluation positions are at most 5 cM apart.
-#' SxMIBD_Ext <- calcIBD(poptype = "DH",
-#'                       locfile = system.file("extdata/SxM", "SxM_geno.txt",
+#' SxMIBD_Ext <- calcIBD(popType = "DH",
+#'                       markerFile = system.file("extdata/SxM", "SxM_geno.txt",
+#'                                               package = "statgenIBD"),
+#'                       mapFile = system.file("extdata/SxM", "SxM_map.txt",
 #'                                             package = "statgenIBD"),
-#'                       mapfile = system.file("extdata/SxM", "SxM_map.txt",
-#'                                             package = "statgenIBD"),
-#'                       evaldist = 5)
+#'                       evalDist = 5)
 #'
 #' ## Check summary.
 #' summary(SxMIBD_Ext)
 #'
 #' @export
-calcIBD <- function(poptype, locfile, mapfile, evalpos = NULL, evaldist = NULL, grid = TRUE, verbose = FALSE) {
-    .Call(`_statgenIBD_calcIBD`, poptype, locfile, mapfile, evalpos, evaldist, grid, verbose)
+calcIBD <- function(popType, markerFile, mapFile, evalPos = NULL, evalDist = NULL, grid = TRUE, verbose = FALSE) {
+    .Call(`_statgenIBD_calcIBD`, popType, markerFile, mapFile, evalPos, evalDist, grid, verbose)
 }
 

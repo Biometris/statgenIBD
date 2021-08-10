@@ -5,7 +5,7 @@ SxMloc <- system.file("extdata/SxM", "SxM_geno.txt", package = "statgenIBD")
 SxMmap <- system.file("extdata/SxM", "SxM_map.txt", package = "statgenIBD")
 
 ## IBD calculations .
-SxMIBD <- calcIBD(poptype = "DH", locfile = SxMloc, mapfile = SxMmap)
+SxMIBD <- calcIBD(popType = "DH", markerFile = SxMloc, mapFile = SxMmap)
 
 mapOut <- tempfile(fileext = ".txt")
 genoOut <- tempfile(fileext = ".txt")

@@ -15,10 +15,10 @@
 #'
 #' @examples
 #' ## Compute IBD probabilities for Steptoe Morex.
-#' SxMIBD <- calcIBD(poptype = "DH",
-#'                   locfile = system.file("extdata/SxM", "SxM_geno.txt",
+#' SxMIBD <- calcIBD(popType = "DH",
+#'                   markerFile = system.file("extdata/SxM", "SxM_geno.txt",
 #'                                         package = "statgenIBD"),
-#'                   mapfile = system.file("extdata/SxM", "SxM_map.txt",
+#'                   mapFile = system.file("extdata/SxM", "SxM_map.txt",
 #'                                         package = "statgenIBD"))
 #'
 #' ## Get probabilities for a single marker.

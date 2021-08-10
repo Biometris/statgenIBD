@@ -40,23 +40,23 @@ using namespace ibd;
 //' | C4Sx | four-way | C4, followed by x generations of selfing | 6 |
 //' | C4SxDH | four-way | C4, followed by x generations of selfing and DH generation | 6 |
 //'
-//' @param poptype A character string indicating the type of population. One of
+//' @param popType A character string indicating the type of population. One of
 //' DH, Fx, FxDH, BCx, BCxDH, BC1Sx, BC1SxDH, C3, C3DH, C3Sx, C3SxDH, C4, C4DH,
 //' C4Sx, C4SxDH (see Details).
-//' @param locfile A character string indicating the location of the file with
+//' @param markerFile A character string indicating the location of the file with
 //' genotypic information for the population. The file should be in
 //' tab-delimited format with a header containing marker names.
-//' @param mapfile A character string indicating the location of the map file
+//' @param mapFile A character string indicating the location of the map file
 //' for the population. The file should be in tab-delimited format. It should
 //' consist of exactly three columns, marker, chromosome and position. There
 //' should be no header. The positions in the file should be in centimorgan.
-//' @param evalpos A data.frame with evaluation positions to which the
+//' @param evalPos A data.frame with evaluation positions to which the
 //' calculations should be limited.
-//' @param evaldist An optional numerical value indicating the maximum
+//' @param evalDist An optional numerical value indicating the maximum
 //' distance for marker positions. Extra markers will be added based on the
 //' value of \code{grid}.
 //' @param grid Should the extra markers that are added to assure the a
-//' maximum distince of \code{evaldist} be on a grid (\code{TRUE}) or in between
+//' maximum distince of \code{evalDist} be on a grid (\code{TRUE}) or in between
 //' marker existing marker positions (\code{FALSE}).
 //' @param verbose Should messages indicating the progress of the process be
 //' printed?
@@ -67,17 +67,17 @@ using namespace ibd;
 //' \item{markers}{a 3-dimensional \code{array} of IBD probabilities with
 //' markers, genotypes and  parents as array dimensions.}
 //' \item{parents}{the parents.}
-//' \item{poptype}{the population type.}
+//' \item{popType}{the population type.}
 //' \item{multiCross}{a logical value indicating if multiple crosses have been
 //' combined in the \code{IBDprob} object.}
 //' }
 //'
 //' @examples
 //' ## Compute IBD probabilities for Steptoe Morex.
-//' SxMIBD <- calcIBD(poptype = "DH",
-//'                   locfile = system.file("extdata/SxM", "SxM_geno.txt",
+//' SxMIBD <- calcIBD(popType = "DH",
+//'                   markerFile = system.file("extdata/SxM", "SxM_geno.txt",
 //'                                         package = "statgenIBD"),
-//'                   mapfile = system.file("extdata/SxM", "SxM_map.txt",
+//'                   mapFile = system.file("extdata/SxM", "SxM_map.txt",
 //'                                         package = "statgenIBD"))
 //'
 //' ## Check summary.
@@ -86,27 +86,27 @@ using namespace ibd;
 //' ## Compute IBD probabilities for Steptoe Morex.
 //' ## Add extra evaluation positions in between exiting marker positions
 //' ## to assure evaluation positions are at most 5 cM apart.
-//' SxMIBD_Ext <- calcIBD(poptype = "DH",
-//'                       locfile = system.file("extdata/SxM", "SxM_geno.txt",
+//' SxMIBD_Ext <- calcIBD(popType = "DH",
+//'                       markerFile = system.file("extdata/SxM", "SxM_geno.txt",
+//'                                               package = "statgenIBD"),
+//'                       mapFile = system.file("extdata/SxM", "SxM_map.txt",
 //'                                             package = "statgenIBD"),
-//'                       mapfile = system.file("extdata/SxM", "SxM_map.txt",
-//'                                             package = "statgenIBD"),
-//'                       evaldist = 5)
+//'                       evalDist = 5)
 //'
 //' ## Check summary.
 //' summary(SxMIBD_Ext)
 //'
 //' @export
 // [[Rcpp::export]]
-List calcIBD(CharacterVector& poptype,
-             CharacterVector& locfile,
-             CharacterVector& mapfile,
-             Nullable<DataFrame&> evalpos = R_NilValue,
-             Nullable<NumericVector&> evaldist = R_NilValue,
+List calcIBD(CharacterVector& popType,
+             CharacterVector& markerFile,
+             CharacterVector& mapFile,
+             Nullable<DataFrame&> evalPos = R_NilValue,
+             Nullable<NumericVector&> evalDist = R_NilValue,
              const bool& grid = true,
              const bool& verbose = false)
 {
-  string _poptype = Rcpp::as<std::string>(poptype);
+  string _poptype = Rcpp::as<std::string>(popType);
   // only to check poptype has correct format:
   const pop_base *popt = init_pop(_poptype);
 
@@ -117,15 +117,15 @@ List calcIBD(CharacterVector& poptype,
   arma::cube prob;
   vector<string> parents, offspring;
   double max_step_size = -1;
-  if (evaldist.isNotNull())
-    max_step_size = Rcpp::as<double>(evaldist);
+  if (evalDist.isNotNull())
+    max_step_size = Rcpp::as<double>(evalDist);
   try
   {
     main_pedigreeR(prob, parents, offspring, positions,
                    _poptype,
-                   Rcpp::as<std::string>(locfile),
-                   Rcpp::as<std::string>(mapfile),
-                   evalpos,
+                   Rcpp::as<std::string>(markerFile),
+                   Rcpp::as<std::string>(mapFile),
+                   evalPos,
                    max_step_size,
                    grid,
                    verbose);
@@ -193,7 +193,7 @@ List calcIBD(CharacterVector& poptype,
   // Create result list: map + markers.
   List res = List::create(Named("map") = map,
                           Named("markers") = P,
-                          Named("poptype") = poptype,
+                          Named("popType") = popType,
                           Named("parents") = parents,
                           Named("multiCross") = false);
   res.attr("class") = "IBDprob";

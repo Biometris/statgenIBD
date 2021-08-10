@@ -6,11 +6,13 @@
 \alias{statgenIBD-package}
 \title{statgenIBD: Calculation of IBD Probabilities}
 \description{
-Calculation of IBD probabilities for biparental, three and four-way 
-    crosses. Calculations are based on Hidden Markov Models (HMM) and 
-    inheritance vectors following Lander 
+Calculation of Identity by Descent (IBD) probabilities for 
+    biparental, three and four-way crosses. Calculations are based on Hidden
+    Markov Models and inheritance vectors following Lander and Green
     (\url{https://www.jstor.org/stable/29713}) and Huang
-    (\doi{10.1073/pnas.1100465108})
+    (\doi{10.1073/pnas.1100465108}). One of a series of statistical genetic 
+    packages for streamlining the analysis of typical plant breeding experiments
+    developed by Biometris.
 }
 \author{
 \strong{Maintainer}: Bart-Jan van Rossum \email{bart-jan.vanrossum@wur.nl} (\href{https://orcid.org/0000-0002-8673-2514}{ORCID})

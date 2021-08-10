@@ -1,18 +1,18 @@
 ### Test IBDprob concatenation.
 
 ## Define file locations.
-ABloc <- system.file("extdata/multipop", "AxB.txt", package = "statgenIBD")
-ACloc <- system.file("extdata/multipop", "AxC.txt", package = "statgenIBD")
+ABmarkers <- system.file("extdata/multipop", "AxB.txt", package = "statgenIBD")
+ACmarkers <- system.file("extdata/multipop", "AxC.txt", package = "statgenIBD")
 ABCmap <- system.file("extdata/multipop", "mapfile.txt", package = "statgenIBD")
 
 ## IBD calculations for two populations separately.
-AB <- calcIBD(poptype = "F4DH", locfile = ABloc, mapfile = ABCmap)
-AC <- calcIBD(poptype = "F4DH", locfile = ACloc, mapfile = ABCmap)
+AB <- calcIBD(popType = "F4DH", markerFile = ABmarkers, mapFile = ABCmap)
+AC <- calcIBD(popType = "F4DH", markerFile = ACmarkers, mapFile = ABCmap)
 
 ## Alternative calculations for AC to test input checks.
-ACalt1 <- calcIBD(poptype = "F4", locfile = ACloc, mapfile = ABCmap)
-ACalt2 <- calcIBD(poptype = "F4DH", locfile = ACloc, mapfile = ABCmap,
-                  evaldist = 5)
+ACalt1 <- calcIBD(popType = "F4", markerFile = ACmarkers, mapFile = ABCmap)
+ACalt2 <- calcIBD(popType = "F4DH", markerFile = ACmarkers, mapFile = ABCmap,
+                  evalDist = 5)
 
 ## Check that input checks are working correctly.
 expect_error(c(AB, "tst"),
@@ -32,7 +32,7 @@ expect_inherits(ABC, "IBDprob")
 expect_equal(ABC$map, AB$map)
 expect_equal_to_reference(ABC$markers, "ABC_markers")
 expect_equal(ABC$parents, c("A", "B", "C"))
-expect_equal(ABC$poptype, AB$poptype)
+expect_equal(ABC$popType, AB$popType)
 expect_true(ABC$multicross)
 
 ## Check that genoCross attribute is added correctly.

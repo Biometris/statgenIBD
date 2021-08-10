@@ -1,13 +1,13 @@
 ### Test getProbs function.
 
 ## Define file locations.
-ABloc <- system.file("extdata/multipop", "AxB.txt", package = "statgenIBD")
-ACloc <- system.file("extdata/multipop", "AxC.txt", package = "statgenIBD")
-ABCmap <- system.file("extdata/multipop", "mapfile.txt", package = "statgenIBD")
+ABmarkers <- system.file("extdata/multipop", "AxB.txt", package = "statgenIBD")
+ACmarkers <- system.file("extdata/multipop", "AxC.txt", package = "statgenIBD")
+ABCmap <- system.file("extdata/multipop", "mapFile.txt", package = "statgenIBD")
 
 ## IBD calculations for two populations separately.
-AB <- calcIBD(poptype = "F4DH", locfile = ABloc, mapfile = ABCmap)
-AC <- calcIBD(poptype = "F4DH", locfile = ACloc, mapfile = ABCmap)
+AB <- calcIBD(popType = "F4DH", markerFile = ABmarkers, mapFile = ABCmap)
+AC <- calcIBD(popType = "F4DH", markerFile = ACmarkers, mapFile = ABCmap)
 ABC <- c(AB, AC)
 
 ## Check that input checks are working correctly.
@@ -37,10 +37,10 @@ expect_equal(colnames(ABC_M1_1),
 ## Check that option sumProbs functions correctly.
 
 ## Define file locations.
-F4loc <- system.file("extdata/popF4", "cross.txt", package = "statgenIBD")
-F4map <- system.file("extdata/popF4", "mapfile.txt", package = "statgenIBD")
+F4markers <- system.file("extdata/popF4", "cross.txt", package = "statgenIBD")
+F4map <- system.file("extdata/popF4", "mapFile.txt", package = "statgenIBD")
 
-F4 <- calcIBD(poptype = "F4", locfile = F4loc, mapfile = F4map)
+F4 <- calcIBD(popType = "F4", markerFile = F4markers, mapFile = F4map)
 
 F4_M1_1a <- getProbs(IBDprob = F4, markers = "M1_1", sumProbs = FALSE)
 F4_M1_1b <- getProbs(IBDprob = F4, markers = "M1_1", sumProbs = TRUE)

@@ -101,10 +101,10 @@ Using the map and genotypic files we can compute the IBD probabilities using `ca
 
 ```{r sxmIBD}
 ## Compute IBD probabilities for Steptoe Morex.
-SxMIBD <- calcIBD(poptype = "DH",
-                  locfile = system.file("extdata/SxM", "SxM_geno.txt",
-                                        package = "statgenIBD"),
-                  mapfile = system.file("extdata/SxM", "SxM_map.txt",
+SxMIBD <- calcIBD(popType = "DH",
+                  markerFile = system.file("extdata/SxM", "SxM_geno.txt",
+                                           package = "statgenIBD"),
+                  mapFile = system.file("extdata/SxM", "SxM_map.txt",
                                         package = "statgenIBD"))
 
 ## Print summary.
@@ -120,7 +120,7 @@ The output of the `calcIBD` function is an object of class `IBDprob`. This objec
 +------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | markers    | `array`      | A three dimensional array with the IBD probabilities. The dimensions of this array are \#markers x \#genotypes x \#parents. The array contains per combination of marker and genotypes the probabilities that it descended from either of the parents. |
 +------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| poptype    | `character`  | The population type.                                                                                                                                                                                                                                   |
+| popType    | `character`  | The population type.                                                                                                                                                                                                                                   |
 +------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | parents    | `character`  | The parents.                                                                                                                                                                                                                                           |
 +------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -153,19 +153,19 @@ plot(SxMIBD,
 
 ### Evaluation positions
 
-When calling the `calcIBD` function without extra parameters, the only positions for which the calculations are made are the positions present in the map. There are two ways to change this. A first option is to specify the parameter `evaldist`. Setting this to a value of e.g. 5, assures that extra evaluation positions are added in such a way that the maximum distance between evaluation points will be 5 cM.
+When calling the `calcIBD` function without extra parameters, the only positions for which the calculations are made are the positions present in the map. There are two ways to change this. A first option is to specify the parameter `evalDist`. Setting this to a value of e.g. 5, assures that extra evaluation positions are added in such a way that the maximum distance between evaluation points will be 5 cM.
 
-Adding the extra evaluation points can be done on a grid by setting `grid = TRUE`. Doing this defines a grid of evaluation points from the beginning of each chromosome to the end with a distance between the evaluation points of `evaldist`. The original marker positions will be ignored in this case. To use evaluation points on a regular grid is important for haplotype construction and can be efficient for detection of QTLs using a scan along the genome [@VanEeuwijk2009].
+Adding the extra evaluation points can be done on a grid by setting `grid = TRUE`. Doing this defines a grid of evaluation points from the beginning of each chromosome to the end with a distance between the evaluation points of `evalDist`. The original marker positions will be ignored in this case. To use evaluation points on a regular grid is important for haplotype construction and can be efficient for detection of QTLs using a scan along the genome [@VanEeuwijk2009].
 
 ```{r sxmIBD_extGrid}
 ## Compute IBD probabilities for Steptoe Morex.
 ## Add extra evaluation positions on dense grid.
-SxMIBD_Ext_grid <- calcIBD(poptype = "DH",
-                           locfile = system.file("extdata/SxM", "SxM_geno.txt",
+SxMIBD_Ext_grid <- calcIBD(popType = "DH",
+                           markerFile = system.file("extdata/SxM", "SxM_geno.txt",
+                                                    package = "statgenIBD"),
+                           mapFile = system.file("extdata/SxM", "SxM_map.txt",
                                                  package = "statgenIBD"),
-                           mapfile = system.file("extdata/SxM", "SxM_map.txt",
-                                                 package = "statgenIBD"),
-                           evaldist = 1,
+                           evalDist = 1,
                            grid = TRUE)
 
 ## Print summary.
@@ -185,12 +185,12 @@ When setting `grid = FALSE` extra evaluation positions will be included between 
 ```{r sxmIBD_ext}
 ## Compute IBD probabilities for Steptoe Morex.
 ## Add extra evaluation positions between existing markers.
-SxMIBD_Ext <- calcIBD(poptype = "DH",
-                      locfile = system.file("extdata/SxM", "SxM_geno.txt",
+SxMIBD_Ext <- calcIBD(popType = "DH",
+                      markerFile = system.file("extdata/SxM", "SxM_geno.txt",
+                                               package = "statgenIBD"),
+                      mapFile = system.file("extdata/SxM", "SxM_map.txt",
                                             package = "statgenIBD"),
-                      mapfile = system.file("extdata/SxM", "SxM_map.txt",
-                                            package = "statgenIBD"),
-                      evaldist = 5,
+                      evalDist = 5,
                       grid = FALSE)
 
 ## Print summary.
@@ -204,34 +204,34 @@ As the summary shows, the number of evaluation point has increased to 290, from 
 head(SxMIBD_Ext$map)
 ```
 
-A second way of changing the position for which the computations are made, is by specifying them in a `data.frame`. This `data.frame` should have two columns, "chr" and "pos" and can be specified in the `calcIBD` function using the `evalpos` parameter.
+A second way of changing the position for which the computations are made, is by specifying them in a `data.frame`. This `data.frame` should have two columns, "chr" and "pos" and can be specified in the `calcIBD` function using the `evalPos` parameter.
 
 In the package a very simple example of such a `data.frame` for the Steptoe Morex data is included as a .txt file . In it three evaluation positions are specified for each of the chromosomes.
 
 ```{r inspectPosFile}
-## Read the evalpos file and display the first rows.
-evalpos <- read.table(system.file("extdata/SxM", "SxM_eval.txt", package = "statgenIBD"), 
+## Read the evalPos file and display the first rows.
+evalPos <- read.table(system.file("extdata/SxM", "SxM_eval.txt", package = "statgenIBD"), 
                       header = TRUE)
-head(evalpos)
+head(evalPos)
 ```
 
-When using a `data.frame` with evaluation position, IBD calculations are made only for the positions in the `data.frame`. The information in the mapfile is still used in those computations, but for the marker positions themselves the evaluations are not done. The evaluation points will be named EVAL_chr_pos, e.g the first evaluation point in the file, at position 0 of chromosome 1, will be named EVAL_1\_0.
+When using a `data.frame` with evaluation position, IBD calculations are made only for the positions in the `data.frame`. The information in the map file is still used in those computations, but for the marker positions themselves the evaluations are not done. The evaluation points will be named EVAL_chr_pos, e.g the first evaluation point in the file, at position 0 of chromosome 1, will be named EVAL_1\_0.
 
 ```{r sxmIBD_posFile}
-SxMIBD_evalpos <- calcIBD(poptype = "DH",
-                          locfile = system.file("extdata/SxM", "SxM_geno.txt",
+SxMIBD_evalPos <- calcIBD(popType = "DH",
+                          markerFile = system.file("extdata/SxM", "SxM_geno.txt",
+                                                   package = "statgenIBD"),
+                          mapFile = system.file("extdata/SxM", "SxM_map.txt",
                                                 package = "statgenIBD"),
-                          mapfile = system.file("extdata/SxM", "SxM_map.txt",
-                                                package = "statgenIBD"),
-                          evalpos = evalpos)
+                          evalPos = evalPos)
 
 ## Print summary.
-summary(SxMIBD_evalpos)
+summary(SxMIBD_evalPos)
 ```
 
 As the summary shows, the number of evaluation points now decreased to 21, 3 for each of the 7 chromosomes.
 
-In case both `evalpos` and `evaldist` are specified the former takes prevalence and `evaldist` is ignored.
+In case both `evalPos` and `evalDist` are specified the former takes prevalence and `evalDist` is ignored.
 
 ### Extracting value for markers of interest
 
@@ -266,14 +266,14 @@ Simulated data for several more complex populations and crosses is included in t
 
 ### F4
 
-First we have a look at an F4 of a two-way RIL population, i.e. an F1 followed by 3 generations of selfing. This population was constructed from parents A and B. As we can see from the table in the populations section, when doing computations for an F4 populations, we can use `poptype = "Fx"` where x is replaced by 4.
+First we have a look at an F4 of a two-way RIL population, i.e. an F1 followed by 3 generations of selfing. This population was constructed from parents A and B. As we can see from the table in the populations section, when doing computations for an F4 populations, we can use `popType = "Fx"` where x is replaced by 4.
 
 ```{r F4IBD}
 ## Compute IBD probabilities for simulated F4 population.
-F4IBD <- calcIBD(poptype = "F4",
-                 locfile = system.file("extdata/popF4", "cross.txt",
-                                       package = "statgenIBD"),
-                 mapfile = system.file("extdata/popF4", "mapfile.txt",
+F4IBD <- calcIBD(popType = "F4",
+                 markerFile = system.file("extdata/popF4", "cross.txt",
+                                          package = "statgenIBD"),
+                 mapFile = system.file("extdata/popF4", "mapfile.txt",
                                        package = "statgenIBD"))
 
 ## Print summary.
@@ -303,10 +303,10 @@ Also included is a C4S3 population, a four-way cross followed by 3 generations o
 
 ```{r C3S4DHIBD}
 ## Compute IBD probabilities for simulated C4S3 population.
-C4S3IBD <- calcIBD(poptype = "C4S3",
-                   locfile = system.file("extdata/popC4S3", "cross.txt",
-                                         package = "statgenIBD"),
-                   mapfile = system.file("extdata/popC4S3", "mapfile.txt",
+C4S3IBD <- calcIBD(popType = "C4S3",
+                   markerFile = system.file("extdata/popC4S3", "cross.txt",
+                                            package = "statgenIBD"),
+                   mapFile = system.file("extdata/popC4S3", "mapfile.txt",
                                          package = "statgenIBD"))
 
 ## Print summary.
@@ -323,20 +323,20 @@ First we compute the IBD probabilities for each of the populations separately.
 
 ```{r multiIBD}
 ## Compute IBD probabilties for AxB.
-AB <- calcIBD(poptype = "F4DH",
-              locfile = system.file("extdata/multipop", "AxB.txt",
-                                    package = "statgenIBD"),
-              mapfile = system.file("extdata/multipop", "mapfile.txt",
+AB <- calcIBD(popType = "F4DH",
+              markerFile = system.file("extdata/multipop", "AxB.txt",
+                                       package = "statgenIBD"),
+              mapFile = system.file("extdata/multipop", "mapfile.txt",
                                     package = "statgenIBD"))
 
 ## Print summary.
 summary(AB)
 
 ## Compute IBD probabilties for Axc.
-AC <- calcIBD(poptype = "F4DH",
-              locfile = system.file("extdata/multipop", "AxC.txt",
-                                    package = "statgenIBD"),
-              mapfile = system.file("extdata/multipop", "mapfile.txt",
+AC <- calcIBD(popType = "F4DH",
+              markerFile = system.file("extdata/multipop", "AxC.txt",
+                                       package = "statgenIBD"),
+              mapFile = system.file("extdata/multipop", "mapfile.txt",
                                     package = "statgenIBD"))
 
 ## Print summary.

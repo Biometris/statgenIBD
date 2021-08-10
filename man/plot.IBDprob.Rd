@@ -29,12 +29,12 @@ Creates a plot for an object of class \code{IBDprob}.
 ## Compute IBD probabilities for Steptoe Morex.
 ## Add extra evaluation positions in between exiting marker positions
 ## to assure evaluation positions are at most 2 cM apart.
-SxMIBD_Ext <- calcIBD(poptype = "DH",
-                      locfile = system.file("extdata/SxM", "SxM_geno.txt",
-                                            package = "statgenIBD"),
-                      mapfile = system.file("extdata/SxM", "SxM_map.txt",
-                                            package = "statgenIBD"),
-                      evaldist = 2)
+SxMIBD_Ext <- calcIBD(popType = "DH",
+                      markerFile = system.file("extdata/SxM", "SxM_geno.txt",
+                                              package = "statgenIBD"),
+                      mapFile = system.file("extdata/SxM", "SxM_map.txt",
+                                           package = "statgenIBD"),
+                      evalDist = 2)
 
 ## Plot results for genotype dh005.
 plot(SxMIBD_Ext,
