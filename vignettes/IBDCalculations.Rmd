@@ -80,7 +80,7 @@ The first example is the Steptoe Morex data, described by [@Hayes1993]. This is 
 
 The map and genotypic file for this population are included in the package.
 
-Both the map and the genotypic file should be in a **tab**-delimited format, and have the same format as used in [Flapjack](http://flapjack.hutton.ac.uk/en/latest/projects_&_data_formats.html#data-sets-maps-and-genotypes) [@milne2010]. The map file should be a file without a header. It should contain three columns, corresponding to marker name, chromosome number and position on the chromosome in centiMorgan.
+Both the map and the genotypic file should be in a **tab**-delimited format. The map file should be a file without a header. It should contain three columns, corresponding to marker name, chromosome number and position on the chromosome in centiMorgan.
 
 ```{r inspectMap}
 ## Read the map and display the first tows.
@@ -90,6 +90,8 @@ head(map)
 
 The genotypic file should a file with a header containing the marker names. The first column should contain the genotypes, starting with the parents, in this case Morex and Steptoe. The name of this column is irrelevant and can even be an empty string as in this example.
 
+The parents are assumed to be inbred lines, without missing scores. For this Steptoe x Morex example, the markers for Morex are all 1, Steptoe all 2. The original SNP data can also be used. Missing marker scores in the offspring should have value "-". More general, for populations with SNP scores *a* and *b* for the parents, the offspring can be scored as *a* (or *a/a), b* (or *b/b), a/b, a/-, -/b, or -.*
+
 ```{r inspectLoc}
 ## Read the genotypic file and display the first rows and columns.
 geno <- read.table(system.file("extdata/SxM", "SxM_geno.txt", package = "statgenIBD"),
@@ -97,7 +99,7 @@ geno <- read.table(system.file("extdata/SxM", "SxM_geno.txt", package = "statgen
 head(geno[, 1:5])
 ```
 
-Using the map and genotypic files we can compute the IBD probabilities using `calcIBD`. This function computes, per genotype and marker, the probability that it descended from either parent. If this information is known for the marker from the input, the probabilities will simply be 0 for one of the parents and 1 for the other. When a marker score is missing from the input, the probabilities are calculated using neighboring markers.
+Using the map and genotypic files we can compute the IBD probabilities using `calcIBD`. This function computes, per genotype and marker, the probability that it descended from either parent. If this information is known for the marker from the input, the probabilities will simply be 0 for one of the parents and 1 for the other. When a marker score is missing from the input, the probabilities are calculated using the information of the other markers on the chromosome.
 
 ```{r sxmIBD}
 ## Compute IBD probabilities for Steptoe Morex.
@@ -155,7 +157,7 @@ plot(SxMIBD,
 
 When calling the `calcIBD` function without extra parameters, the only positions for which the calculations are made are the positions present in the map. There are two ways to change this. A first option is to specify the parameter `evalDist`. Setting this to a value of e.g. 5, assures that extra evaluation positions are added in such a way that the maximum distance between evaluation points will be 5 cM.
 
-Adding the extra evaluation points can be done on a grid by setting `grid = TRUE`. Doing this defines a grid of evaluation points from the beginning of each chromosome to the end with a distance between the evaluation points of `evalDist`. The original marker positions will be ignored in this case. To use evaluation points on a regular grid is important for haplotype construction and can be efficient for detection of QTLs using a scan along the genome [@VanEeuwijk2009].
+Adding the extra evaluation points can be done on a grid by setting `grid = TRUE`. Doing this defines a grid of evaluation points from the beginning of each chromosome to the end with a distance between the evaluation points of `evalDist`. The original marker positions will be ignored in this case. To use evaluation points on a regular grid is important for haplotype construction and is efficient for detection of QTLs [@VanEeuwijk2009].
 
 ```{r sxmIBD_extGrid}
 ## Compute IBD probabilities for Steptoe Morex.
@@ -247,7 +249,7 @@ The output of the `getProbs` function is a `data.frame` with a column `geno` con
 
 ### Write results to Flapjack format
 
-The results of IBD calculations can be written to Flapjack format using `writeFlapjack`. Two files will be written that can be imported directly into Flapjack, a map file and a genotypic file. For the genotypic file the probabilities from the IBD calculations are converted to combinations of parents. If for a genotype x marker combination the probability that it comes from a particular parent is high enough (higher than $0.85 / number \; of \; parents$), that parent is included in the output for that genotype x marker combination.
+The results of IBD calculations can be written to Flapjack [@milne2010] format using `writeFlapjack`. Two files will be written that can be imported directly into Flapjack, a map file and a genotypic file. For the genotypic file the probabilities from the IBD calculations are converted to combinations of parents. If for a genotype x marker combination the probability that it comes from a particular parent is high enough (higher than $0.85 / number \; of \; parents$), that parent is included in the output for that genotype x marker combination.
 
 ```{r SxMwriteFlapjack, eval=FALSE}
 ## Write results to Flapjack format.
@@ -332,7 +334,7 @@ AB <- calcIBD(popType = "F4DH",
 ## Print summary.
 summary(AB)
 
-## Compute IBD probabilties for Axc.
+## Compute IBD probabilties for AxC.
 AC <- calcIBD(popType = "F4DH",
               markerFile = system.file("extdata/multipop", "AxC.txt",
                                        package = "statgenIBD"),
