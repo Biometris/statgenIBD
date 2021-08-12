@@ -1,6 +1,6 @@
 ## Initial release
 
-- Initial package release
+- Initial package release, updated DESCRIPTION following remarks from previous submission
 
 ----
 
