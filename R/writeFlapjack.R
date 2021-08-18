@@ -45,11 +45,14 @@ writeFlapjack <- function(IBDprob,
   markersWide <- reshape(data = markersLong, idvar = c("genotype", "snp"),
                          timevar = "parent", direction = "wide")
   for (i in 1:nrow(markersWide)) {
-     parentsI <- parents[markersWide[i , 3:(2 + nPar)] > (0.85 / nPar)]
+     parentsI <- which(markersWide[i , 3:(2 + nPar)] > (0.85 / nPar))
      markersWide[i, "res"] <- paste0(parentsI, collapse = "/")
   }
+  resPar <- matrix(data = seq_along(parents), nrow = nPar, ncol = nMarkers,
+                   dimnames = list(parents, dimnames(markers)[[1]]))
   res <- matrix(data = markersWide[["res"]], nrow = nGeno, byrow = TRUE,
                 dimnames = dimnames(markers)[2:1])
+  res <- rbind(resPar, res)
   ## Write map file.
   cat(file = outFileMap, "# fjFile = MAP\n")
   write.table(map, file = outFileMap,
