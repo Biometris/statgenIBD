@@ -57,7 +57,8 @@ writeFlapjack <- function(IBDprob,
               col.names = FALSE, append = TRUE)
   ## Write marker file.
   cat(file = outFileGeno, "# fjFile = GENOTYPE\n\t")
-  cat(colnames(res), file = outFileGeno, append = TRUE)
+  cat(colnames(res), file = outFileGeno, sep = "\t", append = TRUE)
+  cat("\n", file = outFileGeno, append = TRUE)
   write.table(res, file = outFileGeno,
               quote = FALSE, sep = "\t", na = "-", row.names = TRUE,
               col.names = FALSE, append = TRUE)
