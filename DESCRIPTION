@@ -9,7 +9,7 @@ Description: For biparental, three and four-way crosses Identity by Descent
     packages for streamlining the analysis of typical plant breeding experiments
     developed by Biometris.
 Version: 1.0.1
-Date: 2021-08-16
+Date: 2021-08-24
 Authors@R: c(person(given = "Martin", 
                     family = "Boer", 
                     email = "martin.boer@wur.nl", 
@@ -34,3 +34,5 @@ Suggests:
     knitr, 
     tinytest
 VignetteBuilder: knitr
+URL: https://biometris.github.io/statgenIBD/index.html, https://github.com/Biometris/statgenIBD/
+BugReports: https://github.com/Biometris/statgenIBD/issues
