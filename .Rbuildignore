@@ -9,3 +9,9 @@ README.Rmd
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+public
+[.]o$
+[.]so$
+[.]dll$
+^cran-comments\.md$
+^CRAN-RELEASE$
