@@ -1,6 +1,6 @@
 ## Patch release
 
-- Test issues causing archiving on CRAN are fixed. One minor bug was fixed as well.
+- Patch release to fix test issues causing archiving on CRAN. One minor bug was fixed as well.
 
 ----
 
@@ -21,6 +21,7 @@ There were no ERRORs or WARNINGs.
 There were 2 NOTES:
 
 * checking CRAN incoming feasibility ... NOTE
+
 Maintainer: ‘Bart-Jan van Rossum <bart-jan.vanrossum@wur.nl>’
 
 New submission
@@ -44,11 +45,11 @@ Found the following (possibly) invalid URLs:
     Status: 403
     Message: Forbidden
 
-This link is fine when opened from a browser.
+This link works fine when opened in a browser.
 
 * checking installed package size ... NOTE
   installed size is  9.1Mb
   sub-directories of 1Mb or more:
     libs   8.5Mb
 
-Installed size depends on platform. This not only occurs at some of the tested platforms.
+Installed size depends on platform. This only occurs at some of the tested platforms.    

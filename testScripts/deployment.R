@@ -4,7 +4,7 @@ devtools::check_win_devel()
 rhub::platforms()
 
 ## Check with rhub.
-rhub::check_for_cran()
+rhub::check_for_cran(path = "C:/Projects/R_packages/statgenIBD/")
 
 ## Check with rhub.
 rhub::check_for_cran(platforms = c("ubuntu-gcc-release",

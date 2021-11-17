@@ -34,3 +34,5 @@ Suggests:
     knitr, 
     tinytest
 VignetteBuilder: knitr
+URL: https://biometris.github.io/statgenIBD/index.html, https://github.com/Biometris/statgenIBD/
+BugReports: https://github.com/Biometris/statgenIBD/issues
