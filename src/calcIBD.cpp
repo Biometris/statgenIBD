@@ -106,6 +106,13 @@ List calcIBD(CharacterVector& popType,
              const bool& grid = true,
              const bool& verbose = false)
 {
+  //Rcpp::Rcout << "test" << std::endl;
+  //read_eval_pos_df(evalPos);
+  //Rcpp::Rcout << "test2" << std::endl;
+
+  //List res = List::create(Named("popType") = popType);
+  //return res;
+
   string _poptype = Rcpp::as<std::string>(popType);
   // only to check poptype has correct format:
   const pop_base *popt = init_pop(_poptype);
@@ -119,6 +126,7 @@ List calcIBD(CharacterVector& popType,
   double max_step_size = -1;
   if (evalDist.isNotNull())
     max_step_size = Rcpp::as<double>(evalDist);
+
   try
   {
     main_pedigreeR(prob, parents, offspring, positions,
@@ -178,7 +186,7 @@ List calcIBD(CharacterVector& popType,
   }
   // Construct map file from positions.
   CharacterVector posNames = CharacterVector(M);
-  IntegerVector chr = IntegerVector(M);
+  CharacterVector chr = CharacterVector(M);
   NumericVector pos = NumericVector(M);
   for (int m = 0; m < M; m++) {
     posNames(m) = positions[m].GetName();

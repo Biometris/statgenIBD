@@ -22,7 +22,7 @@ LinkageMap read_eval_pos_file(const std::string& filename);
 
 LinkageMap read_eval_pos_df(const Rcpp::DataFrame& evalposdf);
 
-LinkageMap select_chr(const LinkageMap& markermap, int sel_chr);
+LinkageMap select_chr(const LinkageMap& markermap, std::string sel_chr);
 
 #endif
 
