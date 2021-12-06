@@ -8,7 +8,7 @@ using namespace ibd;
 using namespace std;
 
 LinkageMap select_chr(const LinkageMap& markermap,
-                      int sel_chr)
+                      std::string sel_chr)
 {
   const int M = markermap.size();
   LinkageMap sel_markermap;
@@ -39,7 +39,7 @@ LinkageMap adjust_markermap(const LinkageMap& markermap)
         {
           string n = loc.GetName();
           double p = new_markermap.back().GetPosition();
-          int c = loc.GetChr();
+          std::string c = loc.GetChr();
           loc = Locus(c,p+delta,n);
         }
       }
@@ -107,7 +107,7 @@ LinkageMap read_map_file(const string& filename)
   {
     double pos;
     string name;
-    int chr;
+    std::string chr;
     inp >> name >> chr >> pos;
     Locus loc(chr,pos,name);
     markermap.push_back(loc);
@@ -128,10 +128,10 @@ LinkageMap read_eval_pos_file(const string& filename)
     line_nr++;
     if (line.empty()) continue;
     istringstream line_stream(line);
-    int chr;
+    std::string chr;
     double pos;
     line_stream >> chr >> pos;
-    string name = "EVAL_" + stringify(chr) + "_" + stringify(pos);
+    string name = "EVAL_" + chr + "_" + stringify(pos);
     //positions.push_back(Locus(chr,pos,EVAL_POS));
     positions.push_back(Locus(chr, pos, name));
   }
@@ -142,13 +142,26 @@ LinkageMap read_eval_pos_file(const string& filename)
 LinkageMap read_eval_pos_df(const Rcpp::DataFrame& evalposdf)
 {
   Rcpp::NumericVector pos = evalposdf["pos"];
-  Rcpp::NumericVector chr = evalposdf["chr"];
+  Rcpp::CharacterVector chr = evalposdf["chr"];
+
+  Rcpp::Rcout << pos << std::endl;
+  Rcpp::Rcout << chr << std::endl;
+
   LinkageMap positions;
   for (int m=0;m<evalposdf.nrows();m++)
   {
-    string name = "EVAL_" + stringify(chr[m]) + "_" + stringify(pos[m]);
-    positions.push_back(Locus(chr[m], pos[m], name));
+    Rcpp::Rcout << m << std::endl;
+    std::string chrM = Rcpp::as<std::string>(chr[m]);
+    Rcpp::Rcout << chrM << std::endl;
+    std::string name = "EVAL_" + chrM + "_" + stringify(pos[m]);
+    Rcpp::Rcout << name << std::endl;
+    double posM = pos[m];
+	Rcpp::Rcout << posM << std::endl;
+	Locus loc(chrM,posM,name);
+	positions.push_back(loc);
+    //positions.push_back(Locus(chrM, posM, name));
   }
+
   sort(positions.begin(),positions.end());
   return(positions);
 }
