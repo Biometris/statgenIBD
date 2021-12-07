@@ -116,53 +116,22 @@ LinkageMap read_map_file(const string& filename)
   return markermap;
 }
 
-LinkageMap read_eval_pos_file(const string& filename)
-{
-  LinkageMap positions;
-  string line;
-  ifstream inp;
-  OpenFile(inp,filename);
-  int line_nr = 0;
-  while (getline(inp,line))
-  {
-    line_nr++;
-    if (line.empty()) continue;
-    istringstream line_stream(line);
-    std::string chr;
-    double pos;
-    line_stream >> chr >> pos;
-    string name = "EVAL_" + chr + "_" + stringify(pos);
-    //positions.push_back(Locus(chr,pos,EVAL_POS));
-    positions.push_back(Locus(chr, pos, name));
-  }
-  sort(positions.begin(),positions.end());
-  return positions;
-}
-
 LinkageMap read_eval_pos_df(const Rcpp::DataFrame& evalposdf)
 {
   Rcpp::NumericVector pos = evalposdf["pos"];
   Rcpp::CharacterVector chr = evalposdf["chr"];
-
-  Rcpp::Rcout << pos << std::endl;
-  Rcpp::Rcout << chr << std::endl;
-
   LinkageMap positions;
   for (int m=0;m<evalposdf.nrows();m++)
   {
-    Rcpp::Rcout << m << std::endl;
-    std::string chrM = Rcpp::as<std::string>(chr[m]);
-    Rcpp::Rcout << chrM << std::endl;
+    std::string chrM = Rcpp::as<std::string>(chr[m]);    
     std::string name = "EVAL_" + chrM + "_" + stringify(pos[m]);
-    Rcpp::Rcout << name << std::endl;
     double posM = pos[m];
-	Rcpp::Rcout << posM << std::endl;
 	Locus loc(chrM,posM,name);
-	positions.push_back(loc);
-    //positions.push_back(Locus(chrM, posM, name));
+	positions.push_back(loc);    
   }
 
   sort(positions.begin(),positions.end());
+  
   return(positions);
 }
 

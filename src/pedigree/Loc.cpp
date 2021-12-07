@@ -9,7 +9,8 @@ MapFunction mapfunction = invhaldane;
 int compare(const Locus& locA,
             const Locus& locB)
 {
-	if (locA.chr != locB.chr) return -1;
+	if (locA.chr < locB.chr) return -1;
+	if (locA.chr > locB.chr) return  1;
 
 	if (locA.pos < locB.pos) return -1;
 	if (locA.pos > locB.pos) return  1;

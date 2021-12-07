@@ -106,13 +106,6 @@ List calcIBD(CharacterVector& popType,
              const bool& grid = true,
              const bool& verbose = false)
 {
-  //Rcpp::Rcout << "test" << std::endl;
-  //read_eval_pos_df(evalPos);
-  //Rcpp::Rcout << "test2" << std::endl;
-
-  //List res = List::create(Named("popType") = popType);
-  //return res;
-
   string _poptype = Rcpp::as<std::string>(popType);
   // only to check poptype has correct format:
   const pop_base *popt = init_pop(_poptype);
@@ -205,5 +198,6 @@ List calcIBD(CharacterVector& popType,
                           Named("parents") = parents,
                           Named("multiCross") = false);
   res.attr("class") = "IBDprob";
+  
   return res;
 }

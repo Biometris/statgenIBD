@@ -191,9 +191,7 @@ int main_pedigreeR(arma::cube& Z,
   bool pos_option = eval_pos_df.length() > 0;
   if (pos_option)
   {
-    Rcout << "reading more data .............." << endl;
     eval_pos = read_eval_pos_df(eval_pos_df);
-    Rcout << "reading most data .............." << endl;
   }
   else if (max_step_size > 0)
   {
