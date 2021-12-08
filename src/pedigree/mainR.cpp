@@ -96,8 +96,7 @@ void marker_selection(LinkageMap& markermap,
   {
     Rcout << "YES" << endl;
     Locus loc = markermap[0];
-    markermap.push_back(Locus(loc.GetChr(),loc.GetPosition(),EXTR_POS));
-    //markermap.push_back(Locus(loc.GetChr()+1,loc.GetPosition(),EXTR_POS));
+    markermap.push_back(Locus(loc.GetChr(),loc.GetPosition() + 1.0,EXTR_POS));   
   }
 }
 
