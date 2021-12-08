@@ -9,6 +9,13 @@ MapFunction mapfunction = invhaldane;
 int compare(const Locus& locA,
             const Locus& locB)
 {
+	int intA = -1, intB = -1;
+	try {intA = std::stoi(locA.chr); } catch (...) {}
+	try {intB = std::stoi(locB.chr); } catch (...) {}
+	
+	if (intA < intB) return -1;
+	if (intA > intB) return 1;
+
 	if (locA.chr < locB.chr) return -1;
 	if (locA.chr > locB.chr) return  1;
 
