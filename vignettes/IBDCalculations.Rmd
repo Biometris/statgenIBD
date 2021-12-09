@@ -381,6 +381,12 @@ plot(ABC, genotype = "AxB0001")
 plot(ABC, genotype = "AxC0001")
 ```
 
+Plotting all genotypes together also shows the clear separation between the to crosses in `ABC`.
+
+```{r plotMultiIBDAll}
+plot(ABC, plotType = "allGeno")
+```
+
 ```{r winddown, include = FALSE}
 options(op)
 ```
