@@ -339,7 +339,8 @@ AB <- calcIBD(popType = "F4DH",
               markerFile = system.file("extdata/multipop", "AxB.txt",
                                        package = "statgenIBD"),
               mapFile = system.file("extdata/multipop", "mapfile.txt",
-                                    package = "statgenIBD"))
+                                    package = "statgenIBD"),
+              evalDist = 1)
 
 ## Print summary.
 summary(AB)
@@ -349,7 +350,8 @@ AC <- calcIBD(popType = "F4DH",
               markerFile = system.file("extdata/multipop", "AxC.txt",
                                        package = "statgenIBD"),
               mapFile = system.file("extdata/multipop", "mapfile.txt",
-                                    package = "statgenIBD"))
+                                    package = "statgenIBD"),
+              evalDist = 1)
 
 ## Print summary.
 summary(AC)
@@ -365,8 +367,8 @@ summary(ABC)
 Looking at the summary, we can see the our combined population now has 180 individuals, 100 from population AB and 80 from population AC. There are also three parents, A, B and C. For all individuals from population AB the probability for parent C will be 0, as will be the probability for parent B for individuals from population AC.
 
 ```{r checkMultiIBD}
-## Extract probabilities for markers M1_1 and M3_3.
-ABCProbs <- getProbs(ABC, markers = c("M1_1", "M3_3"))
+## Extract probabilities for markers EXT_1_1 and EXT_1_3.
+ABCProbs <- getProbs(ABC, markers = c("EXT_1_1", "EXT_1_3"))
 
 ## Print probabilities for genotypes AxB0001 and AxC0001.
 ABCProbs[ABCProbs$geno %in% c("AxB0001", "AxC0001"), ]
