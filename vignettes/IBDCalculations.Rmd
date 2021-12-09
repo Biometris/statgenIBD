@@ -145,11 +145,21 @@ SxMIBD$markers["abg313b", "dh005", ]
 
 ### Visualizing results
 
-The calculated IBD probabilities can be visualized using the `plot` function. This will generate a plot of the probabilities per parent for a selected genotype. The plot for **dh005** is made below. Note that it contains a lot of white space since the markers in the file are spread widely along the genome. In the next section we will show how to compute probabilities on a denser grid.
+The calculated IBD probabilities can be visualized using the `plot` function. Two types of plot can be made using this function. `plotType = "singleGeno"` will generate a plot of the probabilities per parent for a selected genotype. The plot for **dh005** is made below. Note that it contains a lot of white space since the markers in the file are spread widely along the genome. In the next section we will show how to compute probabilities on a denser grid.
 
 ```{r plotsxmIBD}
-## Visualize IBD probabilities for dh005
+## Visualize IBD probabilities for dh005.
 plot(SxMIBD, 
+     plotType = "singleGeno",
+     genotype = "dh005")
+```
+
+A second type of plot can be made specifying `plotType = "allGeno"`. This will generate a plot of all genotypes colored per evaluation position according to the parent with the highest probability for that combination of genotype and position. Darker colors indicate a higher probability. Dashed lines indicate the start of a new chromosome.
+
+```{r plotsxmIBDAll}
+## Visualize IBD probabilities for all genotypes.
+plot(SxMIBD, 
+     plotType = "allGeno",
      genotype = "dh005")
 ```
 
