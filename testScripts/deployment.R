@@ -1,5 +1,7 @@
 ## Check with winbuilder - develop only.
 devtools::check_win_devel()
+## Check with mac builder
+devtools::check_mac_release()
 
 rhub::platforms()
 
