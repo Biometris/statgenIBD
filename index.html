@@ -25,6 +25,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">statgenIBD</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2</span>
       </span>
     </div>
 
@@ -78,21 +80,21 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="https://biometris.github.io/statgenSTA">statgenSTA</a>
+      <a href="https://biometris.github.io/statgenSTA" class="external-link">statgenSTA</a>
     </li>
     <li>
-      <a href="https://biometris.github.io/statgenGxE">statgenGxE</a>
+      <a href="https://biometris.github.io/statgenGxE" class="external-link">statgenGxE</a>
     </li>
     <li>
-      <a href="https://biometris.github.io/statgenGWAS">statgenGWAS</a>
+      <a href="https://biometris.github.io/statgenGWAS" class="external-link">statgenGWAS</a>
     </li>
     <li>
-      <a href="https://biometris.github.io/statgenHTP">statgenHTP</a>
+      <a href="https://biometris.github.io/statgenHTP" class="external-link">statgenHTP</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="https://github.com/Biometris/statgenIBD">
+  <a href="https://github.com/Biometris/statgenIBD" class="external-link">
     <span class="fa fa-github fa-lg fab"></span>
      
     github
@@ -110,73 +112,83 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="statgenibd" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#statgenibd" class="anchor"></a>statgenIBD</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="statgenibd">statgenIBD<a class="anchor" aria-label="anchor" href="#statgenibd"></a>
+</h1></div>
 
 <p><strong>statgenIBD</strong> is an R package for calculating IBD probabilities for biparental, three and four-way crosses. Calculations are based on Hidden Markov Models (HMM) and inheritance vectors.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <ul>
 <li>Install from CRAN:</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"statgenIBD"</span><span class="op">)</span></code></pre></div>
+<!-- end list --><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"statgenIBD"</span><span class="op">)</span></code></pre></div>
 <ul>
-<li>Install latest development version from GitHub (requires <a href="https://github.com/r-lib/remotes">remotes</a> package):</li>
+<li>Install latest development version from GitHub (requires <a href="https://github.com/r-lib/remotes" class="external-link">remotes</a> package):</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"Biometris/statgenIBD"</span>, ref <span class="op">=</span> <span class="st">"develop"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<!-- end list --><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"Biometris/statgenIBD"</span>, ref <span class="op">=</span> <span class="st">"develop"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=statgenIBD">https://​cloud.r-project.org/​package=statgenIBD</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/Biometris/statgenIBD/">https://​github.com/​Biometris/​statgenIBD/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/Biometris/statgenIBD/issues">https://​github.com/​Biometris/​statgenIBD/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=statgenIBD" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/Biometris/statgenIBD/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/Biometris/statgenIBD/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>GPL</li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Martin Boer <br><small class="roles"> Author </small>  </li>
-<li>Bart-Jan van Rossum <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-8673-2514" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html#citation">Citing statgenIBD</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-pkg.org/pkg/statgenIBD"><img src="https://www.r-pkg.org/badges/version/statgenIBD"></a></li>
-<li><a href="https://www.r-pkg.org/pkg/statgenIBD"><img src="https://cranlogs.r-pkg.org/badges/statgenIBD" alt="CRAN RStudio mirror downloads"></a></li>
-<li><a href="https://github.com/Biometris/statgenIBD/actions?workflow=R-CMD-check"><img src="https://github.com/Biometris/statgenIBD/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/gh/Biometris/statgenIBD"><img src="https://codecov.io/gh/Biometris/statgenIBD/branch/master/graph/badge.svg" alt="codecov"></a></li>
+<li>Martin Boer <br><small class="roles"> Author </small>  </li>
+<li>Bart-Jan van Rossum <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-8673-2514" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.r-pkg.org/pkg/statgenIBD" class="external-link"><img src="https://www.r-pkg.org/badges/version/statgenIBD"></a></li>
+<li><a href="https://www.r-pkg.org/pkg/statgenIBD" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/statgenIBD" alt="CRAN RStudio mirror downloads"></a></li>
+<li><a href="https://github.com/Biometris/statgenIBD/actions?workflow=R-CMD-check" class="external-link"><img src="https://github.com/Biometris/statgenIBD/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/Biometris/statgenIBD" class="external-link"><img src="https://codecov.io/gh/Biometris/statgenIBD/branch/master/graph/badge.svg" alt="codecov"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Martin Boer, Bart-Jan van Rossum.</p>
+  <p></p>
+<p>Developed by Martin Boer, Bart-Jan van Rossum.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -184,6 +196,8 @@
 
   
 
+
+  
 
   </body>
 </html>
