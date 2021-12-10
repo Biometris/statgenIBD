@@ -202,7 +202,8 @@ plot.IBDprob <- function(x,
     maxPars <- parents[apply(X = markers, MARGIN = 1:2, FUN = which.max)]
     nGeno <- nrow(maxVals)
     ## Create plot data.
-    plotDat <- data.frame(marker = dimnames(maxVals)[[1]],
+    plotDat <- data.frame(marker = factor(dimnames(maxVals)[[1]],
+                                          levels = dimnames(maxVals)[[1]]),
                           genotype = rep(dimnames(maxVals)[[2]], each = nGeno),
                           maxVal = as.vector(maxVals),
                           maxPar = as.vector(maxPars))
@@ -216,7 +217,7 @@ plot.IBDprob <- function(x,
                          ggplot2::aes_string(x = "marker", y = "genotype",
                                              alpha = "maxVal",
                                              fill = "maxPar"))+
-      ggplot2::geom_tile() +
+      ggplot2::geom_raster() +
       ggplot2::labs(title = title, x = "Genome", y = "Genotypes",
                     fill = "Parent", alpha = "Probability") +
       ggplot2::geom_vline(xintercept = newChrs, linetype = "dashed",
