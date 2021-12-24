@@ -7,7 +7,7 @@
 \method{plot}{IBDprob}(
   x,
   ...,
-  plotType = c("singleGeno", "allGeno"),
+  plotType = c("singleGeno", "allGeno", "pedigree"),
   genotype,
   title = NULL,
   output = TRUE

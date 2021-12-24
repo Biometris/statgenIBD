@@ -153,7 +153,7 @@ c.IBDprob <- function(...) {
 #' @export
 plot.IBDprob <- function(x,
                          ...,
-                         plotType = c("singleGeno", "allGeno"),
+                         plotType = c("singleGeno", "allGeno", "pedigree"),
                          genotype,
                          title = NULL,
                          output = TRUE) {
@@ -230,6 +230,8 @@ plot.IBDprob <- function(x,
         panel.border = ggplot2::element_rect(fill = NA),
         plot.title = ggplot2::element_text(hjust = 0.5)
       )
+  } else if (plotType == "pedigree") {
+    p <- pedPlot(x, title = title)
   }
   if (output) {
     plot(p)
