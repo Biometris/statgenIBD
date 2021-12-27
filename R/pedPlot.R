@@ -1,22 +1,23 @@
 #' Helper function for plotting the pedigree
 #'
 #' @keywords internal
-pedPlot <- function(x,
+pedPlot <- function(markers,
+                    pedigree,
+                    popType,
+                    multiCross,
+                    genoCross,
                     title) {
-  pedDatTot <-  x$pedigree
-  popType <- x$popType
-  multiCross <- x$multiCross
-  genoCross <- attr(x, "genoCross")
+  pedDatTot <-  pedigree
   ## Restrict to parents and first progeny.
-  pedDatPar <- pedDatTot[!pedDatTot[["ID"]] %in% colnames(x$markers), ]
-  pedDatOff <- pedDatTot[pedDatTot[["ID"]] %in% colnames(x$markers), ]
+  pedDatPar <- pedDatTot[!pedDatTot[["ID"]] %in% colnames(markers), ]
+  pedDatOff <- pedDatTot[pedDatTot[["ID"]] %in% colnames(markers), ]
   pedDatOff <- pedDatOff[!duplicated(pedDatOff[c("par1", "par2")]), ]
   pedDatOff[["ID"]] <- "F1"
   if (multiCross) {
     pedDatTot[["cross"]] <- genoCross[["cross"]][match(pedDatTot[["ID"]],
                                                        genoCross[["geno"]])]
   } else {
-    pedDatTot[pedDatTot[["ID"]] %in% colnames(x$markers), "cross"] <- "cross1"
+    pedDatTot[pedDatTot[["ID"]] %in% colnames(markers), "cross"] <- "cross1"
   }
   pedDat <- rbind(pedDatPar, pedDatOff)
   generation <- as.numeric(factor(pedDat[["type"]],
