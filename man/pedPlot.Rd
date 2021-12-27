@@ -4,7 +4,7 @@
 \alias{pedPlot}
 \title{Helper function for plotting the pedigree}
 \usage{
-pedPlot(markers, pedigree, popType, multiCross, genoCross, title)
+pedPlot(pedigree, offSpring, popType, multiCross, genoCross, title)
 }
 \description{
 Helper function for plotting the pedigree

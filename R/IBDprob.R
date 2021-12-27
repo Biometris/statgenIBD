@@ -188,10 +188,12 @@ plot.IBDprob <- function(x,
     p <- singleGenoPlot(markers = markers, map = map, parents = parents,
                         genotype = genotype, title = title)
   } else if (plotType == "allGeno") {
-    p <- allGenoPlot(markers = markers, map = map, parents = parents, title = title)
+    p <- allGenoPlot(markers = markers, map = map, parents = parents,
+                     title = title)
   } else if (plotType == "pedigree") {
-    p <- pedPlot(markers = markers, pedigree = pedigree, popType = popType,
-                 multiCross = multiCross, genoCross = genoCross, title = title)
+    p <- pedPlot(pedigree = pedigree, offSpring = colnames(markers),
+                 popType = popType, multiCross = multiCross,
+                 genoCross = genoCross, title = title)
   }
   if (output) {
     plot(p)
