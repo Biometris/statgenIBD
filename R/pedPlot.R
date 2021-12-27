@@ -3,17 +3,24 @@
 #' @keywords internal
 pedPlot <- function(x,
                     title) {
-  if (x$multiCross) {
-    stop("Plot not implemented yet for multicross.\n")
-  }
-  pedDat <-  x$pedigree
+  pedDatTot <-  x$pedigree
   popType <- x$popType
+  multiCross <- x$multiCross
+  genoCross <- attr(x, "genoCross")
   ## Restrict to parents and first progeny.
-  pedDat <- pedDat[1:which.max(pedDat[["type"]] == popType), ]
-  pedDat[nrow(pedDat), "ID"] <- "F1"
+  pedDatPar <- pedDatTot[!pedDatTot[["ID"]] %in% colnames(x$markers), ]
+  pedDatOff <- pedDatTot[pedDatTot[["ID"]] %in% colnames(x$markers), ]
+  pedDatOff <- pedDatOff[!duplicated(pedDatOff[c("par1", "par2")]), ]
+  pedDatOff[["ID"]] <- "F1"
+  if (multiCross) {
+    pedDatTot[["cross"]] <- genoCross[["cross"]][match(pedDatTot[["ID"]],
+                                                       genoCross[["geno"]])]
+  } else {
+    pedDatTot[pedDatTot[["ID"]] %in% colnames(x$markers), "cross"] <- "cross1"
+  }
+  pedDat <- rbind(pedDatPar, pedDatOff)
   generation <- as.numeric(factor(pedDat[["type"]],
                                   levels = unique(pedDat[["type"]]))) - 1
-
   ## Determine the row and column numbers in the plot.
   plotCols <- max(table(generation))
   plotRows <- length(unique(generation)) + 1
@@ -42,7 +49,7 @@ pedPlot <- function(x,
                           by.x = "par2", by.y = "ID"))
   arrowDat[["linetype"]] <- "solid"
   ## Add extra arrow to bottom of plot.
-  extArrow <- tail(arrowDat, 1)
+  extArrow <- tail(arrowDat, sum(generation == max(generation)))
   extArrow[["linetype"]] <- "dotted"
   extArrow[["yPos.y"]] <- extArrow[["yPos.x"]]
   extArrow[["yPos.x"]] <- extArrow[["yPos.x"]] - 1
@@ -59,11 +66,13 @@ pedPlot <- function(x,
   extLab[["ID"]] <- popType
   labDat <- rbind(labDat, extLab)
   ## Construct texts.
-  textDat <- data.frame(xPos.y = c(0 ,0, 0, tail(labDat[["xPos.y"]], 1)),
-                        yPos.y = c(plotRows, 1, 0, 0),
+  ## Get number of individuals per cross.
+  crossSizes <- table(pedDatTot[["cross"]])
+  textDat <- data.frame(xPos.y = c(0, 0, 0, extLab[["xPos.y"]]),
+                        yPos.y = c(plotRows, 1, 0, rep(0, nrow(extLab))),
                         text = c("Parent:", "Population type:", "size:",
-                                 dim(x$markers)[2]))
-  extText <- tail(arrowDat, 1)
+                                 crossSizes))
+  extText <- tail(arrowDat, nrow(extArrow))
   extText[["text"]] <- "selfing"
   extText[["xPos.y"]] <- (extText[["xPos.x"]] + extText[["xPos.y"]]) / 2
   extText[["yPos.y"]] <- (extText[["yPos.x"]] + extText[["yPos.y"]]) / 2
@@ -84,7 +93,7 @@ pedPlot <- function(x,
     ggplot2::geom_segment(ggplot2::aes_string(xend = "(xPos.x + xPos.y) / 2",
                                               yend = "(yPos.x + yPos.y) / 2"),
                           size = 1, color = "blue",
-                          data = arrowDat[-nrow(arrowDat), ],
+                          data = arrowDat[arrowDat[["linetype"]] == "solid", ],
                           arrow = ggplot2::arrow(length = ggplot2::unit(0.3, "cm"),
                                                  type = "closed")) +
     ggplot2::geom_label(ggplot2::aes_string(label = "ID"),

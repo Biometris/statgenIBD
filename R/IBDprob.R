@@ -87,6 +87,11 @@ c.IBDprob <- function(...) {
   parentsNw <- unique(unlist(sapply(X = markerLst, FUN = function(mrk) {
     dimnames(mrk)[3]
   })))
+  pedLst <- lapply(X = args, FUN = `[[`, "pedigree")
+  pedTot <- do.call(rbind, pedLst)
+  pedParNw <- unique(pedTot[pedTot[["par1"]] == 0 & pedTot[["par2"]] == 0, ])
+  pedOffNw <- pedTot[pedTot[["par1"]] != 0 | pedTot[["par2"]] != 0, ]
+  pedNw <- rbind(pedParNw, pedOffNw)
   genoNw <- unlist(sapply(X = markerLst, FUN = colnames))
   nGeno <- sapply(X = markerLst, FUN = ncol)
   genoCross <- data.frame(cross = paste0("cross",
@@ -104,7 +109,8 @@ c.IBDprob <- function(...) {
                         markers = markersNw,
                         popType = pops,
                         parents = parents,
-                        multicross = TRUE),
+                        pedigree = pedNw,
+                        multiCross = TRUE),
                    class = "IBDprob",
                    genoCross = genoCross)
   return(res)
