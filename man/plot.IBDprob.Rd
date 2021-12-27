@@ -33,11 +33,16 @@ plot should be made. Ignored if \code{plotType = "allGeno"}.}
 A ggplot object is invisibly returned.
 }
 \description{
-Creates a plot for an object of class \code{IBDprob}. Two types of plot can
-be made, a plot for a single genotype showing the IBD probabilities for all
-parents across the genome (\code{plotType = "singleGeno"}), or a plot showing
-for all genotypes the probabilities of the parent with the highest
-probability per marker (\code{plotType = "allGeno"}).
+Creates a plot for an object of class \code{IBDprob}. Three types of plot can
+be made:
+\itemize{
+\item{\code{singleGeno}}{ A plot for a single genotype showing the IBD
+probabilities  for all parents across the genome.}
+\item{\code{singleGeno}}{ A plot showing for all genotypes the IBD
+probabilities of the parent with the highest probability per marker.}
+\item{\code{pedigree}}{ A plot showing the structure of the pedigree of
+the population.}
+}
 }
 \examples{
 ## Compute IBD probabilities for Steptoe Morex.
@@ -58,5 +63,9 @@ plot(SxMIBD_Ext,
 ## Plot results for all genotypes.
 plot(SxMIBD_Ext,
      plotType = "allGeno")
+
+## Plot sturcture of the pedigree.
+plot(SxMIBD_Ext,
+     plotType = "pedigree")
 
 }

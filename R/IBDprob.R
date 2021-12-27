@@ -118,11 +118,16 @@ c.IBDprob <- function(...) {
 
 #' Plot function for objects of class IBDprob
 #'
-#' Creates a plot for an object of class \code{IBDprob}. Two types of plot can
-#' be made, a plot for a single genotype showing the IBD probabilities for all
-#' parents across the genome (\code{plotType = "singleGeno"}), or a plot showing
-#' for all genotypes the probabilities of the parent with the highest
-#' probability per marker (\code{plotType = "allGeno"}).
+#' Creates a plot for an object of class \code{IBDprob}. Three types of plot can
+#' be made:
+#' \itemize{
+#' \item{\code{singleGeno}}{ A plot for a single genotype showing the IBD
+#' probabilities  for all parents across the genome.}
+#' \item{\code{singleGeno}}{ A plot showing for all genotypes the IBD
+#' probabilities of the parent with the highest probability per marker.}
+#' \item{\code{pedigree}}{ A plot showing the structure of the pedigree of
+#' the population.}
+#' }
 #'
 #' @param x An object of class \code{IBDprob}.
 #' @param ... Further arguments. Unused.
@@ -155,6 +160,10 @@ c.IBDprob <- function(...) {
 #' ## Plot results for all genotypes.
 #' plot(SxMIBD_Ext,
 #'      plotType = "allGeno")
+#'
+#' ## Plot sturcture of the pedigree.
+#' plot(SxMIBD_Ext,
+#'      plotType = "pedigree")
 #'
 #' @export
 plot.IBDprob <- function(x,
