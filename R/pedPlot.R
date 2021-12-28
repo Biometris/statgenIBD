@@ -1,5 +1,6 @@
 #' Helper function for plotting the pedigree
 #'
+#' @importFrom utils tail
 #' @keywords internal
 pedPlot <- function(pedigree,
                     offSpring,
