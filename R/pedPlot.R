@@ -49,6 +49,7 @@ pedPlot <- function(pedigree,
                     merge(pedDat,
                           pedDat[, !colnames(pedDat) %in% c("par1", "par2")],
                           by.x = "par2", by.y = "ID"))
+  arrowDat <- arrowDat[order(arrowDat[["yPos.x"]], decreasing = TRUE), ]
   arrowDat[["linetype"]] <- "solid"
   ## Add extra arrow to bottom of plot.
   extArrow <- tail(arrowDat, sum(generation == max(generation)))

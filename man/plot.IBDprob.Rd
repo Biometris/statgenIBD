@@ -22,7 +22,7 @@
 be made.}
 
 \item{genotype}{A character string indicating the genotype for which the
-plot should be made. Ignored if \code{plotType = "allGeno"}.}
+plot should be made. Only for \code{plotType = "singleGeno"}.}
 
 \item{title}{A character string, the title of the plot.}
 
@@ -37,8 +37,8 @@ Creates a plot for an object of class \code{IBDprob}. Three types of plot can
 be made:
 \itemize{
 \item{\code{singleGeno}}{ A plot for a single genotype showing the IBD
-probabilities  for all parents across the genome.}
-\item{\code{singleGeno}}{ A plot showing for all genotypes the IBD
+probabilities for all parents across the genome.}
+\item{\code{allGeno}}{ A plot showing for all genotypes the IBD
 probabilities of the parent with the highest probability per marker.}
 \item{\code{pedigree}}{ A plot showing the structure of the pedigree of
 the population.}
