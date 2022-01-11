@@ -11,6 +11,18 @@ pedPlot <- function(pedigree,
   pedDatTot <- pedigree
   ## Restrict to parents and first progeny.
   pedDatPar <- pedDatTot[!pedDatTot[["ID"]] %in% offSpring, ]
+  ## Put most used parent central.
+  parTab <- table(c(pedDatPar[["par1"]], pedDatPar[["par2"]]))
+  parTab <- parTab[names(parTab) %in%
+                     pedDatPar[pedDatPar[["type"]] == "INBPAR", "ID"]]
+  if (length(parTab) > 1) {
+    parTab <- sort(parTab)
+    parTab <- c(rev(parTab[seq(from = length(parTab), to = 1, by = -2)]),
+                rev(parTab[seq(from = length(parTab) - 1, to = 1, by = -2)]))
+    pedDatPar <- pedDatPar[c(match(names(parTab), table = pedDatPar[["ID"]],
+                                   nomatch = 0),
+                             (length(parTab) + 1):nrow(pedDatPar)), ]
+  }
   pedDatOff <- pedDatTot[pedDatTot[["ID"]] %in% offSpring, ]
   pedDatOff <- pedDatOff[!duplicated(pedDatOff[c("par1", "par2")]), ]
   pedDatOff[["ID"]] <- "F1"
@@ -88,7 +100,7 @@ pedPlot <- function(pedigree,
   ## Segments, arrows, labels and text separately and an additional
   ## segment for the arrow in the explanation part.
   p <- ggplot2::ggplot(arrowDat,
-                  ggplot2::aes_string(x = "xPos.y", y = "yPos.y")) +
+                       ggplot2::aes_string(x = "xPos.y", y = "yPos.y")) +
     ggplot2::geom_segment(ggplot2::aes_string(xend = "xPos.x",
                                               yend = "yPos.x",
                                               linetype = "linetype"),
@@ -109,12 +121,12 @@ pedPlot <- function(pedigree,
     ggplot2::ylim(-0.5, plotRows + 0.5) +
     ggplot2::labs(x = "", y = "", title = title) +
     ggplot2::theme(panel.background = ggplot2::element_blank(),
-          plot.background = ggplot2::element_blank(),
-          strip.background = ggplot2::element_blank(),
-          panel.border = ggplot2::element_rect(fill = NA),
-          axis.text = ggplot2::element_blank(),
-          axis.ticks = ggplot2::element_blank(),
-          plot.title = ggplot2::element_text(hjust = 0.5),
-          legend.position = "none")
+                   plot.background = ggplot2::element_blank(),
+                   strip.background = ggplot2::element_blank(),
+                   panel.border = ggplot2::element_rect(fill = NA),
+                   axis.text = ggplot2::element_blank(),
+                   axis.ticks = ggplot2::element_blank(),
+                   plot.title = ggplot2::element_text(hjust = 0.5),
+                   legend.position = "none")
   return(p)
 }
