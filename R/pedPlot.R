@@ -15,7 +15,7 @@ pedPlot <- function(pedigree,
   parTab <- table(c(pedDatPar[["par1"]], pedDatPar[["par2"]]))
   parTab <- parTab[names(parTab) %in%
                      pedDatPar[pedDatPar[["type"]] == "INBPAR", "ID"]]
-  if (length(parTab) > 1) {
+  if (length(parTab) > 1 && length(unique(parTab)) > 1) {
     parTab <- sort(parTab)
     parTab <- c(rev(parTab[seq(from = length(parTab), to = 1, by = -2)]),
                 rev(parTab[seq(from = length(parTab) - 1, to = 1, by = -2)]))
