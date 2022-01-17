@@ -11,18 +11,6 @@ pedPlot <- function(pedigree,
   pedDatTot <- pedigree
   ## Restrict to parents and first progeny.
   pedDatPar <- pedDatTot[!pedDatTot[["ID"]] %in% offSpring, ]
-  ## Put most used parent central.
-  parTab <- table(c(pedDatPar[["par1"]], pedDatPar[["par2"]]))
-  parTab <- parTab[names(parTab) %in%
-                     pedDatPar[pedDatPar[["type"]] == "INBPAR", "ID"]]
-  if (length(parTab) > 1 && length(unique(parTab)) > 1) {
-    parTab <- sort(parTab)
-    parTab <- c(rev(parTab[seq(from = length(parTab), to = 1, by = -2)]),
-                rev(parTab[seq(from = length(parTab) - 1, to = 1, by = -2)]))
-    pedDatPar <- pedDatPar[c(match(names(parTab), table = pedDatPar[["ID"]],
-                                   nomatch = 0),
-                             (length(parTab) + 1):nrow(pedDatPar)), ]
-  }
   pedDatOff <- pedDatTot[pedDatTot[["ID"]] %in% offSpring, ]
   pedDatOff <- pedDatOff[!duplicated(pedDatOff[c("par1", "par2")]), ]
   pedDatOff[["ID"]] <- "F1"
@@ -33,6 +21,17 @@ pedPlot <- function(pedigree,
     pedDatTot[pedDatTot[["ID"]] %in% offSpring, "cross"] <- "cross1"
   }
   pedDat <- rbind(pedDatPar, pedDatOff)
+  ## Put most used parent central.
+  parTab <- table(c(pedDat[["par1"]], pedDat[["par2"]]))
+  parTab <- parTab[names(parTab) %in%
+                     pedDat[pedDat[["type"]] == "INBPAR", "ID"]]
+  if (length(parTab) > 1 && length(unique(parTab)) > 1) {
+    parTab <- sort(parTab)
+    parTab <- c(rev(parTab[seq(from = length(parTab), to = 1, by = -2)]),
+                rev(parTab[seq(from = length(parTab) - 1, to = 1, by = -2)]))
+    pedDat <- pedDat[c(match(names(parTab), table = pedDat[["ID"]], nomatch = 0),
+                             (length(parTab) + 1):nrow(pedDat)), ]
+  }
   generation <- as.numeric(factor(pedDat[["type"]],
                                   levels = unique(pedDat[["type"]]))) - 1
   ## Determine the row and column numbers in the plot.
