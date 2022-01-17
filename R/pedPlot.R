@@ -81,6 +81,8 @@ pedPlot <- function(pedigree,
   labDat <- rbind(labDat, extLab)
   ## Construct texts.
   ## Get number of individuals per cross.
+  pedDatTot[["cross"]] <- factor(pedDatTot[["cross"]],
+                                 levels = unique(pedDatTot[["cross"]]))
   crossSizes <- table(pedDatTot[["cross"]])
   textDat <- data.frame(xPos.y = c(0, 0, 0, extLab[["xPos.y"]]),
                         yPos.y = c(plotRows, 1, 0, rep(0, nrow(extLab))),
