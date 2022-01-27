@@ -4,6 +4,9 @@
 #include <string>
 #include <vector>
 
+//! extra column (after ID for individual) for family identifier
+const bool fam_column_pedigree_file = false;
+
 //! Properties of an individual
 /*!
 This class contains the name (identity) of an individual, the names of the parents, and the type.
@@ -47,9 +50,12 @@ private:
 	std::string ID, FAM, TYPE, P1, P2;
 };
 
+bool findID(const std::vector<IndProp>& pop, const std::string& ID);
 int ndxID(const std::vector<IndProp>& pop, const std::string& ID);
 
 bool match(int& x, const std::string& str, const char * pat);
 bool match(int& x, int& y, const std::string& str, const char * pat);
+
+std::vector<IndProp> read_ped_file(const std::string& filename);
 
 #endif

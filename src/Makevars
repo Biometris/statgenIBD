@@ -5,11 +5,13 @@ PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
 PKG_CPPFLAGS = \
  -I. \
  -Igeneral\
- -Ipedigree
+ -Ipedigree\
+ -Isim
 
 # Include all C++ files in src/ and its subdirectories
 PKG_SOURCES = \
         calcIBD.cpp\
+		simQTL.cpp\
         RcppExports.cpp\
         general/HMMalgo.cpp\
         general/InhVector.cpp\
@@ -18,13 +20,41 @@ PKG_SOURCES = \
         general/OrdGeno.cpp\
         general/TransMatSym2D.cpp\
         general/util_genetics.cpp\
+		general/Random.cpp\
+		general/matvec.cpp\
+		general/dir.cpp\
         pedigree/analysis_fam.cpp\
         pedigree/crosses.cpp\
         pedigree/Loc.cpp\
         pedigree/mainR.cpp\
         pedigree/markerscore.cpp\
         pedigree/popt.cpp\
-        pedigree/read_map.cpp
+        pedigree/read_map.cpp\
+		sim/GenoValue.cpp\
+		sim/input.cpp\
+		sim/MarkerType.cpp\
+		sim/output.cpp\
+		sim/PopName.cpp\
+		sim/Sim.cpp\
+		sim/SimPop.cpp\
+		sim/Genome.cpp\
+		sim/Genotype.cpp\
+		sim/Chromosome.cpp\
+		sim/ChromosomePair.cpp\
+		sim/CommandFile.cpp\
+		sim/ObsGeno.cpp\
+		sim/poptype/mapqtl.cpp\
+		sim/poptype/BCpop.cpp\
+		sim/poptype/calcRILexact.cpp\
+		sim/poptype/DHpop.cpp\
+		sim/poptype/F2pop.cpp\
+		sim/poptype/GenoProb.cpp\
+		sim/poptype/HANSpop.cpp\
+		sim/poptype/PIONpop.cpp\
+		sim/poptype/poptype.cpp\
+		sim/poptype/RILpop.cpp\
+		sim/poptype/simul.cpp
+		
 
 # Obtain the object files
 OBJECTS = $(PKG_SOURCES:.cpp=.o)

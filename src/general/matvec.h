@@ -79,6 +79,25 @@ public:
 	void resize(int nr, int nc, const T& val = T());
 };
 
+template<class T>
+class matrix3D  : public std::vector< matrix<T> >
+{
+private:
+	typedef std::vector< std::vector<T> > mat3d_t;
+public:
+	matrix3D() {}
+	matrix3D(int x, int y, int z)
+		: std::vector< matrix<T> >(x,matrix<T>(y,z)){}
+	matrix3D(int x, int y, int z, const T& init)
+		: std::vector< matrix<T> >(x,matrix<T>(y,z,init)) {}
+	typename mat3d_t::size_type Dim1() const
+		{ return this->size(); }
+	typename mat3d_t::size_type Dim2() const
+		{ return (this->size() == 0) ? 0 : this->front().NrRows();}
+	typename mat3d_t::size_type Dim3() const
+		{ return (this->size() == 0) ? 0 : this->front().NrCols(); }
+};
+
 template <class T>
 void matrix<T>::resize(int nr, int nc, const T& val)
 {
@@ -404,6 +423,8 @@ void freematrix(T **ptr)
 	delete[] *ptr;
 	delete[] ptr;
 }
+
+matrix<double> identity_matrix(int n);
 
 }
 

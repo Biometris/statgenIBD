@@ -23,11 +23,32 @@ private:
 	double left,right;
 };
 
+class MakeLabel
+{
+public:
+	MakeLabel(const std::string& pre, int width) : pre_(pre),width_(width) {}
+	std::string operator()(int a);
+private:
+	std::string pre_;
+	int width_;
+};
+
+std::string itostr(int a);
+
+void tolower(std::string& a);
+void toupper(std::string& a);
+
 unsigned int pow2(int n);
 
 inline double sqr(double x) { return x*x; }
 inline double cub(double x) { return x*x*x; }
 inline double pow10(double x) { return pow(10.0,x); }
+
+double mean(const std::vector<double>& y);
+double mean(const std::vector<double>& y, const std::vector<double>& w);
+
+double variance(const std::vector<double>& y);
+double variance(const std::vector<double>& y, const std::vector<double>& w);
 
 double round(double x, int precision = 0);
 
@@ -35,8 +56,13 @@ void make_conditional(std::vector<double>& p);
 std::vector<double> elem_prod(const std::vector<double>& a,
 							  const std::vector<double>& b);
 
+std::istream& skip_header(std::istream &f);
+std::istream& skip_lines(std::istream& inp, int n);
 std::istream& skip_rest_of_line(std::istream& inp);
 std::istream& eatcomment(std::istream& inp);
+
+std::string remove_comment(const std::string& str);
+bool not_space(char c);
 
 void OpenFile(std::ofstream& outp, std::string filename);
 void OpenFile(std::ifstream& inp, std::string filename);

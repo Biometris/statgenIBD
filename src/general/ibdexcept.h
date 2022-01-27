@@ -24,7 +24,7 @@ public:
   virtual ~ibd_file_error() throw() {;}
 };
 
-typedef ibd_error MQMlib_error;
+typedef ibd_error ibd_error;
 typedef ibd_file_error MQMlib_file_error;
 
 }
