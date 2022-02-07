@@ -6,7 +6,8 @@ PKG_CPPFLAGS = \
  -I. \
  -Igeneral\
  -Ipedigree\
- -Isim
+ -Isim\
+ -Isim/poptype
 
 # Include all C++ files in src/ and its subdirectories
 PKG_SOURCES = \

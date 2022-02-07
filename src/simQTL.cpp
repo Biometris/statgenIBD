@@ -6,7 +6,6 @@
 #include "Loc.h"
 #include "read_map.h"
 
-
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -82,19 +81,27 @@ void print_coa_file(const vector<string>& parname, const string& filename)
 		outp << *it << endl;
 }
 
-
-int simQTL(string inputfile,
-		   string dir_name = "",
-           int nrep = 1,
-           bool print_flexQTL = false)
+//' simQTL
+//'
+//' @export
+// [[Rcpp::export]]
+int simQTL(CharacterVector& inputfile,
+		   Nullable<CharacterVector&> dir_name = R_NilValue,
+           const int& nrep = 1,
+           const bool& print_flexQTL = false)
 {
 	cout.setf(ios::fixed, ios::floatfield);
 	
 	//Argu.GetArgument("scriptfile",inputfile);
 	//Argu.GetOption("r",nrep);
-	if (dir_name != "")
-		ChangeDir(dir_name);
-
+	string inputfile_str = Rcpp::as<string>(inputfile);
+	
+	if (dir_name.isNotNull()) 
+	{
+	  string dir_name_str = Rcpp::as<string>(dir_name);
+	  ChangeDir(dir_name_str);
+	}    	
+	
 	int nr_alleles;
 	long int start_seed;
 	double fr_miss = 0.0;
@@ -102,7 +109,7 @@ int simQTL(string inputfile,
 	LinkageMap markermap;
 	vector<double> chr_length;
 	string eval_filename,mapfile;
-	Commands commands = read_input_file(inputfile);
+	Commands commands = read_input_file(inputfile_str);
 	read(mu,commands,"mu");
 	read(sigma2_e,commands,"var");
 	read(eval_filename,dist_eval_pos,commands,"dist");

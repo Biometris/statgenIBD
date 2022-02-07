@@ -89,3 +89,10 @@ calcIBD <- function(popType, markerFile, mapFile, evalPos = NULL, evalDist = NUL
     .Call(`_statgenIBD_calcIBD`, popType, markerFile, mapFile, evalPos, evalDist, grid, verbose)
 }
 
+#' simQTL
+#'
+#' @export
+simQTL <- function(inputfile, dir_name = NULL, nrep = 1L, print_flexQTL = FALSE) {
+    .Call(`_statgenIBD_simQTL`, inputfile, dir_name, nrep, print_flexQTL)
+}
+

@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 #include <algorithm>
 #include "Genome.h"
 #include "util_genetics.h"
@@ -62,6 +63,7 @@ bool ibd::Genome::IsHomozygote() const
 
 ibd::Genotype ibd::Genome::GetGenotype(int chr_nr, double cM) const
 {
+	Rcpp::Rcout << chr_nr << std::endl;
 	if (chr_nr < 0 || (unsigned)chr_nr >= chr_pair.size())
 		throw ibd_error("Genome::GetGenotype");
 	return chr_pair[chr_nr].GetGenotype(cM);
@@ -170,6 +172,7 @@ vector<ibd::Genotype> ibd::Genome::GetGenotype(const LinkageMap& linkage_map) co
 		chr_nr = std::stoi(iter1->GetChr());
 		if (prev_chr_nr != chr_nr)
 		{
+			Rcpp::Rcout << chr_nr << std::endl;
 			if (chr_nr < 0 || chr_nr >= nchr)
 				throw ibd_error("Genome::GetGenotype ");
 			const ChromosomePair& cur = chr_pair[chr_nr];
@@ -181,6 +184,7 @@ vector<ibd::Genotype> ibd::Genome::GetGenotype(const LinkageMap& linkage_map) co
 		Position pos(iter1->GetPosition());
 	    iter2_a = find_if(iter2_a,a_end,pos);
 		iter2_b = find_if(iter2_b,b_end,pos);
+		
 		if (iter2_a == a_end || iter2_b == b_end)
 			throw ibd_error("Genome::GetGenotype");
 		*iter3++ = Genotype(iter2_a->allele, iter2_b->allele);

@@ -28,9 +28,24 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// simQTL
+int simQTL(CharacterVector& inputfile, Nullable<CharacterVector&> dir_name, const int& nrep, const bool& print_flexQTL);
+RcppExport SEXP _statgenIBD_simQTL(SEXP inputfileSEXP, SEXP dir_nameSEXP, SEXP nrepSEXP, SEXP print_flexQTLSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector& >::type inputfile(inputfileSEXP);
+    Rcpp::traits::input_parameter< Nullable<CharacterVector&> >::type dir_name(dir_nameSEXP);
+    Rcpp::traits::input_parameter< const int& >::type nrep(nrepSEXP);
+    Rcpp::traits::input_parameter< const bool& >::type print_flexQTL(print_flexQTLSEXP);
+    rcpp_result_gen = Rcpp::wrap(simQTL(inputfile, dir_name, nrep, print_flexQTL));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_statgenIBD_calcIBD", (DL_FUNC) &_statgenIBD_calcIBD, 7},
+    {"_statgenIBD_simQTL", (DL_FUNC) &_statgenIBD_simQTL, 4},
     {NULL, NULL, 0}
 };
 
