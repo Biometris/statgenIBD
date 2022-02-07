@@ -23,12 +23,14 @@ pedPlot <- function(pedigree,
   pedDat <- rbind(pedDatPar, pedDatOff)
   ## Put most used parent central.
   parTab <- table(c(pedDat[["par1"]], pedDat[["par2"]]))
+  ## First order by ID in pedigree to prevent crossing arrows as much as possible.
+  parTab <- parTab[unique(pedigree[["ID"]])]
   parTab <- parTab[names(parTab) %in%
                      pedDat[pedDat[["type"]] == "INBPAR", "ID"]]
   if (length(parTab) > 1 && length(unique(parTab)) > 1) {
     parTab <- sort(parTab)
     parTab <- c(head(parTab, length(parTab) / 2), tail(parTab, 1),
-                rev(head(rev(parTab)[-1], length(parTab) / 2)))
+                rev(head(rev(parTab)[-1], (length(parTab) - 1) / 2)))
     pedDat <- pedDat[c(match(names(parTab), table = pedDat[["ID"]], nomatch = 0),
                              (length(parTab) + 1):nrow(pedDat)), ]
   }
@@ -56,10 +58,10 @@ pedPlot <- function(pedigree,
   ## Construct data for plotting arrows.
   arrowDat <- rbind(merge(pedDat,
                           pedDat[, !colnames(pedDat) %in% c("par1", "par2")],
-                          by.x = "par1", by.y = "ID"),
+                          by.x = "par1", by.y = "ID", sort = FALSE),
                     merge(pedDat,
                           pedDat[, !colnames(pedDat) %in% c("par1", "par2")],
-                          by.x = "par2", by.y = "ID"))
+                          by.x = "par2", by.y = "ID", sort = FALSE))
   arrowDat <- arrowDat[order(arrowDat[["yPos.x"]], decreasing = TRUE), ]
   arrowDat[["linetype"]] <- "solid"
   ## Add extra arrow to bottom of plot.
