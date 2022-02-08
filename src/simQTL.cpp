@@ -44,10 +44,24 @@ void sim_pops(const vector<PopProp>& pops, map<string,Genome>& genome_inbred_par
 			for (vector<PopProp>::const_iterator it=pops.begin();it!=pops.end();++it)
 			{
 				string pop_name = it->GetName();
+				
+				Rcout << pop_name << endl;
+				
 				SimPop sim_pop = sim_population(*it,genome_inbred_parents,pop_name);
+				
+				Rcout << "LALA" << endl;
+				
 				make_ped_file(sim_pop,pop_name);
+				
+				Rcout << "LALA2" << endl;
+				
 				make_loc_file(sim_pop,markermap,markertype,pop_name);
-				make_qua_file(sim_pop,phi,sigma,pop_name);
+				
+				Rcout << "LALA3" << endl;
+				
+				//make_qua_file(sim_pop,phi,sigma,pop_name);
+				
+				//Rcout << "LALA4" << endl;
 			}
 		//}
 		if (nrep > 1) ChangeDir("..");
@@ -64,10 +78,18 @@ map<string,Genome> make_genome_inbred_founders(const map<string,string>& inbfnds
 	typedef map<string,string>::const_iterator IterFnds;
 	for (IterFnds iter=inbfnds.begin();iter!=inbfnds.end();++iter)
 	{
+		
+		Rcout << "chr_length" << endl;
+		Rcout << chr_length << endl;
+		Rcout << "k" << endl;
+		Rcout << k << endl;
+		
 		Genome fnd = Genome(chr_length,k,k);
 		genome_founders[iter->first] = fnd;
 		Rcout << setw(2) << k << setw(8) << iter->first 
-			 << setw(5) << iter->second << setw(12) << phi(fnd) << endl;
+			 << setw(5) << iter->second << 
+			 //setw(12) << phi(fnd) << 
+			 endl;
 		k++;
 	}
 	return genome_founders;
@@ -167,6 +189,7 @@ int simQTL(CharacterVector& inputfile,
 
 	Phi phi(QTLs,inbfnds,A,mu);
 	double sigma = sqrt(sigma2_e);	
+	
 	vector<MarkerType> markertype = generate_markertypes(M,Nfnd,nr_alleles,fr_miss);
 	map<string,Genome> genome_founders = make_genome_inbred_founders(inbfnds,chr_length,phi);
 

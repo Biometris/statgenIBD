@@ -1,3 +1,4 @@
+#include <Rcpp.h>
 #include <iomanip>
 
 #include "sim.h"
@@ -22,6 +23,10 @@ SimPop sim_population(const PopProp& pop, const map<string,Genome>& genome_par, 
 		else
 			throw ibd_error("Cannot find parent " + pop.GetParName(i));
 	}
+	
+	Rcpp::Rcout << "npar" << endl;
+	Rcpp::Rcout << npar << endl;
+	
 	Genome P1,P2;
 	string P1_name,P2_name;
 

@@ -72,6 +72,13 @@ ibd::Genotype ibd::Genome::GetGenotype(int chr_nr, double cM) const
 ibd::Genotype ibd::Genome::GetGenotype(const Locus& loc) const
 {
 	int chr_nr = std::stoi(loc.GetChr());
+	
+	Rcpp::Rcout << "chr_pair.size()" << endl;
+	Rcpp::Rcout << chr_pair.size() << endl;
+	Rcpp::Rcout << "chr_nr" << endl;
+	Rcpp::Rcout << chr_nr << endl;
+	
+	
 	if (chr_nr < 0 || (unsigned)chr_nr >= chr_pair.size())
 		throw ibd_error("Genome::GetGenotype");
 	double cM = loc.GetPosition();
