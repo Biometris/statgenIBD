@@ -1,4 +1,4 @@
-#include "simpop.h"
+#include "SimPop.h"
 
 using namespace ibd;
 using namespace std;
