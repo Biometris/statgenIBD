@@ -1,5 +1,6 @@
 #include "PIONpop.h"
 #include "util_genetics.h"
+#include "convert.h"
 
 using namespace std;
 using namespace ibd;
@@ -9,10 +10,10 @@ namespace
 
 string make_PION_name(int gen) 
 { 
-	string name = "PION";
-	char buffer[100]; 
-	_itoa_s(gen,buffer,100,10); 
-	name += buffer;
+	string name = "PION" + stringify(gen);
+	//char buffer[100]; 
+	//_itoa_s(gen,buffer,100,10); 
+	//name += buffer;
 	return name;
 }
 
