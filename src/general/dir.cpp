@@ -6,6 +6,7 @@
 #else
 #include <sys/stat.h> // for mkdir
 #include <sys/types.h> // for mkdir
+#include <unistd.h> // for chdir
 #include <float.h> // for DBL_MIN
 #endif
 
