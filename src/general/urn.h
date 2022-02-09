@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "ibdexcept.h"
-#include "random.h"
+#include "Random.h"
 
 namespace ibd
 {
