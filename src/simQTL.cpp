@@ -44,24 +44,10 @@ void sim_pops(const vector<PopProp>& pops, map<string,Genome>& genome_inbred_par
 			for (vector<PopProp>::const_iterator it=pops.begin();it!=pops.end();++it)
 			{
 				string pop_name = it->GetName();
-				
-				Rcout << pop_name << endl;
-				
 				SimPop sim_pop = sim_population(*it,genome_inbred_parents,pop_name);
-				
-				Rcout << "LALA" << endl;
-				
 				make_ped_file(sim_pop,pop_name);
-				
-				Rcout << "LALA2" << endl;
-				
 				make_loc_file(sim_pop,markermap,markertype,pop_name);
-				
-				Rcout << "LALA3" << endl;
-				
 				//make_qua_file(sim_pop,phi,sigma,pop_name);
-				
-				//Rcout << "LALA4" << endl;
 			}
 		//}
 		if (nrep > 1) ChangeDir("..");
@@ -78,12 +64,6 @@ map<string,Genome> make_genome_inbred_founders(const map<string,string>& inbfnds
 	typedef map<string,string>::const_iterator IterFnds;
 	for (IterFnds iter=inbfnds.begin();iter!=inbfnds.end();++iter)
 	{
-		
-		Rcout << "chr_length" << endl;
-		Rcout << chr_length << endl;
-		Rcout << "k" << endl;
-		Rcout << k << endl;
-		
 		Genome fnd = Genome(chr_length,k,k);
 		genome_founders[iter->first] = fnd;
 		Rcout << setw(2) << k << setw(8) << iter->first 
@@ -114,8 +94,7 @@ int simQTL(CharacterVector& inputfile,
 {
 	cout.setf(ios::fixed, ios::floatfield);
 	
-	//Argu.GetArgument("scriptfile",inputfile);
-	//Argu.GetOption("r",nrep);
+	string cur_dir = get_current_dir();
 	string inputfile_str = Rcpp::as<string>(inputfile);
 	
 	if (dir_name.isNotNull()) 
@@ -206,7 +185,7 @@ int simQTL(CharacterVector& inputfile,
 			string id = it->GetID();
 			vecSimInd[k++] = SimInd(*it,genome_par_fam.find(id)->second);
 		}
-		string cur_dir = get_current_dir();
+		cur_dir = get_current_dir();
 		ChangeDir(outputdir);
  		make_loc_file(vecSimInd,markermap,markertype,locfile);
 		ChangeDir(cur_dir);
@@ -235,6 +214,7 @@ int simQTL(CharacterVector& inputfile,
 	make_eval_file(eval_filename,chr_length,dist_eval_pos);
 	
 	sim_pops(pops,genome_par_fam,markermap,markertype,phi,sigma,QTLmap,nrep);
+	ChangeDir(cur_dir);
 	return 0;
 }
 

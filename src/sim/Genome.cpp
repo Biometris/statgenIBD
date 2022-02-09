@@ -63,7 +63,6 @@ bool ibd::Genome::IsHomozygote() const
 
 ibd::Genotype ibd::Genome::GetGenotype(int chr_nr, double cM) const
 {
-	Rcpp::Rcout << chr_nr << std::endl;
 	if (chr_nr < 0 || (unsigned)chr_nr >= chr_pair.size())
 		throw ibd_error("Genome::GetGenotype");
 	return chr_pair[chr_nr].GetGenotype(cM);
@@ -72,13 +71,6 @@ ibd::Genotype ibd::Genome::GetGenotype(int chr_nr, double cM) const
 ibd::Genotype ibd::Genome::GetGenotype(const Locus& loc) const
 {
 	int chr_nr = std::stoi(loc.GetChr());
-	
-	Rcpp::Rcout << "chr_pair.size()" << endl;
-	Rcpp::Rcout << chr_pair.size() << endl;
-	Rcpp::Rcout << "chr_nr" << endl;
-	Rcpp::Rcout << chr_nr << endl;
-	
-	
 	if (chr_nr < 0 || (unsigned)chr_nr >= chr_pair.size())
 		throw ibd_error("Genome::GetGenotype");
 	double cM = loc.GetPosition();
@@ -179,7 +171,6 @@ vector<ibd::Genotype> ibd::Genome::GetGenotype(const LinkageMap& linkage_map) co
 		chr_nr = std::stoi(iter1->GetChr());
 		if (prev_chr_nr != chr_nr)
 		{
-			Rcpp::Rcout << chr_nr << std::endl;
 			if (chr_nr < 0 || chr_nr >= nchr)
 				throw ibd_error("Genome::GetGenotype ");
 			const ChromosomePair& cur = chr_pair[chr_nr];
