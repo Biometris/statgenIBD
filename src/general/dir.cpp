@@ -1,9 +1,9 @@
 #include "dir.h"
 #include "ibdexcept.h"
 
-#ifndef LINUX
-#include <direct.h>
-#else
+//#ifndef LINUX
+//#include <direct.h>
+//#else
 #include <sys/stat.h> // for mkdir
 #include <sys/types.h> // for mkdir
 #include <float.h> // for DBL_MIN
