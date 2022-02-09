@@ -1,7 +1,6 @@
 ## C3 and C4 crash when computing probabilities.
-pops <- c("DH", "F4", "F4DH", "BC3", "BC3DH", "BC1S2", "BC1S2DH", #"C3",
-          "C3DH", "C3S4", "C3S4DH", #"C4",
-          "C4DH", "C4S3", "C4S3DH")
+pops <- c("DH", "F4", "F4DH", "BC3", "BC3DH", "BC1S2", "BC1S2DH", "C3",
+          "C3DH", "C3S4", "C3S4DH", "C4", "C4DH", "C4S3", "C4S3DH")
 
 ## input file doesn't accept relative paths.
 popDirs <- paste0("C:/Projects/R_packages/statgenIBD/testScripts/simQTL/pop", pops)
@@ -26,3 +25,25 @@ for (popIBD in popIBDs) {
   plot(popIBD, plotType = "pedigree", title = popIBD$popType)
 }
 dev.off()
+
+
+
+tst <- calcIBD(popType = "C3",
+        markerFile = "C:/Projects/R_packages/statgenIBD/testScripts/simQTL/popC3/cross.loc",
+        mapFile = "C:/Projects/R_packages/statgenIBD/testScripts/simQTL/popC3/mapfile.map")
+
+tst2 <- calcIBD(popType = "C4",
+               markerFile = "C:/Projects/R_packages/statgenIBD/testScripts/simQTL/popC4/cross.loc",
+               mapFile = "C:/Projects/R_packages/statgenIBD/testScripts/simQTL/popC4/mapfile.map")
+
+
+
+popIBDs[[8]]$popType
+popIBDs[[8]]$markers
+
+dimnames(popIBDs[[10]]$markers)
+
+dimnames(popIBDs[[14]]$markers)
+
+
+

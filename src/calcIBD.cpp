@@ -113,6 +113,7 @@ List calcIBD(CharacterVector& popType,
   int x;
   bool isDH = _poptype.find("DH") != std::string::npos;
   bool isBC = match(x, _poptype, "BCx");
+  bool isC3C4 = (_poptype == "C3" | _poptype == "C4");
   LinkageMap positions;
   arma::cube prob;
   vector<string> parents, offspring;
@@ -144,7 +145,6 @@ List calcIBD(CharacterVector& popType,
   {
     ::Rf_error("c++ exception (unknown reason)");
   }
-  
   const int npar = parents.size();
   const int M = positions.size();
   const int K = pop.size();
@@ -157,12 +157,15 @@ List calcIBD(CharacterVector& popType,
   }
   // Construct vector of names for parents.
   CharacterVector parentNames (0);
-  for (int i = 0; i < npar; i++)
+  if (!isC3C4) 
   {
-    if (!(isBC && i == 0))
-    {
-      parentNames.push_back("p" + parents[i]);
-    }
+	for (int i = 0; i < npar; i++)
+	 {
+       if (!(isBC && i == 0))
+         {
+           parentNames.push_back("p" + parents[i]);
+         }
+     }
   }
   if (!isDH)
   {
@@ -171,8 +174,8 @@ List calcIBD(CharacterVector& popType,
       parentNames.push_back("p" + parents[0] + parents[1]);
     } else if (npar == 3)
     {
-      parentNames.push_back("p" + parents[0] + parents[1]);
       parentNames.push_back("p" + parents[0] + parents[2]);
+      parentNames.push_back("p" + parents[1] + parents[2]);
     } else if (npar == 4) {
       parentNames.push_back("p" + parents[0] + parents[2]);
       parentNames.push_back("p" + parents[0] + parents[3]);
