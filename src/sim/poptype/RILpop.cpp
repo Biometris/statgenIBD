@@ -1,5 +1,6 @@
 #include "RILpop.h"
 #include "util_genetics.h"
+#include "convert.h"
 
 using namespace std;
 using namespace ibd;
@@ -9,10 +10,10 @@ namespace
 
 string make_RIL_name(int gen) 
 { 
-	string name = "RI";
-	char buffer[100]; 
-	itoa(gen,buffer,10); 
-	name += buffer;
+	string name = "RI" + stringify(gen);
+	//char buffer[100]; 
+	//itoa(gen,buffer,10); 
+	//name += buffer;
 	return name;
 }
 
