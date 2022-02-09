@@ -3,7 +3,7 @@
 
 #include "util_genetics.h"
 #include "Sim.h"
-#include "Genovalue.h"
+#include "GenoValue.h"
 #include "Markertype.h"
 #include "Loc.h"
 #include "CommandFile.h"
