@@ -9,7 +9,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include "sim.h"
+#include "Sim.h"
 #include "input.h"
 #include "output.h"
 #include "popt.h"

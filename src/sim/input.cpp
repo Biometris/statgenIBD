@@ -3,7 +3,7 @@
 #include "MarkerType.h"
 #include "output.h"
 
-#include "sim.h"
+#include "Sim.h"
 #include "dir.h"
 #include "Loc.h"
 #include "Random.h"

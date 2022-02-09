@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 #include <iomanip>
 
-#include "sim.h"
+#include "Sim.h"
 #include "urn.h"
 #include "misc.h"
 
