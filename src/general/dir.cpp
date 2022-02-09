@@ -1,13 +1,13 @@
 #include "dir.h"
 #include "ibdexcept.h"
 
-//#ifndef LINUX
-//#include <direct.h>
-//#else
+#ifndef __linux__
+#include <direct.h>
+#else
 #include <sys/stat.h> // for mkdir
 #include <sys/types.h> // for mkdir
 #include <float.h> // for DBL_MIN
-//#endif
+#endif
 
 using namespace ibd;
 using namespace std;
@@ -15,7 +15,7 @@ using namespace std;
 string ibd::get_current_dir()
 {
 	string retBuf;
-#ifdef LINUX
+#ifdef __linux__
 	retBuf = getenv("PWD");
 #else
 	char buffer[_MAX_PATH];
@@ -27,7 +27,7 @@ string ibd::get_current_dir()
 
 void ibd::ChangeDir(const char * dir)
 {
-#ifdef LINUX
+#ifdef __linux__
     if (chdir(dir) == 0 )    return;
     if (mkdir(dir,0700) < 0) throw ibd_error("Cannot make directory");  
     if (chdir(dir) == -1)    throw ibd_error("Cannot change to directory");
