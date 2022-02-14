@@ -28,22 +28,6 @@ dev.off()
 
 
 
-tst <- calcIBD(popType = "C3",
-        markerFile = "C:/Projects/R_packages/statgenIBD/testScripts/simQTL/popC3/cross.loc",
-        mapFile = "C:/Projects/R_packages/statgenIBD/testScripts/simQTL/popC3/mapfile.map")
-
-tst2 <- calcIBD(popType = "C4",
-               markerFile = "C:/Projects/R_packages/statgenIBD/testScripts/simQTL/popC4/cross.loc",
-               mapFile = "C:/Projects/R_packages/statgenIBD/testScripts/simQTL/popC4/mapfile.map")
-
-
-
-popIBDs[[8]]$popType
-popIBDs[[8]]$markers
-
-dimnames(popIBDs[[10]]$markers)
-
-dimnames(popIBDs[[14]]$markers)
 
 
 

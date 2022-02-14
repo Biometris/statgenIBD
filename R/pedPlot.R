@@ -9,6 +9,12 @@ pedPlot <- function(pedigree,
                     genoCross,
                     title) {
   pedDatTot <- pedigree
+  isDH <- endsWith(popType, "DH")
+  isS <- grepl(pattern = "S|F", x = popType)
+  isBC <- startsWith(popType, "BC")
+  if (isBC) {
+   nBC <- as.numeric(substring(text = popType, first = 3, last = 3))
+  }
   ## Restrict to parents and first progeny.
   pedDatPar <- pedDatTot[!pedDatTot[["ID"]] %in% offSpring, ]
   pedDatOff <- pedDatTot[pedDatTot[["ID"]] %in% offSpring, ]
@@ -91,7 +97,23 @@ pedPlot <- function(pedigree,
                         text = c("Parent:", "Population type:", "size:",
                                  crossSizes))
   extText <- tail(arrowDat, nrow(extArrow))
-  extText[["text"]] <- "selfing"
+  if (popType == "DH") {
+    lastText <- "haploid"
+  } else {
+    lastText <- NULL
+    if (isBC) {
+      BCtxt <- if (nBC == 1) "F1" else paste0("BC", nBC - 1)
+      lastText <- paste(BCtxt , "x", pedDat[2, "ID"])
+    }
+    if (isS) {
+      lastText <- c(lastText, "selfing")
+    }
+    if (isDH) {
+      lastText <- c(lastText, "DH")
+    }
+    lastText <- paste(lastText, collapse = " + ")
+  }
+  extText[["text"]] <- lastText
   extText[["xPos.y"]] <- (extText[["xPos.x"]] + extText[["xPos.y"]]) / 2
   extText[["yPos.y"]] <- (extText[["yPos.x"]] + extText[["yPos.y"]]) / 2
   textDat <- rbind(textDat, extText[c("xPos.y", "yPos.y", "text")])
