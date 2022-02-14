@@ -77,8 +77,6 @@ pedPlot <- function(pedigree,
   extArrow[["yPos.x"]] <- extArrow[["yPos.x"]] - 1
   extArrow[["xPos.y"]] <- extArrow[["xPos.x"]]
   arrowDat <- rbind(arrowDat, extArrow)
-  arrowDat[["linetype"]] <- factor(arrowDat[["linetype"]],
-                                   levels = unique(arrowDat[["linetype"]]))
   ## Construct data for labels.
   labDat <- arrowDat[colnames(arrowDat) != "ID"]
   labDat <- merge(labDat, pedDat[c("ID", "xPos", "yPos")],
@@ -97,6 +95,8 @@ pedPlot <- function(pedigree,
                         text = c("Parent:", "Population type:", "size:",
                                  crossSizes))
   extText <- tail(arrowDat, nrow(extArrow))
+  ## Construct text label for last - dashed - line in plot.
+  ## Exact text depends on population type.
   if (popType == "DH") {
     lastText <- "haploid"
   } else {
@@ -117,6 +117,17 @@ pedPlot <- function(pedigree,
   extText[["xPos.y"]] <- (extText[["xPos.x"]] + extText[["xPos.y"]]) / 2
   extText[["yPos.y"]] <- (extText[["yPos.x"]] + extText[["yPos.y"]]) / 2
   textDat <- rbind(textDat, extText[c("xPos.y", "yPos.y", "text")])
+  ## For back crosses add an extra dotted line from parent 2 to bottom.
+  ## Should be done after other computations are done to keep correct
+  ## label positions.
+  if (isBC) {
+    extArrow2 <- extArrow
+    extArrow2[["yPos.y"]] <- plotRows
+    extArrow2[["xPos.y"]] <- max(arrowDat[["xPos.y"]])
+    arrowDat <- rbind(arrowDat, extArrow2)
+  }
+  arrowDat[["linetype"]] <- factor(arrowDat[["linetype"]],
+                                   levels = unique(arrowDat[["linetype"]]))
   ## Construct title.
   if (is.null(title)) {
     title <- "pedigree"

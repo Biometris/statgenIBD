@@ -113,7 +113,7 @@ List calcIBD(CharacterVector& popType,
   int x;
   bool isDH = _poptype.find("DH") != std::string::npos;
   bool isBC = match(x, _poptype, "BCx");
-  bool isC3C4 = (_poptype == "C3" | _poptype == "C4");
+  bool isC3C4 = ((_poptype == "C3") | (_poptype == "C4"));
   LinkageMap positions;
   arma::cube prob;
   vector<string> parents, offspring;
@@ -157,7 +157,7 @@ List calcIBD(CharacterVector& popType,
   }
   // Construct vector of names for parents.
   CharacterVector parentNames (0);
-  if (!isC3C4) 
+  if (!isC3C4)
   {
 	for (int i = 0; i < npar; i++)
 	 {
@@ -206,7 +206,7 @@ List calcIBD(CharacterVector& popType,
     type(k) = pop[k].GetType();
   }
   DataFrame pedigree = DataFrame::create(Named("ID") = ID, Named("par1") = par1,
-                                         Named("par2") = par2, Named("type") = type);  
+                                         Named("par2") = par2, Named("type") = type);
   // Reshape prob to 3D array and add names to dimensions.
   NumericVector P = wrap(prob);
   P.attr("dimnames") = List::create(posNames, offspring, parentNames);
@@ -218,6 +218,6 @@ List calcIBD(CharacterVector& popType,
 						  Named("pedigree") = pedigree,
                           Named("multiCross") = false);
   res.attr("class") = "IBDprob";
-  
+
   return res;
 }
