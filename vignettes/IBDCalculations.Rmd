@@ -83,7 +83,7 @@ The map and genotypic file for this population are included in the package.
 Both the map and the genotypic file should be in a **tab**-delimited format. The map file should be a file without a header. It should contain three columns, corresponding to marker name, chromosome number and position on the chromosome in centiMorgan.
 
 ```{r inspectMap}
-## Read the map and display the first tows.
+## Read the map and display the first rows.
 map <- read.table(system.file("extdata/SxM", "SxM_map.txt", package = "statgenIBD"))
 head(map)
 ```
