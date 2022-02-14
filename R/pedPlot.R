@@ -11,15 +11,16 @@ pedPlot <- function(pedigree,
   pedDatTot <- pedigree
   isDH <- endsWith(popType, "DH")
   isS <- grepl(pattern = "S|F", x = popType)
+  isC3C4 <- popType %in% c("C3", "C4")
   isBC <- startsWith(popType, "BC")
   if (isBC) {
-   nBC <- as.numeric(substring(text = popType, first = 3, last = 3))
+    nBC <- as.numeric(substring(text = popType, first = 3, last = 3))
   }
   ## Restrict to parents and first progeny.
   pedDatPar <- pedDatTot[!pedDatTot[["ID"]] %in% offSpring, ]
   pedDatOff <- pedDatTot[pedDatTot[["ID"]] %in% offSpring, ]
   pedDatOff <- pedDatOff[!duplicated(pedDatOff[c("par1", "par2")]), ]
-  pedDatOff[["ID"]] <- "F1"
+  pedDatOff[["ID"]] <- if (!isC3C4) "F1" else popType
   if (multiCross) {
     pedDatTot[["cross"]] <- genoCross[["cross"]][match(pedDatTot[["ID"]],
                                                        genoCross[["geno"]])]
@@ -38,13 +39,14 @@ pedPlot <- function(pedigree,
     parTab <- c(head(parTab, length(parTab) / 2), tail(parTab, 1),
                 rev(head(rev(parTab)[-1], (length(parTab) - 1) / 2)))
     pedDat <- pedDat[c(match(names(parTab), table = pedDat[["ID"]], nomatch = 0),
-                             (length(parTab) + 1):nrow(pedDat)), ]
+                       (length(parTab) + 1):nrow(pedDat)), ]
   }
   generation <- as.numeric(factor(pedDat[["type"]],
                                   levels = unique(pedDat[["type"]]))) - 1
   ## Determine the row and column numbers in the plot.
   plotCols <- max(table(generation))
-  plotRows <- length(unique(generation)) + 1
+  plotRows <- length(unique(generation))
+  if (!isC3C4) plotRows <- plotRows + 1
   ## Determine x and y positions of all parents and individuals in the plot
   xPos <- yPos <- NULL
   for (g in unique(generation)) {
@@ -71,18 +73,23 @@ pedPlot <- function(pedigree,
   arrowDat <- arrowDat[order(arrowDat[["yPos.x"]], decreasing = TRUE), ]
   arrowDat[["linetype"]] <- "solid"
   ## Add extra arrow to bottom of plot.
-  extArrow <- tail(arrowDat, sum(generation == max(generation)))
-  extArrow[["linetype"]] <- "dotted"
-  extArrow[["yPos.y"]] <- extArrow[["yPos.x"]]
-  extArrow[["yPos.x"]] <- extArrow[["yPos.x"]] - 1
-  extArrow[["xPos.y"]] <- extArrow[["xPos.x"]]
-  arrowDat <- rbind(arrowDat, extArrow)
+  if (!isC3C4) {
+    extArrow <- tail(arrowDat, sum(generation == max(generation)))
+    extArrow[["linetype"]] <- "dotted"
+    extArrow[["yPos.y"]] <- extArrow[["yPos.x"]]
+    extArrow[["yPos.x"]] <- extArrow[["yPos.x"]] - 1
+    extArrow[["xPos.y"]] <- extArrow[["xPos.x"]]
+    arrowDat <- rbind(arrowDat, extArrow)
+  } else {
+    extArrow <- data.frame()
+  }
   ## Construct data for labels.
   labDat <- arrowDat[colnames(arrowDat) != "ID"]
   labDat <- merge(labDat, pedDat[c("ID", "xPos", "yPos")],
                   by.x = c(c("xPos.y", "yPos.y")), by.y = c("xPos", "yPos"))
-  extLab <- extArrow
+  extLab <- tail(arrowDat, 1)
   extLab[["yPos.y"]] <- extLab[["yPos.x"]]
+  extLab[["xPos.y"]] <- extLab[["xPos.x"]]
   extLab[["ID"]] <- popType
   labDat <- rbind(labDat, extLab)
   ## Construct texts.
@@ -94,29 +101,31 @@ pedPlot <- function(pedigree,
                         yPos.y = c(plotRows, 1, 0, rep(0, nrow(extLab))),
                         text = c("Parent:", "Population type:", "size:",
                                  crossSizes))
-  extText <- tail(arrowDat, nrow(extArrow))
-  ## Construct text label for last - dashed - line in plot.
-  ## Exact text depends on population type.
-  if (popType == "DH") {
-    lastText <- "haploid"
-  } else {
-    lastText <- NULL
-    if (isBC) {
-      BCtxt <- if (nBC == 1) "F1" else paste0("BC", nBC - 1)
-      lastText <- paste(BCtxt , "x", pedDat[2, "ID"])
+  if (nrow(extArrow) > 0) {
+    extText <- tail(arrowDat, nrow(extArrow))
+    ## Construct text label for last - dashed - line in plot.
+    ## Exact text depends on population type.
+    if (popType == "DH") {
+      lastText <- "haploid"
+    } else {
+      lastText <- NULL
+      if (isBC) {
+        BCtxt <- if (nBC == 1) "F1" else paste0("BC", nBC - 1)
+        lastText <- paste(BCtxt , "x", pedDat[2, "ID"])
+      }
+      if (isS) {
+        lastText <- c(lastText, "selfing")
+      }
+      if (isDH) {
+        lastText <- c(lastText, "DH")
+      }
+      lastText <- paste(lastText, collapse = " + ")
     }
-    if (isS) {
-      lastText <- c(lastText, "selfing")
-    }
-    if (isDH) {
-      lastText <- c(lastText, "DH")
-    }
-    lastText <- paste(lastText, collapse = " + ")
+    extText[["text"]] <- lastText
+    extText[["xPos.y"]] <- (extText[["xPos.x"]] + extText[["xPos.y"]]) / 2
+    extText[["yPos.y"]] <- (extText[["yPos.x"]] + extText[["yPos.y"]]) / 2
+    textDat <- rbind(textDat, extText[c("xPos.y", "yPos.y", "text")])
   }
-  extText[["text"]] <- lastText
-  extText[["xPos.y"]] <- (extText[["xPos.x"]] + extText[["xPos.y"]]) / 2
-  extText[["yPos.y"]] <- (extText[["yPos.x"]] + extText[["yPos.y"]]) / 2
-  textDat <- rbind(textDat, extText[c("xPos.y", "yPos.y", "text")])
   ## For back crosses add an extra dotted line from parent 2 to bottom.
   ## Should be done after other computations are done to keep correct
   ## label positions.
