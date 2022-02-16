@@ -1,6 +1,6 @@
 #' Helper function for plotting the pedigree
 #'
-#' @importFrom utils tail
+#' @importFrom utils tail head
 #' @keywords internal
 pedPlot <- function(pedigree,
                     offSpring,
@@ -87,7 +87,8 @@ pedPlot <- function(pedigree,
   labDat <- arrowDat[colnames(arrowDat) != "ID"]
   labDat <- merge(labDat, pedDat[c("ID", "xPos", "yPos")],
                   by.x = c(c("xPos.y", "yPos.y")), by.y = c("xPos", "yPos"))
-  extLab <- tail(arrowDat, 1)
+  extLab <- tail(arrowDat,
+                 if (multiCross) length(unique(genoCross[["cross"]])) else 1)
   extLab[["yPos.y"]] <- extLab[["yPos.x"]]
   extLab[["xPos.y"]] <- extLab[["xPos.x"]]
   extLab[["ID"]] <- popType
