@@ -1,6 +1,6 @@
 ## Release with some additions and bug fixes.
 
-- Some small bugs are fixed in this release. Also a new plotting option is added and there is more flexibility in input files.
+- A new plot option is added and a few minor bugs are fixed.
 
 ----
 
