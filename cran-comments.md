@@ -19,7 +19,7 @@
 
 There were no ERRORs or WARNINGs.
 
-There were 2 NOTES:
+There was 1 NOTE:
 
 * checking CRAN incoming feasibility ... NOTE
 
@@ -30,10 +30,3 @@ Found the following (possibly) invalid URLs:
     Message: Forbidden
 
 This link works fine when opened in a browser.
-
-* checking installed package size ... NOTE
-  installed size is  9.1Mb
-  sub-directories of 1Mb or more:
-    libs   8.5Mb
-
-Installed size depends on platform. This only occurs at some of the tested platforms.    
