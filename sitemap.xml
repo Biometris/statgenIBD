@@ -19,6 +19,9 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/allGenoPlot.html</loc>
+  </url>
+  <url>
     <loc>/reference/c.IBDprob.html</loc>
   </url>
   <url>
@@ -31,7 +34,13 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/pedPlot.html</loc>
+  </url>
+  <url>
     <loc>/reference/plot.IBDprob.html</loc>
+  </url>
+  <url>
+    <loc>/reference/singleGenoPlot.html</loc>
   </url>
   <url>
     <loc>/reference/statgenIBD-package.html</loc>
