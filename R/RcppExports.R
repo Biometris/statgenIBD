@@ -92,7 +92,7 @@ calcIBD <- function(popType, markerFile, mapFile, evalPos = NULL, evalDist = NUL
 #' simQTL
 #'
 #' @export
-simQTL <- function(inputfile, dir_name = NULL, nrep = 1L, print_flexQTL = FALSE) {
-    .Call(`_statgenIBD_simQTL`, inputfile, dir_name, nrep, print_flexQTL)
+simQTL <- function(inputfile, dir_name = NULL, eval_filename = "eval.txt", mapfile = "map.txt", chr_length2 = 100.0, nloc_chr2 = 11.0, nr_alleles = 2L, nrep = 1L, print_flexQTL = FALSE, dist_eval_pos = 5.0, fr_miss = 0.0, mu = 5.0, sigma2_e = 1.0, start_seed = 1234L) {
+    .Call(`_statgenIBD_simQTL`, inputfile, dir_name, eval_filename, mapfile, chr_length2, nloc_chr2, nr_alleles, nrep, print_flexQTL, dist_eval_pos, fr_miss, mu, sigma2_e, start_seed)
 }
 

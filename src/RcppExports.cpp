@@ -29,23 +29,33 @@ BEGIN_RCPP
 END_RCPP
 }
 // simQTL
-int simQTL(CharacterVector& inputfile, Nullable<CharacterVector&> dir_name, const int& nrep, const bool& print_flexQTL);
-RcppExport SEXP _statgenIBD_simQTL(SEXP inputfileSEXP, SEXP dir_nameSEXP, SEXP nrepSEXP, SEXP print_flexQTLSEXP) {
+int simQTL(CharacterVector& inputfile, Nullable<CharacterVector&> dir_name, const std::string& eval_filename, const std::string& mapfile, const NumericVector& chr_length2, const NumericVector& nloc_chr2, const int& nr_alleles, const int& nrep, const bool& print_flexQTL, const double& dist_eval_pos, const double& fr_miss, const double& mu, const double& sigma2_e, const long int& start_seed);
+RcppExport SEXP _statgenIBD_simQTL(SEXP inputfileSEXP, SEXP dir_nameSEXP, SEXP eval_filenameSEXP, SEXP mapfileSEXP, SEXP chr_length2SEXP, SEXP nloc_chr2SEXP, SEXP nr_allelesSEXP, SEXP nrepSEXP, SEXP print_flexQTLSEXP, SEXP dist_eval_posSEXP, SEXP fr_missSEXP, SEXP muSEXP, SEXP sigma2_eSEXP, SEXP start_seedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector& >::type inputfile(inputfileSEXP);
     Rcpp::traits::input_parameter< Nullable<CharacterVector&> >::type dir_name(dir_nameSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type eval_filename(eval_filenameSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type mapfile(mapfileSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type chr_length2(chr_length2SEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type nloc_chr2(nloc_chr2SEXP);
+    Rcpp::traits::input_parameter< const int& >::type nr_alleles(nr_allelesSEXP);
     Rcpp::traits::input_parameter< const int& >::type nrep(nrepSEXP);
     Rcpp::traits::input_parameter< const bool& >::type print_flexQTL(print_flexQTLSEXP);
-    rcpp_result_gen = Rcpp::wrap(simQTL(inputfile, dir_name, nrep, print_flexQTL));
+    Rcpp::traits::input_parameter< const double& >::type dist_eval_pos(dist_eval_posSEXP);
+    Rcpp::traits::input_parameter< const double& >::type fr_miss(fr_missSEXP);
+    Rcpp::traits::input_parameter< const double& >::type mu(muSEXP);
+    Rcpp::traits::input_parameter< const double& >::type sigma2_e(sigma2_eSEXP);
+    Rcpp::traits::input_parameter< const long int& >::type start_seed(start_seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(simQTL(inputfile, dir_name, eval_filename, mapfile, chr_length2, nloc_chr2, nr_alleles, nrep, print_flexQTL, dist_eval_pos, fr_miss, mu, sigma2_e, start_seed));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_statgenIBD_calcIBD", (DL_FUNC) &_statgenIBD_calcIBD, 7},
-    {"_statgenIBD_simQTL", (DL_FUNC) &_statgenIBD_simQTL, 4},
+    {"_statgenIBD_simQTL", (DL_FUNC) &_statgenIBD_simQTL, 14},
     {NULL, NULL, 0}
 };
 

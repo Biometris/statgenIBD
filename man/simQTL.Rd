@@ -4,7 +4,22 @@
 \alias{simQTL}
 \title{simQTL}
 \usage{
-simQTL(inputfile, dir_name = NULL, nrep = 1L, print_flexQTL = FALSE)
+simQTL(
+  inputfile,
+  dir_name = NULL,
+  eval_filename = "eval.txt",
+  mapfile = "map.txt",
+  chr_length2 = 100,
+  nloc_chr2 = 11,
+  nr_alleles = 2L,
+  nrep = 1L,
+  print_flexQTL = FALSE,
+  dist_eval_pos = 5,
+  fr_miss = 0,
+  mu = 5,
+  sigma2_e = 1,
+  start_seed = 1234L
+)
 }
 \description{
 simQTL

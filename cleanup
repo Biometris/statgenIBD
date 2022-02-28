@@ -13,4 +13,12 @@ rm -f \
   src/pedigree/mainR.o\
   src/pedigree/markerscore.o\
   src/pedigree/popt.o\
-  src/pedigree/read_map.o
+  src/pedigree/read_map.o\
+  src/simQTL.o\
+  src/sim/input.o\
+  src/sim/PopName.o\
+  src/sim/Genome.o\
+  src/sim/CommandFile.o \
+  src/sim/poptype/mapqtl.o\
+  src/sim/poptype/calcRILexact.o\
+  src/sim/poptype/HANSpop.o
