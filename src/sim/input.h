@@ -1,6 +1,7 @@
 #ifndef INPUT_SIMQTL_HEADER
 #define INPUT_SIMQTL_HEADER
 
+#include <RcppArmadillo.h>
 #include "util_genetics.h"
 #include "Sim.h"
 #include "GenoValue.h"
@@ -9,12 +10,14 @@
 #include "CommandFile.h"
 
 ibd::Commands read_input_file(const std::string& filename);
-//void read_seed(long int& start_seed, const ibd::Commands& commands);
+// void read_seed(long int& start_seed, const ibd::Commands& commands);
 std::vector<PopProp> read_pop(const ibd::Commands& commands);
-void read_number_markers(std::vector<int>& nr_markers_per_chr, std::istream& f);
-void read_genome(std::vector<double>& chr_length, const ibd::Commands& commands);
-std::map<Locus, std::vector<double> > read_QTLs(const ibd::Commands& commands);
+// void read_number_markers(std::vector<int>& nr_markers_per_chr, std::istream& f);
+// void read_genome(std::vector<double>& chr_length, const ibd::Commands& commands);
+// std::map<Locus, std::vector<double> > read_QTLs(const ibd::Commands& commands);
+std::map<Locus, std::vector<double> > read_QTLs(const Rcpp::DataFrame& QTLposdf);
 std::map<std::string,std::string> read_inbfnd(const ibd::Commands& commands,unsigned int nqtl);
+std::map<std::string,std::string> read_inbfnd(const Rcpp::DataFrame& inbfnddf,unsigned int nqtl);
 
 ibd::matrix<double> read_epi(const ibd::Commands& commands,
                              const std::map< Locus,std::vector<double> >& QTLs);

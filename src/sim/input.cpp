@@ -44,25 +44,45 @@ Commands read_input_file(const string& filename)
   return read_command_file(defined_commands,filename);
 }
 
-map<Locus, vector<double> > read_QTLs(const Commands& commands)
+// map<Locus, vector<double> > read_QTLs(const Commands& commands)
+// {
+//   map<Locus, vector<double> > QTLs;
+//   typedef Commands::const_iterator Iter;
+//   pair<Iter,Iter> range = commands.equal_range("qtl");
+//   for (Iter iter=range.first;iter!=range.second;++iter)
+//   {
+//     const line_command& lc = iter->second;
+//     istringstream line_stream(lc.argument);
+//     string chr;
+//     double pos;
+//     string name;
+//     vector<double> par(2);
+//     line_stream >> name >> chr >> pos >> par;
+//     //Locus loc(chr-1,pos,name);
+//     Locus loc(chr,pos,name);
+//     QTLs[loc] = par;
+//   }
+//   return QTLs;
+// }
+
+map<Locus, vector<double> > read_QTLs(const Rcpp::DataFrame& QTLposdf)
 {
+  Rcpp::NumericVector pos = QTLposdf["pos"];
+  Rcpp::CharacterVector chr = QTLposdf["chr"];
+  Rcpp::CharacterVector name = QTLposdf["name"];
+  Rcpp::NumericVector add = QTLposdf["add"];
+  Rcpp::NumericVector dom = QTLposdf["dom"];
   map<Locus, vector<double> > QTLs;
-  typedef Commands::const_iterator Iter;
-  pair<Iter,Iter> range = commands.equal_range("qtl");
-  for (Iter iter=range.first;iter!=range.second;++iter)
+  for (int m=0;m<QTLposdf.nrows();m++)
   {
-    const line_command& lc = iter->second;
-    istringstream line_stream(lc.argument);
-    string chr;
-    double pos;
-    string name;
-    vector<double> par(2);
-    line_stream >> name >> chr >> pos >> par;
-    //Locus loc(chr-1,pos,name);
-    Locus loc(chr,pos,name);
-    QTLs[loc] = par;
+    string chrM = Rcpp::as<std::string>(chr[m]);
+    string nameM = Rcpp::as<std::string>(name[m]);
+    double posM = pos[m];
+    vector<double> parM = {add[m], dom[m]};
+    Locus loc(chrM,posM,nameM);
+    QTLs[loc] = parM;
   }
-  return QTLs;
+  return(QTLs);
 }
 
 matrix<double> read_epi(const Commands& commands, const map< Locus,vector<double> >& QTLs)
@@ -151,6 +171,50 @@ map<string,string> read_inbfnd(const Commands& commands,unsigned int nqtl)
   return inbfnd;
 }
 
+
+map<string,string> read_inbfnd(const Rcpp::DataFrame& inbfnddf,
+                               unsigned int nqtl)
+{
+  map<string,string> inbfnd;
+  Rcpp::CharacterVector name = inbfnddf["name"];
+  Rcpp::DataFrame fnd_effects = inbfnddf;
+  if (fnd_effects.size() != (nqtl + 1))
+    throw ibd_error("wrong number of qtls");
+  for (int m=0;m<fnd_effects.nrows();m++)
+  {
+    Rcpp::Rcout<< m << endl;
+
+    string nameM = Rcpp::as<std::string>(name[m]);
+    string fnd_effectsM = "";
+    Rcpp::CharacterVector fnd_effectsI;
+    for (unsigned int i=1;i<=nqtl;i++)
+    {
+      Rcpp::Rcout<< i << endl;
+
+      fnd_effectsI = fnd_effects[i];
+
+      Rcpp::Rcout << fnd_effectsI << endl;
+
+      string s = Rcpp::as<std::string>(fnd_effectsI[m]);
+
+      Rcpp::Rcout << s << endl;
+
+      // if (s != "+" && s != "-")
+      //   throw ibd_error("error in sign of qtl effects");
+      fnd_effectsM = fnd_effectsM + s;
+    }
+    Rcpp::Rcout << fnd_effectsM << endl;
+
+    inbfnd[nameM] = fnd_effectsM;
+  }
+  return inbfnd;
+}
+
+
+
+
+
+
 vector<PopProp> read_pop(const Commands& commands)
 {
   vector<PopProp> pops;
@@ -179,89 +243,89 @@ vector<PopProp> read_pop(const Commands& commands)
   return pops;
 }
 
-void read_seed(long int& start_seed, const Commands& commands)
-{
-  const line_command& lc = GetCommand(commands,"seed");
-  istringstream line_stream(lc.argument);
-  line_stream >> start_seed;
-  if (!line_stream.eof() || line_stream.bad())
-    lc.error("format error");
+// void read_seed(long int& start_seed, const Commands& commands)
+// {
+//   const line_command& lc = GetCommand(commands,"seed");
+//   istringstream line_stream(lc.argument);
+//   line_stream >> start_seed;
+//   if (!line_stream.eof() || line_stream.bad())
+//     lc.error("format error");
+//
+//   if (start_seed == 0)
+//   {
+//     randstart();
+//     start_seed = get_randomseed();
+//   }
+//   else if (start_seed < 0)
+//     set_randomseed(start_seed);
+//   else
+//     lc.error("Start value of random generator ran2 must be negative!");
+// }
 
-  if (start_seed == 0)
-  {
-    randstart();
-    start_seed = get_randomseed();
-  }
-  else if (start_seed < 0)
-    set_randomseed(start_seed);
-  else
-    lc.error("Start value of random generator ran2 must be negative!");
-}
+// void read_genome(vector<double>& chr_length, const Commands& commands)
+// {
+//   const line_command& lc = GetCommand(commands,"genome");
+//   istringstream f(lc.argument);
+//
+//   char c;
+//   f >> c;
+//   if (c == '(')
+//   {
+//     for (;;)
+//     {
+//       double length;
+//       f >> length >> c;
+//       chr_length.push_back(length);
+//       if (c != ',')
+//       {
+//         if (c != ')')
+//           lc.error("Error while reading chromosome lengths");
+//         else
+//           break;
+//       }
+//     }
+//   }
+//   else
+//   {
+//     int nchr;
+//     double length;
+//     f.putback(c);
+//     f >> nchr >> length;
+//     chr_length = vector<double>(nchr,length);
+//   }
+//
+//   eatcomment(f); // ?!
+//   if (!f.eof() || f.bad())
+//     lc.error("format error");
+// }
 
-void read_genome(vector<double>& chr_length, const Commands& commands)
-{
-  const line_command& lc = GetCommand(commands,"genome");
-  istringstream f(lc.argument);
-
-  char c;
-  f >> c;
-  if (c == '(')
-  {
-    for (;;)
-    {
-      double length;
-      f >> length >> c;
-      chr_length.push_back(length);
-      if (c != ',')
-      {
-        if (c != ')')
-          lc.error("Error while reading chromosome lengths");
-        else
-          break;
-      }
-    }
-  }
-  else
-  {
-    int nchr;
-    double length;
-    f.putback(c);
-    f >> nchr >> length;
-    chr_length = vector<double>(nchr,length);
-  }
-
-  eatcomment(f); // ?!
-  if (!f.eof() || f.bad())
-    lc.error("format error");
-}
-
-void read_number_markers(vector<int>& nr_markers_per_chr, istream& f)
-{
-  const int nchr = nr_markers_per_chr.size();
-  char c;
-  f >> c;
-  if (c == '(')
-  {
-    for (int i=0;i<nchr-1;i++)
-    {
-      f >> nr_markers_per_chr[i] >> c;
-      if (c != ',')
-        f.clear(ios::badbit);
-    }
-    f >> nr_markers_per_chr[nchr-1] >> c;
-    if (c != ')')
-      f.clear(ios::badbit);
-  }
-  else
-  {
-    int nr_loc;
-    f.putback(c);
-    f >> nr_loc;
-    for (int i=0;i<nchr;i++)
-      nr_markers_per_chr[i] = nr_loc;
-  }
-  eatcomment(f);
-}
+// void read_number_markers(vector<int>& nr_markers_per_chr, istream& f)
+// {
+//   const int nchr = nr_markers_per_chr.size();
+//   char c;
+//   f >> c;
+//   if (c == '(')
+//   {
+//     for (int i=0;i<nchr-1;i++)
+//     {
+//       f >> nr_markers_per_chr[i] >> c;
+//       if (c != ',')
+//         f.clear(ios::badbit);
+//     }
+//     f >> nr_markers_per_chr[nchr-1] >> c;
+//     if (c != ')')
+//       f.clear(ios::badbit);
+//   }
+//   else
+//   {
+//     int nr_loc;
+//     f.putback(c);
+//     f >> nr_loc;
+//     for (int i=0;i<nchr;i++)
+//       nr_markers_per_chr[i] = nr_loc;
+//   }
+//   eatcomment(f);
+// }
 
 void read_marker(LinkageMap& Markermap,
                  const string& filename,
@@ -448,51 +512,51 @@ void make_hybrids(const Commands& commands,
 }
 
 
-void make_hybrids_old(const Commands& commands,
-                      const map<string,Genome>& simpop,
-                      const Phi& phi, double sigma)
-{
-  int N;
-  string file1,file2,filename;
-  if (!read(file1,file2,N,filename,commands,"hybrids"))
-    return;
-
-  vector<string> grpA = get_strings(file1);
-  vector<string> grpB = get_strings(file2);
-  cout << "Hybrids: " << endl
-       << " size A: " << grpA.size() << endl
-       << " size B: " << grpB.size() << endl << endl;
-
-  ofstream outp;
-  OpenFile(outp,filename);
-
-  typedef pair<string,string> str_pr;
-  vector<str_pr> par_comb; // all parent combinations
-  for (vector<string>::const_iterator itA=grpA.begin();itA!=grpA.end();itA++)
-    for (vector<string>::const_iterator itB=grpB.begin();itB!=grpB.end();itB++)
-      par_comb.push_back(make_pair(*itA,*itB));
-  Urn<str_pr> urn(par_comb);
-
-  outp << setw(8)  << "ID" << setw(8)  << "P1!" << setw(8)  << "P2!"
-       << setw(12) << "pheno" << setw(12) << "geno" << endl;
-
-  MakeLabel hybr_label("HYBR",4);
-  for (int i=0;i<N;i++)
-  {
-    str_pr h = urn.random_draw();
-    Genome g1 = get(simpop,h.first);
-    Genome g2 = get(simpop,h.second);
-    Genome g = g1*g2;
-
-    double geno_val = phi(g);
-    double error = randnormal(0.0,sigma);
-    double pheno_val = geno_val + error;
-
-    outp << setw(8)  << hybr_label(i)
-         << setw(8)  << h.first << setw(8)  << h.second
-         << setw(12) << pheno_val  << setw(12) << geno_val << endl;
-  }
-}
+// void make_hybrids_old(const Commands& commands,
+//                       const map<string,Genome>& simpop,
+//                       const Phi& phi, double sigma)
+// {
+//   int N;
+//   string file1,file2,filename;
+//   if (!read(file1,file2,N,filename,commands,"hybrids"))
+//     return;
+//
+//   vector<string> grpA = get_strings(file1);
+//   vector<string> grpB = get_strings(file2);
+//   cout << "Hybrids: " << endl
+//        << " size A: " << grpA.size() << endl
+//        << " size B: " << grpB.size() << endl << endl;
+//
+//   ofstream outp;
+//   OpenFile(outp,filename);
+//
+//   typedef pair<string,string> str_pr;
+//   vector<str_pr> par_comb; // all parent combinations
+//   for (vector<string>::const_iterator itA=grpA.begin();itA!=grpA.end();itA++)
+//     for (vector<string>::const_iterator itB=grpB.begin();itB!=grpB.end();itB++)
+//       par_comb.push_back(make_pair(*itA,*itB));
+//   Urn<str_pr> urn(par_comb);
+//
+//   outp << setw(8)  << "ID" << setw(8)  << "P1!" << setw(8)  << "P2!"
+//        << setw(12) << "pheno" << setw(12) << "geno" << endl;
+//
+//   MakeLabel hybr_label("HYBR",4);
+//   for (int i=0;i<N;i++)
+//   {
+//     str_pr h = urn.random_draw();
+//     Genome g1 = get(simpop,h.first);
+//     Genome g2 = get(simpop,h.second);
+//     Genome g = g1*g2;
+//
+//     double geno_val = phi(g);
+//     double error = randnormal(0.0,sigma);
+//     double pheno_val = geno_val + error;
+//
+//     outp << setw(8)  << hybr_label(i)
+//          << setw(8)  << h.first << setw(8)  << h.second
+//          << setw(12) << pheno_val  << setw(12) << geno_val << endl;
+//   }
+// }
 
 
 // april 11: use the following two functions for generating hybrids:

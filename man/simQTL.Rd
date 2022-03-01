@@ -6,12 +6,14 @@
 \usage{
 simQTL(
   inputfile,
+  inbFnd,
   dir_name = NULL,
   eval_filename = "eval.txt",
   mapfile = "map.txt",
-  chr_length2 = 100,
-  nloc_chr2 = 11,
+  chrLength = 100,
+  nlocChr = 11,
   nr_alleles = 2L,
+  QTLPos = NULL,
   nrep = 1L,
   print_flexQTL = FALSE,
   dist_eval_pos = 5,

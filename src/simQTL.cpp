@@ -88,12 +88,14 @@ void print_coa_file(const vector<string>& parname, const string& filename)
 //' @export
 // [[Rcpp::export]]
 int simQTL(CharacterVector& inputfile,
+           DataFrame& inbFnd,
            Nullable<CharacterVector&> dir_name = R_NilValue,
            const std::string& eval_filename = "eval.txt",
            const std::string& mapfile = "map.txt",
-           const NumericVector& chr_length2 = 100.0,
-           const NumericVector& nloc_chr2 = 11.0,
+           const NumericVector& chrLength = 100.0,
+           const NumericVector& nlocChr = 11.0,
            const int& nr_alleles = 2,
+           Nullable<DataFrame&> QTLPos = R_NilValue,
            const int& nrep = 1,
            const bool& print_flexQTL = false,
            const double& dist_eval_pos = 5.0,
@@ -102,7 +104,7 @@ int simQTL(CharacterVector& inputfile,
            const double& sigma2_e = 1.0,
            const long int& start_seed = 1234)
 {
-  cout.setf(ios::fixed, ios::floatfield);
+  //cout.setf(ios::fixed, ios::floatfield);
 
   string cur_dir = get_current_dir();
   string inputfile_str = Rcpp::as<string>(inputfile);
@@ -113,8 +115,8 @@ int simQTL(CharacterVector& inputfile,
     ChangeDir(dir_name_str);
   }
 
-  vector<double> chr_length = Rcpp::as< std::vector<double> >(chr_length2);
-  vector<double> nloc_chr = Rcpp::as< std::vector<double> >(nloc_chr2);
+  vector<double> chr_length = Rcpp::as< std::vector<double> >(chrLength);
+  vector<double> nloc_chr = Rcpp::as< std::vector<double> >(nlocChr);
 
   //int nr_alleles;
   //long int start_seed;
@@ -132,8 +134,19 @@ int simQTL(CharacterVector& inputfile,
   //read_genome(chr_length,commands);
   read_marker(markermap,mapfile,chr_length,nloc_chr,nr_alleles);//,commands);
 
-  map<Locus, vector<double> > QTLs = read_QTLs(commands);
-  map<string,string> inbfnds = read_inbfnd(commands,QTLs.size());
+
+  //map<Locus, vector<double> > QTLs = read_QTLs(commands);
+
+  map<Locus, vector<double> > QTLs;
+
+  if (QTLPos.isNotNull())
+  {
+    QTLs = read_QTLs(QTLPos);
+  }
+
+  //map<string,string> inbfnds = read_inbfnd(commands,QTLs.size());
+
+  map<string,string> inbfnds = read_inbfnd(inbFnd,QTLs.size());
 
   vector<string> fnd_names;
   for (map<string,string>::const_iterator it=inbfnds.begin();it!=inbfnds.end();it++)
