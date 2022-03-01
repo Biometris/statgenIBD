@@ -88,7 +88,10 @@ void print_coa_file(const vector<string>& parname, const string& filename)
 //' @export
 // [[Rcpp::export]]
 int simQTL(CharacterVector& inputfile,
-           DataFrame& inbFnd,
+           const std::string& popType,
+           const DataFrame& inbFnd,
+           const int& nInd = 10,
+           const std::string& crossName = "cross",
            Nullable<CharacterVector&> dir_name = R_NilValue,
            const std::string& mapfile = "map.txt",
            const NumericVector& chrLength = 100.0,
@@ -113,8 +116,8 @@ int simQTL(CharacterVector& inputfile,
     ChangeDir(dir_name_str);
   }
 
-  vector<double> chr_length = Rcpp::as< std::vector<double> >(chrLength);
-  vector<double> nloc_chr = Rcpp::as< std::vector<double> >(nlocChr);
+  vector<double> chr_length = Rcpp::as< vector<double> >(chrLength);
+  vector<double> nloc_chr = Rcpp::as< vector<double> >(nlocChr);
 
   //int nr_alleles;
   //long int start_seed;
@@ -136,13 +139,8 @@ int simQTL(CharacterVector& inputfile,
   //map<Locus, vector<double> > QTLs = read_QTLs(commands);
 
   map<Locus, vector<double> > QTLs;
-
   if (QTLPos.isNotNull())
-  {
     QTLs = read_QTLs(QTLPos);
-  }
-
-  //map<string,string> inbfnds = read_inbfnd(commands,QTLs.size());
 
   map<string,string> inbfnds = read_inbfnd(inbFnd,QTLs.size());
 
@@ -151,7 +149,9 @@ int simQTL(CharacterVector& inputfile,
     fnd_names.push_back(it->first);
   read_makeped(commands,fnd_names);
 
-  vector<PopProp> pops = read_pop(commands);
+  //vector<PopProp> pops = read_pop(commands);
+  vector<PopProp> pops = read_pop(crossName,popType,nInd,fnd_names);
+
   matrix<double> A = read_epi(commands,QTLs);
 
   vector<IndProp> ped;

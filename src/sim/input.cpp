@@ -11,8 +11,9 @@
 #include "urn.h"
 #include "poptype/mapqtl.h"
 
-using namespace ibd;
+using namespace Rcpp;
 using namespace std;
+using namespace ibd;
 
 Commands read_input_file(const string& filename)
 {
@@ -65,14 +66,15 @@ Commands read_input_file(const string& filename)
 //   return QTLs;
 // }
 
-map<Locus, vector<double> > read_QTLs(const Rcpp::DataFrame& QTLposdf)
+map<Locus, vector<double> > read_QTLs(const DataFrame& QTLposdf)
 {
+  map<Locus, vector<double> > QTLs;
   Rcpp::NumericVector pos = QTLposdf["pos"];
   Rcpp::CharacterVector chr = QTLposdf["chr"];
   Rcpp::CharacterVector name = QTLposdf["name"];
   Rcpp::NumericVector add = QTLposdf["add"];
   Rcpp::NumericVector dom = QTLposdf["dom"];
-  map<Locus, vector<double> > QTLs;
+
   for (int m=0;m<QTLposdf.nrows();m++)
   {
     string chrM = Rcpp::as<std::string>(chr[m]);
@@ -85,7 +87,8 @@ map<Locus, vector<double> > read_QTLs(const Rcpp::DataFrame& QTLposdf)
   return(QTLs);
 }
 
-matrix<double> read_epi(const Commands& commands, const map< Locus,vector<double> >& QTLs)
+matrix<double> read_epi(const Commands& commands,
+                        const map< Locus,vector<double> >& QTLs)
 {
   int nQTL = QTLs.size();
   matrix<double> A(nQTL,nQTL,0.0);
@@ -172,7 +175,7 @@ matrix<double> read_epi(const Commands& commands, const map< Locus,vector<double
 // }
 
 
-map<string,string> read_inbfnd(const Rcpp::DataFrame& inbfnddf,
+map<string,string> read_inbfnd(const DataFrame& inbfnddf,
                                unsigned int nqtl)
 {
   map<string,string> inbfnd;
@@ -198,36 +201,54 @@ map<string,string> read_inbfnd(const Rcpp::DataFrame& inbfnddf,
   return inbfnd;
 }
 
+// vector<PopProp> read_pop(const Commands& commands)
+// {
+//   vector<PopProp> pops;
+//   typedef Commands::const_iterator Iter;
+//   pair<Iter,Iter> range = commands.equal_range("pop");
+//   for (Iter iter=range.first;iter!=range.second;++iter)
+//   {
+//     const line_command& lc = iter->second;
+//     istringstream line_stream(lc.argument);
+//     string name,popt;
+//     line_stream >> name >> popt;
+//     int nind,npar;
+//     if (popt.find("C4") == 0)
+//       npar = 4;
+//     else if (popt.find("C3") == 0)
+//       npar = 3;
+//     else
+//       npar = 2;
+//     vector<string> P(npar);
+//     line_stream >> P >> nind;
+//     PopProp pop(nind,name,popt,P);
+//     if (!line_stream.eof() || line_stream.bad())
+//       lc.error("format error");
+//     pops.push_back(pop);
+//   }
+//   return pops;
+// }
 
-
-
-
-
-vector<PopProp> read_pop(const Commands& commands)
+vector<PopProp> read_pop(const string& name,
+                         const string&popt,
+                         const int& nind,
+                         const vector<string> parNames)
 {
   vector<PopProp> pops;
-  typedef Commands::const_iterator Iter;
-  pair<Iter,Iter> range = commands.equal_range("pop");
-  for (Iter iter=range.first;iter!=range.second;++iter)
-  {
-    const line_command& lc = iter->second;
-    istringstream line_stream(lc.argument);
-    string name,popt;
-    line_stream >> name >> popt;
-    int nind,npar;
-    if (popt.find("C4") == 0)
-      npar = 4;
-    else if (popt.find("C3") == 0)
-      npar = 3;
-    else
-      npar = 2;
-    vector<string> P(npar);
-    line_stream >> P >> nind;
-    PopProp pop(nind,name,popt,P);
-    if (!line_stream.eof() || line_stream.bad())
-      lc.error("format error");
-    pops.push_back(pop);
+  int npar;
+  if (popt.find("C4") == 0)
+    npar = 4;
+  else if (popt.find("C3") == 0)
+    npar = 3;
+  else
+    npar = 2;
+  int nparNames = parNames.size();
+  if (npar != nparNames) {
+    throw ibd_error("parent names don't match number of parents in population.");
   }
+  PopProp pop(nind,name,popt,parNames);
+  pops.push_back(pop);
+
   return pops;
 }
 

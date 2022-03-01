@@ -6,7 +6,10 @@
 \usage{
 simQTL(
   inputfile,
+  popType,
   inbFnd,
+  nInd = 10L,
+  crossName = "cross",
   dir_name = NULL,
   mapfile = "map.txt",
   chrLength = 100,

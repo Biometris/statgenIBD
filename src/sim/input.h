@@ -11,7 +11,11 @@
 
 ibd::Commands read_input_file(const std::string& filename);
 // void read_seed(long int& start_seed, const ibd::Commands& commands);
-std::vector<PopProp> read_pop(const ibd::Commands& commands);
+//std::vector<PopProp> read_pop(const ibd::Commands& commands);
+std::vector<PopProp> read_pop(const std::string& name,
+                              const std::string&popt,
+                              const int& nind,
+                              const std::vector<std::string> parNames);
 // void read_number_markers(std::vector<int>& nr_markers_per_chr, std::istream& f);
 // void read_genome(std::vector<double>& chr_length, const ibd::Commands& commands);
 // std::map<Locus, std::vector<double> > read_QTLs(const ibd::Commands& commands);
