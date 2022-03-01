@@ -119,57 +119,57 @@ matrix<double> read_epi(const Commands& commands, const map< Locus,vector<double
   return A;
 }
 
-map<string,string> read_inbfnd(const Commands& commands,unsigned int nqtl)
-{
-  map<string,string> inbfnd;
-  typedef Commands::const_iterator Iter;
-  pair<Iter,Iter> range = commands.equal_range("inbfnd");
-  for (Iter iter=range.first;iter!=range.second;++iter)
-  {
-    const line_command& lc = iter->second;
-    istringstream line_stream(lc.argument);
-    string fnd_name,fnd_effects;
-    line_stream >> fnd_name >> fnd_effects;
-    if (!line_stream.eof() || line_stream.bad())
-      lc.error("format error");
-    if (fnd_effects.length() != nqtl)
-      lc.error("wrong number of qtls");
-    for (unsigned int i=0;i<nqtl;i++)
-    {
-      char c = fnd_effects[i];
-      if (c != '+' && c != '-')
-        lc.error("error in sign of qtl effects");
-    }
-    inbfnd[fnd_name] = fnd_effects;
-  }
-
-  string filename;
-  if (!read(filename,commands,"inbfndfile"))
-    return inbfnd;
-
-  string line;
-  ifstream inp;
-  OpenFile(inp,filename);
-  while (getline(inp,line))
-  {
-    if (line.empty()) continue;
-    istringstream line_stream(line);
-    string fnd_name,fnd_effects;
-    line_stream >> fnd_name >> fnd_effects;
-
-    if (fnd_effects.length() != nqtl)
-      throw ibd_error("wrong number of qtls in file " + filename);
-    for (unsigned int i=0;i<nqtl;i++)
-    {
-      char c = fnd_effects[i];
-      if (c != '+' && c != '-')
-        throw ibd_error("error in file " + filename);
-    }
-    inbfnd[fnd_name] = fnd_effects;
-  }
-
-  return inbfnd;
-}
+// map<string,string> read_inbfnd(const Commands& commands,unsigned int nqtl)
+// {
+//   map<string,string> inbfnd;
+//   typedef Commands::const_iterator Iter;
+//   pair<Iter,Iter> range = commands.equal_range("inbfnd");
+//   for (Iter iter=range.first;iter!=range.second;++iter)
+//   {
+//     const line_command& lc = iter->second;
+//     istringstream line_stream(lc.argument);
+//     string fnd_name,fnd_effects;
+//     line_stream >> fnd_name >> fnd_effects;
+//     if (!line_stream.eof() || line_stream.bad())
+//       lc.error("format error");
+//     if (fnd_effects.length() != nqtl)
+//       lc.error("wrong number of qtls");
+//     for (unsigned int i=0;i<nqtl;i++)
+//     {
+//       char c = fnd_effects[i];
+//       if (c != '+' && c != '-')
+//         lc.error("error in sign of qtl effects");
+//     }
+//     inbfnd[fnd_name] = fnd_effects;
+//   }
+//
+//   string filename;
+//   if (!read(filename,commands,"inbfndfile"))
+//     return inbfnd;
+//
+//   string line;
+//   ifstream inp;
+//   OpenFile(inp,filename);
+//   while (getline(inp,line))
+//   {
+//     if (line.empty()) continue;
+//     istringstream line_stream(line);
+//     string fnd_name,fnd_effects;
+//     line_stream >> fnd_name >> fnd_effects;
+//
+//     if (fnd_effects.length() != nqtl)
+//       throw ibd_error("wrong number of qtls in file " + filename);
+//     for (unsigned int i=0;i<nqtl;i++)
+//     {
+//       char c = fnd_effects[i];
+//       if (c != '+' && c != '-')
+//         throw ibd_error("error in file " + filename);
+//     }
+//     inbfnd[fnd_name] = fnd_effects;
+//   }
+//
+//   return inbfnd;
+// }
 
 
 map<string,string> read_inbfnd(const Rcpp::DataFrame& inbfnddf,
@@ -182,29 +182,17 @@ map<string,string> read_inbfnd(const Rcpp::DataFrame& inbfnddf,
     throw ibd_error("wrong number of qtls");
   for (int m=0;m<fnd_effects.nrows();m++)
   {
-    Rcpp::Rcout<< m << endl;
-
     string nameM = Rcpp::as<std::string>(name[m]);
     string fnd_effectsM = "";
     Rcpp::CharacterVector fnd_effectsI;
     for (unsigned int i=1;i<=nqtl;i++)
     {
-      Rcpp::Rcout<< i << endl;
-
       fnd_effectsI = fnd_effects[i];
-
-      Rcpp::Rcout << fnd_effectsI << endl;
-
       string s = Rcpp::as<std::string>(fnd_effectsI[m]);
-
-      Rcpp::Rcout << s << endl;
-
-      // if (s != "+" && s != "-")
-      //   throw ibd_error("error in sign of qtl effects");
+      if (s != "+" && s != "-")
+        throw ibd_error("error in sign of qtl effects");
       fnd_effectsM = fnd_effectsM + s;
     }
-    Rcpp::Rcout << fnd_effectsM << endl;
-
     inbfnd[nameM] = fnd_effectsM;
   }
   return inbfnd;
@@ -332,8 +320,8 @@ void read_marker(LinkageMap& Markermap,
                  vector<double> chr_length,
                  vector<double> nloc_chr,
                  const int& nr_alleles) //,
-                 //double& fr_miss,
-                 //const Commands& commands)
+  //double& fr_miss,
+  //const Commands& commands)
 {
   //const line_command& lc = GetCommand(commands,"markers");
   //istringstream f(lc.argument);
@@ -343,17 +331,17 @@ void read_marker(LinkageMap& Markermap,
   //f >> filename;
   //read_number_markers(nloc_chr,f);
   //if (f.bad())
-//    lc.error("format error");
+  //    lc.error("format error");
   //f >> nr_alleles;
   //if (f.bad())
-//    lc.error("format error");
+  //    lc.error("format error");
   //if (f.eof())
   //		fr_miss = 0.0;
   //else
   //		f >> fr_miss;
 
   //if (!f.eof() || f.bad())
-//    lc.error("format error");
+  //    lc.error("format error");
 
   for (int chr=0;chr<nchr;chr++)
   {

@@ -16,7 +16,7 @@ std::vector<PopProp> read_pop(const ibd::Commands& commands);
 // void read_genome(std::vector<double>& chr_length, const ibd::Commands& commands);
 // std::map<Locus, std::vector<double> > read_QTLs(const ibd::Commands& commands);
 std::map<Locus, std::vector<double> > read_QTLs(const Rcpp::DataFrame& QTLposdf);
-std::map<std::string,std::string> read_inbfnd(const ibd::Commands& commands,unsigned int nqtl);
+// std::map<std::string,std::string> read_inbfnd(const ibd::Commands& commands,unsigned int nqtl);
 std::map<std::string,std::string> read_inbfnd(const Rcpp::DataFrame& inbfnddf,unsigned int nqtl);
 
 ibd::matrix<double> read_epi(const ibd::Commands& commands,

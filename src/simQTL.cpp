@@ -90,7 +90,6 @@ void print_coa_file(const vector<string>& parname, const string& filename)
 int simQTL(CharacterVector& inputfile,
            DataFrame& inbFnd,
            Nullable<CharacterVector&> dir_name = R_NilValue,
-           const std::string& eval_filename = "eval.txt",
            const std::string& mapfile = "map.txt",
            const NumericVector& chrLength = 100.0,
            const NumericVector& nlocChr = 11.0,
@@ -98,7 +97,6 @@ int simQTL(CharacterVector& inputfile,
            Nullable<DataFrame&> QTLPos = R_NilValue,
            const int& nrep = 1,
            const bool& print_flexQTL = false,
-           const double& dist_eval_pos = 5.0,
            const double& fr_miss = 0.0,
            const double& mu = 5.0,
            const double& sigma2_e = 1.0,
@@ -174,7 +172,7 @@ int simQTL(CharacterVector& inputfile,
   // Test output
   Rcout << "Test output: " << endl << endl;
   Rcout << "seed:    " << start_seed << endl;
-  Rcout << "dist:    " << eval_filename << "  " << dist_eval_pos << endl;
+  //Rcout << "dist:    " << eval_filename << "  " << dist_eval_pos << endl;
   Rcout << "nr_all:  " << nr_alleles << endl;
   Rcout << "fr_mis:  " << fr_miss << endl;
   Rcout << "nloc:    " << M << endl << endl;

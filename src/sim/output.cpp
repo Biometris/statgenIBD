@@ -12,14 +12,14 @@ void make_ped_file(const SimPop& sim_pop, const string& filename)
 	for (SimPop::const_iterator it=sim_pop.begin();it!=sim_pop.end();it++)
 	{
 		const IndProp& indprop = it->first;
-		outp << setw(12) << indprop.GetID() 
+		outp << setw(12) << indprop.GetID()
 			 << setw(12) << indprop.GetType()
 			 << setw(12) << indprop.GetP1()
 			 << setw(12) << indprop.GetP2() << endl;
 	}
 }
 
-void make_loc_file(const SimPop& sim_pop, 
+void make_loc_file(const SimPop& sim_pop,
 				   const LinkageMap& markermap,
 				   const vector<MarkerType>& markertype,
 				   const string& filename)
@@ -50,14 +50,14 @@ void make_loc_file(const SimPop& sim_pop,
 	}
 }
 
-void make_qua_file(const SimPop& sim_pop, const Phi& phi, double sigma, 
+void make_qua_file(const SimPop& sim_pop, const Phi& phi, double sigma,
 				   const string& filename)
 {
 	ofstream outp;
 	OpenFile(outp,filename + ".qua");
-	outp << setw(12) << "ID" 
-		 << setw(15) << "pheno" 
-		 << setw(15) << "geno" 
+	outp << setw(12) << "ID"
+		 << setw(15) << "pheno"
+		 << setw(15) << "geno"
 		 << setw(15) << "error" << endl;
 
 	for (SimPop::const_iterator it=sim_pop.begin();it!=sim_pop.end();it++)
@@ -69,27 +69,27 @@ void make_qua_file(const SimPop& sim_pop, const Phi& phi, double sigma,
 			double error = randnormal(0.0,sigma);
 			double pheno_val = geno_val + error;
 			string ID = it->first.GetID();
-			outp << setw(12) << ID 
-				 << setw(15) << pheno_val 
-				 << setw(15) << geno_val  
+			outp << setw(12) << ID
+				 << setw(15) << pheno_val
+				 << setw(15) << geno_val
 				 << setw(15) << error << endl;
 		}
 	}
 }
 
-void make_eval_file(const string& eval_filename, vector<double>& chr_length, 
-					double dist_eval_pos)
-{
-	ofstream outp;
-	OpenFile(outp,eval_filename);
-	const int Nchr = chr_length.size();
-	for (int chr=0;chr<Nchr;chr++)
-	{
-		double len = chr_length[chr];
-		for (double pos = 0.0; pos <=len; pos+=dist_eval_pos)
-			outp << setw(3) << chr+1 << setw(12) << pos << endl;
-	}
-}
+// void make_eval_file(const string& eval_filename, vector<double>& chr_length,
+// 					double dist_eval_pos)
+// {
+// 	ofstream outp;
+// 	OpenFile(outp,eval_filename);
+// 	const int Nchr = chr_length.size();
+// 	for (int chr=0;chr<Nchr;chr++)
+// 	{
+// 		double len = chr_length[chr];
+// 		for (double pos = 0.0; pos <=len; pos+=dist_eval_pos)
+// 			outp << setw(3) << chr+1 << setw(12) << pos << endl;
+// 	}
+// }
 
 void make_part_ldf_file(int N,vector<double>& chr_length,
 				   double dist_eval_pos, string filename)
@@ -113,8 +113,8 @@ void make_part_ldf_file(int N,vector<double>& chr_length,
 	outp << "posnr " << endl;
 	for (int m=0;m<nloc;m++)
 	{
-		outp << setw(5) << m+1 << setw(6) << eval_map[m].GetChr() 
-			 << setw(12) << eval_map[m].GetPosition() << endl; 
+		outp << setw(5) << m+1 << setw(6) << eval_map[m].GetChr()
+			 << setw(12) << eval_map[m].GetPosition() << endl;
 	}
 
 	outp << endl << "inbred 1" << endl;
@@ -153,8 +153,8 @@ void print(ostream& outp, const map<Locus,vector<double> >& QTLs)
 	{
 		const Locus& loc = iter->first;
 		const vector<double>& par = iter->second;
-		outp << setw(3) << loc.GetChr() << setw(12) << loc.GetPosition() 
-			 << setw(6) << loc.GetName() << setw(12) << par << endl; 
+		outp << setw(3) << loc.GetChr() << setw(12) << loc.GetPosition()
+			 << setw(6) << loc.GetName() << setw(12) << par << endl;
 	}
 }
 
@@ -175,8 +175,8 @@ void print_genstat_table(const vector<PopProp>& pops, const map<string,string>& 
 
 /*
 	outp << setw(5) << "crsnr" << setw(12) << "name"
-		 << setw(8) << "type" << setw(6) << "nind" 
-		 << setw(8) << "ndx[1]" << setw(8) << "ndx[2]" 
+		 << setw(8) << "type" << setw(6) << "nind"
+		 << setw(8) << "ndx[1]" << setw(8) << "ndx[2]"
 		 << setw(8) << "ndx[3]" << setw(8) << "ndx[4]" << endl;
 
 	set<string> inbfnd_used; // only select founders used in crosses
@@ -185,7 +185,7 @@ void print_genstat_table(const vector<PopProp>& pops, const map<string,string>& 
 		string fnd_name = iter1->first;
 		for (vector<PopProp>::const_iterator iter2 = pops.begin();iter2!=pops.end();iter2++)
 		{
-			if (iter2->P[0] == fnd_name || iter2->P[1] == fnd_name || 
+			if (iter2->P[0] == fnd_name || iter2->P[1] == fnd_name ||
 				iter2->P[2] == fnd_name || iter2->P[3] == fnd_name)
 				inbfnd_used.insert(fnd_name);
 		}
@@ -198,17 +198,17 @@ void print_genstat_table(const vector<PopProp>& pops, const map<string,string>& 
 		int k=1;
 		for (set<string>::const_iterator it2=inbfnd_used.begin();it2!=inbfnd_used.end();it2++)
 		{
-			if (*it2 == it->P[0]) c1 = k; 
-			if (*it2 == it->P[1]) c2 = k; 
-			if (*it2 == it->P[2]) c3 = k; 
-			if (*it2 == it->P[3]) c4 = k; 
+			if (*it2 == it->P[0]) c1 = k;
+			if (*it2 == it->P[1]) c2 = k;
+			if (*it2 == it->P[2]) c3 = k;
+			if (*it2 == it->P[3]) c4 = k;
 			k++;
 		}
 		outp << setw(5) << crsnr << setw(12) << it->name
 			 << setw(8) << it->type << setw(6) << it->nind
-			 << setw(8) << c1 << setw(8) << c2 
+			 << setw(8) << c1 << setw(8) << c2
 			 << setw(8) << c3 << setw(8) << c4 << endl;
 		crsnr++;
 	}
-*/ 
+*/
 }

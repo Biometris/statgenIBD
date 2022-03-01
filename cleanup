@@ -22,3 +22,4 @@ rm -f \
   src/sim/poptype/mapqtl.o\
   src/sim/poptype/calcRILexact.o\
   src/sim/poptype/HANSpop.o
+
