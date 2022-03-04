@@ -29,12 +29,11 @@ BEGIN_RCPP
 END_RCPP
 }
 // simQTL
-int simQTL(CharacterVector& inputfile, const std::string& popType, const DataFrame& inbFnd, const int& nInd, const std::string& crossName, Nullable<CharacterVector&> dir_name, const std::string& mapfile, const NumericVector& chrLength, const NumericVector& nlocChr, const int& nr_alleles, Nullable<DataFrame&> QTLPos, const int& nrep, const bool& print_flexQTL, const double& fr_miss, const double& mu, const double& sigma2_e, const long int& start_seed);
-RcppExport SEXP _statgenIBD_simQTL(SEXP inputfileSEXP, SEXP popTypeSEXP, SEXP inbFndSEXP, SEXP nIndSEXP, SEXP crossNameSEXP, SEXP dir_nameSEXP, SEXP mapfileSEXP, SEXP chrLengthSEXP, SEXP nlocChrSEXP, SEXP nr_allelesSEXP, SEXP QTLPosSEXP, SEXP nrepSEXP, SEXP print_flexQTLSEXP, SEXP fr_missSEXP, SEXP muSEXP, SEXP sigma2_eSEXP, SEXP start_seedSEXP) {
+int simQTL(const std::string& popType, const DataFrame& inbFnd, const int& nInd, const std::string& crossName, Nullable<CharacterVector&> dir_name, const std::string& mapfile, const NumericVector& chrLength, const NumericVector& nlocChr, const int& nr_alleles, Nullable<DataFrame&> QTLPos, Nullable<NumericMatrix&> epiInt, const int& nrep, const bool& print_flexQTL, const double& fr_miss, const double& mu, const double& sigma2_e, const long int& start_seed);
+RcppExport SEXP _statgenIBD_simQTL(SEXP popTypeSEXP, SEXP inbFndSEXP, SEXP nIndSEXP, SEXP crossNameSEXP, SEXP dir_nameSEXP, SEXP mapfileSEXP, SEXP chrLengthSEXP, SEXP nlocChrSEXP, SEXP nr_allelesSEXP, SEXP QTLPosSEXP, SEXP epiIntSEXP, SEXP nrepSEXP, SEXP print_flexQTLSEXP, SEXP fr_missSEXP, SEXP muSEXP, SEXP sigma2_eSEXP, SEXP start_seedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector& >::type inputfile(inputfileSEXP);
     Rcpp::traits::input_parameter< const std::string& >::type popType(popTypeSEXP);
     Rcpp::traits::input_parameter< const DataFrame& >::type inbFnd(inbFndSEXP);
     Rcpp::traits::input_parameter< const int& >::type nInd(nIndSEXP);
@@ -45,13 +44,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const NumericVector& >::type nlocChr(nlocChrSEXP);
     Rcpp::traits::input_parameter< const int& >::type nr_alleles(nr_allelesSEXP);
     Rcpp::traits::input_parameter< Nullable<DataFrame&> >::type QTLPos(QTLPosSEXP);
+    Rcpp::traits::input_parameter< Nullable<NumericMatrix&> >::type epiInt(epiIntSEXP);
     Rcpp::traits::input_parameter< const int& >::type nrep(nrepSEXP);
     Rcpp::traits::input_parameter< const bool& >::type print_flexQTL(print_flexQTLSEXP);
     Rcpp::traits::input_parameter< const double& >::type fr_miss(fr_missSEXP);
     Rcpp::traits::input_parameter< const double& >::type mu(muSEXP);
     Rcpp::traits::input_parameter< const double& >::type sigma2_e(sigma2_eSEXP);
     Rcpp::traits::input_parameter< const long int& >::type start_seed(start_seedSEXP);
-    rcpp_result_gen = Rcpp::wrap(simQTL(inputfile, popType, inbFnd, nInd, crossName, dir_name, mapfile, chrLength, nlocChr, nr_alleles, QTLPos, nrep, print_flexQTL, fr_miss, mu, sigma2_e, start_seed));
+    rcpp_result_gen = Rcpp::wrap(simQTL(popType, inbFnd, nInd, crossName, dir_name, mapfile, chrLength, nlocChr, nr_alleles, QTLPos, epiInt, nrep, print_flexQTL, fr_miss, mu, sigma2_e, start_seed));
     return rcpp_result_gen;
 END_RCPP
 }

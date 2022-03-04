@@ -9,7 +9,7 @@
 #include "Loc.h"
 #include "CommandFile.h"
 
-ibd::Commands read_input_file(const std::string& filename);
+// ibd::Commands read_input_file(const std::string& filename);
 // void read_seed(long int& start_seed, const ibd::Commands& commands);
 //std::vector<PopProp> read_pop(const ibd::Commands& commands);
 std::vector<PopProp> read_pop(const std::string& name,
@@ -23,8 +23,8 @@ std::map<Locus, std::vector<double> > read_QTLs(const Rcpp::DataFrame& QTLposdf)
 // std::map<std::string,std::string> read_inbfnd(const ibd::Commands& commands,unsigned int nqtl);
 std::map<std::string,std::string> read_inbfnd(const Rcpp::DataFrame& inbfnddf,unsigned int nqtl);
 
-ibd::matrix<double> read_epi(const ibd::Commands& commands,
-                             const std::map< Locus,std::vector<double> >& QTLs);
+// ibd::matrix<double> read_epi(const ibd::Commands& commands,
+//                              const std::map< Locus,std::vector<double> >& QTLs);
 
 void read_marker(LinkageMap& Markermap,
                  const std::string& filename,

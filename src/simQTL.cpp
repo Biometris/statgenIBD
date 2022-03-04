@@ -87,8 +87,7 @@ void print_coa_file(const vector<string>& parname, const string& filename)
 //'
 //' @export
 // [[Rcpp::export]]
-int simQTL(CharacterVector& inputfile,
-           const std::string& popType,
+int simQTL(const std::string& popType,
            const DataFrame& inbFnd,
            const int& nInd = 10,
            const std::string& crossName = "cross",
@@ -98,6 +97,7 @@ int simQTL(CharacterVector& inputfile,
            const NumericVector& nlocChr = 11.0,
            const int& nr_alleles = 2,
            Nullable<DataFrame&> QTLPos = R_NilValue,
+           Nullable<NumericMatrix&> epiInt = R_NilValue,
            const int& nrep = 1,
            const bool& print_flexQTL = false,
            const double& fr_miss = 0.0,
@@ -108,7 +108,7 @@ int simQTL(CharacterVector& inputfile,
   //cout.setf(ios::fixed, ios::floatfield);
 
   string cur_dir = get_current_dir();
-  string inputfile_str = Rcpp::as<string>(inputfile);
+  // string inputfile_str = Rcpp::as<string>(inputfile);
 
   if (dir_name.isNotNull())
   {
@@ -127,7 +127,7 @@ int simQTL(CharacterVector& inputfile,
   //vector<double> chr_length;
   //string eval_filename,mapfile;
   //string mapfile;
-  Commands commands = read_input_file(inputfile_str);
+  // Commands commands = read_input_file(inputfile_str);
   //read(mu,commands,"mu");
   //read(sigma2_e,commands,"var");
   //read(eval_filename,dist_eval_pos,commands,"dist");
@@ -147,27 +147,39 @@ int simQTL(CharacterVector& inputfile,
   vector<string> fnd_names;
   for (map<string,string>::const_iterator it=inbfnds.begin();it!=inbfnds.end();it++)
     fnd_names.push_back(it->first);
-  read_makeped(commands,fnd_names);
+
+  //read_makeped(commands,fnd_names);
 
   //vector<PopProp> pops = read_pop(commands);
   vector<PopProp> pops = read_pop(crossName,popType,nInd,fnd_names);
 
-  matrix<double> A = read_epi(commands,QTLs);
+  const int nQTL = QTLs.size();
+  matrix<double> A(nQTL, nQTL, 0.0);
+  if (epiInt.isNotNull()) {
+    // Convert to non-nullable matrix to be able to access content.
+    NumericMatrix epiInt_(epiInt);
+    for(int i=0;i<nQTL;i++)
+    {
+      for(int j=0;j<nQTL;j++)
+        A[i][j] = epiInt_(i, j);
+    }
+  }
+
+  // matrix<double> A = read_epi(commands,QTLs);
 
   vector<IndProp> ped;
   string pedfile,locfile,outputdir;
-  bool pedigree_defined = read(pedfile,locfile,outputdir,commands,"pedigree");
-  if (pedigree_defined)
-    ped = read_ped_file(pedfile);
+  // bool pedigree_defined = read(pedfile,locfile,outputdir,commands,"pedigree");
+  // if (pedigree_defined)
+  //   ped = read_ped_file(pedfile);
 
-  vector<string> parfam;
-  bool inbpar_defined = multi_read(parfam,commands,"inbpar");
-  if (inbpar_defined)
-    print_coa_file(parfam,"coa.txt");
+  // vector<string> parfam;
+  // bool inbpar_defined = multi_read(parfam,commands,"inbpar");
+  // if (inbpar_defined)
+  //   print_coa_file(parfam,"coa.txt");
 
   const int M = markermap.size();
   const int Nfnd = inbfnds.size();
-  const int nQTL = QTLs.size();
 
   // Test output
   Rcout << "Test output: " << endl << endl;
@@ -198,33 +210,33 @@ int simQTL(CharacterVector& inputfile,
   map<string,Genome> genome_founders = make_genome_inbred_founders(inbfnds,chr_length,phi);
 
   map<string,Genome> genome_par_fam;
-  if (pedigree_defined)
-  {
-    // 18 febr 2008: Here we assume only 1 simulation for pedigree->parents families.
-    genome_par_fam = sim_pedigree(ped,genome_founders);
-    const int N = genome_par_fam.size();
-    SimPop vecSimInd(N);
-    int k=0;
-    for (vector<IndProp>::const_iterator it=ped.begin();it!=ped.end();it++)
-    {
-      string id = it->GetID();
-      vecSimInd[k++] = SimInd(*it,genome_par_fam.find(id)->second);
-    }
-    cur_dir = get_current_dir();
-    ChangeDir(outputdir);
-    make_loc_file(vecSimInd,markermap,markertype,locfile);
-    ChangeDir(cur_dir);
-  }
-  else
-    genome_par_fam = genome_founders;
+  // if (pedigree_defined)
+  // {
+  //   // 18 febr 2008: Here we assume only 1 simulation for pedigree->parents families.
+  //   genome_par_fam = sim_pedigree(ped,genome_founders);
+  //   const int N = genome_par_fam.size();
+  //   SimPop vecSimInd(N);
+  //   int k=0;
+  //   for (vector<IndProp>::const_iterator it=ped.begin();it!=ped.end();it++)
+  //   {
+  //     string id = it->GetID();
+  //     vecSimInd[k++] = SimInd(*it,genome_par_fam.find(id)->second);
+  //   }
+  //   cur_dir = get_current_dir();
+  //   ChangeDir(outputdir);
+  //   make_loc_file(vecSimInd,markermap,markertype,locfile);
+  //   ChangeDir(cur_dir);
+  // }
+  // else
+  genome_par_fam = genome_founders;
 
   string inputfile_hybr,outputfile_hybr;
-  if (read(inputfile_hybr,outputfile_hybr,outputdir,commands,"hybridsfile"))
-  {
-    Rcout << "outputdir: " << outputdir << " ...." << endl;
-    sim_hybridsfile(inputfile_hybr,outputdir,outputfile_hybr,ped,genome_par_fam,
-                    markertype,markermap,phi,sigma,print_flexQTL);
-  }
+  // if (read(inputfile_hybr,outputfile_hybr,outputdir,commands,"hybridsfile"))
+  // {
+  //   Rcout << "outputdir: " << outputdir << " ...." << endl;
+  //   sim_hybridsfile(inputfile_hybr,outputdir,outputfile_hybr,ped,genome_par_fam,
+  //                   markertype,markermap,phi,sigma,print_flexQTL);
+  // }
 
   // ?! check this
   //make_hybrids(commands,genome_par_fam,phi,sigma);

@@ -5,7 +5,6 @@
 \title{simQTL}
 \usage{
 simQTL(
-  inputfile,
   popType,
   inbFnd,
   nInd = 10L,
@@ -16,6 +15,7 @@ simQTL(
   nlocChr = 11,
   nr_alleles = 2L,
   QTLPos = NULL,
+  epiInt = NULL,
   nrep = 1L,
   print_flexQTL = FALSE,
   fr_miss = 0,

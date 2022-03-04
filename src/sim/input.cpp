@@ -15,35 +15,35 @@ using namespace Rcpp;
 using namespace std;
 using namespace ibd;
 
-Commands read_input_file(const string& filename)
-{
-  DefCommands defined_commands;
-  AddCommand(defined_commands,"seed");
-  AddCommand(defined_commands,"genome");
-  AddCommand(defined_commands,"markers");
-  AddCommand(defined_commands,"dist");
-  AddCommand(defined_commands,"mu");
-  AddCommand(defined_commands,"var");
-
-  AddOptionalCommand(defined_commands,"makeped");
-  AddOptionalCommand(defined_commands,"pedigree");
-
-  // option hybrids is for a random selection of hybrids
-  // option hybridsfile reads a file with defined hybrids
-  AddOptionalCommand(defined_commands,"hybrids");
-  AddOptionalCommand(defined_commands,"hybridsfile");
-
-  AddOptionalCommand(defined_commands,"inbfndfile");
-
-  const int max = 100;
-  AddMultiCommand(defined_commands,"inbfnd",0,max);
-  AddMultiCommand(defined_commands,"pop",0,max);
-  AddMultiCommand(defined_commands,"qtl",0,max);
-  AddMultiCommand(defined_commands,"epi",0,max); // two-way add x add interactions.
-
-  AddMultiCommand(defined_commands,"inbpar",0,max); // inbred parents
-  return read_command_file(defined_commands,filename);
-}
+// Commands read_input_file(const string& filename)
+// {
+//   DefCommands defined_commands;
+//   AddCommand(defined_commands,"seed");
+//   AddCommand(defined_commands,"genome");
+//   AddCommand(defined_commands,"markers");
+//   AddCommand(defined_commands,"dist");
+//   AddCommand(defined_commands,"mu");
+//   AddCommand(defined_commands,"var");
+//
+//   AddOptionalCommand(defined_commands,"makeped");
+//   AddOptionalCommand(defined_commands,"pedigree");
+//
+//   // option hybrids is for a random selection of hybrids
+//   // option hybridsfile reads a file with defined hybrids
+//   AddOptionalCommand(defined_commands,"hybrids");
+//   AddOptionalCommand(defined_commands,"hybridsfile");
+//
+//   AddOptionalCommand(defined_commands,"inbfndfile");
+//
+//   const int max = 100;
+//   AddMultiCommand(defined_commands,"inbfnd",0,max);
+//   AddMultiCommand(defined_commands,"pop",0,max);
+//   AddMultiCommand(defined_commands,"qtl",0,max);
+//   AddMultiCommand(defined_commands,"epi",0,max); // two-way add x add interactions.
+//
+//   AddMultiCommand(defined_commands,"inbpar",0,max); // inbred parents
+//   return read_command_file(defined_commands,filename);
+// }
 
 // map<Locus, vector<double> > read_QTLs(const Commands& commands)
 // {
@@ -87,40 +87,40 @@ map<Locus, vector<double> > read_QTLs(const DataFrame& QTLposdf)
   return(QTLs);
 }
 
-matrix<double> read_epi(const Commands& commands,
-                        const map< Locus,vector<double> >& QTLs)
-{
-  int nQTL = QTLs.size();
-  matrix<double> A(nQTL,nQTL,0.0);
-  typedef Commands::const_iterator Iter;
-  pair<Iter,Iter> range = commands.equal_range("epi");
-  for (Iter iter=range.first;iter!=range.second;++iter)
-  {
-    const line_command& lc = iter->second;
-    istringstream line_stream(lc.argument);
-    string qtl1,qtl2;
-    double eff;
-    line_stream >> qtl1 >> qtl2 >> eff;
-    int k=0;
-    int qtl1_nr = -1;
-    int qtl2_nr = -1;
-    typedef map<Locus,vector<double> >::const_iterator Iter;
-    for (Iter it = QTLs.begin();it != QTLs.end();++it)
-    {
-      string name = it->first.GetName();
-      if (name == qtl1)
-        qtl1_nr = k;
-      if (name == qtl2)
-        qtl2_nr = k;
-      k++;
-    }
-    if (qtl1_nr < 0 || qtl2_nr < 0 || qtl1_nr == qtl2_nr)
-      lc.error("error while reading epistatic interaction");
-    else
-      A[qtl1_nr][qtl2_nr] = A[qtl2_nr][qtl1_nr] = eff;
-  }
-  return A;
-}
+// matrix<double> read_epi(const Commands& commands,
+//                         const map< Locus,vector<double> >& QTLs)
+// {
+//   int nQTL = QTLs.size();
+//   matrix<double> A(nQTL,nQTL,0.0);
+//   typedef Commands::const_iterator Iter;
+//   pair<Iter,Iter> range = commands.equal_range("epi");
+//   for (Iter iter=range.first;iter!=range.second;++iter)
+//   {
+//     const line_command& lc = iter->second;
+//     istringstream line_stream(lc.argument);
+//     string qtl1,qtl2;
+//     double eff;
+//     line_stream >> qtl1 >> qtl2 >> eff;
+//     int k=0;
+//     int qtl1_nr = -1;
+//     int qtl2_nr = -1;
+//     typedef map<Locus,vector<double> >::const_iterator Iter;
+//     for (Iter it = QTLs.begin();it != QTLs.end();++it)
+//     {
+//       string name = it->first.GetName();
+//       if (name == qtl1)
+//         qtl1_nr = k;
+//       if (name == qtl2)
+//         qtl2_nr = k;
+//       k++;
+//     }
+//     if (qtl1_nr < 0 || qtl2_nr < 0 || qtl1_nr == qtl2_nr)
+//       lc.error("error while reading epistatic interaction");
+//     else
+//       A[qtl1_nr][qtl2_nr] = A[qtl2_nr][qtl1_nr] = eff;
+//   }
+//   return A;
+// }
 
 // map<string,string> read_inbfnd(const Commands& commands,unsigned int nqtl)
 // {
