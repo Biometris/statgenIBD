@@ -1,3 +1,5 @@
+# statgenIBD 1.0.4.9000
+
 # statgenIBD 1.0.4
 
 * Increased speed of IBD calculations by improving an inefficient part of the algorithm.
