@@ -1,6 +1,6 @@
-## Release with some additions and bug fixes.
+## Release with 'bug' fixes.
 
-- A new plot option is added and a few minor bugs are fixed.
+- Though not really a bug fix, after the latest release we noticed a major bottleneck in the code that slowed down calculations a lot. Calculations are now sped up by about a factor 3.
 
 ----
 
@@ -28,5 +28,13 @@ Found the following (possibly) invalid URLs:
     From: DESCRIPTION
     Status: 403
     Message: Forbidden
-
+    
 This link works fine when opened in a browser.
+    
+Found the following (possibly) invalid DOIs:
+  DOI: 10.1073/pnas.1100465108
+    From: DESCRIPTION
+    Status: Service Unavailable
+    Message: 503    
+
+The DOI is correct. The corresponding link can be opened in a browser.
