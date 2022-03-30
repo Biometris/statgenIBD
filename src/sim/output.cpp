@@ -50,11 +50,13 @@ void make_loc_file(const SimPop& sim_pop,
   }
 }
 
-void make_qua_file(const SimPop& sim_pop, const Phi& phi, double sigma,
-                   const string& filename)
+void make_pheno_file(const SimPop& sim_pop,
+                     const Phi& phi,
+                     double sigma,
+                     const string& filename)
 {
   ofstream outp;
-  OpenFile(outp,filename + ".qua");
+  OpenFile(outp,filename + "_pheno.txt");
   outp << setw(12) << "ID"
        << setw(15) << "pheno"
        << setw(15) << "geno"

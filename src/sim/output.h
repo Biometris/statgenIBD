@@ -20,7 +20,7 @@ void make_loc_file(const SimPop& sim_pop,
 				   const std::vector<MarkerType>& markertype,
 			       const std::string& filename);
 
-void make_qua_file(const SimPop& sim_pop, const Phi& phi, double sigma,
+void make_pheno_file(const SimPop& sim_pop, const Phi& phi, double sigma,
 				   const std::string& filename);
 
 void print(std::ostream& outp, const std::map<Locus,std::vector<double> >& QTLs);

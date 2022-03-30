@@ -21,9 +21,14 @@ using namespace Rcpp;
 using namespace std;
 using namespace ibd;
 
-void sim_pops(const vector<PopProp>& pops, map<string,Genome>& genome_inbred_parents,
-              const LinkageMap& markermap, const vector<MarkerType>& markertype,
-              const Phi& phi, double sigma, const LinkageMap& QTLmap, int nrep)
+void sim_pops(const vector<PopProp>& pops,
+              map<string,Genome>& genome_inbred_parents,
+              const LinkageMap& markermap,
+              const vector<MarkerType>& markertype,
+              const Phi& phi,
+              double sigma,
+              const LinkageMap& QTLmap,
+              int nrep)
 {
   Rcout << endl << "Start of simulations ..... " << endl;
   const int width = 5; // maximum number of simulations: 00001 - 99999
@@ -47,7 +52,7 @@ void sim_pops(const vector<PopProp>& pops, map<string,Genome>& genome_inbred_par
       SimPop sim_pop = sim_population(*it,genome_inbred_parents,pop_name);
       make_ped_file(sim_pop,pop_name);
       make_loc_file(sim_pop,markermap,markertype,pop_name);
-      //make_qua_file(sim_pop,phi,sigma,pop_name);
+      make_pheno_file(sim_pop,phi,sigma,pop_name);
     }
     //}
     if (nrep > 1) ChangeDir("..");

@@ -102,10 +102,12 @@ void ibd::make_map_file(string name, const LinkageMap& marker_map)
   }
 }
 
-void ibd::make_qua_file(string name, const vector<double>& y, const vector<double>& w,
-                        const vector<int>& env_factor)
+void ibd::make_pheno_file(string name,
+                          const vector<double>& y,
+                          const vector<double>& w,
+                          const vector<int>& env_factor)
 {
-  string filename = name + ".qua";
+  string filename = name + "_pheno.txt";
   ofstream outp(filename.c_str());
   if (!outp)
     throw ibd_error("Cannot open file " + filename);
@@ -125,9 +127,11 @@ void ibd::make_qua_file(string name, const vector<double>& y, const vector<doubl
          << setw(12) << w[ind] << endl;
 }
 
-void ibd::make_qua_file(string name, const vector<double>& y, const string& trait_name)
+void ibd::make_pheno_file(string name,
+                          const vector<double>& y,
+                          const string& trait_name)
 {
-  string filename = name + ".qua";
+  string filename = name + "_pheno.txt";
   ofstream outp(filename.c_str());
   if (!outp)
     throw ibd_error("Cannot open file " + filename);
@@ -180,7 +184,7 @@ void ibd::make_MapQTL_files(string name,
                             const PopulationType& poptype)
 {
   make_map_file(name,markermap);
-  make_qua_file(name,pheno,weight,env_factor);
+  make_pheno_file(name,pheno,weight,env_factor);
   make_loc_file(name,geno,poptype,markermap);
 }
 
@@ -192,14 +196,14 @@ void ibd::make_MapQTL_files(string name,
                             const PopulationType& poptype)
 {
   make_map_file(name,markermap);
-  make_qua_file(name,pheno,trait_name);
+  make_pheno_file(name,pheno,trait_name);
   make_loc_file(name,geno,poptype,markermap);
 }
 
 
-string ibd::read_qua_file(vector<string>& column_name,
-                          matrix<string>& qua_info,
-                          const string filename)
+string ibd::read_pheno_file(vector<string>& column_name,
+                            matrix<string>& qua_info,
+                            const string filename)
 {
   ifstream inp(filename.c_str());
   if (!inp)
@@ -327,10 +331,10 @@ PopulationType ibd::read_MapQTLfiles(string& name_quant_trait,
   map<string, vector<ObsGeno> > marker_obs;
 
   PopulationType poptype = read_loc_file(name,marker_obs,locfile);
-  string miss = read_qua_file(column_name,qua_info,quafile);
+  string miss = read_pheno_file(column_name,qua_info,quafile);
   read_map_file(complete_markermap,chr_name,mapfile);
   string qtrait_name;
-  cout << "qua file" << endl;
+  cout << "pheno file" << endl;
   for (unsigned int c=0;c<column_name.size();c++)
     cout << setw(3) << c << setw(20) << column_name[c] << endl;
   int col_nr_pheno, col_nr_weight, col_nr_env;
@@ -495,7 +499,7 @@ PopulationType ibd::read_MapQTLfiles(string& name_quant_trait,
   map<string, vector<ObsGeno> > marker_obs;
 
   PopulationType poptype = read_loc_file(name,marker_obs,locfile);
-  string miss = read_qua_file(column_name,qua_info,quafile);
+  string miss = read_pheno_file(column_name,qua_info,quafile);
   read_map_file(complete_markermap,chr_name,mapfile);
   int nind = qua_info.NrRows();
   vector<bool> miss_ind(nind);
@@ -559,7 +563,7 @@ PopulationType ibd::read_MapQTLfiles(vector<double>& pheno,
   map<string, vector<ObsGeno> > marker_obs;
 
   PopulationType poptype = read_loc_file(name,marker_obs,locfile);
-  string miss = read_qua_file(column_name,qua_info,quafile);
+  string miss = read_pheno_file(column_name,qua_info,quafile);
   read_map_file(complete_markermap,chr_name,mapfile);
   int nind = qua_info.NrRows();
   vector<bool> miss_ind(nind);
