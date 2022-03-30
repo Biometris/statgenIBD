@@ -159,13 +159,13 @@ List calcIBD(CharacterVector& popType,
   CharacterVector parentNames (0);
   if (!isC3C4)
   {
-	for (int i = 0; i < npar; i++)
-	 {
-       if (!(isBC && i == 0))
-         {
-           parentNames.push_back("p" + parents[i]);
-         }
-     }
+    for (int i = 0; i < npar; i++)
+    {
+      if (!(isBC && i == 0))
+      {
+        parentNames.push_back("p" + parents[i]);
+      }
+    }
   }
   if (!isDH)
   {
@@ -202,7 +202,7 @@ List calcIBD(CharacterVector& popType,
   for (int k = 0; k < K; k++) {
     ID(k) = pop[k].GetID();
     par1(k) = pop[k].GetP1();
-	par2(k) = pop[k].GetP2();
+    par2(k) = pop[k].GetP2();
     type(k) = pop[k].GetType();
   }
   DataFrame pedigree = DataFrame::create(Named("ID") = ID, Named("par1") = par1,
@@ -215,7 +215,7 @@ List calcIBD(CharacterVector& popType,
                           Named("markers") = P,
                           Named("popType") = popType,
                           Named("parents") = parents,
-						  Named("pedigree") = pedigree,
+                          Named("pedigree") = pedigree,
                           Named("multiCross") = false);
   res.attr("class") = "IBDprob";
 
