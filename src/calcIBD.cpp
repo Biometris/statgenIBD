@@ -113,7 +113,7 @@ List calcIBD(CharacterVector& popType,
   int x;
   bool isDH = _poptype.find("DH") != std::string::npos;
   bool isBC = match(x, _poptype, "BCx");
-  bool isC3C4 = ((_poptype == "C3") | (_poptype == "C4"));
+  bool isC3C4 = ((_poptype == "C3") || (_poptype == "C4"));
   LinkageMap positions;
   arma::cube prob;
   vector<string> parents, offspring;
