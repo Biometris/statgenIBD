@@ -1,8 +1,9 @@
 #include "ChromosomePair.h"
 #include "util_genetics.h"
-#include "Random.h"
+#include <Rcpp.h>
 
 using namespace std;
+using namespace Rcpp;
 
 bool ibd::eq(const ChromosomePair& x, const ChromosomePair& y)
 {
@@ -28,22 +29,22 @@ ibd::Chromosome ibd::ChromosomePair::Meiosis() const
 	iter1_end = chr_a.segments.end();
 	iter2_end = chr_b.segments.end();
 
-	if (randuniform() < 0.5)
+	if (R::runif(0, 1) < 0.5)
 	{
 		swap(iter1,iter2);
 		swap(iter1_end,iter2_end);
 	}
-	double crossover_pos = randexp(lambda);
+	double crossover_pos = R::rexp(lambda);
 	while (crossover_pos < length)
 	{
 		while (iter1->right < crossover_pos)
-			result.add_segment(*iter1++);	
+			result.add_segment(*iter1++);
 		while (iter2->right < crossover_pos)
 			iter2++;
 		if (iter1->allele != iter2->allele)
 			result.add_segment(Segment(iter1->allele,crossover_pos));
-		
-		crossover_pos += randexp(lambda); 
+
+		crossover_pos += R::rexp(lambda);
 		swap(iter1,iter2);
 		swap(iter1_end,iter2_end);
 	}
@@ -53,10 +54,10 @@ ibd::Chromosome ibd::ChromosomePair::Meiosis() const
     return result;
 }
 
-ibd::oBinFile& ibd::operator<<(oBinFile& os, const ChromosomePair& x) 
+ibd::oBinFile& ibd::operator<<(oBinFile& os, const ChromosomePair& x)
 { os << x.chr_a << x.chr_b; return os;}
 
-ibd::iBinFile& ibd::operator>>(iBinFile& is, ChromosomePair& x)       
+ibd::iBinFile& ibd::operator>>(iBinFile& is, ChromosomePair& x)
 { is >> x.chr_a >> x.chr_b; return is; }
 
 

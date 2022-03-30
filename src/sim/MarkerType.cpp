@@ -1,6 +1,7 @@
 #include "MarkerType.h"
 #include "urn.h"
 #include "convert.h"
+#include <Rcpp.h>
 
 using namespace ibd;
 using namespace std;
@@ -12,7 +13,7 @@ MarkerType::MarkerType(int Nfnd, int Nalleles, double perc_missing)
 	{
 		for (int i=0;i<Nfnd;i++)
 		{
-			int r = randint(1,Nalleles);
+		  int r = Rcpp::sample(Nalleles, 1, false, R_NilValue, true)[0];
 			table.push_back(stringify(r)); // randint(1,Nalleles);
 		}
 	}
@@ -27,9 +28,9 @@ MarkerType::MarkerType(int Nfnd, int Nalleles, double perc_missing)
 	}
 }
 
-string MarkerType::operator()(Genotype g) const 
-{	
-	double x = randuniform();
+string MarkerType::operator()(Genotype g) const
+{
+	double x = R::runif(0, 1);
 	if (x < percentage_missing) return "*";
 	int a = g.First();
 	int b = g.Second();
@@ -37,9 +38,9 @@ string MarkerType::operator()(Genotype g) const
 	{
 		string c1 = table[a];
 		string c2 = table[b];
-		if (c1 == c2) 
+		if (c1 == c2)
 			return c1;
-		if (c1 > c2) 
+		if (c1 > c2)
 			swap(c1,c2);
 		string score = c1 + "/" + c2;
 		return score;
@@ -64,7 +65,7 @@ string MarkerType::Second(ibd::Genotype g) const
 }
 
 
-vector<MarkerType> generate_markertypes(int nloc,int nfnd, int nalleles, 
+vector<MarkerType> generate_markertypes(int nloc,int nfnd, int nalleles,
 										  double percentage_missing)
 {
 	vector<MarkerType> result;

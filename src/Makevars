@@ -21,7 +21,6 @@ PKG_SOURCES = \
         general/OrdGeno.cpp\
         general/TransMatSym2D.cpp\
         general/util_genetics.cpp\
-		general/Random.cpp\
 		general/matvec.cpp\
 		general/dir.cpp\
         pedigree/analysis_fam.cpp\
@@ -55,7 +54,7 @@ PKG_SOURCES = \
 		sim/poptype/poptype.cpp\
 		sim/poptype/RILpop.cpp\
 		sim/poptype/simul.cpp
-		
+
 
 # Obtain the object files
 OBJECTS = $(PKG_SOURCES:.cpp=.o)

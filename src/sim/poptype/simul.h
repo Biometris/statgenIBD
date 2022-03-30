@@ -6,13 +6,13 @@
 #include <fstream>
 #include <vector>
 #include "poptype.h"
-#include "Random.h"
+#include <Rcpp.h>
 
-namespace ibd 
+namespace ibd
 {
 
 template<class G>
-double calc_genetic_var(const G& QTLmodel, const LinkageMap& QTLmap, 
+double calc_genetic_var(const G& QTLmodel, const LinkageMap& QTLmap,
 						const PopulationType& poptype)
 {
 	const int nqtl = QTLmap.size();
@@ -36,7 +36,7 @@ double calc_genetic_var(const G& QTLmodel, const LinkageMap& QTLmap,
 }
 
 template<class G>
-double calc_genetic_mean(const G& QTLmodel, const LinkageMap& QTLmap, 
+double calc_genetic_mean(const G& QTLmodel, const LinkageMap& QTLmap,
 						 const PopulationType& poptype)
 {
 	const int nqtl = QTLmap.size();
@@ -97,7 +97,7 @@ private:
 	double _mu;
 };
 
-std::vector<ObsGeno> generate_markerdata(const Genome& genome, 
+std::vector<ObsGeno> generate_markerdata(const Genome& genome,
 									const LinkageMap& MarkerMap,
 									double fraction_missing,
 									PopulationType poptype);
@@ -106,15 +106,15 @@ std::vector<ObsGeno> generate_markerdata(const Genome& genome,
 void sim(std::vector<double>& pheno,									    // phenotypic values
 		 std::vector<double>& geno_val,										// genotypic values
 		 matrix<ObsGeno>& geno,                                             // marker observations
-		 const QTLModel& QTLmodel, const LinkageMap& QTLmap,			    // QTL info 
-		 double sigma_env, const std::vector<double>& weight,				// env. var + weights 
+		 const QTLModel& QTLmodel, const LinkageMap& QTLmap,			    // QTL info
+		 double sigma_env, const std::vector<double>& weight,				// env. var + weights
 		 const LinkageMap& markermap, double fr_miss,					    // marker info
 		 std::vector<double> chr_length, int nind, PopulationType poptype);	// population info
 
 // void read_chromosome_lengths(std::vector<double>& chr_length, std::ifstream &f);
 void read_markermap(LinkageMap& markermap, std::ifstream& f);
 
-void read_qtlmap(LinkageMap& QTLmap, std::vector<double>& main_effect, 
+void read_qtlmap(LinkageMap& QTLmap, std::vector<double>& main_effect,
 				 const std::string& filename,
 				 PopulationType poptype);
 
@@ -127,7 +127,7 @@ PopulationType  read_param(int& nind,
 				double& eff_dim_epi,
 				const std::string& filename);
 
-std::vector<double> read_interactions(const std::string& filename, int nqtl, 
+std::vector<double> read_interactions(const std::string& filename, int nqtl,
 								 PopulationType poptype);
 
 }

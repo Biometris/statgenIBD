@@ -6,7 +6,6 @@
 #include "Sim.h"
 #include "dir.h"
 #include "Loc.h"
-#include "Random.h"
 #include "convert.h"
 #include "urn.h"
 #include "poptype/mapqtl.h"
@@ -467,7 +466,8 @@ vector<string> get_strings(string filename)
 
 void make_hybrids(const Commands& commands,
                   const map<string,Genome>& simpop,
-                  const Phi& phi, double sigma)
+                  const Phi& phi,
+                  double sigma)
 {
   int N;
   string file1,file2,filename;
@@ -508,7 +508,7 @@ void make_hybrids(const Commands& commands,
       Genome g = g1*g2;
 
       double geno_val = phi(g);
-      double error = randnormal(0.0,sigma);
+      double error = R::rnorm(0.0, sigma);
       double pheno_val = geno_val + error;
 
       outp << indicator[k] << setw(12)  << hybr_label(k)
@@ -620,7 +620,7 @@ void make_hybrids(const vector<IndProp>& hybr,const map<string,Genome>& simpop,
     Genome g = g1*g2;
 
     double geno_val = phi(g);
-    double error = randnormal(0.0,sigma);
+    double error = R::rnorm(0.0,sigma);
     double pheno_val = geno_val + error;
 
     outp << setw(8)  << ind.GetID()
@@ -783,7 +783,7 @@ void sim_hybridsfile(const string inputfile,
     Genome g = g1*g2;
 
     double geno_val = phi(g);
-    double error = randnormal(0.0,sigma);
+    double error = R::rnorm(0.0,sigma);
     double pheno_val = geno_val + error;
 
     outp << setw(12) << ID << setw(12) << "HYBRID"

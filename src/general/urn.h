@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "ibdexcept.h"
-#include "Random.h"
+#include <Rcpp.h>
 
 namespace ibd
 {
@@ -21,7 +21,7 @@ public:
 	void draw(const T& i);						         // draw element i
 	void draw(const T& i, int ndx);                      // see comment in urn.cpp
 	void replace(const T& i);							 // replace element i
-	void replace_all() { n = y.size(); }			     // replace all the balls 
+	void replace_all() { n = y.size(); }			     // replace all the balls
 private:
 	std::vector<T> y;								     // vector with all the "balls"
 	int n;												 // number of "balls" in "urn"
@@ -30,9 +30,9 @@ private:
 template <class T>
 T Urn<T>::random_draw()
 {
-	if (n==0) 
+	if (n==0)
 		throw ibd_error("Urn::random_draw() : empty urn");
-	int r = randint(n);
+	int r = Rcpp::sample(n-1, 1, false, R_NilValue, false)[0];
 	std::swap(y[r],y[--n]);
 	return y[n];
 }
@@ -46,20 +46,20 @@ void Urn<T>::draw(const T& i)
 	vec_iter begin = y.begin();
 	vec_iter end   = begin + n;
 	vec_iter it    = find(begin, end, i);
-	if (it == end) 
+	if (it == end)
 		throw ibd_error("Urn::draw(const T& i)");
 	std::swap(*it,y[--n]);
 }
 
 // draw element i, using the initial guess "pos" of the position of the element
 // for example, if y has the following values:
-// A,B,C,D,E,F,G 
+// A,B,C,D,E,F,G
 // and n=5 (number of balls in urn)
-// then draw(A,2) will search in the following order: 2,3,4,0,1 
+// then draw(A,2) will search in the following order: 2,3,4,0,1
 template <class T>
 void Urn<T>::draw(const T& i, int pos)
 {
-	if (pos >= n || pos < 0) 
+	if (pos >= n || pos < 0)
 		throw ibd_error("Urn::draw(const T& i, int ndx)");
 	typedef std::vector<T>::iterator vec_iter;
 	vec_iter begin           = y.begin();
@@ -67,9 +67,9 @@ void Urn<T>::draw(const T& i, int pos)
 	vec_iter end             = begin + n;
 
 	vec_iter it  = find(pos_first_guess, end, i);
-	if (it == end)						
+	if (it == end)
 	{
-		it = find(begin,pos_first_guess,i); 
+		it = find(begin,pos_first_guess,i);
 		if (it == pos_first_guess)
 			throw ibd_error("Urn::draw(const T& i, int ndx)");
 	}
@@ -79,10 +79,10 @@ void Urn<T>::draw(const T& i, int pos)
 template <class T>
 void Urn<T>::replace(const T& i)
 {
-	vector<T>::iterator it = find (y.begin() + n, y.end(), i); 
-	if (it == y.end()) 
+	vector<T>::iterator it = find (y.begin() + n, y.end(), i);
+	if (it == y.end())
 		throw ibd_error("Urn::replace(const T& i)");
-	std::swap(*it,y[n++]); 
+	std::swap(*it,y[n++]);
 }
 
 template <class T>

@@ -1,6 +1,6 @@
 #include "output.h"
-#include "Random.h"
 #include "convert.h"
+#include <Rcpp.h>
 
 using namespace ibd;
 using namespace std;
@@ -66,7 +66,7 @@ void make_qua_file(const SimPop& sim_pop, const Phi& phi, double sigma,
     {
       const Genome& genome = it->second;
       double geno_val = phi(genome);
-      double error = randnormal(0.0,sigma);
+      double error = R::rnorm(0.0,sigma);
       double pheno_val = geno_val + error;
       string ID = it->first.GetID();
       outp << setw(12) << ID
