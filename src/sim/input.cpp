@@ -7,7 +7,6 @@
 #include "dir.h"
 #include "Loc.h"
 #include "convert.h"
-#include "urn.h"
 #include "poptype/mapqtl.h"
 
 using namespace Rcpp;
@@ -437,7 +436,6 @@ void read_makeped(const Commands& commands, const vector<string>& fnd_names)
 
 }
 
-
 Genome get(const map<string,Genome>& pop, string ID)
 {
   map<string,Genome>::const_iterator it = pop.find(ID);
@@ -480,14 +478,11 @@ void make_hybrids(const Commands& commands,
        << " size A: " << grpA.size() << endl
        << " size B: " << grpB.size() << endl << endl;
 
-  vector<int> nr;
+  //vector<int> nr;
   const int Ntot = grpA.size()*grpB.size();
-  for (int i=0;i<Ntot;i++)
-    nr.push_back(i);
-  Urn<int> urn(nr);
   vector<int> indicator(Ntot,0);
   for (int i=0;i<N;i++)
-    indicator[urn.random_draw()] = 1;
+    indicator[rand() % Ntot + 1] = 1;
 
   ofstream outp;
   OpenFile(outp,filename);
@@ -588,13 +583,12 @@ vector<IndProp> read_hybrids(const Commands& commands)
   for (vector<string>::const_iterator itA=grpA.begin();itA!=grpA.end();itA++)
     for (vector<string>::const_iterator itB=grpB.begin();itB!=grpB.end();itB++)
       par_comb.push_back(make_pair(*itA,*itB));
-  Urn<str_pr> urn(par_comb);
 
   vector<IndProp> result(N);
   MakeLabel hybr_label("HYBR",4);
   for (int i=0;i<N;i++)
   {
-    str_pr h = urn.random_draw();
+    str_pr h = par_comb[rand() % par_comb.size()];
     result[i] = IndProp(hybr_label(i),"*","*",h.first,h.second);
   }
   return result;
