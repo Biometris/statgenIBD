@@ -23,7 +23,8 @@
 #' @export
 summary.IBDprob <- function(object,
                             ...) {
-  cat("population type: ", object$popType, "\n")
+  cat("population type: ", ifelse(is.null(object$popType), 'undefined',
+                                  object$popType), "\n")
   cat("Number of evaluation points: ", nrow(object$markers), "\n")
   cat("Number of individuals: ", ncol(object$markers),"\n")
   cat("Parents: ", object$parents, "\n")

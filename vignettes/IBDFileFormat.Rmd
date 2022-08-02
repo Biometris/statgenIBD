@@ -1,0 +1,84 @@
+---
+title: "IBD probabilities file format"
+author: "Johannes Kruisselbrink"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: false
+    number_sections: true
+bibliography: bibliography.bib
+link-citations: yes
+vignette: >
+  %\VignetteIndexEntry{IBD probabilities file format}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.dim = c(7, 4)
+)
+library(statgenIBD)
+op <- options(width = 90)
+```
+
+## File format
+
+The results of IBD probability calculations can be stored to and loaded from plain text, tab-delimited *.ibd* files using the functions `writeIBDs` and `readIBDs`. An IBD file should contain a header line, with the first and second header named *Marker* and *Genotype* to indicate the marker names and genotype names columns. The remaining headers should contain the  founder names to indicate the columns holding the founder IBD probabilities. Each row in the file should hold the IBD probabilities of the corresponding marker and genotype. I.e., the probability that marker 'x' of genotype 'y' descents from parent 'z'. The ordering of the records shoul be by marker, then by genotype (see the example below). Comment lines start with a '#'.
+```
+# IBD probabilities file format example
+Marker  Genotype    Founder1    Founder2    ...     FounderN
+M001    G001        0.5         0.5         ...     0 
+M001    G002        0           1           ...     0 
+M001    G003        0           0.5         ...     0.5 
+...     ...         ...         ...         ...     ...
+M002    G001        0           0.5         ...     0.5 
+M002    G002        0.25        0.75        ...     0 
+...
+```
+Note that for large datasets, this file can become very large. It is therefore recommended to store this file in a compressed file format.
+
+## Examples
+
+### Writing IBD probabilities to a .ibd file
+
+After having computed IBD probabilities, the results can be written to a *.ibd*
+file using `writeIBDs`.
+
+```{r SxMwriteIBD}
+## Compute IBD probabilities for Steptoe Morex.
+SxMIBD <- calcIBD(popType = "DH",
+                  markerFile = system.file("extdata/SxM", "SxM_geno.txt",
+                                           package = "statgenIBD"),
+                  mapFile = system.file("extdata/SxM", "SxM_map.txt",
+                                        package = "statgenIBD"))
+
+## Write IBDs to tab-delimited .ibd file.
+writeIBDs(SxMIBD, "SxM-IBD.ibd")
+```
+
+The created file will look like as follows:
+
+```
+Marker	Genotype	pMorex	pSteptoe
+dh001	plc	0	1
+dh001	glx	1	0
+dh001	wg789a	1	0
+dh001	abg380	1	0
+dh001	abc158	1	0
+...
+```
+
+### Reading IBD probabilities from file
+
+Retrieving the IBD probabilities later on can be done using `readIBDs`.
+```{r SxMreadIBD}
+## Write IBDs to tab-delimited .ibd file.
+SxMIBD <- readIBDs("SxM-IBD.ibd")
+summary(SxMIBD)
+```
+```{r, echo=FALSE, results='hide'}
+unlink("SxM-IBD.ibd")
+```
