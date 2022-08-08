@@ -4,7 +4,7 @@
 #' about the file format can be found in the vignette (
 #' \code{vignette("IBDFileFormat", package = "statgenIBD")}).
 #'
-#' @param file A character string specifying the path of the file.
+#' @param inFile A character string specifying the path of the file.
 #'
 #' @return An object of class \code{IBDprob} containing data a data.frame with
 #' the IBD probabilities.
@@ -17,47 +17,45 @@
 #' ## Print summary.
 #' summary(SxMIBD)
 #'
-#' @importFrom utils read.table
+#' @importFrom utils hasName read.table
 #' @export
-readIBDs <- function(file) {
-  if (!is.character(file) || length(file) > 1) {
-    stop("File path should be a single character string.")
+readIBDs <- function(inFile) {
+  if (!is.character(inFile) || length(inFile) > 1) {
+    stop("inFile path should be a single character string.\n")
   }
-  if (!file.exists(file)) {
-    stop("File not found.")
+  if (!file.exists(inFile)) {
+    stop("inFile not found.\n")
   }
-
-  data <- read.table(file, sep="\t", header=TRUE)
-  data[, -c(1,2)] <- apply(data[, -c(1,2)], 2, function(x) as.numeric(x))
-  genotypes <- unique(data$Genotype)
-  markers <- unique(data$Marker)
-  founders <- colnames(data)[-c(1,2)]
-  numGenotypes <- length(genotypes)
-  numMarkers <- length(markers)
-  numFounders <- length(founders)
-
-  if (length(unique(data[seq_len(numGenotypes), 1])) == 1) {
-    # Grouped by marker
-    mat <- array(
-       data = as.matrix(data[,-c(1,2)]),
-       dim = c(numGenotypes, numMarkers, numFounders),
-       dimnames = list(genotypes, markers, founders)
-    )
-  } else if (length(unique(data[seq_len(numMarkers), 2])) == 1) {
-    # Grouped by genotype
-    stop("Reading by genotype order not implemented.")
-  } else {
-    # Not grouped by genotype or marker; lets read it the hard way
-    mat <- array(rep(NA, numGenotypes * numMarkers * numFounders), dim=c(numGenotypes, numMarkers, numFounders))
-    dimnames(mat) <- list(genotypes, markers, founders)
-    for (ix in seq_len(nrow(data))) {
-      mat[data[ix, 2], data[ix, 1],] <- as.numeric(data[ix, -c(1,2)])
-    }
+  ## Read file.
+  inDat <- read.table(inFile, sep = "\t", header = TRUE)
+  ## Check that data has required columns.
+  if (!all(colnames(inDat)[1:2] == c("Marker", "Genotype"))) {
+    stop("First to columns in inFile should be named Marker and Genotype.\n")
   }
+  if (ncol(inDat) < 4) {
+    stop("At least 2 parent columns should be present in input.\n")
+  }
+  inDat[, -c(1,2)] <- apply(inDat[, -c(1,2)], 2, function(x) as.numeric(x))
+  genoNamesIn <- unique(inDat[["Genotype"]])
+  markerNamesIn <- unique(inDat[["Marker"]])
+  ## Sort input data to get everything in expected order.
+  inDat <- inDat[order(inDat[["Marker"]], inDat[["Genotype"]]), ]
+  genoNames <- unique(inDat[["Genotype"]])
+  markerNames <- unique(inDat[["Marker"]])
+  parents <- colnames(inDat)[-c(1, 2)]
+  nGeno <- length(genoNames)
+  nMarkers <- length(markerNames)
+  nPar <- length(parents)
+  markers <- array(
+    data = as.matrix(inDat[, -c(1, 2)]),
+    dim = c(nGeno, nMarkers, nPar),
+    dimnames = list(genoNames, markerNames, parents)
+  )
+  markers <- markers[genoNamesIn, markerNamesIn, ]
   res <- structure(list(map = NULL,
-                        markers = mat,
+                        markers = markers,
                         popType = NULL,
-                        parents = founders,
+                        parents = parents,
                         multiCross = NULL),
                    class = "IBDprob")
   return(res)
