@@ -1,5 +1,7 @@
 # statgenIBD 1.0.4.9000
 
+* Two new functions for writing (`writeIBDs`) and reading IBD (`readIBDs`) probabilities to a custom format have been added. The format is explained in a new vignette `vignette("IBDFileFormat", package = "statgenIBD")`.
+
 # statgenIBD 1.0.4
 
 * Increased speed of IBD calculations by improving an inefficient part of the algorithm.

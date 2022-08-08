@@ -4,10 +4,10 @@
 \alias{readIBDs}
 \title{Read IBD probabilities from file}
 \usage{
-readIBDs(file)
+readIBDs(inFile)
 }
 \arguments{
-\item{file}{A character string specifying the path of the file.}
+\item{inFile}{A character string specifying the path of the file.}
 }
 \value{
 An object of class \code{IBDprob} containing data a data.frame with

@@ -22,7 +22,11 @@ Authors@R: c(person(given = "Martin",
                    comment = c(ORCID = "0000-0002-8673-2514")),
             person(given = "Wenhao", 
                    family = "Li", 
-                   role = "ctb"))
+                   role = "ctb"),
+            person(given = "Johannes", 
+                   family = "Kruisselbrink",
+                   role = "ctb",
+                   comment = c(ORCID = "0000-0003-1673-5725")))
 License: GPL
 Encoding: UTF-8
 LazyData: true
@@ -31,7 +35,7 @@ Imports:
     ggplot2,
     Rcpp
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Suggests: 
     rmarkdown,

@@ -26,10 +26,10 @@
 #'                                       package = "statgenIBD"))
 #'
 #' ## Write IBDs to file.
-#' writeIBDs(ibdProb = SxMIBD, outFile = "SxM_IBDs.ibd")
+#' writeIBDs(IBDprob = SxMIBD, outFile = "SxM_IBDs.ibd")
 #'
 #' ## Write IBDs to file, set values <0.05 to zero and only print 3 decimals.
-#' writeIBDs(idbProb = SxMIBD, outFile = "SxM_IBDs2.ibd",
+#' writeIBDs(IBDprob = SxMIBD, outFile = "SxM_IBDs2.ibd",
 #'          decimals = 3, minProb = 0.05)
 #'
 #' @export
