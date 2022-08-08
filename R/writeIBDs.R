@@ -1,18 +1,18 @@
 #' Write IBD probabilities to file.
 #'
-#' Writes IBD probabilities to a plain text, tab-delimited file.  Information
+#' Writes IBD probabilities to a plain text, tab-delimited file. Information
 #' about the file format can be found in the vignette (
 #' \code{vignette("IBDFileFormat", package = "statgenIBD")}).
 #'
-#' @param ibdProb An object of class \code{IBDprob} containing the IBD
+#' @param IBDprob An object of class \code{IBDprob} containing the IBD
 #' probabilities.
-#' @param file A character string specifying the path of the output file.
+#' @param outFile A character string specifying the path of the output file.
 #' @param decimals An integer value specifying the number of decimals to include
 #' in writing the output file. When negative, no decimal cut off is applied.
-#' @param minProb A number between zero and one, specifying the minimum
-#' probability cut off value. Probabilities below this cutoff are set to zero
-#' and other probabilities are rescaled to make sure that the probabilities sum
-#' up to one.
+#' @param minProb A numerical value between zero and 1 / number of parents,
+#' specifying the minimum probability cutoff value. Probabilities below this
+#' cutoff are set to zero and other probabilities are rescaled to make sure that
+#' the probabilities sum up to one.
 #'
 #' @return No output. The output file is created as a result of calling this
 #' function.
@@ -20,64 +20,63 @@
 #' @examples
 #' ## Compute IBD probabilities for Steptoe Morex.
 #' SxMIBD <- calcIBD(popType = "DH",
-#'              markerFile = system.file("extdata/SxM", "SxM_geno.txt",
-#'                                    package = "statgenIBD"),
-#'              mapFile = system.file("extdata/SxM", "SxM_map.txt",
-#'                                    package = "statgenIBD"))
+#'                  markerFile = system.file("extdata/SxM", "SxM_geno.txt",
+#'                                          package = "statgenIBD"),
+#'                  mapFile = system.file("extdata/SxM", "SxM_map.txt",
+#'                                       package = "statgenIBD"))
 #'
 #' ## Write IBDs to file.
-#' writeIBDs(SxMIBD, "SxM_IBDs.ibd")
+#' writeIBDs(ibdProb = SxMIBD, outFile = "SxM_IBDs.ibd")
 #'
 #' ## Write IBDs to file, set values <0.05 to zero and only print 3 decimals.
-#' writeIBDs(SxMIBD, "SxM_IBDs.ibd", decimals=3, minProb=0.05)
+#' writeIBDs(idbProb = SxMIBD, outFile = "SxM_IBDs2.ibd",
+#'          decimals = 3, minProb = 0.05)
 #'
 #' @export
-writeIBDs <- function(ibdProb,
-                      file,
-                      decimals=-1,
-                      minProb=0) {
-  #if (!inherits(ibdProb, "IBDprob")) {
-  #  stop("ibdProb should be an object of class IBDprob.\n")
-  #}
-  chkFile(file, fileType = "ibd")
-  ibds <- ibdProb$markers
-  markerNames <- dimnames(ibds)[[2]]
-  genoNames <- dimnames(ibds)[[1]]
-  numFounders <- dim(ibds)[[3]]
-  numGenotypes <- dim(ibds)[[1]]
-  fmt <- ifelse(decimals > 0, paste("%#.", decimals, "f", sep = ""), "%f")
-  fileConn <- file(file, open = "w")
-  writeLines(
-    paste(c("Marker", "Genotype", dimnames(ibds)[[3]]), sep = "\t", collapse = "\t"),
-    con = fileConn,
-    sep = "\n"
-  )
-  for (mrkIndex in 1:dim(ibds)[[2]]) {
-    curMarker <- ibds[,mrkIndex,]
-    if (minProb > 0) {
-      curMarker[curMarker < minProb] <- 0
-      mrkProbs <- rowSums(curMarker, na.rm = FALSE)
-      curMarker <- curMarker / mrkProbs
-    }
-    for (genoIndex in 1:dim(ibds)[[1]]) {
-      writeLines(
-        paste(
-          c(
-            markerNames[mrkIndex], ## Marker
-            genoNames[genoIndex],  ## Genotype
-            sub("\\.$", "",
-              sub("0+$", "",
-                  sprintf(curMarker[genoIndex,], fmt=fmt)
-              )
-            )
-          ),
-          sep = "\t",
-          collapse = "\t"
-        ),
-        con = fileConn,
-        sep = "\n"
-      )
-    }
+writeIBDs <- function(IBDprob,
+                      outFile,
+                      decimals = -1,
+                      minProb = 0) {
+  if (!inherits(IBDprob, "IBDprob")) {
+    stop("IBDprob should be an object of class IBDprob.\n")
   }
-  close(fileConn)
+  chkFile(outFile, fileType = "ibd")
+  if (!is.numeric(decimals) || length(decimals) > 1) {
+    stop("decimals should be a single numerical value.\n")
+  }
+  if (!is.numeric(minProb) || length(minProb) > 1 || minProb < 0 ||
+      minProb >= 1 / length(IBDprob$parents)) {
+    stop("minProb should be a numerical value between 0 and ",
+         "1 / number of parents.\n")
+  }
+  markers <- IBDprob$markers
+  markerNames <- colnames(markers)
+  genoNames <- rownames(markers)
+  parents <- IBDprob$parents
+  fmt <- if (decimals > 0) paste0("%#.", decimals, "f") else "%f"
+  if (minProb > 0) {
+    ## Set values < minProb to zero and rescale.
+    markers[markers < minProb] <- 0
+    markers <- simplify2array(apply(X = markers, MARGIN = 2, FUN = function(x) {
+      x / rowSums(x)
+    }, simplify = FALSE))
+    markers <- aperm(markers, c(1, 3, 2))
+  }
+  ## Create base data.frame for storing data.
+  markersLongBase <- expand.grid(Marker = markerNames, Genotype = genoNames)
+  for (parent in parents) {
+    ## Construct parent column.
+    parentCol <- paste0("p", parent)
+    ## Format output.
+    ## Trailing zeros are removed and number of decimals is adjusted.
+    markersLongBase[[parent]] <-
+      sub("\\.$", "",
+          sub("0+$", "",
+              sprintf(markers[, , parentCol], fmt = fmt)
+              )
+    )
+  }
+  write.table(markersLongBase, file = outFile,
+              quote = FALSE, sep = "\t", na = "-", row.names = TRUE,
+              col.names = TRUE)
 }
