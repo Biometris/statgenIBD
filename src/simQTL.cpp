@@ -246,6 +246,8 @@ int simQTL(const std::string& popType,
   // ?! check this
   //make_hybrids(commands,genome_par_fam,phi,sigma);
 
+  //make_hybrids(ped, genome_founders, "hyb.txt", phi, sigma);
+
   //print_genstat_table(pops,inbfnds,"table.dat");
 
   // write output and simulations:

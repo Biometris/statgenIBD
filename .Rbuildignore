@@ -15,3 +15,4 @@ public
 [.]dll$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+^CRAN-SUBMISSION$

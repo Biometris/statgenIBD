@@ -34,3 +34,13 @@ statgenIBD::simQTL(inbFnd = fnddf2,
                    chrLength = c(100.0, 120),
                    nlocChr = c(11.0, 14),
                    nr_alleles = 3)
+
+
+statgenIBD::simQTL(inbFnd = fnddf2,
+                   popType = "BC1S2",
+                   nInd = 13,
+                   dir_name = popDir,
+                   start_seed = -1234,
+                   chrLength = c(100.0, 120),
+                   nlocChr = c(11.0, 14),
+                   nr_alleles = 0)
