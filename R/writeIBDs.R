@@ -73,7 +73,7 @@ writeIBDs <- function(IBDprob,
     markersLongBase[[parent]] <-
       sub("\\.$", "",
           sub("0+$", "",
-              sprintf(markers[, , parentCol], fmt = fmt)
+              sprintf(t(markers[, , parentCol]), fmt = fmt)
               )
     )
   }

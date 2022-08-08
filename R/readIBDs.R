@@ -47,11 +47,15 @@ readIBDs <- function(inFile) {
   nMarkers <- length(markerNames)
   nPar <- length(parents)
   markers <- array(
-    data = as.matrix(inDat[, -c(1, 2)]),
-    dim = c(nGeno, nMarkers, nPar),
-    dimnames = list(genoNames, markerNames, parents)
+    dim = c(nMarkers, nGeno, nPar),
+    dimnames = list(markerNames, genoNames, parents)
   )
-  markers <- markers[genoNamesIn, markerNamesIn, ]
+  for (parent in parents) {
+    for (geno in genoNames) {
+     markers[, geno, parent] <- inDat[inDat$Genotype == geno, parent]
+    }
+  }
+  markers <- markers[markerNamesIn, genoNamesIn, ]
   res <- structure(list(map = NULL,
                         markers = markers,
                         popType = NULL,
