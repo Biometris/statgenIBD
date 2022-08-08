@@ -50,8 +50,8 @@ writeIBDs <- function(IBDprob,
          "1 / number of parents.\n")
   }
   markers <- IBDprob$markers
-  markerNames <- colnames(markers)
-  genoNames <- rownames(markers)
+  markerNames <- rownames(markers)
+  genoNames <- colnames(markers)
   parents <- IBDprob$parents
   fmt <- if (decimals > 0) paste0("%#.", decimals, "f") else "%f"
   if (minProb > 0) {
@@ -63,7 +63,8 @@ writeIBDs <- function(IBDprob,
     markers <- aperm(markers, c(1, 3, 2))
   }
   ## Create base data.frame for storing data.
-  markersLongBase <- expand.grid(Marker = markerNames, Genotype = genoNames)
+  markersLongBase <- expand.grid(Genotype = genoNames, Marker = markerNames)
+  markersLongBase <- markersLongBase[c("Marker", "Genotype")]
   for (parent in parents) {
     ## Construct parent column.
     parentCol <- paste0("p", parent)
@@ -77,6 +78,6 @@ writeIBDs <- function(IBDprob,
     )
   }
   write.table(markersLongBase, file = outFile,
-              quote = FALSE, sep = "\t", na = "-", row.names = TRUE,
+              quote = FALSE, sep = "\t", na = "-", row.names = FALSE,
               col.names = TRUE)
 }
