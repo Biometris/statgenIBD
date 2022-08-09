@@ -18,6 +18,9 @@ singleGenoPlot <- function(markers,
   plotDat <- merge(markersLong, map, by.x = "snp", by.y = "row.names")
   ## Restrict to selected genotype.
   plotDat <- plotDat[plotDat[["genotype"]] == genotype, ]
+  ## Convert chr to factor to keep ordering intact.
+  plotDat[["chr"]] <- factor(plotDat[["chr"]],
+                             levels = unique(plotDat[["chr"]]))
   ## Construct title.
   if (is.null(title)) {
     title <- genotype
