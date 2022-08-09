@@ -59,18 +59,16 @@ markers3DtoLong <- function(markers,
                                  genotype = dimnames(markers)[[2]])
   markersLong <- NULL
   for (parent in parents) {
-    ## Construct parent column.
-    parentCol <- paste0("p", parent)
     ## Get other columns containing parent.
     parentSubCols <- markerCols[grep(pattern = parent, x = markerCols)]
-    parentSubCols <- parentSubCols[-which(parentSubCols == parentCol)]
+    parentSubCols <- parentSubCols[-which(parentSubCols == parent)]
     ## Add values for parent to base.
     markersParent <- markersLongBase
     markersParent[["parent"]] <- parent
     ## Compute probability for parent.
     ## (2 * pPar + psubPar) / 2
     markersParent[["prob"]] <-
-      c(markers[, , parentCol] +
+      c(markers[, , parent] +
           apply(X = markers[, , parentSubCols, drop = FALSE],
                 MARGIN = 1:2, FUN = sum) / 2)
     ## Add to markersLong

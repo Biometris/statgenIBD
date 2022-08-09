@@ -161,7 +161,7 @@ List calcIBD(CharacterVector& popType,
     {
       if (!(isBC && i == 0))
       {
-        parentNames.push_back("p" + parents[i]);
+        parentNames.push_back(parents[i]);
       }
     }
   }
@@ -169,16 +169,16 @@ List calcIBD(CharacterVector& popType,
   {
     if (npar == 2)
     {
-      parentNames.push_back("p" + parents[0] + parents[1]);
+      parentNames.push_back(parents[0] + parents[1]);
     } else if (npar == 3)
     {
-      parentNames.push_back("p" + parents[0] + parents[2]);
-      parentNames.push_back("p" + parents[1] + parents[2]);
+      parentNames.push_back(parents[0] + parents[2]);
+      parentNames.push_back(parents[1] + parents[2]);
     } else if (npar == 4) {
-      parentNames.push_back("p" + parents[0] + parents[2]);
-      parentNames.push_back("p" + parents[0] + parents[3]);
-      parentNames.push_back("p" + parents[1] + parents[2]);
-      parentNames.push_back("p" + parents[1] + parents[3]);
+      parentNames.push_back(parents[0] + parents[2]);
+      parentNames.push_back(parents[0] + parents[3]);
+      parentNames.push_back(parents[1] + parents[2]);
+      parentNames.push_back(parents[1] + parents[3]);
     }
   }
   // Construct map data.frame from positions.

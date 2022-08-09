@@ -20,7 +20,7 @@ singleGenoPlot <- function(markers,
   plotDat <- plotDat[plotDat[["genotype"]] == genotype, ]
   ## Convert chr to factor to keep ordering intact.
   plotDat[["chr"]] <- factor(plotDat[["chr"]],
-                             levels = unique(plotDat[["chr"]]))
+                             levels = unique(map[["chr"]]))
   ## Construct title.
   if (is.null(title)) {
     title <- genotype

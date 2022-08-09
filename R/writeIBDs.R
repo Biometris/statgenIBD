@@ -66,14 +66,12 @@ writeIBDs <- function(IBDprob,
   markersLongBase <- expand.grid(Genotype = genoNames, Marker = markerNames)
   markersLongBase <- markersLongBase[c("Marker", "Genotype")]
   for (parent in parents) {
-    ## Construct parent column.
-    parentCol <- paste0("p", parent)
     ## Format output.
     ## Trailing zeros are removed and number of decimals is adjusted.
     markersLongBase[[parent]] <-
       sub("\\.$", "",
           sub("0+$", "",
-              sprintf(t(markers[, , parentCol]), fmt = fmt)
+              sprintf(t(markers[, , parent]), fmt = fmt)
               )
     )
   }

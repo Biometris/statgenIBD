@@ -129,7 +129,7 @@ The output of the `calcIBD` function is an object of class `IBDprob`. This objec
 
 The `summary` function can be used to get a short description of the content of a `IBDprob` object.
 
-Looking at genotype **dh001** and marker **plc** we can see from the genotypic file printed above that it has a value of 2, equal to that of Steptoe. If we now look at the output of `calcIBD` it shows a value of 1 for pSteptoe and a value of 0 for pMorex.
+Looking at genotype **dh001** and marker **plc** we can see from the genotypic file printed above that it has a value of 2, equal to that of Steptoe. If we now look at the output of `calcIBD` it shows a value of 1 for Steptoe and a value of 0 for Morex.
 
 ```{r check_dh001_plc}
 SxMIBD$markers["plc", "dh001", ]
