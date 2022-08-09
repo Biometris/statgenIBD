@@ -18,14 +18,28 @@ meanProbsPlot <- function(markers,
     map <- map[map[["chr"]] %in% chr, ]
     plotDat <- plotDat[rownames(plotDat) %in% rownames(map), ]
   }
+  ## Get the boundary for each of the chromosomes.
+  ## Has to be converted to numeric to avoid integer overflow in the next step.
+  chrBnd <- aggregate(x = map$pos, by = list(map$chr),
+                      FUN = function(p) {as.numeric(max(p))})
+  ## Compute cumulative positions.
+  addPos <- data.frame(chr = chrBnd[, 1],
+                       add = c(0, cumsum(chrBnd[, 2]))[1:nrow(chrBnd)],
+                       stringsAsFactors = FALSE)
+  ## Compute cumulative position.
+  map[["snp"]] <- rownames(map)
+  map <- merge(map, addPos, by = "chr")
+  map$cumPos <- map$pos + map$add
   ## convert to data.frame:
   plotDat <- as.data.frame.table(plotDat)
+  ## Merge map to get positions.
+  plotDat <- merge(plotDat, map, by.x = "Var1", by.y = "snp")
   ## Construct title.
   if (is.null(title)) {
     title <- "Coverage per parent"
   }
   p <- ggplot2::ggplot(plotDat,
-                       ggplot2::aes_string(x = "Var1", y = "Freq",
+                       ggplot2::aes_string(x = "cumPos", y = "Freq",
                                            color = "Var2", group = "Var2")) +
     ggplot2::geom_line() +
     ggplot2::labs(x = "Position", y = "Representation", title = title) +
