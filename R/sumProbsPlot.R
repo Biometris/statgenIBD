@@ -2,16 +2,16 @@
 #'
 #' @noRd
 #' @keywords internal
-meanProbsPlot <- function(markers,
-                          map,
-                          parents,
-                          chr = NULL,
-                          title = NULL) {
+sumProbsPlot <- function(markers,
+                         map,
+                         parents,
+                         chr = NULL,
+                         title = NULL) {
   if (!all(chr %in% map[["chr"]])) {
     stop("chr not found in map.\n")
   }
   ## Compute means.
-  plotDat <- apply(markers, c(1,3), mean)
+  plotDat <- apply(markers, c(1,3), sum)
   colnames(plotDat) <- parents
   ## Restrict map to selected chromosomes.
   if (!is.null(chr)) {

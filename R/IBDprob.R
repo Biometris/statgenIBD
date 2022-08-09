@@ -172,7 +172,7 @@ c.IBDprob <- function(...) {
 plot.IBDprob <- function(x,
                          ...,
                          plotType = c("singleGeno", "allGeno", "pedigree",
-                                      "meanProbs", "probSums", "totalCoverage"),
+                                      "meanProbs", "sumProbs", "totalCoverage"),
                          genotype,
                          title = NULL,
                          output = TRUE) {
@@ -202,9 +202,10 @@ plot.IBDprob <- function(x,
   } else if (plotType == "meanProbs") {
     p <- meanProbsPlot(markers = markers, map = map, parents = parents,
                        chr = dotArgs$chr, title = title)
-  # } else if (plotType == "probSums") {
-  #   p <- probSumsPlot(markers = markers, map = map, chr = dotArgs$chr)
-  # } else if (plotType == "meanProbs") {
+  } else if (plotType == "sumProbs") {
+    p <- sumProbsPlot(markers = markers, map = map, parents = parents,
+                      chr = dotArgs$chr, title = title)
+  # } else if (plotType == "totalCoverage") {
   #   p <- totalCoveragePlot(markers = markers, map = map, chr = dotArgs$chr)
   }
   if (output) {
