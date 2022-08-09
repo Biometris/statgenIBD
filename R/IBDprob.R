@@ -128,6 +128,10 @@ c.IBDprob <- function(...) {
 #' probabilities of the parent with the highest probability per marker.}
 #' \item{\code{pedigree}}{ A plot showing the structure of the pedigree of
 #' the population.}
+#' \item{\code{meanProbs}}{ A plot showing the coverage of each parent across
+#' the population.}
+#' \item{\code{totalCoverage}}{ A plot showing the total coverage of each
+#' parent.}
 #' }
 #'
 #' @param x An object of class \code{IBDprob}.
@@ -136,6 +140,10 @@ c.IBDprob <- function(...) {
 #' be made.
 #' @param genotype A character string indicating the genotype for which the
 #' plot should be made. Only for \code{plotType = "singleGeno"}.
+#' @param chr A character vector indicating the chromosomes to which the
+#' coverage should be restricted. Only for \code{plotType = "meanProbs"} and
+#' \code{plotType = "totalCoverage"}. If \code{NULL} all chromosomes are
+#' included.
 #' @param title A character string, the title of the plot.
 #' @param output Should the plot be output to the current device? If
 #' \code{FALSE}, only a ggplot object is invisibly returned.
@@ -166,6 +174,14 @@ c.IBDprob <- function(...) {
 #' ## Plot structure of the pedigree.
 #' plot(SxMIBD_Ext,
 #'      plotType = "pedigree")
+#'
+#' ## Plot coverage across population.
+#' plot(SxMIBD_Ext,
+#'      plotType = "meanProbs")
+#'
+#' ## Plot total coverage.
+#' plot(SxMIBD_Ext,
+#'      plotType = "totalCoverage")
 #' }
 #'
 #' @export
@@ -174,9 +190,9 @@ plot.IBDprob <- function(x,
                          plotType = c("singleGeno", "allGeno", "pedigree",
                                       "meanProbs", "sumProbs", "totalCoverage"),
                          genotype,
+                         chr = NULL,
                          title = NULL,
                          output = TRUE) {
-  dotArgs <- list(...)
   map <- x$map
   markers <- x$markers
   parents <- x$parents
@@ -201,13 +217,13 @@ plot.IBDprob <- function(x,
                  genoCross = genoCross, title = title)
   } else if (plotType == "meanProbs") {
     p <- meanProbsPlot(markers = markers, map = map, parents = parents,
-                       chr = dotArgs$chr, title = title)
+                       chr = chr, title = title)
   } else if (plotType == "sumProbs") {
     p <- sumProbsPlot(markers = markers, map = map, parents = parents,
-                      chr = dotArgs$chr, title = title)
+                      chr = chr, title = title)
   } else if (plotType == "totalCoverage") {
      p <- totalCoveragePlot(markers = markers, map = map, parents = parents,
-                            chr = dotArgs$chr, title = title)
+                            chr = chr, title = title)
   }
   if (output) {
     plot(p)
