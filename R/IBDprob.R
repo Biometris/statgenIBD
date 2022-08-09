@@ -205,8 +205,9 @@ plot.IBDprob <- function(x,
   } else if (plotType == "sumProbs") {
     p <- sumProbsPlot(markers = markers, map = map, parents = parents,
                       chr = dotArgs$chr, title = title)
-  # } else if (plotType == "totalCoverage") {
-  #   p <- totalCoveragePlot(markers = markers, map = map, chr = dotArgs$chr)
+  } else if (plotType == "totalCoverage") {
+     p <- totalCoveragePlot(markers = markers, map = map, parents = parents,
+                            chr = dotArgs$chr, title = title)
   }
   if (output) {
     plot(p)

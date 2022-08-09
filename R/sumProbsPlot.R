@@ -11,7 +11,7 @@ sumProbsPlot <- function(markers,
     stop("chr not found in map.\n")
   }
   ## Compute means.
-  plotDat <- apply(markers, c(1,3), sum)
+  plotDat <- apply(X = markers, MARGIN = c(1, 3), FUN = sum)
   colnames(plotDat) <- parents
   ## Restrict map to selected chromosomes.
   if (!is.null(chr)) {
