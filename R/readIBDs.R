@@ -59,8 +59,7 @@ readIBDs <- function(inFile) {
   res <- structure(list(map = NULL,
                         markers = markers,
                         popType = NULL,
-                        parents = parents,
-                        multiCross = NULL),
+                        parents = parents),
                    class = "IBDprob")
   return(res)
 }

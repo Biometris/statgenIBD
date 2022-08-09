@@ -68,8 +68,6 @@ using namespace ibd;
 //' markers, genotypes and  parents as array dimensions.}
 //' \item{parents}{the parents.}
 //' \item{popType}{the population type.}
-//' \item{multiCross}{a logical value indicating if multiple crosses have been
-//' combined in the \code{IBDprob} object.}
 //' }
 //'
 //' @examples
@@ -215,8 +213,7 @@ List calcIBD(CharacterVector& popType,
                           Named("markers") = P,
                           Named("popType") = popType,
                           Named("parents") = parents,
-                          Named("pedigree") = pedigree,
-                          Named("multiCross") = false);
+                          Named("pedigree") = pedigree);
   res.attr("class") = "IBDprob";
 
   return res;

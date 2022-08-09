@@ -32,7 +32,7 @@ meanProbsPlot <- function(markers,
   map[["snp"]] <- rownames(map)
   map <- merge(map, addPos, by = "chr")
   map$cumPos <- map$pos + map$add
-  ## convert to data.frame:
+  ## convert to data.frame.
   plotDat <- as.data.frame.table(plotDat)
   ## Merge map to get positions.
   plotDat <- merge(plotDat, map, by.x = "Var1", by.y = "snp")

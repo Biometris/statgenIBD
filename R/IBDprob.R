@@ -110,8 +110,7 @@ c.IBDprob <- function(...) {
                         markers = markersNw,
                         popType = pops,
                         parents = parents,
-                        pedigree = pedNw,
-                        multiCross = TRUE),
+                        pedigree = pedNw),
                    class = "IBDprob",
                    genoCross = genoCross)
   return(res)
@@ -197,7 +196,6 @@ plot.IBDprob <- function(x,
   markers <- x$markers
   parents <- x$parents
   pedigree <- x$pedigree
-  multiCross <- x$multiCross
   popType <- x$popType
   genoCross <- attr(x = x, which = "genoCross")
   ## Input checks.
@@ -213,8 +211,7 @@ plot.IBDprob <- function(x,
                      title = title)
   } else if (plotType == "pedigree") {
     p <- pedPlot(pedigree = pedigree, offSpring = colnames(markers),
-                 popType = popType, multiCross = multiCross,
-                 genoCross = genoCross, title = title)
+                 popType = popType, genoCross = genoCross, title = title)
   } else if (plotType == "meanProbs") {
     p <- meanProbsPlot(markers = markers, map = map, parents = parents,
                        chr = chr, title = title)

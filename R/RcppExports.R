@@ -56,8 +56,6 @@
 #' markers, genotypes and  parents as array dimensions.}
 #' \item{parents}{the parents.}
 #' \item{popType}{the population type.}
-#' \item{multiCross}{a logical value indicating if multiple crosses have been
-#' combined in the \code{IBDprob} object.}
 #' }
 #'
 #' @examples
