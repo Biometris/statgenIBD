@@ -23,8 +23,8 @@
 #' @export
 summary.IBDprob <- function(object,
                             ...) {
-  cat("population type: ", ifelse(is.null(object$popType), 'undefined',
-                                  object$popType), "\n")
+  cat("population type: ",
+      if (is.null(object$popType)) "undefined" else object$popType, "\n")
   cat("Number of evaluation points: ", nrow(object$markers), "\n")
   cat("Number of individuals: ", ncol(object$markers),"\n")
   cat("Parents: ", object$parents, "\n")
@@ -33,7 +33,7 @@ summary.IBDprob <- function(object,
 #' Concatenate function for objects of class IBDprob
 #'
 #' Concatenates objects of class \code{IBDprob}. All objects that are
-#' concatenated  should have the same population type and the same map. The
+#' concatenated should have the same population type and the same map. The
 #' function is mainly meant for combining information for multiple crosses
 #' with overlapping parents.
 #'

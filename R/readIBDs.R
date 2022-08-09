@@ -30,7 +30,7 @@ readIBDs <- function(inFile) {
   inDat <- read.table(inFile, sep = "\t", header = TRUE)
   ## Check that data has required columns.
   if (!all(colnames(inDat)[1:2] == c("Marker", "Genotype"))) {
-    stop("First to columns in inFile should be named Marker and Genotype.\n")
+    stop("First two columns in inFile should be named Marker and Genotype.\n")
   }
   if (ncol(inDat) < 4) {
     stop("At least 2 parent columns should be present in input.\n")
