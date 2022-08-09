@@ -7,7 +7,8 @@
 \method{plot}{IBDprob}(
   x,
   ...,
-  plotType = c("singleGeno", "allGeno", "pedigree"),
+  plotType = c("singleGeno", "allGeno", "pedigree", "meanProbs", "probSums",
+    "totalCoverage"),
   genotype,
   title = NULL,
   output = TRUE
@@ -65,7 +66,7 @@ plot(SxMIBD_Ext,
 plot(SxMIBD_Ext,
      plotType = "allGeno")
 
-## Plot sturcture of the pedigree.
+## Plot structure of the pedigree.
 plot(SxMIBD_Ext,
      plotType = "pedigree")
 }

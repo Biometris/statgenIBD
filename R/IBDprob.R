@@ -163,7 +163,7 @@ c.IBDprob <- function(...) {
 #' plot(SxMIBD_Ext,
 #'      plotType = "allGeno")
 #'
-#' ## Plot sturcture of the pedigree.
+#' ## Plot structure of the pedigree.
 #' plot(SxMIBD_Ext,
 #'      plotType = "pedigree")
 #' }
@@ -171,10 +171,12 @@ c.IBDprob <- function(...) {
 #' @export
 plot.IBDprob <- function(x,
                          ...,
-                         plotType = c("singleGeno", "allGeno", "pedigree"),
+                         plotType = c("singleGeno", "allGeno", "pedigree",
+                                      "meanProbs", "probSums", "totalCoverage"),
                          genotype,
                          title = NULL,
                          output = TRUE) {
+  dotArgs <- list(...)
   map <- x$map
   markers <- x$markers
   parents <- x$parents
@@ -197,6 +199,13 @@ plot.IBDprob <- function(x,
     p <- pedPlot(pedigree = pedigree, offSpring = colnames(markers),
                  popType = popType, multiCross = multiCross,
                  genoCross = genoCross, title = title)
+  } else if (plotType == "meanProbs") {
+    p <- meanProbsPlot(markers = markers, map = map, parents = parents,
+                       chr = dotArgs$chr, title = title)
+  # } else if (plotType == "probSums") {
+  #   p <- probSumsPlot(markers = markers, map = map, chr = dotArgs$chr)
+  # } else if (plotType == "meanProbs") {
+  #   p <- totalCoveragePlot(markers = markers, map = map, chr = dotArgs$chr)
   }
   if (output) {
     plot(p)
