@@ -1,5 +1,7 @@
 #' Helper function for plotting mean of probabilities.
 #'
+#' @importFrom stats aggregate
+#'
 #' @noRd
 #' @keywords internal
 meanProbsPlot <- function(markers,
