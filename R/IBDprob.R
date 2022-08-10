@@ -25,8 +25,8 @@ summary.IBDprob <- function(object,
                             ...) {
   cat("population type: ",
       if (is.null(object$popType)) "undefined" else object$popType, "\n")
-  cat("Number of evaluation points: ", nrow(object$markers), "\n")
-  cat("Number of individuals: ", ncol(object$markers),"\n")
+  cat("Number of evaluation points: ", ncol(object$markers), "\n")
+  cat("Number of individuals: ", nrow(object$markers),"\n")
   cat("Parents: ", object$parents, "\n")
 }
 
@@ -93,17 +93,18 @@ c.IBDprob <- function(...) {
   pedParNw <- unique(pedTot[pedTot[["par1"]] == 0 & pedTot[["par2"]] == 0, ])
   pedOffNw <- pedTot[pedTot[["par1"]] != 0 | pedTot[["par2"]] != 0, ]
   pedNw <- rbind(pedParNw, pedOffNw)
-  genoNw <- unlist(sapply(X = markerLst, FUN = colnames))
-  nGeno <- sapply(X = markerLst, FUN = ncol)
+  genoNw <- unlist(sapply(X = markerLst, FUN = rownames))
+  nGeno <- sapply(X = markerLst, FUN = nrow)
   genoCross <- data.frame(cross = paste0("cross",
                                          rep(seq_along(nGeno), times = nGeno)),
                           geno = genoNw)
-  markersNw <- array(dim = c(nrow(markerLst[[1]]), length(genoNw),
+  markersNw <- array(dim = c(length(genoNw), ncol(markerLst[[1]]),
                              length(parentsNw)),
-                     dimnames = list(rownames(markerLst[[1]]), genoNw, parentsNw))
-  for (i in 1:nrow(markerLst[[1]])) {
-    markersNw[i, , ] <- as.matrix(dfBind(lapply(X = markerLst, FUN = function(mrk) {
-      as.data.frame(mrk[i, , ])
+                     dimnames = list(genoNw, colnames(markerLst[[1]]),
+                                     parentsNw))
+  for (i in 1:ncol(markerLst[[1]])) {
+    markersNw[, i, ] <- as.matrix(dfBind(lapply(X = markerLst, FUN = function(mrk) {
+      as.data.frame(mrk[, i, ])
     })))
   }
   res <- structure(list(map = map,
