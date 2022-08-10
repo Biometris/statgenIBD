@@ -51,12 +51,12 @@ markers3DtoLong <- function(markers,
                             markerSel = NULL) {
   ## Restrict markers to selected markers
   if (!is.null(markerSel)) {
-    markers <- markers[markerSel, , , drop = FALSE]
+    markers <- markers[, markerSel, , drop = FALSE]
   }
   markerCols <- dimnames(markers)[[3]]
   ## Create base data.frame for storing long format data.
-  markersLongBase <- expand.grid(snp = dimnames(markers)[[1]],
-                                 genotype = dimnames(markers)[[2]])
+  markersLongBase <- expand.grid(snp = colnames(markers),
+                                 genotype = rownames(markers))
   markersLong <- NULL
   for (parent in parents) {
     ## Get other columns containing parent.

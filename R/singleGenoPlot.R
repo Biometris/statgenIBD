@@ -9,7 +9,7 @@ singleGenoPlot <- function(markers,
   if (!inherits(genotype, "character") || length(genotype) > 1) {
     stop("genotype should be a character string.\n")
   }
-  if (!genotype %in% dimnames(markers)[[2]]) {
+  if (!genotype %in% rownames(markers)) {
     stop(paste("genotype", genotype, "not defined\n"))
   }
   ## Convert to long format for plotting.
