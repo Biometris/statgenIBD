@@ -22,7 +22,7 @@ expect_equal(names(SxMIBD),
              c("map", "markers", "popType", "parents", "pedigree"))
 expect_inherits(SxMIBD$map, "data.frame")
 expect_inherits(SxMIBD$markers, "array")
-expect_equal(dim(SxMIBD$markers), c(116, 150, 2))
+expect_equal(dim(SxMIBD$markers), c(150, 116, 2))
 expect_inherits(SxMIBD$popType, "character")
 expect_inherits(SxMIBD$parents, "character")
 expect_inherits(SxMIBD$pedigree, "data.frame")

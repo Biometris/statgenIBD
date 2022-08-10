@@ -18,7 +18,7 @@ meanProbsPlot <- function(markers,
   ## Restrict map to selected chromosomes.
   if (!is.null(chr)) {
     map <- map[map[["chr"]] %in% chr, ]
-    plotDat <- plotDat[rownames(plotDat) %in% rownames(map), ]
+    markers <- markers[, colnames(markers) %in% rownames(map), ]
   }
   ## Get the boundary for each of the chromosomes.
   ## Has to be converted to numeric to avoid integer overflow in the next step.

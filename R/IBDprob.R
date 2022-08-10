@@ -214,7 +214,7 @@ plot.IBDprob <- function(x,
     if (is.null(pedigree)) {
       stop("pedigree plot can only be made if pedigree information is available.\n")
     }
-    p <- pedPlot(pedigree = pedigree, offSpring = colnames(markers),
+    p <- pedPlot(pedigree = pedigree, offSpring = rownames(markers),
                  popType = popType, genoCross = genoCross, title = title)
   } else if (plotType == "meanProbs") {
     p <- meanProbsPlot(markers = markers, map = map, parents = parents,

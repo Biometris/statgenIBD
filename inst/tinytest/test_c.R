@@ -41,10 +41,5 @@ expect_inherits(genoCross, "data.frame")
 expect_equal(genoCross[["cross"]],
              rep(c("cross1", "cross2"), times = c(100, 80)))
 expect_equal(genoCross[["geno"]],
-             c(dimnames(AB$markers)[[2]], dimnames(AC$markers)[[2]]))
-
-
-
-
-
+             c(rownames(AB$markers), rownames(AC$markers)))
 

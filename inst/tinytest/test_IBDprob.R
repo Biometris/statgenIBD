@@ -73,5 +73,3 @@ expect_silent(p7 <- plot(SxMIBD, plotType = "totalCoverage", chr = 3))
 
 expect_equal(p7$data[["coverage"]], c(46.8607505542283, 53.1392494457717))
 
-
-

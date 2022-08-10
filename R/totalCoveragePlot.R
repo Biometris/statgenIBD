@@ -13,7 +13,7 @@ totalCoveragePlot <- function(markers,
   ## Restrict map to selected chromosomes.
   if (!is.null(chr)) {
     map <- map[map[["chr"]] %in% chr, ]
-    markers <- markers[rownames(markers) %in% rownames(map), , ]
+    markers <- markers[, colnames(markers) %in% rownames(map), ]
   }
   ## Compute means.
   plotDat <- apply(X = markers, MARGIN = c(2, 3), FUN = mean)
