@@ -33,7 +33,7 @@ readIBDs <- function(infile) {
     stop("First two columns in infile should be named Marker and Genotype.\n")
   }
   if (ncol(inDat) < 4) {
-    stop("At least 2 parent columns should be present in input.\n")
+    stop("At least two parent columns should be present in input.\n")
   }
   inDat[, -c(1,2)] <- apply(inDat[, -c(1,2)], 2, function(x) as.numeric(x))
   genoNamesIn <- unique(inDat[["Genotype"]])

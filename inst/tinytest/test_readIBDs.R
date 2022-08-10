@@ -4,8 +4,10 @@
 ibdFile <- system.file("extdata/SxM", "SxM_IBDs.ibd", package = "statgenIBD")
 
 ## Checks for correct input.
-expect_error(readIBDs(infile = 1), "File path should be a single character string.")
-expect_error(readIBDs(infile = "a/b.txt"), "File not found.")
+expect_error(readIBDs(infile = 1),
+             "infile path should be a single character string.")
+expect_error(readIBDs(infile = "a/b.txt"),
+             "infile not found.")
 
 ## Check for successful read and returned structure.
 expect_silent(ibds <- readIBDs(infile = ibdFile))
