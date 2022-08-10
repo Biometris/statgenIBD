@@ -53,7 +53,7 @@
 #' \describe{
 #' \item{map}{a \code{data.frame} with chromosome and position of the markers.}
 #' \item{markers}{a 3-dimensional \code{array} of IBD probabilities with
-#' markers, genotypes and  parents as array dimensions.}
+#' genotypes, markers and parents as array dimensions.}
 #' \item{parents}{the parents.}
 #' \item{popType}{the population type.}
 #' }

@@ -65,7 +65,7 @@ using namespace ibd;
 //' \describe{
 //' \item{map}{a \code{data.frame} with chromosome and position of the markers.}
 //' \item{markers}{a 3-dimensional \code{array} of IBD probabilities with
-//' markers, genotypes and  parents as array dimensions.}
+//' genotypes, markers and parents as array dimensions.}
 //' \item{parents}{the parents.}
 //' \item{popType}{the population type.}
 //' }
@@ -207,7 +207,7 @@ List calcIBD(CharacterVector& popType,
                                          Named("par2") = par2, Named("type") = type);
   // Reshape prob to 3D array and add names to dimensions.
   NumericVector P = wrap(prob);
-  P.attr("dimnames") = List::create(posNames, offspring, parentNames);
+  P.attr("dimnames") = List::create(offspring, posNames, parentNames);
   // Create result list.
   List res = List::create(Named("map") = map,
                           Named("markers") = P,
