@@ -120,7 +120,7 @@ The output of the `calcIBD` function is an object of class `IBDprob`. This objec
 +============+==============+========================================================================================================================================================================================================================================================+
 | map        | `data.frame` | The map for the population.                                                                                                                                                                                                                            |
 +------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| markers    | `array`      | A three dimensional array with the IBD probabilities. The dimensions of this array are \#markers x \#genotypes x \#parents. The array contains per combination of marker and genotypes the probabilities that it descended from either of the parents. |
+| markers    | `array`      | A three dimensional array with the IBD probabilities. The dimensions of this array are \#genotypes x \#markers x \#parents. The array contains per combination of genotypes and marker the probabilities that it descended from either of the parents. |
 +------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | popType    | `character`  | The population type.                                                                                                                                                                                                                                   |
 +------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -132,13 +132,13 @@ The `summary` function can be used to get a short description of the content of 
 Looking at genotype **dh001** and marker **plc** we can see from the genotypic file printed above that it has a value of 2, equal to that of Steptoe. If we now look at the output of `calcIBD` it shows a value of 1 for Steptoe and a value of 0 for Morex.
 
 ```{r check_dh001_plc}
-SxMIBD$markers["plc", "dh001", ]
+SxMIBD$markers["dh001", "plc", ]
 ```
 
 For the combination of marker **abg313b** and genotype **dh005** the genotypic file contained a missing value. Looking at the output we can see that the probability that this marker came from Morex is about 0.67 and the probability that it came from Steptoe is about 0.33.
 
 ```{r check_dh005_abg313b}
-SxMIBD$markers["abg313b", "dh005", ]
+SxMIBD$markers["dh005", "abg313b", ]
 ```
 
 ### Visualizing results
