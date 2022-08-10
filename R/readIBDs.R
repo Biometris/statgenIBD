@@ -4,7 +4,7 @@
 #' about the file format can be found in the vignette (
 #' \code{vignette("IBDFileFormat", package = "statgenIBD")}).
 #'
-#' @param inFile A character string specifying the path of the file.
+#' @param infile A character string specifying the path of the file.
 #'
 #' @return An object of class \code{IBDprob} containing data a data.frame with
 #' the IBD probabilities.
@@ -19,18 +19,18 @@
 #'
 #' @importFrom utils hasName read.table
 #' @export
-readIBDs <- function(inFile) {
-  if (!is.character(inFile) || length(inFile) > 1) {
-    stop("inFile path should be a single character string.\n")
+readIBDs <- function(infile) {
+  if (!is.character(infile) || length(infile) > 1) {
+    stop("infile path should be a single character string.\n")
   }
-  if (!file.exists(inFile)) {
-    stop("inFile not found.\n")
+  if (!file.exists(infile)) {
+    stop("infile not found.\n")
   }
   ## Read file.
-  inDat <- read.table(inFile, sep = "\t", header = TRUE)
+  inDat <- read.table(infile, sep = "\t", header = TRUE)
   ## Check that data has required columns.
   if (!all(colnames(inDat)[1:2] == c("Marker", "Genotype"))) {
-    stop("First two columns in inFile should be named Marker and Genotype.\n")
+    stop("First two columns in infile should be named Marker and Genotype.\n")
   }
   if (ncol(inDat) < 4) {
     stop("At least 2 parent columns should be present in input.\n")
