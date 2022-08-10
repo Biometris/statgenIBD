@@ -7,8 +7,7 @@
 \method{plot}{IBDprob}(
   x,
   ...,
-  plotType = c("singleGeno", "allGeno", "pedigree", "meanProbs", "sumProbs",
-    "totalCoverage"),
+  plotType = c("singleGeno", "allGeno", "pedigree", "meanProbs", "totalCoverage"),
   genotype,
   chr = NULL,
   title = NULL,
