@@ -112,7 +112,7 @@ c.IBDprob <- function(...) {
                         popType = pops,
                         parents = parents,
                         pedigree = pedNw),
-                   class = "IBDprob",
+                   class = c("IBDprob", "list"),
                    genoCross = genoCross)
   return(res)
 }

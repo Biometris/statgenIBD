@@ -60,6 +60,6 @@ readIBDs <- function(infile) {
                         markers = markers,
                         popType = NULL,
                         parents = parents),
-                   class = "IBDprob")
+                   class = c("IBDprob", "list"))
   return(res)
 }
