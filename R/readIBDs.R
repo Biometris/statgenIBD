@@ -46,16 +46,16 @@ readIBDs <- function(infile) {
   nGeno <- length(genoNames)
   nMarkers <- length(markerNames)
   nPar <- length(parents)
-  markers <- array(
-    dim = c(nMarkers, nGeno, nPar),
-    dimnames = list(markerNames, genoNames, parents)
+  markers <- array(NA_real_,
+    dim = c(nGeno, nMarkers, nPar),
+    dimnames = list(genoNames, markerNames, parents)
   )
   for (parent in parents) {
     for (geno in genoNames) {
-     markers[, geno, parent] <- inDat[inDat$Genotype == geno, parent]
+     markers[geno, , parent] <- inDat[inDat$Genotype == geno, parent]
     }
   }
-  markers <- markers[markerNamesIn, genoNamesIn, ]
+  markers <- markers[genoNamesIn, markerNamesIn, ]
   res <- structure(list(map = NULL,
                         markers = markers,
                         popType = NULL,

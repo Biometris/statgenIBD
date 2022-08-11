@@ -50,14 +50,14 @@ writeIBDs <- function(IBDprob,
          "1 / number of parents.\n")
   }
   markers <- IBDprob$markers
-  markerNames <- rownames(markers)
-  genoNames <- colnames(markers)
+  markerNames <- colnames(markers)
+  genoNames <- rownames(markers)
   parents <- IBDprob$parents
   fmt <- if (decimals > 0) paste0("%#.", decimals, "f") else "%f"
   if (minProb > 0) {
     ## Set values < minProb to zero and rescale.
     markers[markers < minProb] <- 0
-    markers <- simplify2array(apply(X = markers, MARGIN = 2, FUN = function(x) {
+    markers <- simplify2array(apply(X = markers, MARGIN = 1, FUN = function(x) {
       x / rowSums(x)
     }, simplify = FALSE))
     markers <- aperm(markers, c(1, 3, 2))
@@ -71,7 +71,7 @@ writeIBDs <- function(IBDprob,
     markersLongBase[[parent]] <-
       sub("\\.$", "",
           sub("0+$", "",
-              sprintf(t(markers[, , parent]), fmt = fmt)
+              sprintf(markers[, , parent], fmt = fmt)
               )
     )
   }
