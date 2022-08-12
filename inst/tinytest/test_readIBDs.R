@@ -13,5 +13,5 @@ expect_error(readIBDs(infile = "a/b.txt"),
 expect_silent(ibds <- readIBDs(infile = ibdFile))
 expect_inherits(ibds, "IBDprob")
 expect_inherits(ibds$markers, "array")
-expect_equal(dim(ibds$markers), c(116, 150, 2))
+expect_equal(dim(ibds$markers), c(150, 116, 2))
 expect_equal(length(ibds$parents), 2)

@@ -25,7 +25,7 @@ RABBIT. Reading this file allows for plotting the pedigree.
 \examples{
 ## Read RABBIT data for barley.
 genoFile <- system.file("extdata/barley", "barley_magicReconstruct.zip",
-                       package = "statgenMPP")
+                       package = "statgenIBD")
 barleyIBD <- readRABBIT(unzip(genoFile, exdir = tempdir()))
 
 }

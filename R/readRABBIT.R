@@ -15,7 +15,7 @@
 #' @examples
 #' ## Read RABBIT data for barley.
 #' genoFile <- system.file("extdata/barley", "barley_magicReconstruct.zip",
-#'                        package = "statgenMPP")
+#'                        package = "statgenIBD")
 #' barleyIBD <- readRABBIT(unzip(genoFile, exdir = tempdir()))
 #'
 #' @references Zheng, Chaozhi, Martin P Boer, and Fred A Van Eeuwijk.
