@@ -68,7 +68,7 @@ In the package, IBD probabilities can be calculated for many different types of 
 | C4SxDH              | four-way   | C4, followed by x generations of selfing and DH generation | 6          |
 +---------------------+------------+------------------------------------------------------------+------------+
 
-For IBD calculations of more complex population types, including MAGIC and population with complicated pedigree structure, see [RABBIT](https://github.com/chaozhi/RABBIT) software [@Zheng2014; @Zheng2015; @Zheng2018].
+For IBD calculations of more complex population types, including MAGIC and population with complicated pedigree structure, see [RABBIT](https://github.com/chaozhi/RABBIT) software [@Zheng2014; @Zheng2015; @Zheng2018]. The IBDs calculated using RABBIT can be imported into statgenIBD as well, see [Importing IBD probabilities computed using RABBIT](#rab).
 
 ## Examples
 
@@ -411,6 +411,42 @@ Plotting all genotypes together also shows the clear separation between the to c
 ```{r plotMultiIBDAll}
 plot(ABC, plotType = "allGeno")
 ```
+
+## Importing IBD probabilities computed using RABBIT {#rab}
+
+Instead of performing IBD calculations directly with the package, it is also possible to import IBD probabilities computed using RABBIT software [@Zheng2014; @Zheng2015; @Zheng2018]. The main advantage of using RABBIT for IBD calculations is that it can handle complex pedigree populations and therefore can also be used in cases where the population structure is more complex than those that can be computed using `statgenIBD`, e.g. in the maize Steptoe Morex population described before.
+
+As an example we use a barley population described in @Liller2017-jz. This MPP design consists of 5 parents. Four wild parents were crossed with the cultivar Morex and then backcrossed with Morex once. Individuals from the four families from the backcrosses were then crossed with each other as in a full diallel design, which generated six F6 families through five generations of selfing. The data for this population is available in zipped format in the package.
+
+RABBIT output can be read using the `readRABBIT` function in `statgenMPP`. This has as input the standard RABBIT output summary file and the pedigree file that needs to be provided to RABBIT as well. This pedigree file is an optional input and is only used for plotting the pedigree structure of the population. 
+
+```{r barleyIBD}
+## Specify files containing RABBIT output.
+## Extract in a temporary directory.
+tempDir <- tempdir()
+inFile <- unzip(system.file("extdata/barley/barley_magicReconstruct.zip", 
+                            package = "statgenMPP"), exdir = tempDir)
+
+## Specify pedigree file.
+pedFile <- system.file("extdata/barley/barley_pedInfo.csv",
+                       package = "statgenMPP")
+
+## read RABBIT output. 
+barleyIBD <- readRABBIT(infile = inFile,
+                        pedFile = pedFile)
+```
+
+As for the previous examples, we can summarize and plot the imported data to get a first idea of its content.
+
+```{r sumPbarleyIBD}
+## Summary.
+summary(barleyIBD)
+```
+
+```{r plotPbarleyIBD}
+## Plot structure of the pedigree.
+plot(barleyIBD, plotType = "pedigree")
+``` 
 
 ```{r winddown, include = FALSE}
 options(op)
