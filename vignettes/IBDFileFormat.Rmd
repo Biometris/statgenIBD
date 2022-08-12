@@ -46,7 +46,7 @@ Note that for large datasets, this file can become very large. It is therefore r
 
 ### Writing IBD probabilities to a .ibd file
 
-After having computed IBD probabilities, the results can be written to a *.ibd*
+After having computed IBD probabilities, the results can be written to a *.txt*
 file using `writeIBDs`.
 
 ```{r SxMwriteIBD}
@@ -58,7 +58,7 @@ SxMIBD <- calcIBD(popType = "DH",
                                         package = "statgenIBD"))
 
 ## Write IBDs to tab-delimited .ibd file.
-writeIBDs(SxMIBD, "SxM-IBD.ibd")
+writeIBDs(SxMIBD, "SxM-IBD.txt")
 ```
 
 The created file will look like as follows:
@@ -78,9 +78,9 @@ dh001	abc158	1	0
 Retrieving the IBD probabilities later on can be done using `readIBDs`.
 ```{r SxMreadIBD}
 ## Write IBDs to tab-delimited .ibd file.
-SxMIBD <- readIBDs("SxM-IBD.ibd")
+SxMIBD <- readIBDs("SxM-IBD.txt")
 summary(SxMIBD)
 ```
 ```{r, echo=FALSE, results='hide'}
-unlink("SxM-IBD.ibd")
+unlink("SxM-IBD.txt")
 ```

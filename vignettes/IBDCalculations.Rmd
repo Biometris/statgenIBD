@@ -265,18 +265,18 @@ The output of the `getProbs` function is a `data.frame` with a column `geno` con
 
 ### Write and read tab-delimited *.ibd files
 
-The results of IBD calculations can be written to a tab-delimited *.ibd* file using `writeIBDs`. Details about this file format can be found in the accompanying [IBD file format vignette](IBDFileFormat.html).
+The results of IBD calculations can be written to a tab-delimited *.txt* file using `writeIBDs`. Details about this file format can be found in the accompanying [IBD file format vignette](IBDFileFormat.html).
 
 ```{r SxMwriteIBD, eval=FALSE}
 ## Write IBDs to tab-delimited .ibd file.
-writeIBDs(SxMIBD_Ext, "SxMIBD_Ext.ibd")
+writeIBDs(SxMIBD_Ext, "SxMIBD_Ext.txt")
 ```
 
 Likewise, IBD files can be read using the `readIBDs` method.
 
 ```{r SxMreadIBD, eval=FALSE}
 ## Write IBDs to tab-delimited .ibd file.
-SxMIBD_Ext <- readIBDs("SxMIBD_Ext.ibd")
+SxMIBD_Ext <- readIBDs("SxMIBD_Ext.txt")
 summary(SxMIBD_Ext)
 ```
 

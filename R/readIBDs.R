@@ -4,10 +4,10 @@
 #' about the file format can be found in the vignette (
 #' \code{vignette("IBDFileFormat", package = "statgenIBD")}).
 #'
-#' @param infile A character string specifying the path of the file.
+#' @param infile A character string specifying the path of the input .txt file.
+#' Compressed .txt files with extension ".gz" or ".bz2" are supported as well.
 #'
-#' @return An object of class \code{IBDprob} containing data a data.frame with
-#' the IBD probabilities.
+#' @return An object of class \code{IBDprob}.
 #'
 #' @examples
 #' ## Read IBD probabilities for Steptoe Morex.
@@ -20,14 +20,17 @@
 #' @importFrom utils hasName read.table
 #' @export
 readIBDs <- function(infile) {
-  if (!is.character(infile) || length(infile) > 1) {
-    stop("infile path should be a single character string.\n")
-  }
-  if (!file.exists(infile)) {
-    stop("infile not found.\n")
+  if (missing(infile) || !is.character(infile) || length(infile) > 1 ||
+      file.access(infile, mode = 4) == -1 ||
+      ## Compressed .csv files can be read by fread and should be
+      ## allowed as inputs as well.
+      !(tools::file_ext(infile) == "txt" ||
+        (tools::file_ext(infile) %in% c("gz", "bz2") &&
+         tools::file_ext(tools::file_path_sans_ext(infile)) == "txt"))) {
+    stop("infile should be a character string indicating a readable .txt file")
   }
   ## Read file.
-  inDat <- read.table(infile, sep = "\t", header = TRUE)
+  inDat <- data.table::fread(infile, sep = "\t", header = TRUE)
   ## Check that data has required columns.
   if (!all(colnames(inDat)[1:2] == c("Marker", "Genotype"))) {
     stop("First two columns in infile should be named Marker and Genotype.\n")

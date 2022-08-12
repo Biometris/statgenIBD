@@ -4,7 +4,7 @@
 \alias{writeIBDs}
 \title{Write IBD probabilities to file.}
 \usage{
-writeIBDs(IBDprob, outFile, decimals = -1, minProb = 0)
+writeIBDs(IBDprob, outFile, decimals = -1, minProb = 0, compress = FALSE)
 }
 \arguments{
 \item{IBDprob}{An object of class \code{IBDprob} containing the IBD
@@ -19,6 +19,8 @@ in writing the output file. When negative, no decimal cut off is applied.}
 specifying the minimum probability cutoff value. Probabilities below this
 cutoff are set to zero and other probabilities are rescaled to make sure that
 the probabilities sum up to one.}
+
+\item{compress}{Should the output be compressed to .gz format?}
 }
 \value{
 No output. The output file is created as a result of calling this
@@ -38,10 +40,10 @@ SxMIBD <- calcIBD(popType = "DH",
                                       package = "statgenIBD"))
 
 ## Write IBDs to file.
-writeIBDs(IBDprob = SxMIBD, outFile = "SxM_IBDs.ibd")
+writeIBDs(IBDprob = SxMIBD, outFile = "SxM_IBDs.txt")
 
 ## Write IBDs to file, set values <0.05 to zero and only print 3 decimals.
-writeIBDs(IBDprob = SxMIBD, outFile = "SxM_IBDs2.ibd",
+writeIBDs(IBDprob = SxMIBD, outFile = "SxM_IBDs2.txt",
          decimals = 3, minProb = 0.05)
 
 }

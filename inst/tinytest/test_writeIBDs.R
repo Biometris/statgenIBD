@@ -9,12 +9,12 @@ SxMIBD <- calcIBD(popType = "DH", markerFile = SxMloc, mapFile = SxMmap)
 
 ## Check that input checks are working correctly.
 expect_error(writeIBDs(SxMIBD, outFile = 1),
-             "outFile should be a single character string ending in .ibd")
-expect_error(writeIBDs(SxMIBD, outFile = "a/b.ibd"),
+             "outFile should be a single character string ending in .txt")
+expect_error(writeIBDs(SxMIBD, outFile = "a/b.txt"),
              "No permission to write to")
 
 ## Define tempt output file.
-ibdOut <- tempfile(fileext = ".ibd")
+ibdOut <- tempfile(fileext = ".txt")
 
 expect_error(writeIBDs(SxMIBD, outFile = ibdOut, decimals = "a"),
              "decimals should be a single numerical value")

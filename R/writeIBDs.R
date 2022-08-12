@@ -13,6 +13,7 @@
 #' specifying the minimum probability cutoff value. Probabilities below this
 #' cutoff are set to zero and other probabilities are rescaled to make sure that
 #' the probabilities sum up to one.
+#' @param compress Should the output be compressed to .gz format?
 #'
 #' @return No output. The output file is created as a result of calling this
 #' function.
@@ -26,21 +27,22 @@
 #'                                       package = "statgenIBD"))
 #'
 #' ## Write IBDs to file.
-#' writeIBDs(IBDprob = SxMIBD, outFile = "SxM_IBDs.ibd")
+#' writeIBDs(IBDprob = SxMIBD, outFile = "SxM_IBDs.txt")
 #'
 #' ## Write IBDs to file, set values <0.05 to zero and only print 3 decimals.
-#' writeIBDs(IBDprob = SxMIBD, outFile = "SxM_IBDs2.ibd",
+#' writeIBDs(IBDprob = SxMIBD, outFile = "SxM_IBDs2.txt",
 #'          decimals = 3, minProb = 0.05)
 #'
 #' @export
 writeIBDs <- function(IBDprob,
                       outFile,
                       decimals = -1,
-                      minProb = 0) {
+                      minProb = 0,
+                      compress = FALSE) {
   if (!inherits(IBDprob, "IBDprob")) {
     stop("IBDprob should be an object of class IBDprob.\n")
   }
-  chkFile(outFile, fileType = "ibd")
+  chkFile(outFile, fileType = "txt")
   if (!is.numeric(decimals) || length(decimals) > 1) {
     stop("decimals should be a single numerical value.\n")
   }
@@ -72,10 +74,13 @@ writeIBDs <- function(IBDprob,
       sub("\\.$", "",
           sub("0+$", "",
               sprintf(markers[, , parent], fmt = fmt)
-              )
-    )
+          )
+      )
   }
-  write.table(markersLongBase, file = outFile,
-              quote = FALSE, sep = "\t", na = "-", row.names = FALSE,
-              col.names = TRUE)
+  if (compress) {
+    outFile <- paste0(outFile, ".gz")
+  }
+  data.table::fwrite(markersLongBase, file = outFile,
+                     quote = FALSE, sep = "\t", na = "-", row.names = FALSE,
+                     col.names = TRUE)
 }

@@ -7,11 +7,11 @@
 readIBDs(infile)
 }
 \arguments{
-\item{infile}{A character string specifying the path of the file.}
+\item{infile}{A character string specifying the path of the input .txt file.
+Compressed .txt files with extension ".gz" or ".bz2" are supported as well.}
 }
 \value{
-An object of class \code{IBDprob} containing data a data.frame with
-the IBD probabilities.
+An object of class \code{IBDprob}.
 }
 \description{
 Reads IBD probabilities from a plain text, tab-delimited file. Information
