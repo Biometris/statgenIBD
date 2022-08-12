@@ -8,10 +8,12 @@ readRABBIT(infile, pedFile = NULL)
 }
 \arguments{
 \item{infile}{A character string, a link to a .csv file with IBD
-probabilities.}
+probabilities. Compressed .csv files with extension ".gz" or ".bz2" are
+supported as well.}
 
 \item{pedFile}{A character string, a link to a .csv file with pedigree
-information as used by RABBIT as input.}
+information as used by RABBIT as input. Compressed .csv files with extension
+".gz" or ".bz2" are supported as well.}
 }
 \value{
 An \code{IBDprob} object with map and markers corresponding to the

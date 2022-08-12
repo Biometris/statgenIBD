@@ -5,9 +5,11 @@
 #' RABBIT. Reading this file allows for plotting the pedigree.
 #'
 #' @param infile A character string, a link to a .csv file with IBD
-#' probabilities.
+#' probabilities. Compressed .csv files with extension ".gz" or ".bz2" are
+#' supported as well.
 #' @param pedFile A character string, a link to a .csv file with pedigree
-#' information as used by RABBIT as input.
+#' information as used by RABBIT as input. Compressed .csv files with extension
+#' ".gz" or ".bz2" are supported as well.
 #'
 #' @return An \code{IBDprob} object with map and markers corresponding to the
 #' imported information in the imported .csv file.
@@ -28,12 +30,22 @@
 readRABBIT <- function(infile,
                        pedFile = NULL) {
   if (missing(infile) || !is.character(infile) || length(infile) > 1 ||
-      file.access(infile, mode = 4) == -1 || tools::file_ext(infile) != "csv") {
+      file.access(infile, mode = 4) == -1 ||
+      ## Compressed .csv files can be read by fread and should be
+      ## allowed as inputs as well.
+      !(tools::file_ext(infile) == "csv" ||
+        (tools::file_ext(infile) %in% c("gz", "bz2") &&
+         tools::file_ext(tools::file_path_sans_ext(infile)) == "csv"))) {
     stop("infile should be a character string indicating a readable .csv file")
   }
-  if (!is.null(pedFile) && (!is.character(pedFile) || length(pedFile) > 1 ||
-                            file.access(pedFile, mode = 4) == -1 ||
-                            tools::file_ext(pedFile) != "csv")) {
+  if (!is.null(pedFile) &&
+      (!is.character(pedFile) || length(pedFile) > 1 ||
+       file.access(pedFile, mode = 4) == -1 ||
+       ## Compressed .csv files can be read by fread and should be
+       ## allowed as inputs as well.
+       !(tools::file_ext(pedFile) == "csv" ||
+         (tools::file_ext(pedFile) %in% c("gz", "bz2") &&
+          tools::file_ext(tools::file_path_sans_ext(pedFile)) == "csv")))) {
     stop("pedFile should be a character string indicating a readable .csv file")
   }
   ## Read first header to determine whether infile is created
