@@ -32,7 +32,10 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.6)
 Imports: 
+    data.table,
     ggplot2,
+    Matrix,
+    stringi,
     Rcpp
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.2.1
