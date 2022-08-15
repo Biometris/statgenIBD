@@ -26,7 +26,7 @@ op <- options(width = 90)
 
 ## File format
 
-The results of IBD probability calculations can be stored to and loaded from plain text, tab-delimited *.ibd* files using the functions `writeIBDs` and `readIBDs`. An IBD file should contain a header line, with the first and second header named *Marker* and *Genotype* to indicate the marker names and genotype names columns. The remaining headers should contain the  founder names to indicate the columns holding the founder IBD probabilities. Each row in the file should hold the IBD probabilities of the corresponding marker and genotype. I.e., the probability that marker 'x' of genotype 'y' descents from parent 'z'. The ordering of the records shoul be by marker, then by genotype (see the example below). Comment lines start with a '#'.
+The results of IBD probability calculations can be stored to and loaded from plain text, tab-delimited *.txt* files using the functions `writeIBDs` and `readIBDs`. An IBD file should contain a header line, with the first and second header named *Marker* and *Genotype* to indicate the marker names and genotype names columns. The remaining headers should contain the  founder names to indicate the columns holding the founder IBD probabilities. Each row in the file should hold the IBD probabilities of the corresponding marker and genotype. I.e., the probability that marker 'x' of genotype 'y' descents from parent 'z'. The ordering of the records shoul be by marker, then by genotype (see the example below). Comment lines start with a '#'.
 
 ```
 # IBD probabilities file format example
@@ -44,7 +44,7 @@ Note that for large datasets, this file can become very large. It is therefore r
 
 ## Examples
 
-### Writing IBD probabilities to a .ibd file
+### Writing IBD probabilities to a .txt file
 
 After having computed IBD probabilities, the results can be written to a *.txt*
 file using `writeIBDs`.
@@ -57,7 +57,7 @@ SxMIBD <- calcIBD(popType = "DH",
                   mapFile = system.file("extdata/SxM", "SxM_map.txt",
                                         package = "statgenIBD"))
 
-## Write IBDs to tab-delimited .ibd file.
+## Write IBDs to tab-delimited .txt file.
 writeIBDs(SxMIBD, "SxM-IBD.txt")
 ```
 
@@ -77,7 +77,7 @@ dh001	abc158	1	0
 
 Retrieving the IBD probabilities later on can be done using `readIBDs`.
 ```{r SxMreadIBD}
-## Write IBDs to tab-delimited .ibd file.
+## Write IBDs to tab-delimited .txt file.
 SxMIBD <- readIBDs("SxM-IBD.txt")
 summary(SxMIBD)
 ```

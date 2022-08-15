@@ -143,7 +143,19 @@ SxMIBD$markers["dh005", "abg313b", ]
 
 ### Visualizing results
 
-The calculated IBD probabilities can be visualized using the `plot` function. Three types of plot can be made using this function. `plotType = "pedigree"` will create a plot showing the pedigree of the population for which the IBD probabilities where computed. 
+The calculated IBD probabilities can be visualized using the `plot` function. Several types of plot can be made using this function. Besides creating a plot, all plots also return a `ggplot` object that can be further customized.
+
+- a plot of the structure of the population for which the IBD probabilities were computed
+- a plot of the computed IBD probabilities per parent for a single genotype
+- a plot of the computed IBD probabilities across the genome for all genotypes
+- a plot of the coverage of each parent across the genome
+- a plot of the total coverage of each parent
+
+All plots are described in more detail in the sections below.
+
+#### Pedigree plot
+
+A plot of the structure of the population for which the IBD probabilities were computed can be made specifying `plotType = "pedigree"`. This plot is fully determined by the population type of the population for which the probabilies were computed.
 
 ```{r plotsxmIBDped}
 ### Visualize the pedigree of the population.
@@ -151,7 +163,9 @@ plot(SxMIBD,
      plotType = "pedigree")
 ```
 
-`plotType = "singleGeno"` will generate a plot of the probabilities per parent for a selected genotype. The plot for **dh005** is made below. Note that it contains a lot of white space since the markers in the file are spread widely along the genome. In the next section we will show how to compute probabilities on a denser grid.
+#### Single genotype plot
+
+`plotType = "singleGeno"` will generate a plot of the probabilities per parent for a selected genotype. The plot for **dh005** is made below. Note that it contains a lot of white space since the markers in the file are spread widely along the genome. In the next section we will show how to compute probabilities on a denser grid leading to a plot with a lot less white space. 
 
 ```{r plotsxmIBD}
 ## Visualize IBD probabilities for dh005.
@@ -160,7 +174,9 @@ plot(SxMIBD,
      genotype = "dh005")
 ```
 
-A second type of plot can be made specifying `plotType = "allGeno"`. This will generate a plot of all genotypes colored per evaluation position according to the parent with the highest probability for that combination of genotype and position. Darker colors indicate a higher probability. Dashed lines indicate the start of a new chromosome.
+#### Plot of IBD probabilities for all genotypes.
+
+When specifying `plotType = "allGeno"` a plot is made of all genotypes colored per evaluation position according to the parent with the highest probability for that combination of genotype and position. Darker colors indicate a higher probability. Dashed lines indicate the start of a new chromosome.
 
 ```{r plotsxmIBDAll}
 ## Visualize IBD probabilities for all genotypes.
@@ -168,6 +184,34 @@ plot(SxMIBD,
      plotType = "allGeno",
      genotype = "dh005")
 ```
+
+#### Plot the coverage of each parent across the genome.
+
+When specifying `plotType = "meanProbs"` a plot is made of the mean probabilities of each parent for each evaluation position. The plot can be restricted to one or more chromosomes by specifying `chr`.
+
+```{r plotsxmIBDMP}
+## Visualize coverage across genome.
+plot(SxMIBD, 
+     plotType = "meanProbs")
+```
+
+```{r plotsxmIBDMPchr2}
+## Visualize coverage across chromosome 2.
+plot(SxMIBD, 
+     plotType = "meanProbs",
+     chr = 2)
+```
+
+#### Plot the total coverage of each parent
+
+A plot of the total coverage of each parent can be made by specifying `plotType = "totalCovarage"`. This will create a bar plot of the coverage per parent over the genome. The plot can be restricted to one or more chromosomes by specifying `chr`.
+
+```{r plotsxmIBDtotCov}
+## Visualize coverage across genome.
+plot(SxMIBD, 
+     plotType = "totalCoverage")
+```
+
 
 ### Evaluation positions
 
@@ -263,19 +307,19 @@ head(SxM_probs)
 
 The output of the `getProbs` function is a `data.frame` with a column `geno` containing the genotype and for both markers the probability that it descended from Morex and that it descended from Steptoe.
 
-### Write and read tab-delimited *.ibd files
+### Write and read tab-delimited *.txt files
 
 The results of IBD calculations can be written to a tab-delimited *.txt* file using `writeIBDs`. Details about this file format can be found in the accompanying [IBD file format vignette](IBDFileFormat.html).
 
 ```{r SxMwriteIBD, eval=FALSE}
-## Write IBDs to tab-delimited .ibd file.
+## Write IBDs to tab-delimited .txt file.
 writeIBDs(SxMIBD_Ext, "SxMIBD_Ext.txt")
 ```
 
 Likewise, IBD files can be read using the `readIBDs` method.
 
 ```{r SxMreadIBD, eval=FALSE}
-## Write IBDs to tab-delimited .ibd file.
+## Write IBDs to tab-delimited .txt file.
 SxMIBD_Ext <- readIBDs("SxMIBD_Ext.txt")
 summary(SxMIBD_Ext)
 ```

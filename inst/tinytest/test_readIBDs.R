@@ -1,7 +1,7 @@
 ### Test readIBDs function.
 
 ## Define input file.
-ibdFile <- system.file("extdata/SxM", "SxM_IBDs.ibd", package = "statgenIBD")
+ibdFile <- system.file("extdata/SxM", "SxM_IBDs.txt", package = "statgenIBD")
 
 ## Checks for correct input.
 expect_error(readIBDs(infile = 1),

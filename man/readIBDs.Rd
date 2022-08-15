@@ -20,7 +20,7 @@ about the file format can be found in the vignette (
 }
 \examples{
 ## Read IBD probabilities for Steptoe Morex.
-SxMIBD <- readIBDs(system.file("extdata/SxM", "SxM_IBDs.ibd",
+SxMIBD <- readIBDs(system.file("extdata/SxM", "SxM_IBDs.txt",
                                package = "statgenIBD"))
 
 ## Print summary.
