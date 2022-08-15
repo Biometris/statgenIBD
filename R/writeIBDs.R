@@ -8,7 +8,7 @@
 #' probabilities.
 #' @param outFile A character string specifying the path of the output file.
 #' @param decimals An integer value specifying the number of decimals to include
-#' in writing the output file. When negative, no decimal cut off is applied.
+#' in writing the output file.
 #' @param minProb A numerical value between zero and 1 / number of parents,
 #' specifying the minimum probability cutoff value. Probabilities below this
 #' cutoff are set to zero and other probabilities are rescaled to make sure that
@@ -36,7 +36,7 @@
 #' @export
 writeIBDs <- function(IBDprob,
                       outFile,
-                      decimals = -1,
+                      decimals = 6,
                       minProb = 0,
                       compress = FALSE) {
   if (!inherits(IBDprob, "IBDprob")) {

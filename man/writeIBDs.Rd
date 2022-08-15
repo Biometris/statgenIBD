@@ -4,7 +4,7 @@
 \alias{writeIBDs}
 \title{Write IBD probabilities to file.}
 \usage{
-writeIBDs(IBDprob, outFile, decimals = -1, minProb = 0, compress = FALSE)
+writeIBDs(IBDprob, outFile, decimals = 6, minProb = 0, compress = FALSE)
 }
 \arguments{
 \item{IBDprob}{An object of class \code{IBDprob} containing the IBD
@@ -13,7 +13,7 @@ probabilities.}
 \item{outFile}{A character string specifying the path of the output file.}
 
 \item{decimals}{An integer value specifying the number of decimals to include
-in writing the output file. When negative, no decimal cut off is applied.}
+in writing the output file.}
 
 \item{minProb}{A numerical value between zero and 1 / number of parents,
 specifying the minimum probability cutoff value. Probabilities below this
