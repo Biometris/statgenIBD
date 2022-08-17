@@ -2,7 +2,8 @@
 #'
 #' Reads IBD probabilities from a plain text, tab-delimited file. Information
 #' about the file format can be found in the vignette (
-#' \code{vignette("IBDFileFormat", package = "statgenIBD")}).
+#' \code{vignette("IBDFileFormat", package = "statgenIBD")}). A map file
+#' IBD probabilities a data.frame with the map must be specified as well.
 #'
 #' @param infile A character string specifying the path of the input .txt file.
 #' Compressed .txt files with extension ".gz" or ".bz2" are supported as well.
@@ -84,6 +85,20 @@ readIBDs <- function(infile,
     stop("At least two parent columns should be present in input.\n")
   }
   inDat[, -c(1,2)] <- apply(inDat[, -c(1,2)], 2, function(x) as.numeric(x))
+  ## Check that inDat and map contain the same markers.
+  missMrkMap <- rownames(map)[!rownames(map) %in% inDat[["Marker"]]]
+  if (length(missMrkMap) > 0) {
+    warning(length(missMrkMap), " markers in map are not in infile.\n",
+            call. = FALSE)
+    map <- map[!rownames(map) %in% missMrkMap, ]
+  }
+  missMrkDat <- unique(inDat[["Marker"]])[!unique(inDat[["Marker"]]) %in%
+                                            rownames(map)]
+  if (length(missMrkDat) > 0) {
+    warning(length(missMrkDat), " markers in infile are not in map.\n",
+            call. = FALSE)
+    inDat <- inDat[!inDat[["Marker"]] %in% missMrkDat, ]
+  }
   genoNamesIn <- unique(inDat[["Genotype"]])
   markerNamesIn <- unique(inDat[["Marker"]])
   ## Sort input data to get everything in expected order.
