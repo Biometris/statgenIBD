@@ -319,8 +319,8 @@ writeIBDs(SxMIBD_Ext, "SxMIBD_Ext.txt")
 Likewise, IBD files can be read using the `readIBDs` method.
 
 ```{r SxMreadIBD, eval=FALSE}
-## Write IBDs to tab-delimited .txt file.
-SxMIBD_Ext <- readIBDs("SxMIBD_Ext.txt")
+## Read IBDs from tab-delimited .txt file.
+SxMIBD_Ext <- readIBDs("SxMIBD_Ext.txt", map = SxMIBD_Ext$map)
 summary(SxMIBD_Ext)
 ```
 

@@ -39,11 +39,11 @@ SxMIBD <- calcIBD(popType = "DH",
                  mapFile = system.file("extdata/SxM", "SxM_map.txt",
                                       package = "statgenIBD"))
 
-## Write IBDs to file.
-writeIBDs(IBDprob = SxMIBD, outFile = "SxM_IBDs.txt")
+## Write IBDs to temporary files.
+writeIBDs(IBDprob = SxMIBD, outFile = tempfile(fileext = ".txt"))
 
 ## Write IBDs to file, set values <0.05 to zero and only print 3 decimals.
-writeIBDs(IBDprob = SxMIBD, outFile = "SxM_IBDs2.txt",
+writeIBDs(IBDprob = SxMIBD, outFile = tempfile(fileext = ".txt"),
          decimals = 3, minProb = 0.05)
 
 }

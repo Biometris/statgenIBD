@@ -78,7 +78,7 @@ dh001	abc158	1	0
 Retrieving the IBD probabilities later on can be done using `readIBDs`.
 ```{r SxMreadIBD}
 ## Write IBDs to tab-delimited .txt file.
-SxMIBD <- readIBDs("SxM-IBD.txt")
+SxMIBD <- readIBDs("SxM-IBD.txt", map = SxMIBD$map)
 summary(SxMIBD)
 ```
 ```{r, echo=FALSE, results='hide'}

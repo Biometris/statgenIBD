@@ -27,7 +27,7 @@ SxMIBD <- calcIBD(popType = "DH",
                  mapFile = system.file("extdata/SxM", "SxM_map.txt",
                                       package = "statgenIBD"))
 
-## Write predigree information to file.
-writePedigree(IBDprob = SxMIBD, outFile = "SxM_ped.txt")
+## Write predigree information to temporary file.
+writePedigree(IBDprob = SxMIBD, outFile = tempfile(fileext = ".txt"))
 
 }

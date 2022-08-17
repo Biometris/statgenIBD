@@ -15,9 +15,18 @@
 #' @return An object of class \code{IBDprob}.
 #'
 #' @examples
+#' ## Read map for Steptoe Morex.
+#' SxMmap <- read.delim(system.file("extdata/SxM", "SxM_map.txt",
+#'                                package = "statgenIBD"), header = FALSE)
+#' rownames(SxMmap) <- SxMmap$V1
+#' SxMmap <- SxMmap[, -1]
+#' colnames(SxMmap) <- c("chr", "pos")
+#'
+#'
 #' ## Read IBD probabilities for Steptoe Morex.
 #' SxMIBD <- readIBDs(system.file("extdata/SxM", "SxM_IBDs.txt",
-#'                                package = "statgenIBD"))
+#'                                package = "statgenIBD"),
+#'                   map = SxMmap)
 #'
 #' ## Print summary.
 #' summary(SxMIBD)
