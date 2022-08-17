@@ -6,6 +6,11 @@
 #'
 #' @param infile A character string specifying the path of the input .txt file.
 #' Compressed .txt files with extension ".gz" or ".bz2" are supported as well.
+#' @param map A data.frame with columns \code{chr} for chromosome and
+#' \code{pos} for position. Positions should be in centimorgan (cM). They
+#' should not be cumulative over the chromosomes. Other columns are ignored.
+#' Marker names should be in the row names. These should match the marker names
+#' in the input file.
 #'
 #' @return An object of class \code{IBDprob}.
 #'
@@ -19,7 +24,8 @@
 #'
 #' @importFrom utils hasName read.table
 #' @export
-readIBDs <- function(infile) {
+readIBDs <- function(infile,
+                     map) {
   if (missing(infile) || !is.character(infile) || length(infile) > 1 ||
       file.access(infile, mode = 4) == -1 ||
       ## Compressed .csv files can be read by fread and should be
@@ -38,6 +44,26 @@ readIBDs <- function(infile) {
                             remove = FALSE)
     infile <- decompFile
     on.exit(unlink(decompFile), add = TRUE)
+  }
+  if (!is.data.frame(map)) {
+    stop("map should be a data.frame.\n")
+  }
+  if (!all(hasName(x = map, name = c("chr", "pos")))) {
+    ## chr and pos are obligatory cols.
+    stop("chr and pos should be columns in map.\n")
+  }
+  if (!is.numeric(map[["pos"]])) {
+    stop("pos should be a numeric column in map.\n")
+  }
+  ## Extract columns and order.
+  chkNum <- tryCatch(as.numeric(map[["chr"]]), warning = function(w) w)
+  if (is.numeric(map[["chr"]]) || inherits(chkNum, "warning")) {
+    map <- map[order(map[["chr"]], map[["pos"]]), c("chr", "pos")]
+  } else {
+    map <- map[order(chkNum, map[["pos"]]), c("chr", "pos")]
+  }
+  if (!is.character(map[["chr"]])) {
+    map[["chr"]] <- as.character(map[["chr"]])
   }
   ## Read file.
   inDat <- data.table::fread(infile, sep = "\t", header = TRUE)
@@ -69,7 +95,7 @@ readIBDs <- function(infile) {
     }
   }
   markers <- markers[genoNamesIn, markerNamesIn, ]
-  res <- structure(list(map = NULL,
+  res <- structure(list(map = map,
                         markers = markers,
                         popType = NULL,
                         parents = parents),

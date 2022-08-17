@@ -4,11 +4,17 @@
 \alias{readIBDs}
 \title{Read IBD probabilities from file}
 \usage{
-readIBDs(infile)
+readIBDs(infile, map)
 }
 \arguments{
 \item{infile}{A character string specifying the path of the input .txt file.
 Compressed .txt files with extension ".gz" or ".bz2" are supported as well.}
+
+\item{map}{A data.frame with columns \code{chr} for chromosome and
+\code{pos} for position. Positions should be in centimorgan (cM). They
+should not be cumulative over the chromosomes. Other columns are ignored.
+Marker names should be in the row names. These should match the marker names
+in the input file.}
 }
 \value{
 An object of class \code{IBDprob}.
