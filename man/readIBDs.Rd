@@ -22,8 +22,8 @@ An object of class \code{IBDprob}.
 \description{
 Reads IBD probabilities from a plain text, tab-delimited file. Information
 about the file format can be found in the vignette (
-\code{vignette("IBDFileFormat", package = "statgenIBD")}). A map file
-IBD probabilities a data.frame with the map must be specified as well.
+\code{vignette("IBDFileFormat", package = "statgenIBD")}). A data.frame with
+the map must be specified as well.
 }
 \examples{
 ## Read map for Steptoe Morex.

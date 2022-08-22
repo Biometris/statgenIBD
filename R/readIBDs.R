@@ -2,8 +2,8 @@
 #'
 #' Reads IBD probabilities from a plain text, tab-delimited file. Information
 #' about the file format can be found in the vignette (
-#' \code{vignette("IBDFileFormat", package = "statgenIBD")}). A map file
-#' IBD probabilities a data.frame with the map must be specified as well.
+#' \code{vignette("IBDFileFormat", package = "statgenIBD")}). A data.frame with
+#' the map must be specified as well.
 #'
 #' @param infile A character string specifying the path of the input .txt file.
 #' Compressed .txt files with extension ".gz" or ".bz2" are supported as well.
@@ -110,13 +110,14 @@ readIBDs <- function(infile,
   nMarkers <- length(markerNames)
   nPar <- length(parents)
   markers <- array(NA_real_,
-    dim = c(nGeno, nMarkers, nPar),
-    dimnames = list(genoNames, markerNames, parents)
+                   dim = c(nGeno, nMarkers, nPar),
+                   dimnames = list(genoNames, markerNames, parents)
   )
-  for (parent in parents) {
-    for (geno in genoNames) {
-     markers[geno, , parent] <- inDat[inDat$Genotype == geno, parent]
+  for (geno in genoNames) {
+    for (parent in parents) {
+      markers[geno, , parent] <- inDat[inDat$Genotype == geno, parent]
     }
+    markers[geno, , ] <- markers[geno, , ] / rowSums(markers[geno, , ])
   }
   markers <- markers[genoNamesIn, markerNamesIn, ]
   res <- structure(list(map = map,
