@@ -45,16 +45,6 @@ readIBDs <- function(infile,
          tools::file_ext(tools::file_path_sans_ext(infile)) == "txt"))) {
     stop("infile should be a character string indicating a readable .txt file")
   }
-  fileExt <- tools::file_ext(infile)
-  if (fileExt %in% c("gz", "bz2")) {
-    decompFile <- tempfile(tmpdir = tempdir())
-    R.utils::decompressFile(filename = infile, destname = decompFile,
-                            ext = NULL,
-                            FUN = if (fileExt == "gz") gzfile else bzfile,
-                            remove = FALSE)
-    infile <- decompFile
-    on.exit(unlink(decompFile), add = TRUE)
-  }
   if (!is.data.frame(map)) {
     stop("map should be a data.frame.\n")
   }
