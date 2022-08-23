@@ -29,5 +29,5 @@ pkgdown::build_site()
 ## Code coverage - local.
 detach("package:statgenIBD", unload = TRUE)
 covr::gitlab()
-
+library(statgenIBD)
 
