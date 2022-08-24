@@ -35,7 +35,6 @@ Imports:
     data.table,
     ggplot2,
     Matrix,
-    R.utils,
     stringi,
     Rcpp
 LinkingTo: Rcpp, RcppArmadillo

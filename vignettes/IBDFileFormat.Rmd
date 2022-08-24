@@ -26,7 +26,7 @@ op <- options(width = 90)
 
 ## File format
 
-The results of IBD probability calculations can be stored to and loaded from plain text, tab-delimited *.txt* files using the functions `writeIBDs` and `readIBDs`. An IBD file should contain a header line, with the first and second header named *Marker* and *Genotype* to indicate the marker names and genotype names columns. The remaining headers should contain the parent names to indicate the columns holding the parent IBD probabilities. Each row in the file should hold the IBD probabilities of the corresponding marker and genotype. I.e., the probability that marker 'x' of genotype 'y' descends from parent 'z'.
+The results of IBD probability calculations can be stored to and loaded from plain text, tab-delimited *.txt* or *.ibd* files using the functions `writeIBDs` and `readIBDs`. An IBD file should contain a header line, with the first and second header named *Marker* and *Genotype* to indicate the marker names and genotype names columns. The remaining headers should contain the parent names to indicate the columns holding the parent IBD probabilities. Each row in the file should hold the IBD probabilities of the corresponding marker and genotype. I.e., the probability that marker 'x' of genotype 'y' descends from parent 'z'.
 
 An example of the contents of a file with IBD probabilities is shown in the table below:
 
@@ -68,7 +68,7 @@ ibds <- read.delim(ibdFile)
 knitr::kable(head(ibds))
 ```
 
-When writing the probabilities to a file it is possible to set the maximum number of decimals written for the probabilities using the `decimals` argument. By default 6 decimals are written to the output. Values lower than a threshold specified by `minProb` can be set to 0.
+When writing the probabilities to a file it is possible to set the maximum number of decimals written for the probabilities using the `decimals` argument. By default 6 decimals are written to the output. Trailing zeros are always removed. Values lower than a threshold specified by `minProb` can be set to 0.
 
 ```{r, eval=FALSE}
 ## Write IBDs to file, set values <0.05 to zero and only print 3 decimals.
@@ -85,7 +85,7 @@ Retrieving the IBD probabilities later on can be done using `readIBDs`. This req
 SxMMap <- SxMIBD$map
 
 ## Read IBDs to tab-delimited .txt file.
-SxMIBD <- readIBDs("SxM-IBD.txt", map = SxMIBD$map)
+SxMIBD <- readIBDs("SxM-IBD.txt", map = SxMMap)
 summary(SxMIBD)
 ```
 
