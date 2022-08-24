@@ -7,8 +7,8 @@
 readIBDs(infile, map)
 }
 \arguments{
-\item{infile}{A character string specifying the path of the input .txt file.
-Compressed .txt files with extension ".gz" or ".bz2" are supported as well.}
+\item{infile}{A character string specifying the path of the input file.
+Compressed files with extension ".gz" or ".bz2" are supported as well.}
 
 \item{map}{A data.frame with columns \code{chr} for chromosome and
 \code{pos} for position. Positions should be in centimorgan (cM). They
@@ -20,8 +20,8 @@ in the input file.}
 An object of class \code{IBDprob}.
 }
 \description{
-Reads IBD probabilities from a plain text, tab-delimited file. Information
-about the file format can be found in the vignette (
+Reads IBD probabilities from a plain text, tab-delimited .txt or .ibd file.
+Information about the file format can be found in the vignette (
 \code{vignette("IBDFileFormat", package = "statgenIBD")}). A data.frame with
 the map must be specified as well.
 }

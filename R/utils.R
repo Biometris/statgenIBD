@@ -31,9 +31,9 @@ dfBind <- function(dfList) {
 chkFile <- function(outFile,
                     fileType = "csv") {
   if (!is.character(outFile) || length(outFile) > 1 ||
-      tools::file_ext(outFile) != fileType) {
+      !tools::file_ext(outFile) %in% fileType) {
     stop("outFile should be a single character string ending in .",
-         fileType, ".\n")
+         paste(fileType, collapse = " or"), ".\n")
   }
   if (file.access(dirname(outFile), 2)) {
     stop("No permission to write to ", outFile, ".\n")

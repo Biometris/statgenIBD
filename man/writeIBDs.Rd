@@ -27,8 +27,8 @@ No output. The output file is created as a result of calling this
 function.
 }
 \description{
-Writes IBD probabilities to a plain text, tab-delimited file. Information
-about the file format can be found in the vignette (
+Writes IBD probabilities to a plain text, tab-delimited .txt or .ibd file.
+Information about the file format can be found in the vignette (
 \code{vignette("IBDFileFormat", package = "statgenIBD")}).
 }
 \examples{

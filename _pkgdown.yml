@@ -39,10 +39,12 @@ navbar:
 articles:
   - title: "Vignettes"
     desc: >
-      This vignette provides a full description of the statgenIBD package
-      including some fully worked examples.
+      The first vignette provides a full description of the statgenIBD package
+      including some fully worked examples. The second vignette shows the custom
+      file format for storing IBD probabilities.
     contents:
       - IBDCalculations
+      - IBDFileFormat
 
 reference:
 - title: IBD calculations
@@ -53,3 +55,6 @@ reference:
   - getProbs
   - c.IBDprob
   - writeFlapjack
+  - readIBDs
+  - writeIBDs
+  - readRABBIT

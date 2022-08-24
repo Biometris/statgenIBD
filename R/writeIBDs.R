@@ -1,7 +1,7 @@
 #' Write IBD probabilities to file.
 #'
-#' Writes IBD probabilities to a plain text, tab-delimited file. Information
-#' about the file format can be found in the vignette (
+#' Writes IBD probabilities to a plain text, tab-delimited .txt or .ibd file.
+#' Information about the file format can be found in the vignette (
 #' \code{vignette("IBDFileFormat", package = "statgenIBD")}).
 #'
 #' @param IBDprob An object of class \code{IBDprob} containing the IBD
@@ -42,7 +42,7 @@ writeIBDs <- function(IBDprob,
   if (!inherits(IBDprob, "IBDprob")) {
     stop("IBDprob should be an object of class IBDprob.\n")
   }
-  chkFile(outFile, fileType = "txt")
+  chkFile(outFile, fileType = c("txt", "ibd"))
   if (!is.numeric(decimals) || length(decimals) > 1) {
     stop("decimals should be a single numerical value.\n")
   }

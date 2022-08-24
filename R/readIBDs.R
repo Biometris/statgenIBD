@@ -1,12 +1,12 @@
 #' Read IBD probabilities from file
 #'
-#' Reads IBD probabilities from a plain text, tab-delimited file. Information
-#' about the file format can be found in the vignette (
+#' Reads IBD probabilities from a plain text, tab-delimited .txt or .ibd file.
+#' Information about the file format can be found in the vignette (
 #' \code{vignette("IBDFileFormat", package = "statgenIBD")}). A data.frame with
 #' the map must be specified as well.
 #'
-#' @param infile A character string specifying the path of the input .txt file.
-#' Compressed .txt files with extension ".gz" or ".bz2" are supported as well.
+#' @param infile A character string specifying the path of the input file.
+#' Compressed files with extension ".gz" or ".bz2" are supported as well.
 #' @param map A data.frame with columns \code{chr} for chromosome and
 #' \code{pos} for position. Positions should be in centimorgan (cM). They
 #' should not be cumulative over the chromosomes. Other columns are ignored.
@@ -40,10 +40,11 @@ readIBDs <- function(infile,
       file.access(infile, mode = 4) == -1 ||
       ## Compressed .csv files can be read by fread and should be
       ## allowed as inputs as well.
-      !(tools::file_ext(infile) == "txt" ||
+      !(tools::file_ext(infile) %in% c("txt", "ibd") ||
         (tools::file_ext(infile) %in% c("gz", "bz2") &&
-         tools::file_ext(tools::file_path_sans_ext(infile)) == "txt"))) {
-    stop("infile should be a character string indicating a readable .txt file")
+         tools::file_ext(tools::file_path_sans_ext(infile)) %in% c("txt", "ibd")))) {
+    stop("infile should be a character string indicating a readable ",
+         ".txt or .ibd file.\n")
   }
   if (!is.data.frame(map)) {
     stop("map should be a data.frame.\n")

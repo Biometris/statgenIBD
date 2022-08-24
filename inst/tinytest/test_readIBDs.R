@@ -14,9 +14,9 @@ rownames(map3)[1] <- "a"
 
 ## Checks for correct input.
 expect_error(readIBDs(infile = 1),
-             "should be a character string indicating a readable .txt file")
+             "should be a character string indicating a readable .txt or .ibd file")
 expect_error(readIBDs(infile = "a/b.txt"),
-             "should be a character string indicating a readable .txt file")
+             "should be a character string indicating a readable .txt or .ibd file")
 expect_error(readIBDs(infile = ibdFile, map = 1),
              "map should be a data.frame")
 expect_error(readIBDs(infile = ibdFile, map = map[, 1, drop = FALSE]),
