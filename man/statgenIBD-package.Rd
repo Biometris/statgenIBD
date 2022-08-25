@@ -27,7 +27,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Wenhao Li [contributor]
+  \item Wenhao Li (\href{https://orcid.org/0000-0001-5719-5775}{ORCID}) [contributor]
   \item Johannes Kruisselbrink (\href{https://orcid.org/0000-0003-1673-5725}{ORCID}) [contributor]
 }
 

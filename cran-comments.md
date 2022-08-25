@@ -1,12 +1,12 @@
-## Release with 'bug' fixes.
+## Minor release
 
-- Though not really a bug fix, after the latest release we noticed a major bottleneck in the code that slowed down calculations a lot. Calculations are now sped up by about a factor 3.
+- Some extra functionality and an extra vignette are added.
 
 ----
 
 ## Test environments
 
-* local Windows 10 install, R 4.1.2
+* local Windows 10 install, R 4.2.1
 * winbuilder (release)
 * macbuilder (release)
 * Ubuntu (on github actions, devel and release)
@@ -24,17 +24,17 @@ There was 1 NOTE:
 * checking CRAN incoming feasibility ... NOTE
 
 Found the following (possibly) invalid URLs:
+  URL: https://doi.org/10.1073/pnas.1100465108
+    From: inst/doc/IBDCalculations.html
+    Status: 503
+    Message: Service Unavailable
+    
   URL: https://www.jstor.org/stable/29713
     From: DESCRIPTION
+          man/statgenIBD-package.Rd
+          inst/doc/IBDCalculations.html
     Status: 403
     Message: Forbidden
     
-This link works fine when opened in a browser.
+These links works fine when opened in a browser.
     
-Found the following (possibly) invalid DOIs:
-  DOI: 10.1073/pnas.1100465108
-    From: DESCRIPTION
-    Status: Service Unavailable
-    Message: 503    
-
-The DOI is correct. The corresponding link can be opened in a browser.

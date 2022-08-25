@@ -1,4 +1,4 @@
-# statgenIBD 1.0.4.9000
+# statgenIBD 1.0.5
 
 * Two new functions for writing (`writeIBDs`) and reading IBD (`readIBDs`) probabilities to a custom format have been added. The format is explained in a new vignette `vignette("IBDFileFormat", package = "statgenIBD")`.
 * Two new plots are added for objects of class `IBDprob`, a plot showing the mean coverage of each parent across the population (`plotType = meanProbs`) and a plot showing the total coverage of each parent (`plotType = totalCoverage`).
