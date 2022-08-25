@@ -7,6 +7,9 @@
     <loc>/articles/IBDCalculations.html</loc>
   </url>
   <url>
+    <loc>/articles/IBDFileFormat.html</loc>
+  </url>
+  <url>
     <loc>/articles/index.html</loc>
   </url>
   <url>
@@ -40,6 +43,12 @@
     <loc>/reference/plot.IBDprob.html</loc>
   </url>
   <url>
+    <loc>/reference/readIBDs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/readRABBIT.html</loc>
+  </url>
+  <url>
     <loc>/reference/singleGenoPlot.html</loc>
   </url>
   <url>
@@ -50,5 +59,8 @@
   </url>
   <url>
     <loc>/reference/writeFlapjack.html</loc>
+  </url>
+  <url>
+    <loc>/reference/writeIBDs.html</loc>
   </url>
 </urlset>

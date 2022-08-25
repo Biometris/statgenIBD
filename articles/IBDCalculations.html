@@ -8,8 +8,8 @@
 <meta name="description" content="statgenIBD">
 <title>IBD calculations using statgenIBD • statgenIBD</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="IBD calculations using statgenIBD">
 <meta property="og:description" content="statgenIBD">
@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">statgenIBD</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,11 +95,11 @@
 
 
 <script src="IBDCalculations_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>IBD calculations using statgenIBD</h1>
                         <h4 data-toc-skip class="author">Bart-Jan van Rossum and Martin Boer</h4>
             
-            <h4 data-toc-skip class="date">2022-03-07</h4>
+            <h4 data-toc-skip class="date">2022-08-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Biometris/statgenIBD/blob/HEAD/vignettes/IBDCalculations.Rmd" class="external-link"><code>vignettes/IBDCalculations.Rmd</code></a></small>
       <div class="d-none name"><code>IBDCalculations.Rmd</code></div>
@@ -223,7 +223,7 @@
 </tr>
 </tbody>
 </table>
-<p>For IBD calculations of more complex population types, including MAGIC and population with complicated pedigree structure, see <a href="https://github.com/chaozhi/RABBIT" class="external-link">RABBIT</a> software <span class="citation">(Zheng, Boer, and Van Eeuwijk <a href="#ref-Zheng2014" role="doc-biblioref">2014</a>, <a href="#ref-Zheng2015" role="doc-biblioref">2015</a>, <a href="#ref-Zheng2018" role="doc-biblioref">2018</a>)</span>.</p>
+<p>For IBD calculations of more complex population types, including MAGIC and population with complicated pedigree structure, see <a href="https://github.com/chaozhi/RABBIT" class="external-link">RABBIT</a> software <span class="citation">(Zheng, Boer, and Van Eeuwijk <a href="#ref-Zheng2014" role="doc-biblioref">2014</a>, <a href="#ref-Zheng2015" role="doc-biblioref">2015</a>, <a href="#ref-Zheng2018" role="doc-biblioref">2018</a>)</span>. The IBDs calculated using RABBIT can be imported into statgenIBD as well, see <a href="#rab">Importing IBD probabilities computed using RABBIT</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -236,45 +236,45 @@
 <p>The map and genotypic file for this population are included in the package.</p>
 <p>Both the map and the genotypic file should be in a <strong>tab</strong>-delimited format. The map file should be a file without a header. It should contain three columns, corresponding to marker name, chromosome number and position on the chromosome in centiMorgan.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Read the map and display the first rows.</span>
-<span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_map.txt"</span>, package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">map</span><span class="op">)</span>
-<span class="co">#&gt;       V1 V2   V3</span>
-<span class="co">#&gt; 1    plc  1  0.0</span>
-<span class="co">#&gt; 2    glx  1 18.7</span>
-<span class="co">#&gt; 3 wg789a  1 24.1</span>
-<span class="co">#&gt; 4 abg380  1 33.5</span>
-<span class="co">#&gt; 5 abc158  1 40.2</span>
-<span class="co">#&gt; 6 ksua1a  1 44.2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Read the map and display the first rows.</span></span>
+<span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_map.txt"</span>, package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">map</span><span class="op">)</span></span>
+<span><span class="co">#&gt;       V1 V2   V3</span></span>
+<span><span class="co">#&gt; 1    plc  1  0.0</span></span>
+<span><span class="co">#&gt; 2    glx  1 18.7</span></span>
+<span><span class="co">#&gt; 3 wg789a  1 24.1</span></span>
+<span><span class="co">#&gt; 4 abg380  1 33.5</span></span>
+<span><span class="co">#&gt; 5 abc158  1 40.2</span></span>
+<span><span class="co">#&gt; 6 ksua1a  1 44.2</span></span></code></pre></div>
 <p>The genotypic file should a file with a header containing the marker names. The first column should contain the genotypes, starting with the parents, in this case Morex and Steptoe. The name of this column is irrelevant and can even be an empty string as in this example.</p>
 <p>The parents are assumed to be inbred lines, without missing scores. For this Steptoe x Morex example, the markers for Morex are all 1, Steptoe all 2. The original SNP data can also be used. Missing marker scores in the offspring should have value “-”. More general, for populations with SNP scores <em>a</em> and <em>b</em> for the parents, the offspring can be scored as <em>a</em> (or <em>a/a), b</em> (or <em>b/b), a/b, a/-, -/b, or -.</em></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Read the genotypic file and display the first rows and columns.</span>
-<span class="va">geno</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_geno.txt"</span>, package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-                   header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">geno</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt;         plc glx wg789a abg380 abc158</span>
-<span class="co">#&gt; Morex     1   1      1      1      1</span>
-<span class="co">#&gt; Steptoe   2   2      2      2      2</span>
-<span class="co">#&gt; dh001     2   1      1      1      1</span>
-<span class="co">#&gt; dh002     2   2      2      2      2</span>
-<span class="co">#&gt; dh003     2   2      2      2      2</span>
-<span class="co">#&gt; dh004     2   2      2      2      1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Read the genotypic file and display the first rows and columns.</span></span>
+<span><span class="va">geno</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_geno.txt"</span>, package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>                   header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">geno</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         plc glx wg789a abg380 abc158</span></span>
+<span><span class="co">#&gt; Morex     1   1      1      1      1</span></span>
+<span><span class="co">#&gt; Steptoe   2   2      2      2      2</span></span>
+<span><span class="co">#&gt; dh001     2   1      1      1      1</span></span>
+<span><span class="co">#&gt; dh002     2   2      2      2      2</span></span>
+<span><span class="co">#&gt; dh003     2   2      2      2      2</span></span>
+<span><span class="co">#&gt; dh004     2   2      2      2      1</span></span></code></pre></div>
 <p>Using the map and genotypic files we can compute the IBD probabilities using <code>calcIBD</code>. This function computes, per genotype and marker, the probability that it descended from either parent. If this information is known for the marker from the input, the probabilities will simply be 0 for one of the parents and 1 for the other. When a marker score is missing from the input, the probabilities are calculated using the information of the other markers on the chromosome.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Compute IBD probabilities for Steptoe Morex.</span>
-<span class="va">SxMIBD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"DH"</span>,
-                  markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_geno.txt"</span>,
-                                           package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-                  mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_map.txt"</span>,
-                                        package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co">## Print summary.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">SxMIBD</span><span class="op">)</span>
-<span class="co">#&gt; population type:  DH </span>
-<span class="co">#&gt; Number of evaluation points:  116 </span>
-<span class="co">#&gt; Number of individuals:  150 </span>
-<span class="co">#&gt; Parents:  Morex Steptoe</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Compute IBD probabilities for Steptoe Morex.</span></span>
+<span><span class="va">SxMIBD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"DH"</span>,</span>
+<span>                  markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_geno.txt"</span>,</span>
+<span>                                           package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>                  mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_map.txt"</span>,</span>
+<span>                                        package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Print summary.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">SxMIBD</span><span class="op">)</span></span>
+<span><span class="co">#&gt; population type:  DH </span></span>
+<span><span class="co">#&gt; Number of evaluation points:  116 </span></span>
+<span><span class="co">#&gt; Number of individuals:  150 </span></span>
+<span><span class="co">#&gt; Parents:  Morex Steptoe</span></span></code></pre></div>
 <p>The output of the <code>calcIBD</code> function is an object of class <code>IBDprob</code>. This object is a <code>list</code> that consists of five elements:</p>
 <table class="table">
 <colgroup>
@@ -296,7 +296,7 @@
 <tr class="even">
 <td>markers</td>
 <td><code>array</code></td>
-<td>A three dimensional array with the IBD probabilities. The dimensions of this array are #markers x #genotypes x #parents. The array contains per combination of marker and genotypes the probabilities that it descended from either of the parents.</td>
+<td>A three dimensional array with the IBD probabilities. The dimensions of this array are #genotypes x #markers x #parents. The array contains per combination of genotypes and marker the probabilities that it descended from either of the parents.</td>
 </tr>
 <tr class="odd">
 <td>popType</td>
@@ -308,135 +308,177 @@
 <td><code>character</code></td>
 <td>The parents.</td>
 </tr>
-<tr class="odd">
-<td>multiCross</td>
-<td><code>logical</code></td>
-<td>An indicator showing whether in this <code>IBDprob</code> object multiple crosses where combined. This is always <code>FALSE</code> for the output of the <code>calcIBD</code> function, but will be <code>TRUE</code> when multiple crosses are combined as we will see in the examples.</td>
-</tr>
 </tbody>
 </table>
 <p>The <code>summary</code> function can be used to get a short description of the content of a <code>IBDprob</code> object.</p>
-<p>Looking at genotype <strong>dh001</strong> and marker <strong>plc</strong> we can see from the genotypic file printed above that it has a value of 2, equal to that of Steptoe. If we now look at the output of <code>calcIBD</code> it shows a value of 1 for pSteptoe and a value of 0 for pMorex.</p>
+<p>Looking at genotype <strong>dh001</strong> and marker <strong>plc</strong> we can see from the genotypic file printed above that it has a value of 2, equal to that of Steptoe. If we now look at the output of <code>calcIBD</code> it shows a value of 1 for Steptoe and a value of 0 for Morex.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">SxMIBD</span><span class="op">$</span><span class="va">markers</span><span class="op">[</span><span class="st">"plc"</span>, <span class="st">"dh001"</span>, <span class="op">]</span>
-<span class="co">#&gt;   pMorex pSteptoe </span>
-<span class="co">#&gt;        0        1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">SxMIBD</span><span class="op">$</span><span class="va">markers</span><span class="op">[</span><span class="st">"dh001"</span>, <span class="st">"plc"</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt;   Morex Steptoe </span></span>
+<span><span class="co">#&gt;       0       1</span></span></code></pre></div>
 <p>For the combination of marker <strong>abg313b</strong> and genotype <strong>dh005</strong> the genotypic file contained a missing value. Looking at the output we can see that the probability that this marker came from Morex is about 0.67 and the probability that it came from Steptoe is about 0.33.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">SxMIBD</span><span class="op">$</span><span class="va">markers</span><span class="op">[</span><span class="st">"abg313b"</span>, <span class="st">"dh005"</span>, <span class="op">]</span>
-<span class="co">#&gt;    pMorex  pSteptoe </span>
-<span class="co">#&gt; 0.6702599 0.3297401</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">SxMIBD</span><span class="op">$</span><span class="va">markers</span><span class="op">[</span><span class="st">"dh005"</span>, <span class="st">"abg313b"</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt;     Morex   Steptoe </span></span>
+<span><span class="co">#&gt; 0.6702599 0.3297401</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="visualizing-results">Visualizing results<a class="anchor" aria-label="anchor" href="#visualizing-results"></a>
 </h3>
-<p>The calculated IBD probabilities can be visualized using the <code>plot</code> function. Three types of plot can be made using this function. <code>plotType = "pedigree"</code> will create a plot showing the pedigree of the population for which the IBD probabilities where computed.</p>
+<p>The calculated IBD probabilities can be visualized using the <code>plot</code> function. Several types of plot can be made using this function. Besides creating a plot, all plots also return a <code>ggplot</code> object that can be further customized.</p>
+<ul>
+<li>a plot of the structure of the population for which the IBD probabilities were computed</li>
+<li>a plot of the computed IBD probabilities per parent for a single genotype</li>
+<li>a plot of the computed IBD probabilities across the genome for all genotypes</li>
+<li>a plot of the coverage of each parent across the genome</li>
+<li>a plot of the total coverage of each parent</li>
+</ul>
+<p>All plots are described in more detail in the sections below.</p>
+<div class="section level4">
+<h4 id="pedigree-plot">Pedigree plot<a class="anchor" aria-label="anchor" href="#pedigree-plot"></a>
+</h4>
+<p>A plot of the structure of the population for which the IBD probabilities were computed can be made specifying <code>plotType = "pedigree"</code>. This plot is fully determined by the population type of the population for which the probabilies were computed.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">### Visualize the pedigree of the population.</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">SxMIBD</span>,
-     plotType <span class="op">=</span> <span class="st">"pedigree"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">### Visualize the pedigree of the population.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">SxMIBD</span>,</span>
+<span>     plotType <span class="op">=</span> <span class="st">"pedigree"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="IBDCalculations_files/figure-html/plotsxmIBDped-1.png" width="672"></p>
-<p><code>plotType = "singleGeno"</code> will generate a plot of the probabilities per parent for a selected genotype. The plot for <strong>dh005</strong> is made below. Note that it contains a lot of white space since the markers in the file are spread widely along the genome. In the next section we will show how to compute probabilities on a denser grid.</p>
+</div>
+<div class="section level4">
+<h4 id="single-genotype-plot">Single genotype plot<a class="anchor" aria-label="anchor" href="#single-genotype-plot"></a>
+</h4>
+<p><code>plotType = "singleGeno"</code> will generate a plot of the probabilities per parent for a selected genotype. The plot for <strong>dh005</strong> is made below. Note that it contains a lot of white space since the markers in the file are spread widely along the genome. In the next section we will show how to compute probabilities on a denser grid leading to a plot with a lot less white space.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Visualize IBD probabilities for dh005.</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">SxMIBD</span>, 
-     plotType <span class="op">=</span> <span class="st">"singleGeno"</span>,
-     genotype <span class="op">=</span> <span class="st">"dh005"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Visualize IBD probabilities for dh005.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">SxMIBD</span>, </span>
+<span>     plotType <span class="op">=</span> <span class="st">"singleGeno"</span>,</span>
+<span>     genotype <span class="op">=</span> <span class="st">"dh005"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="IBDCalculations_files/figure-html/plotsxmIBD-1.png" width="672"></p>
-<p>A second type of plot can be made specifying <code>plotType = "allGeno"</code>. This will generate a plot of all genotypes colored per evaluation position according to the parent with the highest probability for that combination of genotype and position. Darker colors indicate a higher probability. Dashed lines indicate the start of a new chromosome.</p>
+</div>
+<div class="section level4">
+<h4 id="plot-of-ibd-probabilities-for-all-genotypes-">Plot of IBD probabilities for all genotypes.<a class="anchor" aria-label="anchor" href="#plot-of-ibd-probabilities-for-all-genotypes-"></a>
+</h4>
+<p>When specifying <code>plotType = "allGeno"</code> a plot is made of all genotypes colored per evaluation position according to the parent with the highest probability for that combination of genotype and position. Darker colors indicate a higher probability. Dashed lines indicate the start of a new chromosome.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Visualize IBD probabilities for all genotypes.</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">SxMIBD</span>, 
-     plotType <span class="op">=</span> <span class="st">"allGeno"</span>,
-     genotype <span class="op">=</span> <span class="st">"dh005"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Visualize IBD probabilities for all genotypes.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">SxMIBD</span>, </span>
+<span>     plotType <span class="op">=</span> <span class="st">"allGeno"</span>,</span>
+<span>     genotype <span class="op">=</span> <span class="st">"dh005"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="IBDCalculations_files/figure-html/plotsxmIBDAll-1.png" width="672"></p>
+</div>
+<div class="section level4">
+<h4 id="plot-the-coverage-of-each-parent-across-the-genome-">Plot the coverage of each parent across the genome.<a class="anchor" aria-label="anchor" href="#plot-the-coverage-of-each-parent-across-the-genome-"></a>
+</h4>
+<p>When specifying <code>plotType = "meanProbs"</code> a plot is made of the mean probabilities of each parent for each evaluation position. The plot can be restricted to one or more chromosomes by specifying <code>chr</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Visualize coverage across genome.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">SxMIBD</span>, </span>
+<span>     plotType <span class="op">=</span> <span class="st">"meanProbs"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="IBDCalculations_files/figure-html/plotsxmIBDMP-1.png" width="672"></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Visualize coverage across chromosome 2.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">SxMIBD</span>, </span>
+<span>     plotType <span class="op">=</span> <span class="st">"meanProbs"</span>,</span>
+<span>     chr <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p><img src="IBDCalculations_files/figure-html/plotsxmIBDMPchr2-1.png" width="672"></p>
+</div>
+<div class="section level4">
+<h4 id="plot-the-total-coverage-of-each-parent">Plot the total coverage of each parent<a class="anchor" aria-label="anchor" href="#plot-the-total-coverage-of-each-parent"></a>
+</h4>
+<p>A plot of the total coverage of each parent can be made by specifying <code>plotType = "totalCovarage"</code>. This will create a bar plot of the coverage per parent over the genome. The plot can be restricted to one or more chromosomes by specifying <code>chr</code>.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Visualize coverage across genome.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">SxMIBD</span>, </span>
+<span>     plotType <span class="op">=</span> <span class="st">"totalCoverage"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="IBDCalculations_files/figure-html/plotsxmIBDtotCov-1.png" width="672"></p>
+</div>
 </div>
 <div class="section level3">
 <h3 id="evaluation-positions">Evaluation positions<a class="anchor" aria-label="anchor" href="#evaluation-positions"></a>
 </h3>
 <p>When calling the <code>calcIBD</code> function without extra parameters, the only positions for which the calculations are made are the positions present in the map. There are two ways to change this. A first option is to specify the parameter <code>evalDist</code>. Setting this to a value of e.g. 5, assures that extra evaluation positions are added in such a way that the maximum distance between evaluation points will be 5 cM.</p>
 <p>Adding the extra evaluation points can be done on a grid by setting <code>grid = TRUE</code>. Doing this defines a grid of evaluation points from the beginning of each chromosome to the end with a distance between the evaluation points of <code>evalDist</code>. The original marker positions will be ignored in this case. To use evaluation points on a regular grid is important for haplotype construction and is efficient for detection of QTLs <span class="citation">(Van Eeuwijk et al. <a href="#ref-VanEeuwijk2009" role="doc-biblioref">2009</a>)</span>.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Compute IBD probabilities for Steptoe Morex.</span>
-<span class="co">## Add extra evaluation positions on dense grid.</span>
-<span class="va">SxMIBD_Ext_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"DH"</span>,
-                           markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_geno.txt"</span>,
-                                                    package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-                           mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_map.txt"</span>,
-                                                 package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-                           evalDist <span class="op">=</span> <span class="fl">1</span>,
-                           grid <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="co">## Print summary.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">SxMIBD_Ext_grid</span><span class="op">)</span>
-<span class="co">#&gt; population type:  DH </span>
-<span class="co">#&gt; Number of evaluation points:  1138 </span>
-<span class="co">#&gt; Number of individuals:  150 </span>
-<span class="co">#&gt; Parents:  Morex Steptoe</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Compute IBD probabilities for Steptoe Morex.</span></span>
+<span><span class="co">## Add extra evaluation positions on dense grid.</span></span>
+<span><span class="va">SxMIBD_Ext_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"DH"</span>,</span>
+<span>                           markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_geno.txt"</span>,</span>
+<span>                                                    package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>                           mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_map.txt"</span>,</span>
+<span>                                                 package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>                           evalDist <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                           grid <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Print summary.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">SxMIBD_Ext_grid</span><span class="op">)</span></span>
+<span><span class="co">#&gt; population type:  DH </span></span>
+<span><span class="co">#&gt; Number of evaluation points:  1138 </span></span>
+<span><span class="co">#&gt; Number of individuals:  150 </span></span>
+<span><span class="co">#&gt; Parents:  Morex Steptoe</span></span></code></pre></div>
 <p>As the summary shows, the number of evaluation points has increased to 1138. This will also show when we visualize the results. The positions of the crossovers on the different chromosomes are clearly visible now.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Visualize IBD probabilities for dh005</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">SxMIBD_Ext_grid</span>, 
-     genotype <span class="op">=</span> <span class="st">"dh005"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Visualize IBD probabilities for dh005</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">SxMIBD_Ext_grid</span>, </span>
+<span>     genotype <span class="op">=</span> <span class="st">"dh005"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="IBDCalculations_files/figure-html/SxMIBD_Ext_grid-1.png" width="672"></p>
 <p>When setting <code>grid = FALSE</code> extra evaluation positions will be included between existing marker positions. These extra evaluation points will be spread evenly. If we look at the map for the Steptoe Morex example, we see that the distance between the first two markers on chromosome 1, <strong>plc</strong> and <strong>glx</strong>, is 18.7. To assure a maximum distance between evaluation points of 5, 3 extra evaluation points will be added. Since they will be spread evenly, the distance between them will be 18.7/3 = 4.68. The extra evaluation points will be named EXT_chr_pos, e.g the extra evaluation point at position 4.68 of chromosome 1, will be named EXT_1_4.68.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Compute IBD probabilities for Steptoe Morex.</span>
-<span class="co">## Add extra evaluation positions between existing markers.</span>
-<span class="va">SxMIBD_Ext</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"DH"</span>,
-                      markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_geno.txt"</span>,
-                                               package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-                      mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_map.txt"</span>,
-                                            package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-                      evalDist <span class="op">=</span> <span class="fl">5</span>,
-                      grid <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co">## Print summary.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">SxMIBD_Ext</span><span class="op">)</span>
-<span class="co">#&gt; population type:  DH </span>
-<span class="co">#&gt; Number of evaluation points:  290 </span>
-<span class="co">#&gt; Number of individuals:  150 </span>
-<span class="co">#&gt; Parents:  Morex Steptoe</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Compute IBD probabilities for Steptoe Morex.</span></span>
+<span><span class="co">## Add extra evaluation positions between existing markers.</span></span>
+<span><span class="va">SxMIBD_Ext</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"DH"</span>,</span>
+<span>                      markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_geno.txt"</span>,</span>
+<span>                                               package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>                      mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_map.txt"</span>,</span>
+<span>                                            package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>                      evalDist <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>                      grid <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Print summary.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">SxMIBD_Ext</span><span class="op">)</span></span>
+<span><span class="co">#&gt; population type:  DH </span></span>
+<span><span class="co">#&gt; Number of evaluation points:  290 </span></span>
+<span><span class="co">#&gt; Number of individuals:  150 </span></span>
+<span><span class="co">#&gt; Parents:  Morex Steptoe</span></span></code></pre></div>
 <p>As the summary shows, the number of evaluation point has increased to 290, from 116 in the original calculation with only the map positions. Looking at the first rows of the map in the output, we see that indeed 3 extra evaluation points have been added between <strong>plc</strong> and <strong>glx</strong>.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Show first rows of map in output.</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">SxMIBD_Ext</span><span class="op">$</span><span class="va">map</span><span class="op">)</span>
-<span class="co">#&gt;             chr   pos</span>
-<span class="co">#&gt; plc           1  0.00</span>
-<span class="co">#&gt; EXT_1_4.68    1  4.68</span>
-<span class="co">#&gt; EXT_1_9.35    1  9.35</span>
-<span class="co">#&gt; EXT_1_14.02   1 14.02</span>
-<span class="co">#&gt; glx           1 18.70</span>
-<span class="co">#&gt; EXT_1_21.4    1 21.40</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Show first rows of map in output.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">SxMIBD_Ext</span><span class="op">$</span><span class="va">map</span><span class="op">)</span></span>
+<span><span class="co">#&gt;             chr   pos</span></span>
+<span><span class="co">#&gt; plc           1  0.00</span></span>
+<span><span class="co">#&gt; EXT_1_4.68    1  4.68</span></span>
+<span><span class="co">#&gt; EXT_1_9.35    1  9.35</span></span>
+<span><span class="co">#&gt; EXT_1_14.02   1 14.02</span></span>
+<span><span class="co">#&gt; glx           1 18.70</span></span>
+<span><span class="co">#&gt; EXT_1_21.4    1 21.40</span></span></code></pre></div>
 <p>A second way of changing the position for which the computations are made, is by specifying them in a <code>data.frame</code>. This <code>data.frame</code> should have two columns, “chr” and “pos” and can be specified in the <code>calcIBD</code> function using the <code>evalPos</code> parameter.</p>
 <p>In the package a very simple example of such a <code>data.frame</code> for the Steptoe Morex data is included as a .txt file . In it three evaluation positions are specified for each of the chromosomes.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Read the evalPos file and display the first rows.</span>
-<span class="va">evalPos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_eval.txt"</span>, package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>, 
-                      header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">evalPos</span><span class="op">)</span>
-<span class="co">#&gt;   chr pos</span>
-<span class="co">#&gt; 1   1   0</span>
-<span class="co">#&gt; 2   1  20</span>
-<span class="co">#&gt; 3   1  40</span>
-<span class="co">#&gt; 4   2   0</span>
-<span class="co">#&gt; 5   2  20</span>
-<span class="co">#&gt; 6   2  40</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Read the evalPos file and display the first rows.</span></span>
+<span><span class="va">evalPos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_eval.txt"</span>, package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>, </span>
+<span>                      header <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">evalPos</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   chr pos</span></span>
+<span><span class="co">#&gt; 1   1   0</span></span>
+<span><span class="co">#&gt; 2   1  20</span></span>
+<span><span class="co">#&gt; 3   1  40</span></span>
+<span><span class="co">#&gt; 4   2   0</span></span>
+<span><span class="co">#&gt; 5   2  20</span></span>
+<span><span class="co">#&gt; 6   2  40</span></span></code></pre></div>
 <p>When using a <code>data.frame</code> with evaluation position, IBD calculations are made only for the positions in the <code>data.frame</code>. The information in the map file is still used in those computations, but for the marker positions themselves the evaluations are not done. The evaluation points will be named EVAL_chr_pos, e.g the first evaluation point in the file, at position 0 of chromosome 1, will be named EVAL_1_0.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">SxMIBD_evalPos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"DH"</span>,
-                          markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_geno.txt"</span>,
-                                                   package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-                          mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_map.txt"</span>,
-                                                package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-                          evalPos <span class="op">=</span> <span class="va">evalPos</span><span class="op">)</span>
-
-<span class="co">## Print summary.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">SxMIBD_evalPos</span><span class="op">)</span>
-<span class="co">#&gt; population type:  DH </span>
-<span class="co">#&gt; Number of evaluation points:  21 </span>
-<span class="co">#&gt; Number of individuals:  150 </span>
-<span class="co">#&gt; Parents:  Morex Steptoe</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">SxMIBD_evalPos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"DH"</span>,</span>
+<span>                          markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_geno.txt"</span>,</span>
+<span>                                                   package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>                          mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/SxM"</span>, <span class="st">"SxM_map.txt"</span>,</span>
+<span>                                                package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>                          evalPos <span class="op">=</span> <span class="va">evalPos</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Print summary.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">SxMIBD_evalPos</span><span class="op">)</span></span>
+<span><span class="co">#&gt; population type:  DH </span></span>
+<span><span class="co">#&gt; Number of evaluation points:  21 </span></span>
+<span><span class="co">#&gt; Number of individuals:  150 </span></span>
+<span><span class="co">#&gt; Parents:  Morex Steptoe</span></span></code></pre></div>
 <p>As the summary shows, the number of evaluation points now decreased to 21, 3 for each of the 7 chromosomes.</p>
 <p>In case both <code>evalPos</code> and <code>evalDist</code> are specified the former takes prevalence and <code>evalDist</code> is ignored.</p>
 </div>
@@ -444,28 +486,41 @@
 <h3 id="extracting-value-for-markers-of-interest">Extracting value for markers of interest<a class="anchor" aria-label="anchor" href="#extracting-value-for-markers-of-interest"></a>
 </h3>
 <p>Often only the subset of markers is of interest for further analysis, e.g. for QTL Mapping of for fitting a multi-QTL model. To extract the computed probabilities for such a marker subset from a <code>calcIBD</code> object we can use the <code>getProbs</code> function.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Extract marker probabilities for markers plc and ABG053.</span>
-<span class="va">SxM_probs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getProbs.html">getProbs</a></span><span class="op">(</span><span class="va">SxMIBD</span>, markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"plc"</span>, <span class="st">"ABG053"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">SxM_probs</span><span class="op">)</span>
-<span class="co">#&gt;    geno plc_Morex plc_Steptoe ABG053_Morex ABG053_Steptoe</span>
-<span class="co">#&gt; 1 dh001         0           1            0              1</span>
-<span class="co">#&gt; 2 dh002         0           1            1              0</span>
-<span class="co">#&gt; 3 dh003         0           1            1              0</span>
-<span class="co">#&gt; 4 dh004         0           1            1              0</span>
-<span class="co">#&gt; 5 dh005         0           1            1              0</span>
-<span class="co">#&gt; 6 dh006         0           1            1              0</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Extract marker probabilities for markers plc and ABG053.</span></span>
+<span><span class="va">SxM_probs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getProbs.html">getProbs</a></span><span class="op">(</span><span class="va">SxMIBD</span>, markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"plc"</span>, <span class="st">"ABG053"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">SxM_probs</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    geno plc_Morex plc_Steptoe ABG053_Morex ABG053_Steptoe</span></span>
+<span><span class="co">#&gt; 1 dh001         0           1            0              1</span></span>
+<span><span class="co">#&gt; 2 dh002         0           1            1              0</span></span>
+<span><span class="co">#&gt; 3 dh003         0           1            1              0</span></span>
+<span><span class="co">#&gt; 4 dh004         0           1            1              0</span></span>
+<span><span class="co">#&gt; 5 dh005         0           1            1              0</span></span>
+<span><span class="co">#&gt; 6 dh006         0           1            1              0</span></span></code></pre></div>
 <p>The output of the <code>getProbs</code> function is a <code>data.frame</code> with a column <code>geno</code> containing the genotype and for both markers the probability that it descended from Morex and that it descended from Steptoe.</p>
+</div>
+<div class="section level3">
+<h3 id="write-and-read-tab-delimited--txt-files">Write and read tab-delimited *.txt files<a class="anchor" aria-label="anchor" href="#write-and-read-tab-delimited--txt-files"></a>
+</h3>
+<p>The results of IBD calculations can be written to a tab-delimited <em>.txt</em> file using <code>writeIBDs</code>. Details about this file format can be found in the accompanying <a href="IBDFileFormat.html">IBD file format vignette</a>.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Write IBDs to tab-delimited .txt file.</span></span>
+<span><span class="fu"><a href="../reference/writeIBDs.html">writeIBDs</a></span><span class="op">(</span><span class="va">SxMIBD_Ext</span>, <span class="st">"SxMIBD_Ext.txt"</span><span class="op">)</span></span></code></pre></div>
+<p>Likewise, IBD files can be read using the <code>readIBDs</code> method.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Read IBDs from tab-delimited .txt file.</span></span>
+<span><span class="va">SxMIBD_Ext</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readIBDs.html">readIBDs</a></span><span class="op">(</span><span class="st">"SxMIBD_Ext.txt"</span>, map <span class="op">=</span> <span class="va">SxMIBD_Ext</span><span class="op">$</span><span class="va">map</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">SxMIBD_Ext</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="write-results-to-flapjack-format">Write results to Flapjack format<a class="anchor" aria-label="anchor" href="#write-results-to-flapjack-format"></a>
 </h3>
 <p>The results of IBD calculations can be written to Flapjack <span class="citation">(Milne et al. <a href="#ref-milne2010" role="doc-biblioref">2010</a>)</span> format using <code>writeFlapjack</code>. Two files will be written that can be imported directly into Flapjack, a map file and a genotypic file. For the genotypic file the probabilities from the IBD calculations are converted to combinations of parents. If for a genotype x marker combination the probability that it comes from a particular parent is high enough (higher than <span class="math inline">\(0.85 / number \; of \; parents\)</span>), that parent is included in the output for that genotype x marker combination.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Write results to Flapjack format.</span>
-<span class="fu"><a href="../reference/writeFlapjack.html">writeFlapjack</a></span><span class="op">(</span><span class="va">SxMIBD_Ext</span>,
-              outFileMap <span class="op">=</span> <span class="st">"map.txt"</span>,
-              outFileGeno <span class="op">=</span> <span class="st">"geno.txt"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Write results to Flapjack format.</span></span>
+<span><span class="fu"><a href="../reference/writeFlapjack.html">writeFlapjack</a></span><span class="op">(</span><span class="va">SxMIBD_Ext</span>,</span>
+<span>              outFileMap <span class="op">=</span> <span class="st">"map.txt"</span>,</span>
+<span>              outFileGeno <span class="op">=</span> <span class="st">"geno.txt"</span><span class="op">)</span></span></code></pre></div>
 <p>When opened in Flapjack the results look like this:</p>
 <p><img src="SxM_flapjack.png" style="width:100.0%"></p>
 </div>
@@ -478,64 +533,64 @@
 <h3 id="f4">F4<a class="anchor" aria-label="anchor" href="#f4"></a>
 </h3>
 <p>First we have a look at an F4 of a two-way RIL population, i.e. an F1 followed by 3 generations of selfing. This population was constructed from parents A and B. As we can see from the table in the populations section, when doing computations for an F4 populations, we can use <code>popType = "Fx"</code> where x is replaced by 4.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Compute IBD probabilities for simulated F4 population.</span>
-<span class="va">F4IBD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"F4"</span>,
-                 markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/popF4"</span>, <span class="st">"cross.txt"</span>,
-                                          package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-                 mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/popF4"</span>, <span class="st">"mapfile.txt"</span>,
-                                       package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co">## Print summary.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">F4IBD</span><span class="op">)</span>
-<span class="co">#&gt; population type:  F4 </span>
-<span class="co">#&gt; Number of evaluation points:  11 </span>
-<span class="co">#&gt; Number of individuals:  10 </span>
-<span class="co">#&gt; Parents:  A B</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Compute IBD probabilities for simulated F4 population.</span></span>
+<span><span class="va">F4IBD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"F4"</span>,</span>
+<span>                 markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/popF4"</span>, <span class="st">"cross.txt"</span>,</span>
+<span>                                          package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>                 mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/popF4"</span>, <span class="st">"mapfile.txt"</span>,</span>
+<span>                                       package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Print summary.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">F4IBD</span><span class="op">)</span></span>
+<span><span class="co">#&gt; population type:  F4 </span></span>
+<span><span class="co">#&gt; Number of evaluation points:  11 </span></span>
+<span><span class="co">#&gt; Number of individuals:  10 </span></span>
+<span><span class="co">#&gt; Parents:  A B</span></span></code></pre></div>
 <p>As the summary shows, the output contains probabilities for two parents, A and B. The heterozygote, having an allele from both parents is called AB.</p>
 <p>As in the previous example we can extract the IBD probabilities for further analysis. However in this case it might be useful to not get the probabilities for A, B and AB, but to get the probabilities for the two parents including AB. The probability for A is then calculated as <span class="math inline">\(probability A + 0.5 * probability AB\)</span>. Summing the probabilities like this can be done by specifying <code>sumProbs = TRUE</code> in <code>getProbs</code>.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Extract marker probabilities for markers M1_2 and M1_4.</span>
-<span class="va">F4_probs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getProbs.html">getProbs</a></span><span class="op">(</span><span class="va">F4IBD</span>, markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"M1_2"</span>, <span class="st">"M1_4"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">F4_probs</span><span class="op">)</span>
-<span class="co">#&gt;        geno     M1_2_A     M1_2_B   M1_2_AB     M1_4_A     M1_4_B    M1_4_AB</span>
-<span class="co">#&gt; 1 cross0001 0.48148327 0.45198692 0.0665298 0.48969130 0.44861702 0.06169168</span>
-<span class="co">#&gt; 2 cross0002 0.00000000 0.00000000 1.0000000 0.05416181 0.05416181 0.89167637</span>
-<span class="co">#&gt; 3 cross0003 1.00000000 0.00000000 0.0000000 0.95581746 0.01574904 0.02843350</span>
-<span class="co">#&gt; 4 cross0004 0.00000000 1.00000000 0.0000000 0.01461051 0.97205517 0.01333432</span>
-<span class="co">#&gt; 5 cross0005 0.00000000 1.00000000 0.0000000 0.01461051 0.97205517 0.01333432</span>
-<span class="co">#&gt; 6 cross0006 0.05416181 0.05416181 0.8916764 0.05416181 0.05416181 0.89167637</span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Extract marker probabilities for markers M1_2 and M1_4.</span>
-<span class="co">## Sum the probabilities to probabilities per parent.</span>
-<span class="va">F4_probs_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getProbs.html">getProbs</a></span><span class="op">(</span><span class="va">F4IBD</span>, markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"M1_2"</span>, <span class="st">"M1_4"</span><span class="op">)</span>, sumProbs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">F4_probs_sum</span><span class="op">)</span>
-<span class="co">#&gt;        geno    M1_2_A     M1_4_A    M1_2_B     M1_4_B</span>
-<span class="co">#&gt; 1 cross0001 0.5147482 0.52053714 0.4852518 0.47946286</span>
-<span class="co">#&gt; 2 cross0002 0.5000000 0.50000000 0.5000000 0.50000000</span>
-<span class="co">#&gt; 3 cross0003 1.0000000 0.97003421 0.0000000 0.02996579</span>
-<span class="co">#&gt; 4 cross0004 0.0000000 0.02127767 1.0000000 0.97872233</span>
-<span class="co">#&gt; 5 cross0005 0.0000000 0.02127767 1.0000000 0.97872233</span>
-<span class="co">#&gt; 6 cross0006 0.5000000 0.50000000 0.5000000 0.50000000</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Extract marker probabilities for markers M1_2 and M1_4.</span></span>
+<span><span class="va">F4_probs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getProbs.html">getProbs</a></span><span class="op">(</span><span class="va">F4IBD</span>, markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"M1_2"</span>, <span class="st">"M1_4"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">F4_probs</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        geno     M1_2_A     M1_2_B   M1_2_AB     M1_4_A     M1_4_B    M1_4_AB</span></span>
+<span><span class="co">#&gt; 1 cross0001 0.48148327 0.45198692 0.0665298 0.48969130 0.44861702 0.06169168</span></span>
+<span><span class="co">#&gt; 2 cross0002 0.00000000 0.00000000 1.0000000 0.05416181 0.05416181 0.89167637</span></span>
+<span><span class="co">#&gt; 3 cross0003 1.00000000 0.00000000 0.0000000 0.95581746 0.01574904 0.02843350</span></span>
+<span><span class="co">#&gt; 4 cross0004 0.00000000 1.00000000 0.0000000 0.01461051 0.97205517 0.01333432</span></span>
+<span><span class="co">#&gt; 5 cross0005 0.00000000 1.00000000 0.0000000 0.01461051 0.97205517 0.01333432</span></span>
+<span><span class="co">#&gt; 6 cross0006 0.05416181 0.05416181 0.8916764 0.05416181 0.05416181 0.89167637</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Extract marker probabilities for markers M1_2 and M1_4.</span></span>
+<span><span class="co">## Sum the probabilities to probabilities per parent.</span></span>
+<span><span class="va">F4_probs_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getProbs.html">getProbs</a></span><span class="op">(</span><span class="va">F4IBD</span>, markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"M1_2"</span>, <span class="st">"M1_4"</span><span class="op">)</span>, sumProbs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">F4_probs_sum</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        geno    M1_2_A M1_4_A    M1_2_B M1_4_B</span></span>
+<span><span class="co">#&gt; 1 cross0001 0.5147482    0.5 0.4852518    0.5</span></span>
+<span><span class="co">#&gt; 2 cross0002 1.0000000    0.0 0.0000000    1.0</span></span>
+<span><span class="co">#&gt; 3 cross0003 0.0000000    0.5 1.0000000    0.5</span></span>
+<span><span class="co">#&gt; 4 cross0004 0.0000000    0.0 1.0000000    1.0</span></span>
+<span><span class="co">#&gt; 5 cross0005 0.4991436    0.0 0.5008564    1.0</span></span>
+<span><span class="co">#&gt; 6 cross0006 0.5205371    0.5 0.4794629    0.5</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="c4s3">C4S3<a class="anchor" aria-label="anchor" href="#c4s3"></a>
 </h3>
 <p>Also included is a C4S3 population, a four-way cross followed by 3 generations of selfing. The parents in the four-way cross where A, B, C and D, the first 4 rows in the genotypic file. The crossing scheme was (A x B) x (C x D), followed by 3 generations of selfing.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Compute IBD probabilities for simulated C4S3 population.</span>
-<span class="va">C4S3IBD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"C4S3"</span>,
-                   markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/popC4S3"</span>, <span class="st">"cross.txt"</span>,
-                                            package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-                   mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/popC4S3"</span>, <span class="st">"mapfile.txt"</span>,
-                                         package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co">## Print summary.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">C4S3IBD</span><span class="op">)</span>
-<span class="co">#&gt; population type:  C4S3 </span>
-<span class="co">#&gt; Number of evaluation points:  11 </span>
-<span class="co">#&gt; Number of individuals:  10 </span>
-<span class="co">#&gt; Parents:  A B C D</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Compute IBD probabilities for simulated C4S3 population.</span></span>
+<span><span class="va">C4S3IBD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"C4S3"</span>,</span>
+<span>                   markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/popC4S3"</span>, <span class="st">"cross.txt"</span>,</span>
+<span>                                            package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>                   mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/popC4S3"</span>, <span class="st">"mapfile.txt"</span>,</span>
+<span>                                         package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Print summary.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">C4S3IBD</span><span class="op">)</span></span>
+<span><span class="co">#&gt; population type:  C4S3 </span></span>
+<span><span class="co">#&gt; Number of evaluation points:  11 </span></span>
+<span><span class="co">#&gt; Number of individuals:  10 </span></span>
+<span><span class="co">#&gt; Parents:  A B C D</span></span></code></pre></div>
 <p>As the summary shows, the output contains probabilities for four parents, A, B, C, D, plus the four possible heterozygote genotypes: AC, AD, BC, BD.</p>
 </div>
 <div class="section level3">
@@ -543,66 +598,99 @@
 </h3>
 <p>The final example shows how IBD computations for multiple populations can be combined. In the example we use simulated data for two F4DH populations, i.e. F4 populations as described above followed by a doubled haploid generation. For the first population the parents where A and B, for the second the parents where A and C. This is a simple example of a NAM population, having parent A as central parent.</p>
 <p>First we compute the IBD probabilities for each of the populations separately.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Compute IBD probabilties for AxB.</span>
-<span class="va">AB</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"F4DH"</span>,
-              markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/multipop"</span>, <span class="st">"AxB.txt"</span>,
-                                       package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-              mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/multipop"</span>, <span class="st">"mapfile.txt"</span>,
-                                    package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-              evalDist <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-
-<span class="co">## Print summary.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">AB</span><span class="op">)</span>
-<span class="co">#&gt; population type:  F4DH </span>
-<span class="co">#&gt; Number of evaluation points:  495 </span>
-<span class="co">#&gt; Number of individuals:  100 </span>
-<span class="co">#&gt; Parents:  A B</span>
-
-<span class="co">## Compute IBD probabilties for AxC.</span>
-<span class="va">AC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"F4DH"</span>,
-              markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/multipop"</span>, <span class="st">"AxC.txt"</span>,
-                                       package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-              mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/multipop"</span>, <span class="st">"mapfile.txt"</span>,
-                                    package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,
-              evalDist <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-
-<span class="co">## Print summary.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">AC</span><span class="op">)</span>
-<span class="co">#&gt; population type:  F4DH </span>
-<span class="co">#&gt; Number of evaluation points:  495 </span>
-<span class="co">#&gt; Number of individuals:  80 </span>
-<span class="co">#&gt; Parents:  A C</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Compute IBD probabilties for AxB.</span></span>
+<span><span class="va">AB</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"F4DH"</span>,</span>
+<span>              markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/multipop"</span>, <span class="st">"AxB.txt"</span>,</span>
+<span>                                       package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>              mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/multipop"</span>, <span class="st">"mapfile.txt"</span>,</span>
+<span>                                    package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>              evalDist <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Print summary.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">AB</span><span class="op">)</span></span>
+<span><span class="co">#&gt; population type:  F4DH </span></span>
+<span><span class="co">#&gt; Number of evaluation points:  495 </span></span>
+<span><span class="co">#&gt; Number of individuals:  100 </span></span>
+<span><span class="co">#&gt; Parents:  A B</span></span>
+<span></span>
+<span><span class="co">## Compute IBD probabilties for AxC.</span></span>
+<span><span class="va">AC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"F4DH"</span>,</span>
+<span>              markerFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/multipop"</span>, <span class="st">"AxC.txt"</span>,</span>
+<span>                                       package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>              mapFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/multipop"</span>, <span class="st">"mapfile.txt"</span>,</span>
+<span>                                    package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>,</span>
+<span>              evalDist <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Print summary.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">AC</span><span class="op">)</span></span>
+<span><span class="co">#&gt; population type:  F4DH </span></span>
+<span><span class="co">#&gt; Number of evaluation points:  495 </span></span>
+<span><span class="co">#&gt; Number of individuals:  80 </span></span>
+<span><span class="co">#&gt; Parents:  A C</span></span></code></pre></div>
 <p>Now we want to combine the results from both computations for further analyses. To combine to <code>IBDprob</code> objects we can use the <code>c</code> function. This is only possible if both objects contain the same type of population. Also the evaluation points for both objects have to be identical. In this example we have two F4DH populations and we used the same map file in the computations so combining them is fine.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ABC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">AB</span>, <span class="va">AC</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ABC</span><span class="op">)</span>
-<span class="co">#&gt; population type:  F4DH </span>
-<span class="co">#&gt; Number of evaluation points:  495 </span>
-<span class="co">#&gt; Number of individuals:  180 </span>
-<span class="co">#&gt; Parents:  A B C</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ABC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">AB</span>, <span class="va">AC</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ABC</span><span class="op">)</span></span>
+<span><span class="co">#&gt; population type:  F4DH </span></span>
+<span><span class="co">#&gt; Number of evaluation points:  495 </span></span>
+<span><span class="co">#&gt; Number of individuals:  180 </span></span>
+<span><span class="co">#&gt; Parents:  A B C</span></span></code></pre></div>
 <p>Looking at the summary, we can see the our combined population now has 180 individuals, 100 from population AB and 80 from population AC. There are also three parents, A, B and C. For all individuals from population AB the probability for parent C will be 0, as will be the probability for parent B for individuals from population AC.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## Extract probabilities for markers EXT_1_1 and EXT_1_3.</span>
-<span class="va">ABCProbs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getProbs.html">getProbs</a></span><span class="op">(</span><span class="va">ABC</span>, markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EXT_1_1"</span>, <span class="st">"EXT_1_3"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co">## Print probabilities for genotypes AxB0001 and AxC0001.</span>
-<span class="va">ABCProbs</span><span class="op">[</span><span class="va">ABCProbs</span><span class="op">$</span><span class="va">geno</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AxB0001"</span>, <span class="st">"AxC0001"</span><span class="op">)</span>, <span class="op">]</span>
-<span class="co">#&gt;      cross    geno EXT_1_1_A  EXT_1_1_B EXT_1_1_C  EXT_1_3_A EXT_1_3_B EXT_1_3_C</span>
-<span class="co">#&gt; 1   cross1 AxB0001 0.9600100 0.03998997 0.0000000 0.88351079 0.1164892 0.0000000</span>
-<span class="co">#&gt; 101 cross2 AxC0001 0.1208691 0.00000000 0.8791309 0.09765978 0.0000000 0.9023402</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Extract probabilities for markers EXT_1_1 and EXT_1_3.</span></span>
+<span><span class="va">ABCProbs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getProbs.html">getProbs</a></span><span class="op">(</span><span class="va">ABC</span>, markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EXT_1_1"</span>, <span class="st">"EXT_1_3"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Print probabilities for genotypes AxB0001 and AxC0001.</span></span>
+<span><span class="va">ABCProbs</span><span class="op">[</span><span class="va">ABCProbs</span><span class="op">$</span><span class="va">geno</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AxB0001"</span>, <span class="st">"AxC0001"</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt;      cross    geno EXT_1_1_A  EXT_1_1_B EXT_1_1_C  EXT_1_3_A EXT_1_3_B EXT_1_3_C</span></span>
+<span><span class="co">#&gt; 1   cross1 AxB0001 0.9600100 0.03998997 0.0000000 0.88351079 0.1164892 0.0000000</span></span>
+<span><span class="co">#&gt; 101 cross2 AxC0001 0.1208691 0.00000000 0.8791309 0.09765978 0.0000000 0.9023402</span></span></code></pre></div>
 <p>Note that the output now contains an extra column cross, indicating the cross the genotype came from.</p>
 <p>The value of 0 for either parent B or parent C also shows clearly in the plots below. The left plot shows an individual from the first cross, the right one an individual from the second cross.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ABC</span>, genotype <span class="op">=</span> <span class="st">"AxB0001"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ABC</span>, genotype <span class="op">=</span> <span class="st">"AxC0001"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ABC</span>, genotype <span class="op">=</span> <span class="st">"AxB0001"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ABC</span>, genotype <span class="op">=</span> <span class="st">"AxC0001"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="IBDCalculations_files/figure-html/plotMultiIBD-1.png" width="47%"><img src="IBDCalculations_files/figure-html/plotMultiIBD-2.png" width="47%"></p>
 <p>Plotting all genotypes together also shows the clear separation between the to crosses in <code>ABC</code>.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ABC</span>, plotType <span class="op">=</span> <span class="st">"allGeno"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ABC</span>, plotType <span class="op">=</span> <span class="st">"allGeno"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="IBDCalculations_files/figure-html/plotMultiIBDAll-1.png" width="672"></p>
-<hr>
 </div>
+</div>
+<div class="section level2">
+<h2 id="rab">Importing IBD probabilities computed using RABBIT<a class="anchor" aria-label="anchor" href="#rab"></a>
+</h2>
+<p>Instead of performing IBD calculations directly with the package, it is also possible to import IBD probabilities computed using RABBIT software <span class="citation">(Zheng, Boer, and Van Eeuwijk <a href="#ref-Zheng2014" role="doc-biblioref">2014</a>, <a href="#ref-Zheng2015" role="doc-biblioref">2015</a>, <a href="#ref-Zheng2018" role="doc-biblioref">2018</a>)</span>. The main advantage of using RABBIT for IBD calculations is that it can handle complex pedigree populations and therefore can also be used in cases where the population structure is more complex than those that can be computed using <code>statgenIBD</code>, e.g. in the maize Steptoe Morex population described before.</p>
+<p>As an example we use a barley population described in <span class="citation">Liller et al. (<a href="#ref-Liller2017-jz" role="doc-biblioref">2017</a>)</span>. This MPP design consists of 5 parents. Four wild parents were crossed with the cultivar Morex and then backcrossed with Morex once. Individuals from the four families from the backcrosses were then crossed with each other as in a full diallel design, which generated six F6 families through five generations of selfing. The data for this population is available in zipped format in the package.</p>
+<p>RABBIT output can be read using the <code>readRABBIT</code> function in <code>statgenMPP</code>. This has as input the standard RABBIT output summary file and the pedigree file that needs to be provided to RABBIT as well. This pedigree file is an optional input and is only used for plotting the pedigree structure of the population.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Specify files containing RABBIT output.</span></span>
+<span><span class="co">## Extract in a temporary directory.</span></span>
+<span><span class="va">tempDir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">inFile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/barley/barley_magicReconstruct.zip"</span>, </span>
+<span>                            package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span>, exdir <span class="op">=</span> <span class="va">tempDir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Specify pedigree file.</span></span>
+<span><span class="va">pedFile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/barley/barley_pedInfo.csv"</span>,</span>
+<span>                       package <span class="op">=</span> <span class="st">"statgenIBD"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## read RABBIT output. </span></span>
+<span><span class="va">barleyIBD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readRABBIT.html">readRABBIT</a></span><span class="op">(</span>infile <span class="op">=</span> <span class="va">inFile</span>,</span>
+<span>                        pedFile <span class="op">=</span> <span class="va">pedFile</span><span class="op">)</span></span></code></pre></div>
+<p>As for the previous examples, we can summarize and plot the imported data to get a first idea of its content.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Summary.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">barleyIBD</span><span class="op">)</span></span>
+<span><span class="co">#&gt; population type:  F6 </span></span>
+<span><span class="co">#&gt; Number of evaluation points:  355 </span></span>
+<span><span class="co">#&gt; Number of individuals:  916 </span></span>
+<span><span class="co">#&gt; Parents:  Morex HID4 HID64 HID369 HID382</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Plot structure of the pedigree.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">barleyIBD</span>, plotType <span class="op">=</span> <span class="st">"pedigree"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="IBDCalculations_files/figure-html/plotPbarleyIBD-1.png" width="672"></p>
+<hr>
 </div>
 <div class="section level2 unnumbered">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -616,6 +704,9 @@
 </div>
 <div id="ref-Lander1987">
 <p>Lander, Eric S., and Philip Green. 1987. “Construction of multilocus genetic linkage maps in humans (restriction fragment length polymorphism/EM algorithm/genetic reconstruction algorithm/human genetics/plant genetics).” <em>Proc. Nati. Acad. Sci. USA</em> 84 (2): 2363–7. <a href="https://www.jstor.org/stable/29713" class="external-link">https://www.jstor.org/stable/29713</a>.</p>
+</div>
+<div id="ref-Liller2017-jz">
+<p>Liller, Corinna B, Agatha Walla, Martin P Boer, Pete Hedley, Malcolm Macaulay, Sieglinde Effgen, Maria von Korff, G Wilma van Esse, and Maarten Koornneef. 2017. “Fine Mapping of a Major QTL for Awn Length in Barley Using a Multiparent Mapping Population.” <em>Züchter Genet. Breed. Res.</em> 130 (2): 269–81. <a href="https://doi.org/10.1007/s00122-016-2807-y" class="external-link">https://doi.org/10.1007/s00122-016-2807-y</a>.</p>
 </div>
 <div id="ref-milne2010">
 <p>Milne, I., P. Shaw, G. Stephen, M. Bayer, L. Cardle, W. T. B. Thomas, A. J. Flavell, and D. Marshall. 2010. “Flapjack–Graphical Genotype Visualization.” <em>Bioinformatics</em> 26 (24): 3133–4. <a href="https://doi.org/10.1093/bioinformatics/btq580" class="external-link">https://doi.org/10.1093/bioinformatics/btq580</a>.</p>
@@ -647,7 +738,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>
