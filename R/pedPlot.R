@@ -6,6 +6,7 @@ pedPlot <- function(pedigree,
                     offSpring,
                     popType,
                     genoCross,
+                    multiCross = NULL,
                     title) {
   pedDatTot <- pedigree
   isDH <- endsWith(popType, "DH")

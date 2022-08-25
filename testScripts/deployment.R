@@ -31,3 +31,6 @@ detach("package:statgenIBD", unload = TRUE)
 covr::gitlab()
 library(statgenIBD)
 
+## Check reverse dependencies.
+# First build source package and put it in testScripts/revDep folder.
+tools::check_packages_in_dir("testScripts/revDep", reverse = list())
