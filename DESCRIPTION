@@ -36,10 +36,11 @@ Imports:
     data.table,
     ggplot2,
     Matrix,
-    stringi,
-    Rcpp
+    rlang,
+    Rcpp,
+    stringi
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Suggests: 
     rmarkdown,

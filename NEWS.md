@@ -1,3 +1,7 @@
+# statgenIBD 1.0.5.9000
+
+* Functions no longer rely on soft-deprecated ggplot2 functions.
+
 # statgenIBD 1.0.5
 
 * Two new functions for writing (`writeIBDs`) and reading IBD (`readIBDs`) probabilities to a custom format have been added. The format is explained in a new vignette `vignette("IBDFileFormat", package = "statgenIBD")`.
