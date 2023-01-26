@@ -95,12 +95,14 @@
 
 
 
-<script src="IBDFileFormat_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>IBD probabilities file format</h1>
-                        <h4 data-toc-skip class="author">Johannes Kruisselbrink</h4>
+                        <h4 data-toc-skip class="author">Johannes
+Kruisselbrink</h4>
             
-            <h4 data-toc-skip class="date">2022-12-22</h4>
+            <h4 data-toc-skip class="date">2023-01-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Biometris/statgenIBD/blob/HEAD/vignettes/IBDFileFormat.Rmd" class="external-link"><code>vignettes/IBDFileFormat.Rmd</code></a></small>
       <div class="d-none name"><code>IBDFileFormat.Rmd</code></div>
@@ -111,8 +113,19 @@
 <div class="section level2">
 <h2 id="file-format">File format<a class="anchor" aria-label="anchor" href="#file-format"></a>
 </h2>
-<p>The results of IBD probability calculations can be stored to and loaded from plain text, tab-delimited <em>.txt</em> or <em>.ibd</em> files using the functions <code>writeIBDs</code> and <code>readIBDs</code>. An IBD file should contain a header line, with the first and second header named <em>Marker</em> and <em>Genotype</em> to indicate the marker names and genotype names columns. The remaining headers should contain the parent names to indicate the columns holding the parent IBD probabilities. Each row in the file should hold the IBD probabilities of the corresponding marker and genotype. I.e., the probability that marker ‘x’ of genotype ‘y’ descends from parent ‘z’.</p>
-<p>An example of the contents of a file with IBD probabilities is shown in the table below:</p>
+<p>The results of IBD probability calculations can be stored to and
+loaded from plain text, tab-delimited <em>.txt</em> or <em>.ibd</em>
+files using the functions <code>writeIBDs</code> and
+<code>readIBDs</code>. An IBD file should contain a header line, with
+the first and second header named <em>Marker</em> and <em>Genotype</em>
+to indicate the marker names and genotype names columns. The remaining
+headers should contain the parent names to indicate the columns holding
+the parent IBD probabilities. Each row in the file should hold the IBD
+probabilities of the corresponding marker and genotype. I.e., the
+probability that marker ‘x’ of genotype ‘y’ descends from parent
+‘z’.</p>
+<p>An example of the contents of a file with IBD probabilities is shown
+in the table below:</p>
 <table class="table">
 <thead><tr class="header">
 <th>Marker</th>
@@ -181,7 +194,10 @@
 </tr>
 </tbody>
 </table>
-<p>Note that for large data sets, this file can become very large. It is therefore recommended to store this file in a compressed file format. This can be done directly setting <code>compress = TRUE</code> in <code>writeIBDs</code>.</p>
+<p>Note that for large data sets, this file can become very large. It is
+therefore recommended to store this file in a compressed file format.
+This can be done directly setting <code>compress = TRUE</code> in
+<code>writeIBDs</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -189,7 +205,9 @@
 <div class="section level3">
 <h3 id="writing-ibd-probabilities-to-a-file">Writing IBD probabilities to a file<a class="anchor" aria-label="anchor" href="#writing-ibd-probabilities-to-a-file"></a>
 </h3>
-<p>After having computed IBD probabilities, the results can be written to a <em>.txt</em> or <em>.ibd</em> file using <code>writeIBDs</code>.</p>
+<p>After having computed IBD probabilities, the results can be written
+to a <em>.txt</em> or <em>.ibd</em> file using
+<code>writeIBDs</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Compute IBD probabilities for Steptoe Morex.</span></span>
 <span><span class="va">SxMIBD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calcIBD.html">calcIBD</a></span><span class="op">(</span>popType <span class="op">=</span> <span class="st">"DH"</span>,</span>
@@ -247,7 +265,11 @@
 </tr>
 </tbody>
 </table>
-<p>When writing the probabilities to a file it is possible to set the maximum number of decimals written for the probabilities using the <code>decimals</code> argument. By default 6 decimals are written to the output. Trailing zeros are always removed. Values lower than a threshold specified by <code>minProb</code> can be set to 0.</p>
+<p>When writing the probabilities to a file it is possible to set the
+maximum number of decimals written for the probabilities using the
+<code>decimals</code> argument. By default 6 decimals are written to the
+output. Trailing zeros are always removed. Values lower than a threshold
+specified by <code>minProb</code> can be set to 0.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Write IBDs to file, set values &lt;0.05 to zero and only print 3 decimals.</span></span>
 <span><span class="fu"><a href="../reference/writeIBDs.html">writeIBDs</a></span><span class="op">(</span>IBDprob <span class="op">=</span> <span class="va">SxMIBD</span>, outFile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".txt"</span><span class="op">)</span>,</span>
@@ -256,7 +278,11 @@
 <div class="section level3">
 <h3 id="reading-ibd-probabilities-from-file">Reading IBD probabilities from file<a class="anchor" aria-label="anchor" href="#reading-ibd-probabilities-from-file"></a>
 </h3>
-<p>Retrieving the IBD probabilities later on can be done using <code>readIBDs</code>. This requires the not only the file with IBD probabilities, but also the corresponding map file as a <code>data.frame</code>. In this example we can use the map from the <code>SxMIBD</code> object constructed earlier.</p>
+<p>Retrieving the IBD probabilities later on can be done using
+<code>readIBDs</code>. This requires the not only the file with IBD
+probabilities, but also the corresponding map file as a
+<code>data.frame</code>. In this example we can use the map from the
+<code>SxMIBD</code> object constructed earlier.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Get map.</span></span>
 <span><span class="va">SxMMap</span> <span class="op">&lt;-</span> <span class="va">SxMIBD</span><span class="op">$</span><span class="va">map</span></span>
@@ -268,7 +294,9 @@
 <span><span class="co">#&gt; Number of evaluation points:  116 </span></span>
 <span><span class="co">#&gt; Number of individuals:  150 </span></span>
 <span><span class="co">#&gt; Parents:  Morex Steptoe</span></span></code></pre></div>
-<p>When reading the probabilities all values read are rescaled in such a way that the sum of the probabilities for each genotype x marker combination is equal to 1.</p>
+<p>When reading the probabilities all values read are rescaled in such a
+way that the sum of the probabilities for each genotype x marker
+combination is equal to 1.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
