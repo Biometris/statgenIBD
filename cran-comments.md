@@ -1,12 +1,12 @@
 ## Minor release
 
-- Some extra functionality and an extra vignette are added.
+- A bug in one of the plotting functions is fixed an dependencies on deprecated ggplot functions are removed.
 
 ----
 
 ## Test environments
 
-* local Windows 10 install, R 4.2.1
+* local Windows 10 install, R 4.3.1
 * winbuilder (release)
 * macbuilder (release)
 * Ubuntu (on github actions, devel and release)
