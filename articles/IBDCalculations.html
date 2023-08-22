@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">statgenIBD</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -102,7 +102,7 @@
                         <h4 data-toc-skip class="author">Bart-Jan van
 Rossum and Martin Boer</h4>
             
-            <h4 data-toc-skip class="date">2023-01-26</h4>
+            <h4 data-toc-skip class="date">2023-08-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Biometris/statgenIBD/blob/HEAD/vignettes/IBDCalculations.Rmd" class="external-link"><code>vignettes/IBDCalculations.Rmd</code></a></small>
       <div class="d-none name"><code>IBDCalculations.Rmd</code></div>
@@ -728,13 +728,13 @@ Summing the probabilities like this can be done by specifying
 <span><span class="co">## Sum the probabilities to probabilities per parent.</span></span>
 <span><span class="va">F4_probs_sum</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getProbs.html">getProbs</a></span><span class="op">(</span><span class="va">F4IBD</span>, markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"M1_2"</span>, <span class="st">"M1_4"</span><span class="op">)</span>, sumProbs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">F4_probs_sum</span><span class="op">)</span></span>
-<span><span class="co">#&gt;        geno    M1_2_A M1_4_A    M1_2_B M1_4_B</span></span>
-<span><span class="co">#&gt; 1 cross0001 0.5147482    0.5 0.4852518    0.5</span></span>
-<span><span class="co">#&gt; 2 cross0002 1.0000000    0.0 0.0000000    1.0</span></span>
-<span><span class="co">#&gt; 3 cross0003 0.0000000    0.5 1.0000000    0.5</span></span>
-<span><span class="co">#&gt; 4 cross0004 0.0000000    0.0 1.0000000    1.0</span></span>
-<span><span class="co">#&gt; 5 cross0005 0.4991436    0.0 0.5008564    1.0</span></span>
-<span><span class="co">#&gt; 6 cross0006 0.5205371    0.5 0.4794629    0.5</span></span></code></pre></div>
+<span><span class="co">#&gt;        geno     M1_2_A     M1_4_A     M1_2_B     M1_4_B</span></span>
+<span><span class="co">#&gt; 1 cross0001 0.51474818 0.93552949 0.48525182 0.89445520</span></span>
+<span><span class="co">#&gt; 2 cross0002 0.03084584 0.50000000 0.03084584 0.50000000</span></span>
+<span><span class="co">#&gt; 3 cross0003 1.50000000 0.95581746 0.50000000 0.01574904</span></span>
+<span><span class="co">#&gt; 4 cross0004 0.44583819 0.04555789 1.44583819 1.00300255</span></span>
+<span><span class="co">#&gt; 5 cross0005 0.00000000 0.01461051 1.00000000 0.97205517</span></span>
+<span><span class="co">#&gt; 6 cross0006 0.06837857 0.06082897 0.06837857 0.06082897</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="c4s3">C4S3<a class="anchor" aria-label="anchor" href="#c4s3"></a>
