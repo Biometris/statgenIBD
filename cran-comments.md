@@ -1,6 +1,6 @@
 ## Minor release
 
-- A bug in one of the plotting functions is fixed an dependencies on deprecated ggplot functions are removed.
+- A bug in one of the plotting functions is fixed and dependencies on deprecated ggplot functions are removed.
 
 ----
 
