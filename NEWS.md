@@ -1,6 +1,6 @@
 # statgenIBD 1.0.6
 
-* A bug in the `plot` function is fixed. The "singlegeno" plots now show the correct probabilities. 
+* A bug in the `plot` function is fixed. The "singleGeno" plots now show the correct probabilities. 
 * Functions no longer rely on soft-deprecated ggplot2 functions.
 
 # statgenIBD 1.0.5
