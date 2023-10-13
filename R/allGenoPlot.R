@@ -5,14 +5,23 @@ allGenoPlot <- function(markers,
                         map,
                         parents,
                         title) {
-  ## Get max IBD value and parent per marker-position combination.
-  maxVals <- apply(X = markers, MARGIN = 2:1, FUN = max)
-  maxPars <- parents[apply(X = markers, MARGIN = 2:1, FUN = which.max)]
-  nMarkers <- nrow(maxVals)
+  maxVals <- maxPars <- matrix(nrow = dim(markers)[1], ncol = dim(markers)[2],
+                               dimnames = list(rownames(markers),
+                                               colnames(markers)))
+  for (mrk in colnames(markers)) {
+    ## Use markers3DtoMat for summing homozygeous and heterozygeous probs.
+    mrkMat <- markers3DtoMat(markers = markers, parents = parents,
+                             markerSel = mrk)
+    ## Get max IBD value and parent per marker-position combination.
+    maxVals[, mrk] <- apply(X = mrkMat, MARGIN = 1, FUN = max)
+    maxPars[, mrk] <- parents[apply(X = mrkMat, MARGIN = 1, FUN = which.max)]
+  }
+  nGeno <- nrow(maxVals)
   ## Create plot data.
-  plotDat <- data.frame(marker = factor(rownames(maxVals),
-                                        levels = rownames(maxVals)),
-                        genotype = rep(colnames(maxVals), each = nMarkers),
+  plotDat <- data.frame(genotype = factor(rownames(maxVals),
+                                          levels = rownames(maxVals)),
+                        marker = factor(rep(colnames(maxVals), each = nGeno),
+                                        levels = colnames(maxVals)),
                         maxVal = as.vector(maxVals),
                         maxPar = as.vector(maxPars))
   ## Construct title.
@@ -39,5 +48,6 @@ allGenoPlot <- function(markers,
       panel.border = ggplot2::element_rect(fill = NA),
       plot.title = ggplot2::element_text(hjust = 0.5)
     )
+
   return(p)
 }
