@@ -13,7 +13,9 @@ meanProbsPlot <- function(markers,
     stop("chr not found in map.\n")
   }
   ## Compute means.
-  plotDat <- apply(X = markers, MARGIN = c(2, 3), FUN = mean)
+  mrkDat <- markers3DtoLong(markers = markers, parents = parents)
+  plotDat <- tapply(X = mrkDat$prob, INDEX = list(mrkDat$snp, mrkDat$parent),
+                    FUN = mean)
   colnames(plotDat) <- parents
   ## Restrict map to selected chromosomes.
   if (!is.null(chr)) {
