@@ -31,6 +31,8 @@ navbar:
           href: https://biometris.github.io/statgenHTP
         - text: "statgenMPP"
           href: https://biometris.github.io/statgenMPP
+        - text: "statgenQTLxT"
+          href: https://biometris.github.io/statgenQTLxT
         - text: "LMMsolver"
           href: https://biometris.github.io/LMMsolver
     - icon: fa-github fa-lg fab
