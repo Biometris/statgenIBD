@@ -38,6 +38,7 @@ Imports:
     Matrix,
     rlang,
     Rcpp,
+    statgenGWAS,
     stringi
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.2.3
