@@ -93,7 +93,7 @@ c.IBDprob <- function(...) {
   pedParNw <- unique(pedTot[pedTot[["par1"]] == 0 & pedTot[["par2"]] == 0, ])
   pedOffNw <- pedTot[pedTot[["par1"]] != 0 | pedTot[["par2"]] != 0, ]
   pedNw <- rbind(pedParNw, pedOffNw)
-  genoNw <- unlist(sapply(X = markerLst, FUN = rownames))
+  genoNw <- do.call(c, lapply(X = markerLst, FUN = rownames))
   nGeno <- sapply(X = markerLst, FUN = nrow)
   genoCross <- data.frame(cross = paste0("cross",
                                          rep(seq_along(nGeno), times = nGeno)),
