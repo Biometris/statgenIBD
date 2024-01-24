@@ -32,14 +32,14 @@ meanProbsPlot <- function(markers,
                        stringsAsFactors = FALSE)
   ## Compute cumulative position.
   map[["snp"]] <- rownames(map)
-  map <- merge(map, addPos, by = "chr")
+  map <- merge(map, addPos, by = "chr", sort = FALSE)
   map$cumPos <- map$pos + map$add
   ## Extract central chromosome positions from map.
   ## Differentiate cases to deal with character chromosomes.
   if (is.numeric(map$chr)) {
     chrs <- as.numeric(levels(as.factor(map$chr)))
   } else {
-    chrs <- levels(as.factor(map$chr))
+    chrs <- unique(map$chr)
   }
   xMarks <- aggregate(x = map$cumPos, by = list(map$chr), FUN = function(x) {
     min(x) + (max(x) - min(x)) / 2
