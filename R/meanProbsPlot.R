@@ -34,6 +34,16 @@ meanProbsPlot <- function(markers,
   map[["snp"]] <- rownames(map)
   map <- merge(map, addPos, by = "chr")
   map$cumPos <- map$pos + map$add
+  ## Extract central chromosome positions from map.
+  ## Differentiate cases to deal with character chromosomes.
+  if (is.numeric(map$chr)) {
+    chrs <- as.numeric(levels(as.factor(map$chr)))
+  } else {
+    chrs <- levels(as.factor(map$chr))
+  }
+  xMarks <- aggregate(x = map$cumPos, by = list(map$chr), FUN = function(x) {
+    min(x) + (max(x) - min(x)) / 2
+  })[, 2]
   ## convert to data.frame.
   plotDat <- as.data.frame.table(plotDat)
   ## Merge map to get positions.
@@ -48,14 +58,16 @@ meanProbsPlot <- function(markers,
                                     color = .data[["Var2"]],
                                     group = .data[["Var2"]])) +
     ggplot2::geom_line() +
-    ggplot2::labs(x = "Position", y = "Representation", title = title) +
+    ggplot2::labs(x = "Chromosome", y = "Representation", title = title) +
+    ggplot2::scale_x_continuous(breaks = xMarks, labels = chrs,
+                                expand = c(0, 0)) +
     ggplot2::scale_color_discrete(name = "parent") +
+    ggplot2::geom_vline(data = addPos[-1, ], ggplot2::aes(xintercept = add),
+                        linetype = "dashed") +
     ggplot2::theme(
       plot.title = ggplot2::element_text(hjust = 0.5),
       panel.background = ggplot2::element_blank(),
       legend.key = ggplot2::element_blank(),
-      axis.line = ggplot2::element_line(),
-      axis.ticks.x = ggplot2::element_blank(),
-      axis.text.x = ggplot2::element_blank())
+      axis.line = ggplot2::element_line())
   return(p)
 }
