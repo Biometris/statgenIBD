@@ -22,6 +22,7 @@ meanProbsPlot <- function(markers,
     map <- map[map[["chr"]] %in% chr, ]
     markers <- markers[, colnames(markers) %in% rownames(map), ]
   }
+  map$chr <- factor(map$chr, levels = unique(map$chr))
   ## Get the boundary for each of the chromosomes.
   ## Has to be converted to numeric to avoid integer overflow in the next step.
   chrBnd <- aggregate(x = map$pos, by = list(map$chr),
@@ -35,19 +36,14 @@ meanProbsPlot <- function(markers,
   map <- merge(map, addPos, by = "chr", sort = FALSE)
   map$cumPos <- map$pos + map$add
   ## Extract central chromosome positions from map.
-  ## Differentiate cases to deal with character chromosomes.
-  if (is.numeric(map$chr)) {
-    chrs <- as.numeric(levels(as.factor(map$chr)))
-  } else {
-    chrs <- unique(map$chr)
-  }
+  chrs <- levels(map$chr)
   xMarks <- aggregate(x = map$cumPos, by = list(map$chr), FUN = function(x) {
     min(x) + (max(x) - min(x)) / 2
   })[, 2]
   ## convert to data.frame.
   plotDat <- as.data.frame.table(plotDat)
   ## Merge map to get positions.
-  plotDat <- merge(plotDat, map, by.x = "Var1", by.y = "snp")
+  plotDat <- merge(map, plotDat, by.x = "snp", by.y = "Var1", sort = FALSE)
   ## Construct title.
   if (is.null(title)) {
     title <- "Coverage per parent"
@@ -62,7 +58,8 @@ meanProbsPlot <- function(markers,
     ggplot2::scale_x_continuous(breaks = xMarks, labels = chrs,
                                 expand = c(0, 0)) +
     ggplot2::scale_color_discrete(name = "parent") +
-    ggplot2::geom_vline(data = addPos[-1, ], ggplot2::aes(xintercept = add),
+    ggplot2::geom_vline(data = addPos[-1, ],
+                        ggplot2::aes(xintercept = .data[["add"]]),
                         linetype = "dashed") +
     ggplot2::theme(
       plot.title = ggplot2::element_text(hjust = 0.5),
