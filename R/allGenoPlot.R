@@ -23,7 +23,8 @@ allGenoPlot <- function(markers,
                         marker = factor(rep(colnames(maxVals), each = nGeno),
                                         levels = colnames(maxVals)),
                         maxVal = as.vector(maxVals),
-                        maxPar = as.vector(maxPars))
+                        maxPar = factor(as.vector(maxPars),
+                                        levels = parents))
   ## Construct title.
   if (is.null(title)) {
     title <- "IBD probabilities across the genome for all genotypes"
@@ -38,7 +39,7 @@ allGenoPlot <- function(markers,
                        ggplot2::aes(x = .data[["marker"]],
                                     y = .data[["genotype"]],
                                     alpha = .data[["maxVal"]],
-                                    fill = .data[["maxPar"]]))+
+                                    fill = .data[["maxPar"]])) +
     ggplot2::geom_raster() +
     ggplot2::labs(title = title, x = "Chromosome", y = "Genotypes",
                   fill = "Parent", alpha = "Probability") +
