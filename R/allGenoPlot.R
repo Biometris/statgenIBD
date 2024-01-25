@@ -30,24 +30,29 @@ allGenoPlot <- function(markers,
   }
   ## Get positions of start of new chromosomes.
   newChrs <- which(!duplicated(map[["chr"]]))[-1] - 0.5
+  ## Get mid points of the chromosomes.
+  xMarks <- c(0, newChrs) +
+    diff(c(which(!duplicated(map[["chr"]])) - 0.5, nrow(map) - 0.5)) / 2
+  chrs <- unique(map[["chr"]])
   p <- ggplot2::ggplot(data = plotDat,
                        ggplot2::aes(x = .data[["marker"]],
                                     y = .data[["genotype"]],
                                     alpha = .data[["maxVal"]],
                                     fill = .data[["maxPar"]]))+
     ggplot2::geom_raster() +
-    ggplot2::labs(title = title, x = "Genome", y = "Genotypes",
+    ggplot2::labs(title = title, x = "Chromosome", y = "Genotypes",
                   fill = "Parent", alpha = "Probability") +
     ggplot2::geom_vline(xintercept = newChrs, linetype = "dashed",
                         color = "black") +
+    ggplot2::scale_x_discrete(breaks = levels(plotDat$marker)[round(xMarks)],
+                              labels = chrs) +
     ggplot2::theme(
       panel.background = ggplot2::element_blank(),
       plot.background = ggplot2::element_blank(),
-      axis.text = ggplot2::element_blank(),
-      axis.ticks = ggplot2::element_blank(),
+      axis.text.y = ggplot2::element_blank(),
+      axis.ticks.y = ggplot2::element_blank(),
       panel.border = ggplot2::element_rect(fill = NA),
       plot.title = ggplot2::element_text(hjust = 0.5)
     )
-
   return(p)
 }
