@@ -122,18 +122,18 @@ c.IBDprob <- function(...) {
 #' Creates a plot for an object of class \code{IBDprob}. Six types of plot can
 #' be made:
 #' \itemize{
-#' \item{\code{singleGeno}}{ A plot for a single genotype showing the IBD
-#' probabilities for all parents across the genome.}
-#' \item{\code{allGeno}}{ A plot showing for all genotypes the IBD
-#' probabilities of the parent with the highest probability per marker.}
-#' \item{\code{pedigree}}{ A plot showing the structure of the pedigree of
-#' the population.}
-#' \item{\code{map}}{ A plot of the genetic map showing the length of the
-#' chromosomes and the positions of the markers.}
-#' \item{\code{meanProbs}}{ A plot showing the coverage of each parent across
-#' the population.}
-#' \item{\code{totalCoverage}}{ A plot showing the total coverage of each
-#' parent.}
+#' \item \code{singleGeno} A plot for a single genotype showing the IBD
+#' probabilities for all parents across the genome.
+#' \item \code{allGeno} A plot showing for all genotypes the IBD
+#' probabilities of the parent with the highest probability per marker.
+#' \item \code{pedigree} A plot showing the structure of the pedigree of
+#' the population.
+#' \item \code{map} A plot of the genetic map showing the length of the
+#' chromosomes and the positions of the markers.
+#' \item \code{meanProbs} A plot showing the coverage of each parent across
+#' the population.
+#' \item \code{totalCoverage} A plot showing the total coverage of each
+#' parent.
 #' }
 #'
 #' @param x An object of class \code{IBDprob}.
