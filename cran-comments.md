@@ -1,12 +1,12 @@
 ## Minor release
 
-- A bug in one of the plotting functions is fixed and dependencies on deprecated ggplot functions are removed.
+- Options for plotting inputs and outputs are extended. Some small bugs in the plotting functions are fixed.
 
 ----
 
 ## Test environments
 
-* local Windows 10 install, R 4.3.1
+* local Windows 10 install, R 4.3.2
 * winbuilder (devel)
 * macbuilder (release)
 * Ubuntu (on github actions, devel and release)
