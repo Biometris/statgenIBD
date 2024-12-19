@@ -11,7 +11,7 @@
 #' information as used by RABBIT as input. Compressed .csv files with extension
 #' ".gz" or ".bz2" are supported as well.
 #'
-#' @return An \code{IBDprob} object with map and markers corresponding to the
+#' @returns An \code{IBDprob} object with map and markers corresponding to the
 #' imported information in the imported .csv file.
 #'
 #' @examples
@@ -243,3 +243,4 @@ getRabbitHeaderLines <- function(filepath) {
   close(con)
   return(magicHeaders);
 }
+
