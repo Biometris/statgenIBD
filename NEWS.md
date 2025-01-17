@@ -1,6 +1,9 @@
-# statgenIBD 1.0.6.9000
+# statgenIBD 1.0.8
 
 -   `readRabbit` now reads input files produced by the open source version of RABBIT, available at <https://github.com/Biometris/RABBIT>
+
+# statgenIBD 1.0.7
+
 -   Plotting didn't work correctly for populations where there was a heterozygous probability in the IBD output. This is now corrected for plotType "allGeno", "meanProbs", and "totalCoverage".
 -   It is now possible to create a plot of plotType "singleGeno" when the position of the markers in the map have large values, i.e. when they are in base pairs.
 -   A small bug in the concatenation of `calcIBD` objects with an identical number of genotypes is fixed.
