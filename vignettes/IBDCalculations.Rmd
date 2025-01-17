@@ -497,11 +497,6 @@ As for the previous examples, we can summarize and plot the imported data to get
 summary(barleyIBD)
 ```
 
-```{r plotPbarleyIBD}
-## Plot structure of the pedigree.
-plot(barleyIBD, plotType = "pedigree")
-``` 
-
 ```{r winddown, include = FALSE}
 options(op)
 ```

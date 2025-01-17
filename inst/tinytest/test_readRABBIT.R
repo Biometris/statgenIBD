@@ -43,7 +43,7 @@ expect_inherits(barleyMPP$markers, "array")
 expect_equal(dim(barleyMPP$markers), c(916, 355, 5))
 
 expect_inherits(attr(barleyMPP2, "genoCross"), "data.frame")
-expect_inherits(barleyMPP2$pedigree, "data.frame")
+expect_null(barleyMPP2$pedigree)
 
 ## map and markers should be the same for all.
 expect_equal(barleyMPP$map, barleyMPP2$map)
