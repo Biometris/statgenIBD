@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# statgenIBD
+# statgenIBD <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 [![](https://www.r-pkg.org/badges/version/statgenIBD)](https://www.r-pkg.org/pkg/statgenIBD)
 [![CRAN RStudio mirror
@@ -15,14 +15,14 @@ Markov Models (HMM) and inheritance vectors.
 
 ## Installation
 
--   Install from CRAN:
+- Install from CRAN:
 
 ``` r
 install.packages("statgenIBD")
 ```
 
--   Install latest development version from GitHub (requires
-    [remotes](https://github.com/r-lib/remotes) package):
+- Install latest development version from GitHub (requires
+  [remotes](https://github.com/r-lib/remotes) package):
 
 ``` r
 remotes::install_github("Biometris/statgenIBD", ref = "develop", dependencies = TRUE)
