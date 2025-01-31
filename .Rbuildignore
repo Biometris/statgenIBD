@@ -16,3 +16,4 @@ public
 ^cran-comments\.md$
 ^CRAN-RELEASE$
 developmentScripts
+pkgdown
