@@ -1,6 +1,7 @@
 #' Read IBD probabilities
 #'
-#' Read a file with IBD probabilities computed by the RABBIT software package.
+#' Read a file with IBD probabilities computed by the RABBIT software package,
+#' see [RABBIT](https://github.com/Biometris/RABBIT) for details.
 #' It is possible to additionally read the pedigree file that is also used by
 #' RABBIT. Reading this file allows for plotting the pedigree.
 #'
