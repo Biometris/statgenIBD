@@ -55,10 +55,11 @@ expect_equal(barleyMPP$markers, barleyMPP2$markers)
 
 ## Define input files.
 
-genoFileJulia <- file.path("rabbitJulia", "example_magicreconstruct_ancestry.csv.gz")
-pedFileJulia <- file.path("rabbitJulia", "example_ped.csv")
+genoFileJulia <- file.path(".", "example_magicreconstruct_ancestry.csv.gz")
+pedFileJulia <- file.path(".", "example_ped.csv")
 
 ## Different combinations of inputs should give similar output.
+
 expect_silent(exMPP <- readRABBIT(infile = genoFileJulia))
 expect_silent(exMPP2 <- readRABBIT(infile = genoFileJulia, pedFile = pedFileJulia))
 
