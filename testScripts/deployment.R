@@ -31,6 +31,6 @@ detach("package:statgenIBD", unload = TRUE)
 covr::gitlab()
 library(statgenIBD)
 
-## Check reverse dependencies.
-# First build source package and put it in testScripts/revDep folder.
-tools::check_packages_in_dir("testScripts/revDep", reverse = list())
+## Check reverse dependencies. (takes about 45 minutes).
+Sys.setenv(R_BIOC_VERSION = "3.20")
+revdepcheck::revdep_check()

@@ -72,7 +72,7 @@ expect_equal_to_reference(SxMIBD_evalPosChr, "SxMIBD_evalPosChr")
 ## Test calculating IBDs for simulated populations.
 
 testPopFolders <- list.dirs(".")
-testPopFolders <- testPopFolders[-1]
+testPopFolders <- testPopFolders[startsWith(testPopFolders, "./pop")]
 testPops <- substring(testPopFolders, first = 6)
 
 for (i in seq_along(testPops)) {
