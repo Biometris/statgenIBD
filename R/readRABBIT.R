@@ -41,6 +41,15 @@ readRABBIT <- function(infile,
          tools::file_ext(tools::file_path_sans_ext(infile)) == "csv"))) {
     stop("infile should be a character string indicating a readable .csv file")
   }
+  if (tools::file_ext(infile) == "gz") {
+    tempFile <- tempfile()
+    R.utils::gunzip(infile, destname = tempFile, remove = FALSE)
+    infile <- tempFile
+  } else if (tools::file_ext(infile) == "bz2") {
+    tempFile <- tempfile()
+    R.utils::bunzip2(infile, destname = tempFile, remove = FALSE)
+    infile <- tempFile
+  }
   if (!is.null(pedFile) &&
       (!is.character(pedFile) || length(pedFile) > 1 ||
        file.access(pedFile, mode = 4) == -1 ||
